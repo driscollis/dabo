@@ -472,6 +472,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 				self.fillDynamicChoices()
 
 
+
 	def getBizobj(self):
 		ds = self.DataSource
 		if isinstance(ds, dabo.biz.dBizobj):
@@ -613,7 +614,6 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 			if not colFetch:
 				colFetch = self._colFetch
 			while len(choices) < 2:
-				choices.append(["" for col in choices[0]])
 			if self._colNames:
 				while len(self._colNames) < len(choices[0]):
 					self._colNames.append("")
@@ -834,6 +834,4 @@ if __name__ == "__main__":
 			vs.append(dAutoComplete(self, DataSet=ds, SearchField="landmark", FetchField="loc",
 					ColNames=["Landmark", "Location", "Year Constructed"]), "x")
 
-
 	test.Test().runTest(TestPanel)
-
