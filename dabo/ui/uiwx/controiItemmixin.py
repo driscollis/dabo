@@ -2,7 +2,7 @@
 from six import string_types as sixBasestring
 import wx
 import dabo
-from .dDataControlMixin import dDataControlMixin
+from .datacontrolmixin import dDataControlMixin
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from dabo.lib.propertyHelperMixin import _DynamicList

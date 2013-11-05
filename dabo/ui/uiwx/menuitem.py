@@ -2,8 +2,8 @@
 from six import string_types as sixBasestring
 import types
 import wx
-from . import dPemMixin as pm
-from . import dIcons
+from . import pemmixin as pm
+from . import icons
 import dabo
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents

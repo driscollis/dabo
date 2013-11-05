@@ -2,13 +2,13 @@
 from six import string_types as sixBasestring
 import wx
 import dabo
-from . import dPemMixin
-from . import dSizerMixin
+from . import pemmixin
+from . import sizermixin
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
 
 
-class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
+class dGridSizer(sizermixin.dSizerMixin, wx.GridBagSizer):
 	def __init__(self, *args, **kwargs):
 		"""
 		dGridSizer is a sizer that can lay out items in a virtual grid arrangement.
