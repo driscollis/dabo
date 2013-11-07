@@ -82,7 +82,7 @@ class TempFileHolder(object):
 					if not f.endswith(".pyc"):
 						# Don't worry about the .pyc files, since they may not be there
 						print("Could not delete %s: %s" % (f, e))
-		except StandardError as e:
+		except Exception as e:
 			# In these rare cases, Python has already 'gone away', so just bail
 			pass
 
@@ -588,7 +588,7 @@ try again when it is running.
 				return e
 			except ValueError:
 				pass
-			except StandardError as e:
+			except Exception as e:
 				dabo.log.error(_("Failed to open URL '%(url)s'. Error: %(e)s") % locals())
 				return e
 			resp = json.loads(resp)
@@ -604,7 +604,7 @@ try again when it is running.
 		fileurl = "%s/files/%s" % (dabo.webupdate_urlbase, dabo.__version__)
 		try:
 			resp = urllib2.urlopen(fileurl)
-		except StandardError as e:
+		except Exception as e:
 			# No internet access, or Dabo site is down.
 			dabo.log.error(_("Cannot access the Dabo site. Error: %s") % e)
 			self._resetWebUpdateCheck()

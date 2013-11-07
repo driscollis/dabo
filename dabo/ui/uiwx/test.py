@@ -107,7 +107,7 @@ class Test(object):
 				print("Trying to instantiate %s..." % objname)
 				try:
 					obj = mod.__dict__[objname](panel)
-				except StandardError as e:
+				except Exception as e:
 					print("+++++++++++++++++++++++++++++++++++++++")
 					print("+++ Instantiating %s caused:" % objname)
 					print(traceback.print_exception(*sys.exc_info()))

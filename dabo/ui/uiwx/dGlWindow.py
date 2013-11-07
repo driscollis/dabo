@@ -17,7 +17,7 @@ try:
 	openGL = True
 except ImportError:
 	openGL = False
-except StandardError as e:
+except Exception as e:
 	# Report the error, and abandon the import
 	dabo.log.error(_("Error importing OpenGL: %s") % e)
 	openGL = False

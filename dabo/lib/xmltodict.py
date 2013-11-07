@@ -210,7 +210,7 @@ def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):
 				codeDict = desUtil.parseCodeFile(codeContent)
 				ret["importStatements"] = codeDict.pop("importStatements", "")
 				desUtil.addCodeToClassDict(ret, codeDict)
-			except StandardError as e:
+			except Exception as e:
 				print("Failed to parse code file:", e)
 	return ret
 

@@ -332,7 +332,7 @@ class dCursorMixin(dObject):
 
 		try:
 			log("%s SQL: %s, PARAMS: %s" % (msg, sql, params))
-		except StandardError:
+		except Exception:
 			log("%s (couldn't log SQL or PARAMS)" % msg)
 
 
@@ -1124,11 +1124,11 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		try:
 			dabo.dbActivityLog.info("lookupPKWithAdd() SQL: %s, PARAMS: %s" % (
 					sql.decode(self.Encoding).replace("\n", " "), "(%s, )" % val))
-		except StandardError:
+		except Exception:
 			# A problem with writing to the log, most likely due to encoding issues
 			try:
 				dabo.dbActivityLog.info("lookupPKWithAdd() SQL (failed to log PARAMS): %r" % sql)
-			except StandardError:
+			except Exception:
 				dabo.dbActivityLog.info("lookupPKWithAdd() (failed to log SQL and PARAMS)")
 		aux.execute(sql, (val,))
 		if aux.RowCount:
@@ -1183,11 +1183,11 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				dabo.dbActivityLog.info("mmDissociateValues() SQL: %s, PARAMS: %s" % (
 						sql.decode(self.Encoding).replace("\n", " "), str((self._assocTable,
 					self._assocPKColThis, self._assocPKColOther))))
-			except StandardError:
+			except Exception:
 				# A problem with writing to the log, most likely due to encoding issues
 				try:
 					dabo.dbActivityLog.info("mmDissociateValues() SQL (failed to log PARAMS): %r" % sql)
-				except StandardError:
+				except Exception:
 					dabo.dbActivityLog.info("mmDissociateValues() (failed to log SQL and PARAMS)")
 			try:
 				aux.execute(sql, (thisPK, otherPK))
@@ -1206,7 +1206,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		try:
 			dabo.dbActivityLog.info("mmDissociateAll() SQL: %s" % (
 					sql.decode(self.Encoding).replace("\n", " ")))
-		except StandardError:
+		except Exception:
 			dabo.dbActivityLog.info("mmDissociateAll() (failed to log SQL")
 		try:
 			aux.execute(sql, (self.getPK(),))
@@ -1240,11 +1240,11 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		try:
 			dabo.dbActivityLog.info("mmAddToBoth() SQL: %s, PARAMS: %s" % (
 					sql.decode(self.Encoding).replace("\n", " "), str((thisPK, otherPK))))
-		except StandardError:
+		except Exception:
 			# A problem with writing to the log, most likely due to encoding issues
 			try:
 				dabo.dbActivityLog.info("mmAddToBoth() SQL (failed to log PARAMS): %r" % sql)
-			except StandardError:
+			except Exception:
 				dabo.dbActivityLog.info("mmAddToBoth() (failed to log SQL and PARAMS)")
 		aux.execute(sql, (thisPK, otherPK))
 		if not aux.RowCount:
@@ -1586,7 +1586,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				dabo.dbActivityLog.info(
 						_("DBQueryException encountered in save(): %s") % errMsg)
 				raise e
-			except StandardError as e:
+			except Exception as e:
 				errMsg = ustr(e)
 				if "connect" in errMsg.lower():
 					dabo.dbActivityLog.info(

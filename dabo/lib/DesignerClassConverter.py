@@ -128,7 +128,7 @@ class DesignerClassConverter(dObject):
 				codeDict = desUtil.parseCodeFile(codeContent)
 				dct["importStatements"] = codeDict.pop("importStatements", "")
 				desUtil.addCodeToClassDict(dct, codeDict)
-			except StandardError as e:
+			except Exception as e:
 				print("Failed to parse code file:", e)
 
 

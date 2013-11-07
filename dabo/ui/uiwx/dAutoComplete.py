@@ -695,7 +695,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 			else:
 				try:
 					ds = eval(biz).getDataSet()
-				except StandardError:
+				except Exception:
 					pass
 				self._dataSet = ds
 		else:

@@ -74,7 +74,7 @@ def loggit(fnc):
 			for ag in args:
 				try:
 					loggit.fhwr.write(" %s" % ag)
-				except StandardError as e:
+				except Exception as e:
 					loggit.fhwr.write(" ERR: %s" % e)
 			loggit.fhwr.write("\n")
 		if kwargs:

@@ -214,7 +214,7 @@ class PageCountCanvas(canvas.Canvas):
 				dabo.log.info(_("Font file can not be found: %s") % psfontfile)
 		try:
 			canvas.Canvas.setFont(self, psfontname, size, leading)
-		except StandardError:
+		except Exception:
 			canvas.Canvas.setFont(self, getSubFont(psfontname), size, leading)
 
 
@@ -341,7 +341,7 @@ class ReportObject(CaselessDict):
 					if evaluate:
 						ret = eval(ret)
 					return ret
-				except StandardError:
+				except Exception:
 					pass
 
 			# If the prop is in <Report><Defaults>:
@@ -352,13 +352,13 @@ class ReportObject(CaselessDict):
 					if evaluate:
 						ret = eval(ret)
 					return ret
-				except StandardError:
+				except Exception:
 					try:
 						ret = self.ReportForm["Defaults"][prop[:-4]]
 						if evaluate:
 							ret = eval(ret)
 						return ret
-					except StandardError:
+					except Exception:
 						pass
 
 			if prop[-4:] == "_def":
@@ -1645,7 +1645,7 @@ class ReportWriter(object):
 			c.setFillColor(fontColor)
 			try:
 				c.setFont(fontName, fontSize)
-			except StandardError:
+			except Exception:
 				c.setFont(getSubFont(fontName, "Helvetica"), fontSize)
 
 			if borderWidth > 0:
@@ -1834,7 +1834,7 @@ class ReportWriter(object):
 			if img:
 				try:
 					c.drawImage(img, 0, 0, width, height, mask, preserveAspectRatio=preserveRatio)
-				except StandardError:
+				except Exception:
 					c.drawCentredString(0, 0, "<< Image expr error >>")
 			else:
 				c.drawCentredString(0, 0, obj["expr"])
@@ -2044,7 +2044,7 @@ class ReportWriter(object):
 			# the built-in type 1 Helvetica:
 			try:
 				test = ParaClass("", s)
-			except StandardError:
+			except Exception:
 				s.fontName = getSubFont(s.fontName)
 
 			if isinstance(fobject, (Memo, Paragraph)):

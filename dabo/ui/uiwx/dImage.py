@@ -150,7 +150,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 					if hnd.LoadFile(fname):
 						ret = (hnd.GetName(), hnd.GetExtension())
 						break
-				except StandardError as e:
+				except Exception as e:
 					print("ERROR", e)
 		return ret
 
@@ -393,7 +393,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 				if isFile:
 					try:
 						self._imageData = open(val, "rb").read()
-					except StandardError:
+					except Exception:
 						pass
 				else:
 					# Probably an image stream

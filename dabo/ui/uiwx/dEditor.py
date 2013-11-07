@@ -1973,7 +1973,7 @@ Do you want to overwrite it?""")
 			cd = "\n".join(code2exec)
 			try:
 				exec(cd, self._namespaces)
-			except StandardError as e:
+			except Exception as e:
 				pass
 
 

@@ -987,7 +987,7 @@ class dPemMixin(dPemMixinBase):
 					return
 				try:
 					self._obj.Thaw()
-				except StandardError as e:
+				except Exception as e:
 					# Create an error log message. We can't record the obj reference,
 					# since it is most likely deleted, but the presence of these messages
 					# will ensure that possible problems will not be silenced.

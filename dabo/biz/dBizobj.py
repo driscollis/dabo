@@ -656,7 +656,7 @@ class dBizobj(dObject):
 				self.rollbackTransaction()
 			self._CurrentCursor = cursorKey
 			raise
-		except StandardError:
+		except Exception:
 			if startTransaction:
 				self.rollbackTransaction()
 			self._CurrentCursor = cursorKey
@@ -712,7 +712,7 @@ class dBizobj(dObject):
 			if startTransaction:
 				self.rollbackTransaction()
 			raise
-		except StandardError:
+		except Exception:
 			if startTransaction:
 				self.rollbackTransaction()
 			raise
@@ -740,7 +740,7 @@ class dBizobj(dObject):
 				self.rollbackTransaction()
 			self._CurrentCursor = cursorKey
 			raise
-		except StandardError:
+		except Exception:
 			if startTransaction:
 				self.rollbackTransaction()
 			self._CurrentCursor = cursorKey
@@ -1103,7 +1103,7 @@ class dBizobj(dObject):
 			if status[1] is None or status[1] != self.getPK():
 				try:
 					self._moveToRowNum(status[2], False)
-				except StandardError as e:
+				except Exception as e:
 					# Perhaps the row was deleted; at any rate, leave the pointer
 					# at the end of the data set
 					row = rowCnt - 1

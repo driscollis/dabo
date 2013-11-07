@@ -2128,7 +2128,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 	def SetValue(self, row, col, val):
 		try:
 			self._Table.SetValue(row, col, val)
-		except StandardError as e:
+		except Exception as e:
 			super(dGrid, self).SetCellValue(row, col, val)
 			# Update the main data source
 			self._setCellValue(row, col, val)
@@ -2146,7 +2146,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				biz.setFieldVal(fld, val)
 			else:
 				self.DataSet[row][fld] = val
-		except StandardError as e:
+		except Exception as e:
 			dabo.log.error("Cannot update data set: %s" % e)
 
 
@@ -4647,7 +4647,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				# See if the DataSource is a reference
 				try:
 					ret = eval(self.DataSource)
-				except StandardError:
+				except Exception:
 					# If it fails for any reason, bail.
 					pass
 			self._dataSet = ret
