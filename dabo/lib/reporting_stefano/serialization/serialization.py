@@ -22,9 +22,7 @@ class SerializableMeta(type):
 		cls._xmlSerializationAttributes = attributes
 
 
-class Serializable(object):
-	__metaclass__ = SerializableMeta
-
+class Serializable(object, metaclass=SerializableMeta):
 	def __init__(self, **args):
 		self.srcValues = {}
 		attributeNames = [attrName for attrName,
