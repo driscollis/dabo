@@ -110,7 +110,7 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin):
 		self.itemDataMap = dict()
 		#Load and sort data
 		if not (self._multiChoices or self._choices):
-			raise ValueError, "Pass me at least one of multiChoices OR choices"
+			raise ValueError("Pass me at least one of multiChoices OR choices")
 		#widgets
 		self.dropdown = wx.PopupWindow( self )
 		#Control the style

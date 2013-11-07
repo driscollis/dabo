@@ -28,7 +28,7 @@ def getEncoding():
 			yield prefEncoding
 		if not encoding == defaultEncoding:
 			yield defaultEncoding
-		raise ValueError, "Unknown encoding: %s" % encoding
+		raise ValueError("Unknown encoding: %s" % encoding)
 
 	for encoding in _getEncodingName():
 		try:

@@ -80,7 +80,7 @@ class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
 		elif queryString.startswith("form://"):
 			obj = self.Form
 		else:
-			raise ValueError, _("Internal link must resolve to Form or Application.")
+			raise ValueError(_("Internal link must resolve to Form or Application."))
 		queryString = queryString[queryString.index("//") + 2:]
 		try:
 			meth, args = queryString.split("?")

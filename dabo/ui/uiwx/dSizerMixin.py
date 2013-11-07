@@ -123,7 +123,7 @@ class dSizerMixin(dObject):
 			halign="left", valign="top", border=None, borderSides=None):
 		"""Inserts the passed object into the sizer layout at the specified position."""
 		if obj in self.ChildSizers:
-			raise ValueError, _("Adding the same sizer twice is not allowed.")
+			raise ValueError(_("Adding the same sizer twice is not allowed."))
 		if isinstance(layout, int):
 			# proportion was passed first
 			layout, proportion = proportion, layout

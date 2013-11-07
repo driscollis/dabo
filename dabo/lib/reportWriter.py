@@ -2369,12 +2369,12 @@ class ReportWriter(object):
 				pfHeight = self.getPt(pfHeight)
 
 			if band.lower() in ("pagefooter", "groupfooter") and pf.getProp("Height") is None:
-				raise ValueError, "PageFooter height must be fixed (not None)."
+				raise ValueError("PageFooter height must be fixed (not None).")
 
 			if band.lower() == "groupfooter" and bandDict.getProp("PrintAtBottom"):
 				groupFooterHeight = bandDict.getProp("Height")
 				if groupFooterHeight is None:
-					raise ValueError, "GroupFooter height must be fixed (not None) when PrintAtBottom is True."
+					raise ValueError("GroupFooter height must be fixed (not None) when PrintAtBottom is True.")
 				y = pageFooterOrigin[1] + pfHeight + groupFooterHeight + 1
 
 			if band.lower() == "reportend" and bandDict.getProp("PageBreakBefore"):
@@ -2482,7 +2482,7 @@ class ReportWriter(object):
 						# These still need to be printed, so let it continue
 						pass
 					else:
-						raise ValueError, "Unexpected band value '%s'" % band
+						raise ValueError("Unexpected band value '%s'" % band)
 
 					if not deferred:
 						y -= bandHeight
@@ -3029,7 +3029,7 @@ class ReportWriter(object):
 		if xmldict["name"].lower() == "report":
 			form = self._getFormFromXMLDict(xmldict)
 		else:
-			raise ValueError, "This isn't a valid rfxml string."
+			raise ValueError("This isn't a valid rfxml string.")
 
 		return form
 

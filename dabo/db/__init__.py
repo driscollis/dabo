@@ -112,7 +112,7 @@ def _getRecord(self_):
 			except FieldNotFoundException:
 				# __getitem__ added for a dict key-like interface, so convert
 				# the FieldNotFoundException to KeyError.
-				raise KeyError, key
+				raise KeyError(key)
 			return val
 
 		def __setitem__(self, key, val):
@@ -120,7 +120,7 @@ def _getRecord(self_):
 				return self.__setattr__(key, val)
 			except FieldNotFoundException:
 				# see comment in __getitem__
-				raise KeyError, key
+				raise KeyError(key)
 
 	## The rest of this block adds a property to the Record object
 	## for each field, the sole purpose being to have the field

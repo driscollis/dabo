@@ -553,7 +553,7 @@ class dRadioList(cim.dControlItemMixin, wx.Panel):
 			except IndexError:
 				if val is not None:
 					# No such string.
-					raise ValueError, _("No radio button matching '%s' was found.") % val
+					raise ValueError(_("No radio button matching '%s' was found.") % val)
 		else:
 			self._properties["StringValue"] = val
 

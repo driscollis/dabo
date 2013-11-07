@@ -26,7 +26,7 @@ except StandardError as e:
 class dGlWindow(cm.dControlMixin, glcanvas.GLCanvas):
 	def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
 		if not openGL:
-			raise ImportError, "PyOpenGL is not present, so dGlWindow cannot instantiate."
+			raise ImportError("PyOpenGL is not present, so dGlWindow cannot instantiate.")
 
 		self.init = False
 		self._rotate = self._pan = False
