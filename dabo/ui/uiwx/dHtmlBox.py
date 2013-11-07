@@ -4,7 +4,6 @@ import wx.html
 import os
 import re
 import string
-import types
 from six.moves import urllib
 import datetime
 import dabo
@@ -200,7 +199,7 @@ class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
 		if not self._constructed():
 			self._properties["Source"] = val
 			return
-		if isinstance(val, types.StringTypes):
+		if isinstance(val, sixBasestring):
 			self._source = val
 			self._page = ""
 			val = self.setImageURLs(val)

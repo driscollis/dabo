@@ -299,7 +299,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 		return ret
 
 	def _setBasePrefKey(self, val):
-		if not isinstance(val, types.StringTypes):
+		if not isinstance(val, sixBasestring):
 			raise TypeError('BasePrefKey must be a string.')
 		self._basePrefKey = val
 		pm = self.PreferenceManager
@@ -345,7 +345,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 			return "?"
 
 	def _setName(self, val):
-		if not isinstance(val, types.StringTypes):
+		if not isinstance(val, sixBasestring):
 			raise TypeError('Name must be a string.')
 		if not len(val.split()) == 1:
 			raise KeyError('Name must not contain any spaces')
