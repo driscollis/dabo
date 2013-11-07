@@ -278,7 +278,7 @@ class RemoteConnector(object):
 		# Save the current server manifest
 		pickle.dump(serverMf, file(".serverManifest", "w"), pickle.HIGHEST_PROTOCOL)
 		# Check the server manifest for deleted files
-		deleted = [pth for (pth, modf) in chgs.items()
+		deleted = [pth for (pth, modf) in list(chgs.items())
 				if not modf]
 		for delpth in deleted:
 			if delpth in baseMf:

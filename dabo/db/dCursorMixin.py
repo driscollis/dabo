@@ -694,7 +694,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		rowXML = ""
 		for rec in self._records:
 			recInfo = [ colTemplate % (k, self.getType(v), self.escape(v))
-					for k, v in rec.items() ]
+					for k, v in list(rec.items()) ]
 			rowXML += rowTemplate % "\n".join(recInfo)
 		return base % (self.Encoding, self.AutoPopulatePK, self.KeyField,
 				self.Table, rowXML)
@@ -709,7 +709,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		if row is None:
 			row = self.RowNumber
 		recInfo = [colTemplate % (k, self.getType(v), self.escape(v))
-				for k, v in self._records[row].items()]
+				for k, v in list(self._records[row].items())]
 		return "\n".join(recInfo)
 
 
@@ -959,7 +959,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		Set the value for multiple fields with one call by passing a dict containing
 		the field names as keys, and the new values as values.
 		"""
-		for fld, val in valDict.items():
+		for fld, val in list(valDict.items()):
 			self.setFieldVal(fld, val, row, pk)
 	setValuesByDict = setFieldVals  ## deprecate setValuesByDict in future
 
@@ -1301,7 +1301,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 
 		mem = self._mementos.get(pk, {})
 
-		for k, v in mem.items():
+		for k, v in list(mem.items()):
 			ret[k] = (v, rec[k])
 		return ret
 
@@ -1331,7 +1331,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			rec = self._records[row]
 			pk = self.pkExpression(rec)
 
-		for k, v in rec.items():
+		for k, v in list(rec.items()):
 			if k not in cursor_flags and \
 					self.Table in [f[3] for f in self.DataStructure if f[0]==k]:
 				ret[k] = (None, v)
@@ -1382,7 +1382,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 
 		getFieldVal = self.getFieldVal
 		_records = self._records
-		vFieldKeys = self.VirtualFields.keys()
+		vFieldKeys = list(self.VirtualFields.keys())
 		_correctFieldTypesIfNeeded = self._correctFieldTypesIfNeeded
 
 		if not flds:
@@ -1420,7 +1420,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			if updateInternals:
 				self.genTempAutoPK()
 				self.setNewFlag()
-			for col, val in rec.items():
+			for col, val in list(rec.items()):
 				if autoPopulatePK and (col in kf):
 					continue
 				self.setFieldVal(col, val)
@@ -1640,7 +1640,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				flds = ""
 				vals = []
 				kf = self.KeyField
-				for kk, vv in diff.items():
+				for kk, vv in list(diff.items()):
 					if self.AutoPopulatePK:
 						if self._compoundKey:
 							skipIt = (kk in kf)
@@ -1717,7 +1717,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				aux.execute("select * from %s where %s" % (self.Table, where))
 				try:
 					data = aux.getDataSet()[0]
-					for fld, val in data.items():
+					for fld, val in list(data.items()):
 						try:
 							self.setFieldVal(fld, val)
 						except dException.FieldNotFoundException:
@@ -1868,9 +1868,9 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				if self.RowNumber >= self.RowCount:
 					self.RowNumber = self.RowCount - 1
 
-			for rec_pk, mem in self._mementos.items():
+			for rec_pk, mem in list(self._mementos.items()):
 				row, rec = self._getRecordByPk(rec_pk)
-				for fld, val in mem.items():
+				for fld, val in list(mem.items()):
 					self._records[row][fld] = val
 			self._mementos = {}
 
@@ -1890,7 +1890,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				return
 
 			# Not a new record: need to manually replace the old values:
-			for fld, val in self._mementos.get(recKey, {}).items():
+			for fld, val in list(self._mementos.get(recKey, {}).items()):
 				self._records[row][fld] = val
 			self._clearMemento(row)
 
@@ -1990,7 +1990,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				setDefault(keyField, vals[keyField])
 				keyFieldSet = True
 
-			for field, val in vals.items():
+			for field, val in list(vals.items()):
 				if field == keyField and keyFieldSet:
 					continue
 				setDefault(field, val)
@@ -2338,7 +2338,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		aq = self.AutoQuoteNames
 		tblPrefix = bo.getUpdateTablePrefix(self.Table, autoQuote=aq)
 		nonup = self.getNonUpdateFields()
-		for fld, val in diff.items():
+		for fld, val in list(diff.items()):
 			old_val, new_val = val
 			# Skip the fields that are not to be updated.
 			if fld in nonup:

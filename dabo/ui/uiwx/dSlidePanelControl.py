@@ -191,7 +191,7 @@ class dSlidePanel(dcm.dControlMixin, fpb.FoldPanelItem):
 
 	def _getBarStyle(self):
 		wxbs = self._captionBar.GetCaptionStyle()._captionStyle
-		lowerStyle = [k for k,v in self._barStyleConstants.items()
+		lowerStyle = [k for k,v in list(self._barStyleConstants.items())
 				if v == wxbs][0]
 		return self._barStyles[list(self._barStylesLow).index(lowerStyle)]
 

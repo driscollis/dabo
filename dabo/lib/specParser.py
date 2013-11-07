@@ -23,7 +23,7 @@ class specHandler(xml.sax.ContentHandler):
 
 		elif name == "field":
 			fieldDict = {}
-			for att in attrs.keys():
+			for att in list(attrs.keys()):
 				if att == "name":
 					fldName = attrs.getValue("name")
 				else:
@@ -32,7 +32,7 @@ class specHandler(xml.sax.ContentHandler):
 
 		elif name == "join":
 			joinDict = {}
-			for att in attrs.keys():
+			for att in list(attrs.keys()):
 				if att == "order":
 					name = "_join%s" % attrs["order"]
 				joinDict[att] = attrs[att]

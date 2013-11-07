@@ -98,7 +98,7 @@ def makeDynamicProperty(prop, additionalDoc=None):
 	"""
 	propName = None
 	frame = inspect.currentframe(1)
-	for k, v in frame.f_locals.items():
+	for k, v in list(frame.f_locals.items()):
 		if v is prop:
 			propName = k
 			break

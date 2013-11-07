@@ -143,7 +143,7 @@ class MySQL(dBackend):
 		rs = cursor.fetchall()
 		tables = []
 		for record in rs:
-			tables.append(record.values()[0])
+			tables.append(list(record.values())[0])
 		return tuple(tables)
 
 

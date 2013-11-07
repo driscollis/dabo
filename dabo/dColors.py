@@ -163,7 +163,7 @@ colorDict = {"aliceblue" : (240, 248, 255),
 		"yellowgreen" : (154, 205, 50)
 		}
 
-colors = colorDict.keys()
+colors = list(colorDict.keys())
 colors.sort()
 
 
@@ -255,12 +255,12 @@ def colorTupleFromString(color):
 
 def randomColor():
 	"""Returns a random color tuple"""
-	return colorDict[random.choice(colorDict.keys())]
+	return colorDict[random.choice(list(colorDict.keys()))]
 
 
 def randomColorName():
 	"""Returns a random color name"""
-	return random.choice(colorDict.keys())
+	return random.choice(list(colorDict.keys()))
 
 
 def colorNameFromTuple(colorTuple, firstOnly=False):
@@ -269,7 +269,7 @@ def colorNameFromTuple(colorTuple, firstOnly=False):
 	will be returned as a string, not a list; the string will be empty
 	if there is no match.
 	"""
-	ret = [nm for nm, tup in colorDict.items()
+	ret = [nm for nm, tup in list(colorDict.items())
 			if tup == colorTuple]
 	if firstOnly:
 		try:

@@ -34,7 +34,7 @@ class connHandler(xml.sax.ContentHandler):
 	def startElement(self, name, attrs):
 		self.element = name
 		if name == "connection":
-			for att in attrs.keys():
+			for att in list(attrs.keys()):
 				if att == "dbtype":
 					dbType = attrs.getValue("dbtype").split(":")
 					self.currDict["dbtype"] = dbType[0]
@@ -101,10 +101,10 @@ def importConnections(pth=None, useHomeDir=False):
 	else:
 		basePath = pth
 
-	for cxn, data in ret.items():
+	for cxn, data in list(ret.items()):
 		dbtype = data.get("dbtype", "")
 		if dbtype.lower() in FILE_DATABASES:
-			for key, val in data.items():
+			for key, val in list(data.items()):
 				if key == "database":
 					osp = os.path
 					relpath = utils.resolvePath(val, basePath, abspath=False)

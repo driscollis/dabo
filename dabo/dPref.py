@@ -240,7 +240,7 @@ class dPref(object):
 
 	def persist(self):
 		"""Manually save preferences to the database."""
-		for key, val in self._cache.items():
+		for key, val in list(self._cache.items()):
 			if isinstance(val, dPref):
 				# Child pref; tell it to persist itself
 				val.persist()
@@ -289,7 +289,7 @@ class dPref(object):
 		if self._autoPersist:
 			crs = self._cursor
 			crs.execute("delete from daboprefs where ckey like ? ", (key, ))
-			for key, val in self._cache.items():
+			for key, val in list(self._cache.items()):
 				if isinstance(val, dPref):
 					# In case there are any other references to it hanging around,
 					# clear its cache.
@@ -317,7 +317,7 @@ class dPref(object):
 
 	def flushCache(self):
 		"""Clear the cache, forcing fresh reads from the database."""
-		for key, val in self._cache.items():
+		for key, val in list(self._cache.items()):
 			if isinstance(val, dPref):
 				val.flushCache()
 			else:
@@ -394,7 +394,7 @@ class dPref(object):
 		tmp = {}
 		for itm in retList:
 			tmp[itm] = None
-		return tmp.keys()
+		return list(tmp.keys())
 
 
 	def getValue(self, key):
@@ -435,7 +435,7 @@ class dPref(object):
 			param = "%"
 		crs.execute(sql, (param,))
 		rs = crs.getDataSet()
-		vs = [itm.values()[0] for itm in rs]
+		vs = [list(itm.values())[0] for itm in rs]
 
 		def uniqKeys(dct, val):
 			dct[val] = None

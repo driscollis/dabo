@@ -42,7 +42,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 
 		if kwargs:
 			# Some kwargs haven't been handled.
-			bad = ", ".join(kwargs.keys())
+			bad = ", ".join(list(kwargs.keys()))
 			raise TypeError(("Invalid keyword arguments passed to dGridSizer: %s") % bad)
 
 		dSizerMixin.dSizerMixin.__init__(self, *args, **kwargs)
@@ -509,7 +509,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 					ret = ["All"]
 				else:
 					ret = []
-					for side, val in pdBorder.items():
+					for side, val in list(pdBorder.items()):
 						if (flag & val == val):
 							ret.append(side)
 					if not ret:

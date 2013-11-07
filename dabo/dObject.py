@@ -43,7 +43,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 		if properties is None:
 			properties = {}
 		if attProperties:
-			for prop, val in attProperties.items():
+			for prop, val in list(attProperties.items()):
 				if prop in ("designerClass", ):
 					continue
 				if prop in properties:
@@ -72,7 +72,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 		# Get them sanitized into one dict:
 		if properties is not None:
 			# Override the class values
-			for k,v in properties.items():
+			for k,v in list(properties.items()):
 				self._properties[k] = v
 		properties = self._extractKeywordProperties(kwargs, self._properties)
 		if kwargs:
@@ -251,7 +251,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 		compiled successfully, an error message will be added
 		to the Dabo ErrorLog, and the method will not be added.
 		"""
-		for nm, code in cd.items():
+		for nm, code in list(cd.items()):
 			try:
 				code = code.replace("\n]", "]")
 				compCode = compile(code, "", "exec")

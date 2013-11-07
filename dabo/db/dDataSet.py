@@ -384,7 +384,7 @@ class dDataSet(tuple):
 # 		print "POPULATED", pt-st
 		# Now create any of the tables for the join dDataSets
 		if cursorDict is not None:
-			for alias, ds in cursorDict.items():
+			for alias, ds in list(cursorDict.items()):
 				self._populate(ds, alias)
 
 		# We have a table now with the necessary data. Run the query!

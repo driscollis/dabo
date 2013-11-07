@@ -423,7 +423,7 @@ if __name__ == "__main__":
 			"mysql": Test_dCursorMixin_mysql,
 			"firebird": Test_dCursorMixin_firebird,
 			"oracle": Test_dCursorMixin_oracle}
-	for k, v in db_tests.items():
+	for k, v in list(db_tests.items()):
 		if v:
 			testClasses.append(mapping[k])
 	for t in testClasses:

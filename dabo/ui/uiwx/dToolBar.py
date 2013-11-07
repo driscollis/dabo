@@ -529,7 +529,7 @@ class dToolBarItem(dObject):
 
 
 	def __updateDynamicProps(self):
-		for prop, func in self._dynamic.items():
+		for prop, func in list(self._dynamic.items()):
 			if isinstance(func, tuple):
 				args = func[1:]
 				func = func[0]

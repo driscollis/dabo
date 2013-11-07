@@ -585,7 +585,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	@dabo.ui.deadCheck
 	def _updateDynamicProps(self):
-		for prop, func in self._dynamic.items():
+		for prop, func in list(self._dynamic.items()):
 			if prop[:4] != "Cell":
 				if isinstance(func, tuple):
 					args = func[1:]
@@ -598,7 +598,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 	def _updateCellDynamicProps(self, row):
 		kwargs = {"row": row}
 		self._cellDynamicRow = row
-		for prop, func in self._dynamic.items():
+		for prop, func in list(self._dynamic.items()):
 			if prop[:4] == "Cell":
 				if isinstance(func, tuple):
 					args = func[1:]
@@ -2440,7 +2440,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			# not a bizobj datasource
 			firstRec = ds[0]
 
-		colKeys = [key for key in firstRec.keys()
+		colKeys = [key for key in list(firstRec.keys())
 				   if (includeFields is None or key in includeFields)]
 
 		# Add the columns

@@ -308,7 +308,7 @@ class DesignerClassConverter(dObject):
 		# Leave the third %s in place. That will be replaced by any
 		# inner class definitions we create
 		propInit = ""
-		for prop, propDef in propDefs.items():
+		for prop, propDef in list(propDefs.items()):
 			val = propDef["defaultValue"]
 			if val == "" and propDef["defaultType"] != "string":
 				continue
@@ -342,13 +342,13 @@ class DesignerClassConverter(dObject):
 			self.createChildCode(kids, specKids, isOkDlg)
 
 		# Add any main class code
-		for mthd, cd in code.items():
+		for mthd, cd in list(code.items()):
 			if mthd == "importStatements":
 				self._import += cd + LINESEP
 				continue
 			self.classText = "%s%s%s" % (self.classText, LINESEP, self.indentCode(cd, 1))
 		# Add any property definitions
-		for prop, propDef in propDefs.items():
+		for prop, propDef in list(propDefs.items()):
 			pdg = propDef["getter"]
 			pds = propDef["setter"]
 			pdd = propDef["deller"]
@@ -499,7 +499,7 @@ class DesignerClassConverter(dObject):
 				if isGridSizer:
 					propString = ""
 					propsToSend = []
-					for att, val in atts.items():
+					for att, val in list(atts.items()):
 						if att in ("HGap", "MaxRows", "MaxCols", "VGap"):
 							propsToSend.append("%s=%s" % (att, val))
 						elif att == "MaxDimension":
@@ -518,7 +518,7 @@ class DesignerClassConverter(dObject):
 					szType = atts["Orientation"]
 					for unneeded in ("SlotCount", "classID"):
 						atts.pop(unneeded, None)
-					propString = ", ".join(["%s='%s'" % (k,v) for k,v in atts.items()])
+					propString = ", ".join(["%s='%s'" % (k,v) for k,v in list(atts.items())])
 					if isBorderSizer:
 						prnt = "currParent, "
 				if self.CreateDesignerControls:
@@ -737,7 +737,7 @@ class DesignerClassConverter(dObject):
 		clsName = self.uniqename(shortClsName)
 		cleanAtts = self.cleanAttributes(atts)
 		propInit = ""
-		for prop, propDef in custProps.items():
+		for prop, propDef in list(custProps.items()):
 			val = propDef["defaultValue"]
 			if val == "" and propDef["defaultType"] != "string":
 				continue
@@ -751,7 +751,7 @@ class DesignerClassConverter(dObject):
 		self.innerClassNames.append(clsName)
 		# Since the code will be part of this class, which is at the outer level
 		# of indentation, it needs to be indented one level.
-		for mthd, cd in code.items():
+		for mthd, cd in list(code.items()):
 			if mthd == "importStatements":
 				self._import += cd + LINESEP
 				continue
@@ -759,7 +759,7 @@ class DesignerClassConverter(dObject):
 			if not self.innerClassText.endswith(LINESEP):
 				self.innerClassText += LINESEP
 		# Add any property definitions
-		for prop, propDef in custProps.items():
+		for prop, propDef in list(custProps.items()):
 			pdg = propDef["getter"]
 			pds = propDef["setter"]
 			pdd = propDef["deller"]
@@ -814,7 +814,7 @@ class DesignerClassConverter(dObject):
 		in the runtime objects.
 		"""
 		ret = {}
-		for key, val in attDict.items():
+		for key, val in list(attDict.items()):
 			if key not in ("SlotCount", "designerClass", "rowColPos",
 					"sizerInfo", "PageCount", "ColumnCount", "propertyDefinitions",
 					"classID", "savedClass"):

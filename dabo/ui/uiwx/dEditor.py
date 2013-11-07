@@ -132,7 +132,7 @@ class StyleTimer(dTimer.dTimer):
 	def onHit(self, evt):
 		#self.Interval = 0
 		self.stop()
-		if self.mode in LexerDic.keys():
+		if self.mode in list(LexerDic.keys()):
 			if self.Parent:
 				self.Parent.SetLexer(LexerDic[self.mode])
 			self.mode = "container"
@@ -413,7 +413,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 		"""
 		if line is None:
 			line = self._ZeroBasedLineNumber
-		if nm in self._bookmarks.keys():
+		if nm in list(self._bookmarks.keys()):
 			self.clearBookmark(nm)
 		hnd = self.MarkerAdd(line, self._bmkPos)
 		self._bookmarks[nm] = hnd
@@ -508,7 +508,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 		line, or None if the line is not bookmarked.
 		"""
 		ret = None
-		for nm, hnd in self._bookmarks.items():
+		for nm, hnd in list(self._bookmarks.items()):
 			if self.MarkerLineFromHandle(hnd) == line:
 				ret = nm
 				break
@@ -517,7 +517,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 
 	def getBookmarkList(self):
 		"""Returns a list of all current bookmark names."""
-		return self._bookmarks.keys()
+		return list(self._bookmarks.keys())
 
 
 	def getFunctionList(self):
@@ -1090,7 +1090,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 
 	def getAvailableLanguages(cls):
 		"""Returns an alphabetical list of all languages we have lexers for."""
-		ret = LexerDic.keys()
+		ret = list(LexerDic.keys())
 		ret.sort()
 		return ret
 	getAvailableLanguages = classmethod(getAvailableLanguages)
@@ -1100,7 +1100,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 		"""Sets the appropriate lexer for syntax coloring."""
 		lex = self.Language.lower()
 		if color and lex:
-			if lex in LexerDic.keys():
+			if lex in list(LexerDic.keys()):
 				self.SetLexer(LexerDic[lex])
 				if lex == "python":
 					if not self._keyWordsLanguage == lex:
@@ -1529,7 +1529,7 @@ Do you want to overwrite it?""")
 			return
 		# Get the current status of bookmarks
 		currBmks = [(nm, self.MarkerLineFromHandle(hnd))
-				    for nm, hnd in self._bookmarks.items()]
+				    for nm, hnd in list(self._bookmarks.items())]
 		if currBmks != self._lastBookmarks:
 			# Save them
 			self._lastBookmarks = currBmks
@@ -1792,7 +1792,7 @@ Do you want to overwrite it?""")
 				flag = 0
 			retAll = ([x for x in re.findall(r"\b" + word + r"\w+\b", self._getTextSource(), flag)
 					   if x.find(',')==-1 and x[0]!= ' '])
-			ret = dict.fromkeys(retAll).keys()
+			ret = list(dict.fromkeys(retAll).keys())
 			return ret
 
 
@@ -2063,11 +2063,11 @@ Do you want to overwrite it?""")
 		return self._bookmarkIcon
 
 	def _setBookmarkIcon(self, val):
-		if val in bmkIconDic.keys():
+		if val in list(bmkIconDic.keys()):
 			self._bookmarkIcon = val
 			self._setBookmarkMarker()
 		else:
-			raise ValueError("Value of BookmarkIcon must be in %s" % (bmkIconDic.keys(),))
+			raise ValueError("Value of BookmarkIcon must be in %s" % (list(bmkIconDic.keys()),))
 
 
 	def _getBufferedDrawing(self):
@@ -2228,10 +2228,10 @@ Do you want to overwrite it?""")
 	def _setLanguage(self, val):
 		if self._constructed():
 			if val != self._language:
-				if val.lower() in LexerDic.keys():
+				if val.lower() in list(LexerDic.keys()):
 					self._language = val.lower()
 				else:
-					dabo.log.error(_("Currently only %s are supported") % ", ".join(LexerDic.keys()))
+					dabo.log.error(_("Currently only %s are supported") % ", ".join(list(LexerDic.keys())))
 				self.setDefaults()
 				self._defaultsSet = True
 

@@ -498,7 +498,7 @@ try again when it is running.
 	def _retrieveMRUs(self):
 		"""Retrieve any saved MRU lists."""
 		base = "MRU.%s" % self.getAppInfo("appName")
-		for cap, fcn in self._persistentMRUs.items():
+		for cap, fcn in list(self._persistentMRUs.items()):
 			cleanCap = cleanMenuCaption(cap)
 			itms = self.getUserSetting(".".join((base, cleanCap)))
 			if itms:
@@ -929,7 +929,7 @@ try again when it is running.
 		# For each connection definition, add an entry to
 		# self.dbConnectionDefs that contains a key on the
 		# name, and a value of a dConnectInfo object.
-		for k,v in connDefs.items():
+		for k,v in list(connDefs.items()):
 			self.dbConnectionDefs[k] = v
 
 		dabo.log.info(_("%s database connection definition(s) loaded.")
@@ -999,7 +999,7 @@ try again when it is running.
 			dabo.log.error(_("Error parsing '%(filePath)s': %(e)s") % locals())
 			return {}
 		# Convert the connect info dicts to dConnectInfo instances:
-		for k,v in connDefs.items():
+		for k,v in list(connDefs.items()):
 			ci = dabo.db.dConnectInfo()
 			ci.setConnInfo(v)
 			connDefs[k] = ci
@@ -1028,12 +1028,12 @@ try again when it is running.
 
 	def getConnectionNames(self):
 		"""Returns a list of all defined connection names"""
-		return self.dbConnectionDefs.keys()
+		return list(self.dbConnectionDefs.keys())
 
 
 	def closeConnections(self):
 		"""Cleanup as the app is exiting."""
-		for key, conn in self.dbConnections.items():
+		for key, conn in list(self.dbConnections.items()):
 			conn.close()
 			del self.dbConnections[key]
 
@@ -1072,7 +1072,7 @@ try again when it is running.
 			# For each connection definition, add an entry to
 			# self.dbConnectionDefs that contains a key on the
 			# name, and a value of a dConnectInfo object.
-			for k,v in connDefs.items():
+			for k,v in list(connDefs.items()):
 				self.dbConnectionDefs[k] = v
 				self.dbConnectionNameToFiles[k] = connFile
 		else:

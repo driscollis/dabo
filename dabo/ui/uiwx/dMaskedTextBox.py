@@ -91,7 +91,7 @@ class dMaskedTextBox(tbm.dTextBoxMixin, masked.TextCtrl):
 
 	def getFormats(cls):
 		"""Return a list of available format codes."""
-		return cls._formatMap.keys()
+		return list(cls._formatMap.keys())
 	getFormats = classmethod(getFormats)
 
 
@@ -100,7 +100,7 @@ class dMaskedTextBox(tbm.dTextBoxMixin, masked.TextCtrl):
 		Take a string and return the same string with any duplicate characters removed.
 		The order of the characters is not preserved.
 		"""
-		return "".join(dict.fromkeys(codes).keys())
+		return "".join(list(dict.fromkeys(codes).keys()))
 
 
 	def _onWxHit(self, evt, *args, **kwargs):

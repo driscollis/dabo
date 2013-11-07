@@ -935,9 +935,9 @@ these automatic updates.""").replace("\n", " ")
 				if isinstance(ctl, wx.TextCtrl)]
 
 		tbs.sort()
-		self._findDlgID = tbs[0].values()[0]
+		self._findDlgID = list(tbs[0].values())[0]
 		try:
-			self._replaceDlgID = tbs[1].values()[0]
+			self._replaceDlgID = list(tbs[1].values())[0]
 		except IndexError:
 			# Not a Replace dialog
 			self._replaceDlgID = None
@@ -1187,7 +1187,7 @@ these automatic updates.""").replace("\n", " ")
 			# Remove all the items
 			lnks = self._mruMenuLinks.get(menu, {})
 			kids = menu.Children
-			for itm in lnks.values()[::-1]:
+			for itm in list(lnks.values())[::-1]:
 				if itm not in kids:
 					continue
 				try:

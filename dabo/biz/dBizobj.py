@@ -176,7 +176,7 @@ class dBizobj(dObject):
 		By default, only unchanged non-current cursors are flushed.
 		"""
 		cursors = {}
-		for key, cursor in self.__cursors.items():
+		for key, cursor in list(self.__cursors.items()):
 			if (not flush_current and cursor is self._CurrentCursor) \
 					or (not flush_changed and cursor.isChanged()):
 				cursors[key] = cursor
@@ -247,7 +247,7 @@ class dBizobj(dObject):
 		executing.
 		"""
 		if self.__cursors:
-			cursorKey = self.__cursors.keys()[0]
+			cursorKey = list(self.__cursors.keys())[0]
 			_dataStructure = getattr(self.__cursors[cursorKey], "_dataStructure", None)
 			self._virtualFields = getattr(self.__cursors[cursorKey], "_virtualFields", {})
 		else:
@@ -1696,7 +1696,7 @@ class dBizobj(dObject):
 		withNewUnchanged = includeNewUnchanged
 		if withNewUnchanged is None:
 			withNewUnchanged = self.SaveNewUnchanged
-		for cursor in self.__cursors.values():
+		for cursor in list(self.__cursors.values()):
 			if cursor.isChanged(allRows=True, includeNewUnchanged=withNewUnchanged):
 				return True
 		for child in self._children:
@@ -1972,7 +1972,7 @@ class dBizobj(dObject):
 		If recurse is True, the cache in the child bizobjs will be expired, too.
 		"""
 		if _allCursors:
-			cursors = self.__cursors.values()
+			cursors = list(self.__cursors.values())
 		else:
 			cursors = [self._CurrentCursor]
 
@@ -2057,7 +2057,7 @@ class dBizobj(dObject):
 			valDict = kwargs
 		else:
 			valDict.update(kwargs)
-		for fld, val in valDict.items():
+		for fld, val in list(valDict.items()):
 			self.setFieldVal(fld, val, row, pk)
 
 
@@ -2694,7 +2694,7 @@ afterDelete() which is only called after a delete().""")
 		that provide it with data connectivity. This method ensures that all
 		such cursors are in sync with the bizobj.
 		"""
-		for crs in self.__cursors.values():
+		for crs in list(self.__cursors.values()):
 			self._syncCursorProps(crs)
 
 
@@ -2857,7 +2857,7 @@ afterDelete() which is only called after a delete().""")
 		if not isinstance(val, (types.NoneType, tuple)):
 			raise TypeError(_("Invalid type '%s' for property DataStructure. " \
 					"An tuple value is required.") % type(val))
-		for key, cursor in self.__cursors.items():
+		for key, cursor in list(self.__cursors.items()):
 			cursor.DataStructure = val
 		self._dataStructure = val
 		self._clearCursorRecord()

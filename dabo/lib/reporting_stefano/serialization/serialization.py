@@ -11,7 +11,7 @@ class SerializableMeta(type):
 		for base in bases:
 			if hasattr(base, '_xmlSerializationAttributes'):
 				attributes.extend(base._xmlSerializationAttributes)
-		for name, obj in dict.items():
+		for name, obj in list(dict.items()):
 			if (isinstance(obj, SerializableAttribute)
 					or isinstance(obj, SerializableObjectChild)):
 				attributes.append( (name, obj) )
@@ -29,7 +29,7 @@ class Serializable(object):
 		self.srcValues = {}
 		attributeNames = [attrName for attrName,
 				attrType in self._xmlSerializationAttributes]
-		for key, value in args.iteritems():
+		for key, value in args.items():
 			assert key in attributeNames, "Unknown attribute name %r for object %s" \
 					% (key, self.__class__.__name__)
 			self.srcValues[key] = value

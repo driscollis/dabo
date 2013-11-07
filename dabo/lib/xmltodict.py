@@ -95,7 +95,7 @@ class Xml2Obj(object):
 						except KeyError:
 							pass
 					# Unescape any escaped values
-					for kk, vv in attributes.items():
+					for kk, vv in list(attributes.items()):
 						attributes[kk] = unescape(vv)
 					element["attributes"] = attributes
 
@@ -279,7 +279,7 @@ def dicttoxml(dct, level=0, header=None, linesep=None):
 	ret = ""
 
 	if "attributes" in dct:
-		for key, val in dct["attributes"].items():
+		for key, val in list(dct["attributes"].items()):
 			# Some keys are already handled.
 			noEscape = key in ("sizerInfo",)
 			val = escQuote(val, noEscape)
@@ -295,10 +295,10 @@ def dicttoxml(dct, level=0, header=None, linesep=None):
 			ret += "%s" % dct["cdata"].replace("<", "&lt;").replace(">", "&gt;")
 
 		if "code" in dct:
-			if len(dct["code"].keys()):
+			if len(list(dct["code"].keys())):
 				ret += "%s%s<code>%s" % (eol, "\t" * (level+1), eol)
 				methodTab = "\t" * (level+2)
-				for mthd, cd in dct["code"].items():
+				for mthd, cd in list(dct["code"].items()):
 					# Convert \n's in the code to eol:
 					cd = eol.join(cd.splitlines())
 					# Make sure that the code ends with a linefeed
@@ -311,12 +311,12 @@ def dicttoxml(dct, level=0, header=None, linesep=None):
 				ret += "%s</code>%s"	% ("\t" * (level+1), eol)
 
 		if "properties" in dct:
-			if len(dct["properties"].keys()):
+			if len(list(dct["properties"].keys())):
 				ret += "%s%s<properties>%s" % (eol, "\t" * (level+1), eol)
 				currTab = "\t" * (level+2)
-				for prop, val in dct["properties"].items():
+				for prop, val in list(dct["properties"].items()):
 					ret += "%s<%s>%s" % (currTab, prop, eol)
-					for propItm, itmVal in val.items():
+					for propItm, itmVal in list(val.items()):
 						itmTab = "\t" * (level+3)
 						ret += "%s<%s>%s</%s>%s" % (itmTab, propItm, itmVal,
 								propItm, eol)

@@ -34,7 +34,7 @@ class dPemMixin(dabo.ui.dPemMixinBase.dPemMixinBase):
 		# Get them sanitized into one dict:
 		if properties is not None:
 			# Override the class values
-			for k,v in properties.items():
+			for k,v in list(properties.items()):
 				self._properties[k] = v
 		properties = self._extractKeywordProperties(kwargs, self._properties)
 

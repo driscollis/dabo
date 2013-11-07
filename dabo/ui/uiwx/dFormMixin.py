@@ -368,7 +368,7 @@ class dFormMixin(pm.dPemMixin):
 		pmMenu = pm.menu
 		menuPath = pmMenu.FullPath + "."
 		prefs = pmMenu.getPrefs(returnNested=True)
-		for itmPath, hk in prefs.items():
+		for itmPath, hk in list(prefs.items()):
 			relPath, setting = itmPath.replace(menuPath, "").rsplit(".", 1)
 			menuItem = mb
 			for pth in relPath.split("."):

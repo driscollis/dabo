@@ -590,7 +590,7 @@ class dListControl(dcm.dControlItemMixin,
 
 	def _restoreItemData(self, dct):
 		"""After a sort, returns the original item data values."""
-		for row, val in dct.items():
+		for row, val in list(dct.items()):
 			self.SetItemData(row, val)
 
 

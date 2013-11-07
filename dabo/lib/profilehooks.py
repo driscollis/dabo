@@ -509,7 +509,7 @@ class TraceFuncCoverage:
         print "function called %d times" % self.ncalls
         print
         fs = FuncSource(self.fn)
-        for (filename, lineno), count in self.tracer.counts.items():
+        for (filename, lineno), count in list(self.tracer.counts.items()):
             if filename != fs.filename:
                 continue
             fs.mark(lineno, count)

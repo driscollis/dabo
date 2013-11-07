@@ -51,7 +51,7 @@ daboTypes = {
 		"L": buffer,              ## BLOB
 		}
 
-pythonTypes = dict([[v,k] for k,v in daboTypes.iteritems()])
+pythonTypes = dict([[v,k] for k,v in daboTypes.items()])
 pythonTypes[str] = "C"
 pythonTypes[unicode] = "C"
 del k, v, Decimal
@@ -133,7 +133,7 @@ def _getRecord(self_):
 		return property(fget, fset)
 
 	field_aliases = [ds[0] for ds in self_.DataStructure]
-	field_aliases.extend(self_.VirtualFields.keys())
+	field_aliases.extend(list(self_.VirtualFields.keys()))
 	for field_alias in field_aliases:
 		setattr(CursorRecord, field_alias, getFieldProp(field_alias))
 	return CursorRecord(self_)

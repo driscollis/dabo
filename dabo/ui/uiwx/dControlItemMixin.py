@@ -171,7 +171,7 @@ class dControlItemMixin(dDataControlMixin):
 		if isinstance(val, dict):
 			self._keys = val
 			# What about duplicate values?
-			self._invertedKeys = dict((v,k) for k,v in val.iteritems())
+			self._invertedKeys = dict((v,k) for k,v in val.items())
 		elif isinstance(val, (list, tuple)):
 			self._keys = val
 			self._invertedKeys = None

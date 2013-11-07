@@ -63,7 +63,7 @@ class dConnectInfo(dObject):
 		props = ["Name", "DbType", "Host", "User", "Password", "Database",
 				"PlainTextPassword", "Port", "RemoteHost", "KeepAliveInterval"]
 		lprops = [p.lower() for p in props]
-		for k, v in connInfo.items():
+		for k, v in list(connInfo.items()):
 			try:
 				propidx = lprops.index(k.lower())
 			except ValueError:

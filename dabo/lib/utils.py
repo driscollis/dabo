@@ -182,7 +182,7 @@ def dictStringify(dct):
 	unicode keys changed to strings.
 	"""
 	ret = {}
-	for kk, vv in dct.items():
+	for kk, vv in list(dct.items()):
 		if isinstance(kk, unicode):
 			try:
 				ret[str(kk)] = vv
@@ -318,7 +318,7 @@ def resolveAttributePathing(atts, pth=None, abspath=False):
 	those new values.
 	"""
 	prfx = getPathAttributePrefix()
-	pathsToConvert = ((kk, vv) for kk, vv in atts.items()
+	pathsToConvert = ((kk, vv) for kk, vv in list(atts.items())
 			if isinstance(vv, basestring) and vv.startswith(prfx))
 	for convKey, convVal in pathsToConvert:
 		# Strip the path designator

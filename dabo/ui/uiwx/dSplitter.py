@@ -508,8 +508,8 @@ class _dSplitter_test(dSplitter):
 		self.ShowPanelSplitMenu = True
 
 	def afterInit(self):
-		self.Panel1.BackColor = random.choice(dColors.colorDict.values())
-		self.Panel2.BackColor = random.choice(dColors.colorDict.values())
+		self.Panel1.BackColor = random.choice(list(dColors.colorDict.values()))
+		self.Panel2.BackColor = random.choice(list(dColors.colorDict.values()))
 
 
 	def onSashDoubleClick(self, evt):

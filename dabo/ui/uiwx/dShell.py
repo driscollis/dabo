@@ -52,7 +52,7 @@ class _LookupPanel(dabo.ui.dPanel):
 			return
 		elif kc == dKeys.key_Escape:
 			self.closeDialog(False)
-		if kc in dKeys.arrowKeys.values() or char is None:
+		if kc in list(dKeys.arrowKeys.values()) or char is None:
 			#ignore
 			return
 		if kc == dKeys.key_Back:

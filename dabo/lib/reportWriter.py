@@ -286,7 +286,7 @@ class ReportObject(CaselessDict):
 	def insertRequiredElements(self):
 		"""Insert any missing required elements into the object."""
 		if self.__class__.__name__ not in CLASSES_TO_SKIP_DEF:
-			for k, v in self.AvailableProps.items():
+			for k, v in list(self.AvailableProps.items()):
 				if k.lower() not in PROPS_TO_SKIP_DEF:
 					defProp = self.AvailableProps["%s_def" % k] = v.copy()
 					defProp["doc"] = "This is the DEFAULT value of the property, for design-time evaluation."
@@ -315,7 +315,7 @@ class ReportObject(CaselessDict):
 			start = self
 		m = {"type": start.__class__.__name__}
 
-		for k, v in start.items():
+		for k, v in list(start.items()):
 			if isinstance(v, dict):
 				m[k] = self.getMemento(v)
 			elif isinstance(v, list):
@@ -1262,7 +1262,7 @@ class Barcode(Drawable):
 class TestCursor(ReportObjectCollection):
 	def addRecord(self, record):
 		tRecord = TestRecord(self)
-		for k, v in record.items():
+		for k, v in list(record.items()):
 			tRecord[k] = v
 		tRecord.initAvailableProps()
 		self.append(tRecord)
@@ -1270,7 +1270,7 @@ class TestCursor(ReportObjectCollection):
 
 class TestRecord(ReportObject):
 	def initAvailableProps(self):
-		for k, v in self.items():
+		for k, v in list(self.items()):
 			self.AvailableProps[k] = toPropDict(str, "", "")
 
 
@@ -1380,9 +1380,9 @@ class ReportWriter(object):
 			idx, f, b = idx_f_b
 			m = Memo(b)
 			p = f["Objects"][0]
-			for k, v in p.items():
+			for k, v in list(p.items()):
 				m[k] = v
-			for k, v in f.items():
+			for k, v in list(f.items()):
 				if k.lower() not in ("objects",):
 					m[k] = v
 			f.parent[idx] = m
@@ -2882,7 +2882,7 @@ class ReportWriter(object):
 		if d is None:
 			d = {"name": "Report", "children": []}
 
-		elements = form.keys()
+		elements = list(form.keys())
 		elements.sort(self._elementSort)
 
 		for element in elements:
@@ -2905,7 +2905,7 @@ class ReportWriter(object):
 				for index in range(len(form[element])):
 					formobj = form[element][index]
 					obj = {"name": formobj.__class__.__name__, "children": []}
-					props = formobj.keys()
+					props = list(formobj.keys())
 					props.sort(self._elementSort)
 					if element in formobj:
 						# Recurse
@@ -3070,7 +3070,7 @@ class ReportWriter(object):
 			liveTest = []
 			for record in v:
 				liveRecord = CaselessDict()
-				for f, v in record.items():
+				for f, v in list(record.items()):
 					liveRecord[f] = eval(v)
 				liveTest.append(liveRecord)
 			v = liveTest

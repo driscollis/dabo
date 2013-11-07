@@ -550,7 +550,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 		choices = []
 		colKeys = self.DataFields
 		if not colKeys:
-			colKeys = [key for key in ds[0].keys()]	
+			colKeys = [key for key in list(ds[0].keys())]	
 
 		if len(colKeys) == 1:
 			#Single column

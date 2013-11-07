@@ -113,7 +113,7 @@ No translation file found for domain 'dabo'.
 			daboTranslation = gettext.translation("dabo", daboLocaleDir, languages=["en"], codeset=charset)
 		_currentTrans = daboTranslation.ugettext
 
-	for domain, localedir in _domains.items():
+	for domain, localedir in list(_domains.items()):
 		if domain == "dabo":
 			continue  ## already handled separately above
 		try:

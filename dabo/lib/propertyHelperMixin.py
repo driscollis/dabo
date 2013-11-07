@@ -59,7 +59,7 @@ class PropertyHelperMixin(object):
 		if propdict is None:
 			propdict = {}
 		props = self.getPropertyList()
-		for arg in kwdict.keys():
+		for arg in list(kwdict.keys()):
 			if arg in props:
 				propdict[arg] = kwdict.pop(arg)
 		return propdict
@@ -211,7 +211,7 @@ class PropertyHelperMixin(object):
 				else:
 					raise AttributeError("'%s' is not a property." % prop)
 			if delayedSettings is not None:
-				for setter, val in delayedSettings.items():
+				for setter, val in list(delayedSettings.items()):
 					setter(self, val)
 
 		# Set the props specified in the passed propDict dictionary:
@@ -231,7 +231,7 @@ class PropertyHelperMixin(object):
 		the property to that converted value. If the value needs to be evaluated
 		in a specific namespace, pass that as the 'context' parameter.
 		"""
-		for prop, val in propDict.items():
+		for prop, val in list(propDict.items()):
 			if not hasattr(self, prop):
 				# Not a valid property
 				if ignoreExtra:
@@ -251,7 +251,7 @@ class PropertyHelperMixin(object):
 		This method takes a dict of event names and method to which they are
 		to be bound, and binds the corresponding event to that method.
 		"""
-		for evtName, mthd in kwEvtDict.items():
+		for evtName, mthd in list(kwEvtDict.items()):
 			from dabo import dEvents
 			evt = dEvents.__dict__[evtName]
 			if isinstance(mthd, collections.Callable):

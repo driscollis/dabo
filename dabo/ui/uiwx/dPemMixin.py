@@ -99,7 +99,7 @@ class dPemMixin(dPemMixinBase):
 		# Get them sanitized into one dict:
 		if properties is not None:
 			# Override the class values
-			for k,v in properties.items():
+			for k,v in list(properties.items()):
 				self._properties[k] = v
 		properties = self._extractKeywordProperties(kwargs, self._properties)
 
@@ -109,13 +109,13 @@ class dPemMixin(dPemMixinBase):
 		# Convert these to the properties dict.
 
 		try:
-			builtinNames = __builtins__.keys()
+			builtinNames = list(__builtins__.keys())
 		except AttributeError:
 			# '__builtins__' is a module here
 			builtinNames = dir(__builtins__)
 
 		if attProperties:
-			for prop, val in attProperties.items():
+			for prop, val in list(attProperties.items()):
 				if prop in properties:
 					# attProperties has lower precedence, so skip it
 					continue
@@ -175,7 +175,7 @@ class dPemMixin(dPemMixinBase):
 		# The user's subclass code has had a chance to tweak the init properties.
 		# Insert any of those into the arguments to send to the wx constructor:
 		properties = self._setInitProperties(**properties)
-		for prop in self._preInitProperties.keys():
+		for prop in list(self._preInitProperties.keys()):
 			kwargs[prop] = self._preInitProperties[prop]
 		# Allow the object a chance to add any required parms, such as OptionGroup
 		# which needs a choices parm in order to instantiate.
@@ -379,7 +379,7 @@ class dPemMixin(dPemMixinBase):
 		# when setProperties() is called after the wx object is instantiated,
 		# the style props won't be set a second time.
 		initProps = self._getInitPropertiesList()
-		for prop in _properties.keys():
+		for prop in list(_properties.keys()):
 			if prop in initProps:
 				self.setProperties({prop:_properties[prop]})
 				del(_properties[prop])
@@ -767,7 +767,7 @@ class dPemMixin(dPemMixinBase):
 		anId = wx.NewId()
 		table = self._acceleratorTable
 		table[keyCombo] = (flags, keyCode, anId)
-		self.SetAcceleratorTable(wx.AcceleratorTable(table.values()))
+		self.SetAcceleratorTable(wx.AcceleratorTable(list(table.values())))
 		# Store the modifier keys that will have been pressed to trigger
 		# this key event. They will be included in the Dabo event that is
 		# passed to the callback function.
@@ -818,7 +818,7 @@ class dPemMixin(dPemMixinBase):
 		try:
 			self.Unbind(wx.EVT_MENU, id=table[keyCombo][2])
 			del table[keyCombo]
-			self.SetAcceleratorTable(wx.AcceleratorTable(table.values()))
+			self.SetAcceleratorTable(wx.AcceleratorTable(list(table.values())))
 		except KeyError:
 			pass
 
@@ -880,7 +880,7 @@ class dPemMixin(dPemMixinBase):
 		as the associated value.
 		"""
 		if self.ControllingSizer:
-			for prop, val in propDict.iteritems():
+			for prop, val in propDict.items():
 				self.ControllingSizer.setItemProp(self, prop, val)
 
 
@@ -1403,7 +1403,7 @@ class dPemMixin(dPemMixinBase):
 
 
 	def __updateObjectDynamicProps(self, obj):
-		for prop, func in obj._dynamic.items():
+		for prop, func in list(obj._dynamic.items()):
 			if isinstance(func, tuple):
 				args = func[1:]
 				func = func[0]

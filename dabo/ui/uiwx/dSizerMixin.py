@@ -417,7 +417,7 @@ class dSizerMixin(dObject):
 				if flag & self.borderAllFlag == self.borderAllFlag:
 					return ["All"]
 				ret = []
-				for side, val in pdBorder.items():
+				for side, val in list(pdBorder.items()):
 					if flag & val:
 						ret.append(side)
 				if not ret:
@@ -534,7 +534,7 @@ class dSizerMixin(dObject):
 		This accepts a dict of properties and values, and
 		applies them to the specified sizer item.
 		"""
-		for prop, val in props.items():
+		for prop, val in list(props.items()):
 			if itm:
 				self.setItemProp(itm, prop, val)
 

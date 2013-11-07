@@ -818,7 +818,7 @@ class Form(dabo.ui.dForm):
 		testCursor = rf.addElement(lrw.TestCursor)
 		for rec in self.getBizobj().getDataSet(rows=10):
 			tRec = {}
-			for fld, val in rec.items():
+			for fld, val in list(rec.items()):
 				tRec[fld] = repr(val)
 			testCursor.addRecord(tRec)
 		return rw._getXMLFromForm(rf)
