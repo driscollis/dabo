@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import re
 import datetime
@@ -476,7 +477,7 @@ class dTextBoxMixinBase(dcm.dDataControlMixin):
 class dTextBoxMixin(dTextBoxMixinBase):
 	def __init__(self, preClass, parent, properties=None, attProperties=None, *args, **kwargs):
 		self._dregex = {}
-		self._lastDataType = unicode
+		self._lastDataType = sixUnicode
 
 		dTextBoxMixinBase.__init__(self, preClass, parent, properties=properties,
 				attProperties=attProperties, *args, **kwargs)
@@ -571,7 +572,7 @@ class dTextBoxMixin(dTextBoxMixinBase):
 		else:
 			# Other types can convert directly.
 			if dataType == str:
-				dataType = unicode
+				dataType = sixUnicode
 			try:
 				return dataType(strVal)
 			except ValueError:

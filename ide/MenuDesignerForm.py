@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import codecs
 import os
@@ -641,7 +642,7 @@ class MenuDesignerForm(dabo.ui.dForm):
 		if isinstance(val, sixBasestring):
 			strVal = val
 		else:
-			strVal = unicode(val)
+			strVal = sixUnicode(val)
 		if typ in (sixBasestring) or ((typ is list) and isinstance(val, sixBasestring)):
 			# Escape any single quotes, and then enclose
 			# the value in single quotes

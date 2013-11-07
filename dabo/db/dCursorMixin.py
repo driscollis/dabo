@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # dabo/db/dCursorMixin
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 
 import datetime
@@ -251,7 +252,7 @@ class dCursorMixin(dObject):
 				dabo.log.error(_("_correctFieldType() failed for field: "
 						"'%(field_name)s' (%(func)s); value: %(field_val)s (%(tfv)s)") % locals())
 
-		if pythonType in (unicode,):
+		if pythonType in (sixUnicode,):
 			# Unicode conversion happens below.
 			pass
 		elif pythonType in (datetime.datetime,) and isinstance(field_val, sixBasestring):
@@ -343,7 +344,7 @@ class dCursorMixin(dObject):
 		# retrieving the data. However, many cursor classes can only return
 		# row information as a list, not as a dictionary. This method will
 		# detect that, and convert the results to a dictionary.
-		if isinstance(sql, unicode):
+		if isinstance(sql, sixUnicode):
 			sql = sql.encode(self.Encoding)
 		if convertQMarks:
 			sql = self._qMarkToParamPlaceholder(sql)
@@ -368,7 +369,7 @@ class dCursorMixin(dObject):
 
 			# Database errors need to be decoded from database encoding.
 			try:
-				errMsg = unicode(str(e), self.Encoding)
+				errMsg = sixUnicode(str(e), self.Encoding)
 			except UnicodeError:
 				errMsg = ustr(e)
 			# If this is due to a broken connection, let the user know.

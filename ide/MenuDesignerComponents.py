@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import os
 import dabo.ui
@@ -42,7 +43,7 @@ class MenuSaverMixin(object):
 			if isinstance(val, sixBasestring):
 				strval = val
 			else:
-				strval = unicode(val)
+				strval = sixUnicode(val)
 			# Special cases
 			try:
 				evalStrVal = eval(strval)
@@ -282,17 +283,17 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 
 
 	def _getDesignerProps(self):
-		ret = {"Caption": {"type" : unicode, "readonly" : False},
-				"HelpText" : {"type" : unicode, "readonly" : False},
+		ret = {"Caption": {"type" : sixUnicode, "readonly" : False},
+				"HelpText" : {"type" : sixUnicode, "readonly" : False},
 				"MRU": {"type" : bool, "readonly" : False}}
 		if self.isMenuItem:
-			ret.update({"HotKey": {"type" : unicode, "readonly" : False,
+			ret.update({"HotKey": {"type" : sixUnicode, "readonly" : False,
 					"customEditor": "editHotKey"},
 					"HotKeyAlt": {"type" : bool, "readonly" : False},
-					"HotKeyChar": {"type" : unicode, "readonly" : False},
+					"HotKeyChar": {"type" : sixUnicode, "readonly" : False},
 					"HotKeyControl": {"type" : bool, "readonly" : False},
 					"HotKeyShift": {"type" : bool, "readonly" : False},
-					"Action": {"type" : unicode, "readonly" : False}})
+					"Action": {"type" : sixUnicode, "readonly" : False}})
 			del ret["MRU"]
 		return ret
 

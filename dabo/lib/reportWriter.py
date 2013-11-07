@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import copy
 import datetime
@@ -1686,19 +1687,19 @@ class ReportWriter(object):
 				s = self.NoneDisplay
 			elif obj.Report.getProp("StringifyDates") and isinstance(s, datetime.date):
 				s = getStringFromDate(s)
-			if isinstance(s, unicode):
+			if isinstance(s, sixUnicode):
 				pass
 			elif isinstance(s, str):
 				try:
-					s = unicode(s, "utf-8")
+					s = sixUnicode(s, "utf-8")
 				except UnicodeDecodeError:
 					try:
-						s = unicode(s, self.Encoding)
+						s = sixUnicode(s, self.Encoding)
 					except UnicodeDecodeError:
 						# s must have already been encoded, and the default encoding is ascii.
 						pass
 			else:
-				s = unicode(s)
+				s = sixUnicode(s)
 			try:
 				func(posx, 0, s)
 			except UnicodeDecodeError:

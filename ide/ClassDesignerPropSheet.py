@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import os
 import pydoc
@@ -229,7 +230,7 @@ class PropSheet(dabo.ui.dPanel):
 						if pp not in badProps]
 
 			if len(props) == 0:
-				ds = [{"prop" : "", "val" : "", "type" : unicode, "readonly" : True}]
+				ds = [{"prop" : "", "val" : "", "type" : sixUnicode, "readonly" : True}]
 			else:
 				# Construct the data set from the props
 				ds = []
@@ -405,7 +406,7 @@ class PropSheet(dabo.ui.dPanel):
 		newVal = dabo.ui.getFile("jpg", "png", "gif", "tif", "bmp", "*")
 		if newVal is not None:
 			self.propGrid.CurrentValue = newVal
-			self.updateVal(prop, newVal, unicode)
+			self.updateVal(prop, newVal, sixUnicode)
 			self.propGrid.refresh()
 
 
@@ -497,7 +498,7 @@ class PropSheet(dabo.ui.dPanel):
 			newVal = dlg.getSelectedIcon()
 			if newVal is not None:
 				self.propGrid.CurrentValue = newVal
-				self.updateVal(prop, newVal, unicode)
+				self.updateVal(prop, newVal, sixUnicode)
 				self.propGrid.refresh()
 		else:
 			self.editPicture(objs, prop, val)
@@ -510,7 +511,7 @@ class PropSheet(dabo.ui.dPanel):
 		newVal = dabo.ui.getFile("mnxml", "*")
 		if newVal is not None:
 			self.propGrid.CurrentValue = newVal
-			self.updateVal(prop, newVal, unicode)
+			self.updateVal(prop, newVal, sixUnicode)
 			self.propGrid.refresh()
 
 
@@ -614,7 +615,7 @@ class PropSheet(dabo.ui.dPanel):
 				keyText = ""
 			# Setting the HotKey prop should update the related sub-props.
 			obj.HotKey = keyText
-			self.updateVal(prop, keyText, unicode)
+			self.updateVal(prop, keyText, sixUnicode)
 			self.propGrid.CurrentValue = keyText
 			self.propGrid.refresh()
 		dlg.release()

@@ -6,6 +6,7 @@ It was published there with the statement that it was being placed in
 the public domain. I have only modified it minimally for its inclusion
 into Dabo.
 """
+from six import text_type as sixUnicode
 
 import datetime
 import decimal
@@ -75,7 +76,7 @@ class Encoder(JSONEncoder):
 			if o is decimal.Decimal:
 				value = None
 			else:
-				value = unicode(o)
+				value = sixUnicode(o)
 			return {'__decimal__': True,
 					'value': value}
 

@@ -9,6 +9,7 @@
 # Then, in your code, simply call:
 #
 #	utils.foo()
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import os
 osp = os.path
@@ -183,7 +184,7 @@ def dictStringify(dct):
 	"""
 	ret = {}
 	for kk, vv in list(dct.items()):
-		if isinstance(kk, unicode):
+		if isinstance(kk, sixUnicode):
 			try:
 				ret[str(kk)] = vv
 			except UnicodeEncodeError:
@@ -207,14 +208,14 @@ def ustr(value):
 	When converting to a string, do not use the str() function, which
 	can create encoding errors with non-ASCII text.
 	"""
-	if isinstance(value, unicode):
+	if isinstance(value, sixUnicode):
 		# Don't change the encoding of an object that is already unicode.
 		return value
 	if isinstance(value, Exception):
 		return exceptionToUnicode(value)
 	try:
 		## Faster for all-ascii strings and converting from non-sixBasestring types::
-		return unicode(value)
+		return sixUnicode(value)
 	except UnicodeDecodeError:
 		# Most likely there were bytes whose integer ordinal were > 127 and so the
 		# default ASCII codec used by unicode() couldn't decode them.
@@ -225,7 +226,7 @@ def ustr(value):
 		pass
 	for ln in getEncodings():
 		try:
-			return unicode(value, ln)
+			return sixUnicode(value, ln)
 		except UnicodeError:
 			pass
 	raise UnicodeError("Unable to convert '%r'." % value)

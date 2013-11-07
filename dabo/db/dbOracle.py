@@ -4,6 +4,7 @@
 # The used python database module for Oracle (cx_oracle) currently doesn't support unicode.
 # So we keep this as a reference for further development only
 #
+from six import text_type as sixUnicode
 
 import datetime
 from dabo.dLocalize import _
@@ -49,7 +50,7 @@ class Oracle(dBackend):
 
 	def processFields(self, txt):
 		# this was used for testing only
-		if isinstance(txt, unicode):
+		if isinstance(txt, sixUnicode):
 			txt = ustr(txt)
 		return txt
 

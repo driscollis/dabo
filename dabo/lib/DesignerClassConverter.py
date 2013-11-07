@@ -4,6 +4,7 @@ and return the class object represented by that file. Right now it's wxPython-
 specific, since we only support wxPython, but I suppose that it could be updated
 later on to support other UI toolkits.
 """
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 from datetime import datetime
 import time
@@ -81,7 +82,7 @@ class DesignerClassConverter(dObject):
 		self.createClassText(dct)
 		# Work-around for bug in which a trailing comment line throws an error
 		self.classText += "\n"
-		if isinstance(self.classText, unicode):
+		if isinstance(self.classText, sixUnicode):
 			self.classText = self.classText.encode(self._encoding)
 		open(self._classFileName, "w").write(self.classText)
 
@@ -375,9 +376,9 @@ class DesignerClassConverter(dObject):
 		else:
 			impt = ""
 		ct = self.classText
-		if isinstance(ct, unicode):
+		if isinstance(ct, sixUnicode):
 			self.classText = ct.encode(self._encoding)
-		if isinstance(impt, unicode):
+		if isinstance(impt, sixUnicode):
 			impt = impt.encode(self._encoding)
 		self.classText = self.classText.replace("|classImportStatements|", impt)
 

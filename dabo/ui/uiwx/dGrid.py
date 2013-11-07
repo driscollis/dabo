@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import copy
 import sys
@@ -135,7 +136,7 @@ class dGridDataTable(wxGTclass):
 			if isinstance(col.DataType, type):
 				typeDict = {
 					str : "string",
-					unicode : "unicode",
+					sixUnicode : "unicode",
 					bool : "bool",
 					int : "integer",
 					float : "float",
@@ -524,7 +525,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 			"float" : self.floatRendererClass,
 			"list" : self.listRendererClass,
 			str : self.stringRendererClass,
-			unicode : self.stringRendererClass,
+			sixUnicode : self.stringRendererClass,
 			datetime.date : self.stringRendererClass,
 			datetime.datetime : self.stringRendererClass,
 			bool : self.boolRendererClass,
@@ -546,7 +547,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 			"float" : self.floatEditorClass,
 			"list" : self.listEditorClass,
 			str : self.stringEditorClass,
-			unicode : self.stringEditorClass,
+			sixUnicode : self.stringEditorClass,
 			datetime.date : self.stringEditorClass,
 			datetime.datetime : self.stringEditorClass,
 			bool : self.boolEditorClass,
@@ -1542,11 +1543,11 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 			if val != self._wordWrap:
 				self._wordWrap = val
 				if val:
-					for typ in (unicode, "str", "string"):
+					for typ in (sixUnicode, "str", "string"):
 						self.defaultRenderers[typ] = self.wrapStringRendererClass
 						self.defaultEditors[typ] = self.wrapStringEditorClass
 				else:
-					for typ in (unicode, "str", "string"):
+					for typ in (sixUnicode, "str", "string"):
 						self.defaultRenderers[typ] = self.stringRendererClass
 						self.defaultEditors[typ] = self.stringEditorClass
 				self._updateEditor()
@@ -3034,7 +3035,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 						dataType = "date"
 					elif isinstance(f, datetime.datetime):
 						dataType = "datetime"
-					elif isinstance(f, unicode):
+					elif isinstance(f, sixUnicode):
 						dataType = "unicode"
 					elif isinstance(f, str):
 						dataType = "string"

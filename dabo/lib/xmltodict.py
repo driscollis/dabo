@@ -5,6 +5,7 @@ xmltodict(): convert xml into tree of Python dicts.
 This was copied and modified from John Bair's recipe at aspn.activestate.com:
 	http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/149368
 """
+from six import text_type as sixUnicode
 import os
 import string
 import locale
@@ -187,7 +188,7 @@ def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):
 	if eol not in xml and isPath:
 		# argument was a file
 		xmlContent = codecs.open(xml, "r", encoding).read()
-		if isinstance(xmlContent, unicode):
+		if isinstance(xmlContent, sixUnicode):
 			xmlContent = xmlContent.encode(encoding)
 		try:
 			ret = parser.Parse(xmlContent)

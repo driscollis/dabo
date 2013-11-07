@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import os
 
@@ -249,7 +250,7 @@ class LayoutSaverMixin(dObject):
 			if isinstance(val, sixBasestring):
 				strval = val
 			else:
-				strval = unicode(val)
+				strval = sixUnicode(val)
 			ra[prop] = strval
 		# Add the controlling sizer item properties, if applicable
 		try:
@@ -1586,7 +1587,7 @@ class LayoutBorderSizer(LayoutSizerMixin, dabo.ui.dBorderSizer):
 
 	def _getDesProps(self):
 		ret = super(LayoutBorderSizer, self)._getDesProps()
-		ret.update({"Caption" : {"type" : unicode, "readonly" : False},
+		ret.update({"Caption" : {"type" : sixUnicode, "readonly" : False},
 				"BackColor" : {"type" : "color", "readonly" : False,
 						"customEditor": "editColor"},
 				"FontBold": {"type" : bool, "readonly" : False},

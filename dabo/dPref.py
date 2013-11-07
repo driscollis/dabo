@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import text_type as sixUnicode
 import os
 import warnings
 import datetime
@@ -53,7 +54,7 @@ class dPref(object):
 		super(dPref, self).__init__()
 		self._parent = None
 		self._noneType = type(None)
-		self._typeDict = {int: "int", float: "float", long: "long", str: "str", unicode: "unicode",
+		self._typeDict = {int: "int", float: "float", long: "long", str: "str", sixUnicode: "unicode",
 				bool: "bool", list: "list", tuple: "tuple", datetime.date: "date", dict: "dict",
 				datetime.datetime: "datetime", Decimal: "decimal", self._noneType: "none",
 				dabo.db.dDataSet: "tuple"}
