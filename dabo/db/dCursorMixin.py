@@ -1543,7 +1543,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 					_("No records in dataset '%s'.") % self.Table)
 
 
-	def next(self):
+	def __next__(self):
 		"""Move the record pointer forward one position in the recordset."""
 		if self.RowCount > 0:
 			if self.RowNumber < (self.RowCount - 1):

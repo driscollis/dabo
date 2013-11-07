@@ -3266,7 +3266,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if action == "Find":
 			try:
 				while True:
-					newR, newC = findGen.next()
+					newR, newC = next(findGen)
 					targetVal = self.GetValue(newR, newC)
 					targetString = ustr(targetVal)
 					if isinstance(targetVal, (basestring, datetime.datetime, datetime.date)):

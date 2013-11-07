@@ -1961,7 +1961,7 @@ Do you want to overwrite it?""")
 				while not line.rstrip().endswith(":"):
 					# Continued line
 					try:
-						lineNum += numGen.next()
+						lineNum += next(numGen)
 					except StopIteration:
 						break
 					nextLine = self.GetLine(lineNum).strip()

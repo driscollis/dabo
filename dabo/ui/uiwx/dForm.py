@@ -354,7 +354,7 @@ class BaseForm(fm.dFormMixin):
 		if err:
 			self.notifyUser(err)
 			return
-		self._moveRecordPointer(bizobj.next, dataSource)
+		self._moveRecordPointer(bizobj.__next__, dataSource)
 		self.afterNext()
 
 
@@ -737,7 +737,7 @@ Database error message: %s""") % 	err
 
 	def onFirst(self, evt): self.first()
 	def onPrior(self, evt): self.prior()
-	def onNext(self, evt): self.next()
+	def onNext(self, evt): next(self)
 	def onLast(self, evt): self.last()
 	def onSave(self, evt): self.save()
 	def onCancel(self, evt): self.cancel()

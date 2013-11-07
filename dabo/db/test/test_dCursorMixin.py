@@ -170,7 +170,7 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 	def test_RowNumber(self):
 		cur = self.cur
 		self.assertEqual(cur.RowNumber, 0)
-		cur.next()
+		next(cur)
 		self.assertEqual(cur.RowNumber, 1)
 		cur.moveToRowNum(2)
 		self.assertEqual(cur.RowNumber, 2)
@@ -315,10 +315,10 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 #    values ("Carl Karsten", 10223, 23032.76, 11);
 		self.assertEqual(rec.ffield, Decimal("3.14159"))
 		self.assertEqual(str(rec.ffield), "3.14159")
-		cur.next()
+		next(cur)
 		self.assertEqual(rec.ffield, Decimal("0.999999"))
 		self.assertEqual(str(rec.ffield), "0.999999")
-		cur.next()
+		next(cur)
 		self.assertEqual(rec.ffield, Decimal("11"))
 		self.assertEqual(str(rec.ffield), "11.0")
 

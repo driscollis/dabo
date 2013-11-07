@@ -341,7 +341,7 @@ class dBizobj(dObject):
 		self.afterPrior()
 
 
-	def next(self):
+	def __next__(self):
 		"""
 		Move to the next record of the data set.
 
@@ -354,7 +354,7 @@ class dBizobj(dObject):
 		if errMsg:
 			raise dException.BusinessRuleViolation(errMsg)
 
-		self._CurrentCursor.next()
+		next(self._CurrentCursor)
 		self.requeryAllChildren(_doRequery=self.RequeryChildrenOnNavigate)
 
 		self._afterPointerMove()
@@ -3417,7 +3417,7 @@ class _bizIterator(object):
 				self._onStopIteration()
 		else:
 			try:
-				self.obj.next()
+				next(self.obj)
 			except dException.EndOfFileException:
 				self._onStopIteration()
 		if self.returnRecords:
@@ -3431,7 +3431,7 @@ class _bizIterator(object):
 			self.obj.RowNumber = self.__originalRowNum
 		raise StopIteration
 
-	def next(self):
+	def __next__(self):
 		"""Moves the record pointer to the next record."""
 		return self.__nextfunc()
 
