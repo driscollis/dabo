@@ -2595,7 +2595,7 @@ of the string will be displayed to the user."""
 		def method(self):
 			return ""
 		method.__doc__ = "%s\n\n%s" % (mainDoc, additionalDoc)
-		method.func_name = name
+		method.__name__ = name
 		return method
 
 

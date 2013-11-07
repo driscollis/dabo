@@ -271,8 +271,8 @@ class FuncProfile:
     def print_stats(self):
         """Print profile information to sys.stdout."""
         funcname = self.fn.__name__
-        filename = self.fn.func_code.co_filename
-        lineno = self.fn.func_code.co_firstlineno
+        filename = self.fn.__code__.co_filename
+        lineno = self.fn.__code__.co_firstlineno
         print
         print "*** PROFILER RESULTS ***"
         print "%s (%s:%s)" % (funcname, filename, lineno)
@@ -360,8 +360,8 @@ class HotShotFuncProfile:
         """
         self.profiler.close()
         funcname = self.fn.__name__
-        filename = self.fn.func_code.co_filename
-        lineno = self.fn.func_code.co_firstlineno
+        filename = self.fn.__code__.co_filename
+        lineno = self.fn.__code__.co_firstlineno
         print
         print "*** PROFILER RESULTS ***"
         print "%s (%s:%s)" % (funcname, filename, lineno)
@@ -424,8 +424,8 @@ class HotShotFuncCoverage:
         """
         self.profiler.close()
         funcname = self.fn.__name__
-        filename = self.fn.func_code.co_filename
-        lineno = self.fn.func_code.co_firstlineno
+        filename = self.fn.__code__.co_filename
+        lineno = self.fn.__code__.co_firstlineno
         print
         print "*** COVERAGE RESULTS ***"
         print "%s (%s:%s)" % (funcname, filename, lineno)
@@ -501,8 +501,8 @@ class TraceFuncCoverage:
         This function is registered as an atexit hook.
         """
         funcname = self.fn.__name__
-        filename = self.fn.func_code.co_filename
-        lineno = self.fn.func_code.co_firstlineno
+        filename = self.fn.__code__.co_filename
+        lineno = self.fn.__code__.co_firstlineno
         print
         print "*** COVERAGE RESULTS ***"
         print "%s (%s:%s)" % (funcname, filename, lineno)
@@ -535,7 +535,7 @@ class FuncSource:
     def find_source_lines(self):
         """Mark all executable source lines in fn as executed 0 times."""
         strs = trace.find_strings(self.filename)
-        lines = trace.find_lines_from_code(self.fn.func_code, strs)
+        lines = trace.find_lines_from_code(self.fn.__code__, strs)
         self.firstcodelineno = sys.maxint
         for lineno in lines:
             self.firstcodelineno = min(self.firstcodelineno, lineno)
@@ -606,8 +606,8 @@ def timecall(fn):
         finally:
             duration = time.time() - start
             funcname = fn.__name__
-            filename = fn.func_code.co_filename
-            lineno = fn.func_code.co_firstlineno
+            filename = fn.__code__.co_filename
+            lineno = fn.__code__.co_firstlineno
             print >> sys.stderr, "\n  %s (%s:%s):\n    %.3f seconds\n" % (
                                         funcname, filename, lineno, duration)
     new_fn.__doc__ = fn.__doc__
