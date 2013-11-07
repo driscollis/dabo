@@ -8,6 +8,10 @@ import dabo.ui
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+	
 import dabo.dEvents as dEvents
 from . import formmixin as fm
 import dabo.dException as dException
