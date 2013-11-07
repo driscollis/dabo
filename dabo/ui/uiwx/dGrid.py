@@ -13,6 +13,7 @@ import wx
 import wx.grid
 import dabo
 from dabo.ui import makeDynamicProperty
+from functools import reduce
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 import dabo.dEvents as dEvents
