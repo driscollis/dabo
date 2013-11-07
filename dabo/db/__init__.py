@@ -28,7 +28,11 @@ some rows from a backend database in a script. Here's an example of that::
 
 # TODO: Currently, the logic for building a dictcursor mixin is inside
 #       dabo.biz.dBiz. I think this logic should be here in dabo.db.
-from six.types import LongType as sixLong
+import six
+if six.PY2:
+	sixLong = long
+else:
+	sixLong = int
 from six import text_type as sixUnicode
 import datetime
 from decimal import Decimal

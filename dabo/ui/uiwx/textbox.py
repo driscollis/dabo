@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from six.types import LongType as sixLong
+import six
+if six.PY2:
+	sixLong = long
+else:
+	sixLong = int
 import re
 import datetime
 import wx

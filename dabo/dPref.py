@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from six.types import LongType as sixLong
+import six
+if six.PY2:
+	sixLong = long
+else:
+	sixLong = int
 from six import text_type as sixUnicode
 import os
 import warnings
