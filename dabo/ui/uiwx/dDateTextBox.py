@@ -135,7 +135,7 @@ C: Popup Calendar to Select
 		self.showCalendar()
 
 
-	def __onBtnClick(self,evt):
+	def __onBtnClick(self, evt):
 		"""Display a calendar to allow users to select dates."""
 		self.showCalendar()
 

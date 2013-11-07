@@ -198,7 +198,7 @@ class dLinePlot(cm.dControlMixin, plot.PlotCanvas):
 		self.Redraw()
 
 
-	def OnSize(self,event):
+	def OnSize(self, event):
 		# The Buffer init is done here, to make sure the buffer is always
 		# the same size as the Window
 		Size  = self.canvas.GetClientSize()
@@ -241,21 +241,21 @@ class dLinePlot(cm.dControlMixin, plot.PlotCanvas):
 		sx, sy = mDataDict["scaledXY"]
 		# 10by10 square centered on point
 		dc.DrawRectangle(sx-5, sy-5, 10, 10)
-		px,py = mDataDict["pointXY"]
+		px, py = mDataDict["pointXY"]
 		cNum = mDataDict["curveNum"]
 		pntIn = mDataDict["pIndex"]
 		legend = mDataDict["legend"]
 		# make a string to display
 		s = "Crv# %i, '%s', Pt. (%.2f,%.2f), PtInd %i" %(cNum, legend, px, py, pntIn)
-		dc.DrawText(s, sx , sy+1)
+		dc.DrawText(s, sx, sy+1)
 		# -----------
 
 
 	def setDefaults(self):
-		self.SetFont(wx.Font(10,wx.SWISS,wx.NORMAL,wx.NORMAL))
+		self.SetFont(wx.Font(10, wx.SWISS, wx.NORMAL, wx.NORMAL))
 		self.SetFontSizeAxis(10)
 		self.SetFontSizeLegend(7)
-		self.setLogScale((False,False))
+		self.setLogScale((False, False))
 		self.SetXSpec('auto')
 		self.SetYSpec('auto')
 
@@ -531,7 +531,7 @@ class _dLinePlot_test(dLinePlot):
 
 		data1 = 2.*_Numeric.pi*_Numeric.arange(200)/200.
 		data1.shape = (100, 2)
-		data1[:,1] = _Numeric.sin(data1[:,0])
+		data1[:, 1] = _Numeric.sin(data1[:, 0])
 		self.appendMarkerFromPoints(data1, Caption='Green Markers', Color='green', MarkerShape='circle', MarkerSize=1)
 
 		# A few more points...

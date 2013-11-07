@@ -70,7 +70,7 @@ class dTable(dObject):
 		except KeyError:
 			pass
 		else:
-			self._indexes.append(dIndex(Name=idx,Fields=name))
+			self._indexes.append(dIndex(Name=idx, Fields=name))
 			del kwargs["Index"]
 
 		#Check if setting PK
@@ -416,7 +416,7 @@ if __name__ == "__main__":
 
 	#When you want to have more than one field in an index, use addIndex().
 	myTable.addIndex(Name="idx_name",
-			Fields=("last_name","first_name"))
+			Fields=("last_name", "first_name"))
 
 	print(myTable)
 

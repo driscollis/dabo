@@ -31,7 +31,7 @@ class dCheckBox(Tkinter.Checkbutton, dcm.dDataControlMixin):
 
 	def _onKeyDown(self, event):
 		char = event.EventData["keyChar"]
-		if char is not None and ord(char) in (10,13,32):
+		if char is not None and ord(char) in (10, 13, 32):
 			self._onTkHit(event)
 
 	def _getValue(self):

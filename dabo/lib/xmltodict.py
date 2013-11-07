@@ -143,7 +143,7 @@ class Xml2Obj(object):
 	def CharacterData(self, data):
 		"""SAX character data event handler"""
 		if self._inCode or data.strip():
-			data = data.replace("&lt;", "<").replace("&gt;",">")
+			data = data.replace("&lt;", "<").replace("&gt;", ">")
 			data = data	#.encode()
 			if self._inCode:
 				if self._mthdCode:
@@ -172,7 +172,7 @@ class Xml2Obj(object):
 
 
 	def ParseFromFile(self, filename):
-		return self.Parse(open(filename,"r").read())
+		return self.Parse(open(filename, "r").read())
 
 
 def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):

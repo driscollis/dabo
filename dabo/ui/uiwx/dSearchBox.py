@@ -176,7 +176,7 @@ if __name__ == "__main__":
 	class TestBase(dSearchBox):
 		def initProperties(self):
 			super(TestBase, self).initProperties()
-			self.LogEvents = ["ValueChanged","searchButtonClicked","SearchCancelButtonClicked"]
+			self.LogEvents = ["ValueChanged", "searchButtonClicked", "SearchCancelButtonClicked"]
 			self.CancelButtonVisible = True
 			self.SearchButtonVisible = True
 			self.List = ("item 1", "item 2", "item 3")

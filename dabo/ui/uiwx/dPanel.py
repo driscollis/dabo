@@ -334,7 +334,7 @@ class dScrollPanel(_PanelMixin, wx.ScrolledWindow):
 
 
 	def _scroll(self, xOff, yOff):
-		x,y = self.GetViewStart()
+		x, y = self.GetViewStart()
 		self.Scroll(x+xOff, y+yOff)
 		dabo.ui.callAfterInterval(250, self.layout)
 
@@ -347,7 +347,7 @@ class dScrollPanel(_PanelMixin, wx.ScrolledWindow):
 		"""Scroll horizontally one 'page' width."""
 		sz = self.GetScrollPageSize(wx.HORIZONTAL)
 		if sz:
-			x,y = self.GetViewStart()
+			x, y = self.GetViewStart()
 			self.Scroll(x + (direction * sz), y)
 
 
@@ -359,7 +359,7 @@ class dScrollPanel(_PanelMixin, wx.ScrolledWindow):
 		"""Scroll vertically one 'page' height."""
 		sz = self.GetScrollPageSize(wx.VERTICAL)
 		if sz:
-			x,y = self.GetViewStart()
+			x, y = self.GetViewStart()
 			self.Scroll(x, y + (direction * sz))
 
 
@@ -445,7 +445,7 @@ class _dScrollPanel_test(dScrollPanel):
 	def afterInit(self):
 		subpan = self.addObject(dPanel, BackColor = "green")
 		subpan.bindEvent(dEvents.KeyDown, self.onKeyDown)
-		self.SetScrollbars(10,10,100,100)
+		self.SetScrollbars(10, 10, 100, 100)
 
 	def onMouseLeftDown(self, evt):
 		print("mousedown")

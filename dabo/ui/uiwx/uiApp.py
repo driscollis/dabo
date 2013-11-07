@@ -231,7 +231,7 @@ class uiApp(dObject, wx.App):
 				# files can be in the list, and will throw an IndexError.
 				step2 = [(ch[0], ch[1]) for ch in step1
 						if ch[1].split("/", 1)[0] in ("dabo", "demo", "ide")]
-				step2.sort(lambda x,y: cmp(x[1], y[1]))
+				step2.sort(lambda x, y: cmp(x[1], y[1]))
 				# Now split off the project
 				step3 = [{"mod":ch[0], "project":ch[1].split("/", 1)[0], "file":ch[1].split("/", 1)[1]} for ch in step2]
 				changedFiles = step3

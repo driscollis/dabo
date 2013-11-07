@@ -414,12 +414,12 @@ if __name__ == "__main__":
 	class TestForm(dabo.ui.dForm):
 		def afterInit(self):
 			dCalendar(self, FirstDayOfWeek="monday",
-					Position=(0,0), RegID="cal")
+					Position=(0, 0), RegID="cal")
 			self.cal.HighlightHolidays = True
-			self.cal.setHolidays(((None,12,25), (2006, 1, 4)))
+			self.cal.setHolidays(((None, 12, 25), (2006, 1, 4)))
 
 			dExtendedCalendar(self, FirstDayOfWeek="monday",
-					Position=(0,0), RegID="extCal")
+					Position=(0, 0), RegID="extCal")
 
 			self.Sizer.append(self.cal, halign="Center", valign="middle")
 			self.Sizer.append(self.extCal, halign="Center", valign="middle")

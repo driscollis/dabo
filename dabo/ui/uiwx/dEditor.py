@@ -728,7 +728,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 		##	   * 4 = tabs are bad
 		self.SetProperty("tab.timmy.whinge.level", "1")
 		self.setSyntaxColoring(self.SyntaxColoring)
-		self.SetMargins(0,0)
+		self.SetMargins(0, 0)
 
 		self.SetViewWhiteSpace(self.ShowWhiteSpace)
 		self.SetBufferedDraw(self.BufferedDrawing)
@@ -1319,7 +1319,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 					kw[i] = kw[i] + "?1"
 
 			if self.AutoCompleteList:
-				wx.CallAfter(self.AutoCompShow,0, " ".join(kw))
+				wx.CallAfter(self.AutoCompShow, 0, " ".join(kw))
 			else:
 				self.Bind(stc.EVT_STC_USERLISTSELECTION, self.onListSelection)
 				wx.CallAfter(self.UserListShow, 1, " ".join(kw))
@@ -1654,7 +1654,7 @@ Do you want to overwrite it?""")
 		keyspec = ".".join(("bookmark", fname)).lower()
 		bmks = app.getUserSetting(keyspec)
 		if bmks:
-			for (nm,line) in bmks:
+			for (nm, line) in bmks:
 				self.setBookmark(nm, line)
 		# Restore the appearance
 		self._fontFace = app.getUserSetting("editor.fontface")
@@ -1826,7 +1826,7 @@ Do you want to overwrite it?""")
 				# skip the char
 				pass
 			else:
-				if ord(char) in (10,13,32,27,20) or char in (
+				if ord(char) in (10, 13, 32, 27, 20) or char in (
 					"()!@^%&*+="):
 					break
 				text.append(char)

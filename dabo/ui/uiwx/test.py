@@ -53,7 +53,7 @@ class Test(object):
 				frame.testObjects.append(obj)
 
 			# This will get a good approximation of the required size
-			w,h = panel.Sizer.GetMinSize()
+			w, h = panel.Sizer.GetMinSize()
 			# Some controls don't report sizing correctly, so set a minimum
 			w = max(w, 400)
 			h = max(h, 300)
@@ -83,7 +83,7 @@ class Test(object):
 		frame.LogEvents = logEvents
 
 		panel = frame.addObject(ui.dScrollPanel, "panelTest")
-		panel.SetScrollbars(10,10,50,50)
+		panel.SetScrollbars(10, 10, 50, 50)
 		labelWidth = 150
 		vs = ui.dSizer("vertical")
 

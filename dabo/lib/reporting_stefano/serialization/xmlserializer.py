@@ -70,7 +70,7 @@ class DeserializingParser(object):
 		return self.rootObj
 
 	def ParseFromFile(self, filename):
-		return self.Parse(open(filename,'r').read())
+		return self.Parse(open(filename, 'r').read())
 
 
 def deserialize(xml, rootCls):

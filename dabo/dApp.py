@@ -929,7 +929,7 @@ try again when it is running.
 		# For each connection definition, add an entry to
 		# self.dbConnectionDefs that contains a key on the
 		# name, and a value of a dConnectInfo object.
-		for k,v in list(connDefs.items()):
+		for k, v in list(connDefs.items()):
 			self.dbConnectionDefs[k] = v
 
 		dabo.log.info(_("%s database connection definition(s) loaded.")
@@ -999,7 +999,7 @@ try again when it is running.
 			dabo.log.error(_("Error parsing '%(filePath)s': %(e)s") % locals())
 			return {}
 		# Convert the connect info dicts to dConnectInfo instances:
-		for k,v in list(connDefs.items()):
+		for k, v in list(connDefs.items()):
 			ci = dabo.db.dConnectInfo()
 			ci.setConnInfo(v)
 			connDefs[k] = ci
@@ -1072,7 +1072,7 @@ try again when it is running.
 			# For each connection definition, add an entry to
 			# self.dbConnectionDefs that contains a key on the
 			# name, and a value of a dConnectInfo object.
-			for k,v in list(connDefs.items()):
+			for k, v in list(connDefs.items()):
 				self.dbConnectionDefs[k] = v
 				self.dbConnectionNameToFiles[k] = connFile
 		else:

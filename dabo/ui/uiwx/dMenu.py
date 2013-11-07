@@ -420,7 +420,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 		return itm
 
 
-	def _getItemID(self,typ):
+	def _getItemID(self, typ):
 		typ = ustr(typ).lower()
 		ret = wx.ID_DEFAULT
 		if typ == "exit":

@@ -378,13 +378,13 @@ if __name__ == "__main__":
 			sz.append(dabo.ui.dLabel(pg1, Caption="""Forced Lowercase Letters Only:
 (May not work in older
 versions of wxPython)"""), halign="right")
-			sz.append(dMaskedTextBox(pg1, Width=240, InputCodes='^',Mask="C{20}"), valign="Top")
+			sz.append(dMaskedTextBox(pg1, Width=240, InputCodes='^', Mask="C{20}"), valign="Top")
 
 			sz.append(dabo.ui.dLabel(pg1, Caption="Accepts Uppercase Letters Only:"), halign="right")
 			sz.append(dMaskedTextBox(pg1, Width=240, Mask="A{20}"))
 
 			sz.append(dabo.ui.dLabel(pg1, Caption="Forced Uppercase Letters Only:"), halign="right")
-			sz.append(dMaskedTextBox(pg1, Width=240,InputCodes='!>',Mask="C{20}"))
+			sz.append(dMaskedTextBox(pg1, Width=240, InputCodes='!>', Mask="C{20}"))
 
 			sz.append(dabo.ui.dLabel(pg1, Caption="Lowercase Letters Only:"), halign="right")
 			sz.append(dMaskedTextBox(pg1, Width=240, Mask="a{20}"))
@@ -501,7 +501,7 @@ versions of wxPython)"""), halign="right")
 			gsz.append(txt, "x", colSpan=2)
 			sz.append(gsz, 1, halign="center")
 
-		def _lookup(self,evt):
+		def _lookup(self, evt):
 			pass
 		def onCheckHit(self, evt):
 			chk = evt.EventObject

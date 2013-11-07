@@ -10,10 +10,10 @@ from dabo.lib import utils
 
 def fmtPath(testpath):
 	"""Format a file path in os.specific format"""
-	return testpath.replace("/",os.sep)
+	return testpath.replace("/", os.sep)
 
 def createTempFile(filename):
-	f = open(filename,"w")
+	f = open(filename, "w")
 	f.close()
 
 
@@ -68,8 +68,8 @@ class Test_Utils(unittest.TestCase):
 		self.assertEqual(utils.resolvePath(pth2, "a1/b1"), "../../file2")
 		self.assertEqual(utils.relativePath(pth), "a/b/file2")
 		self.assertEqual(utils.relativePath(pth2), "../../file2")
-		self.assertEqual(utils.relativePath(pth,pth2), "../tmp/relpath_tests_dir/a/b/file2")
-		self.assertEqual(utils.relativePathList(pth,pth2), ["..", "tmp", "relpath_tests_dir", "a", "b", "file2"])
+		self.assertEqual(utils.relativePath(pth, pth2), "../tmp/relpath_tests_dir/a/b/file2")
+		self.assertEqual(utils.relativePathList(pth, pth2), ["..", "tmp", "relpath_tests_dir", "a", "b", "file2"])
 		atts = {"Foo": "Bar", "ThePath": "%s../some/file.txt" % prfx}
 		utils.resolveAttributePathing(atts, os.getcwd())
 		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "../some/file.txt"})

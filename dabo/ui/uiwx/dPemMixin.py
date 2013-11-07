@@ -99,7 +99,7 @@ class dPemMixin(dPemMixinBase):
 		# Get them sanitized into one dict:
 		if properties is not None:
 			# Override the class values
-			for k,v in list(properties.items()):
+			for k, v in list(properties.items()):
 				self._properties[k] = v
 		properties = self._extractKeywordProperties(kwargs, self._properties)
 
@@ -1658,7 +1658,7 @@ class dPemMixin(dPemMixinBase):
 		"""
 		obj = DrawObject(self, FillColor=fillColor, PenColor=penColor,
 		                 PenWidth=penWidth, LineStyle=lineStyle, DrawMode=mode,
-		                 Shape="line", Points=((x1,y1), (x2,y2)), Visible=visible, dc=dc,
+		                 Shape="line", Points=((x1, y1), (x2, y2)), Visible=visible, dc=dc,
 		                 useDefaults=useDefaults)
 		# Add it to the list of drawing objects
 		obj = self._addToDrawnObjects(obj, persist)

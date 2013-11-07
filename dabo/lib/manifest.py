@@ -16,7 +16,7 @@ class Manifest(object):
 	"""
 	# These are the file types that are included by default.
 	includedTypes = ["py", "txt", "cnxml", "rfxml", "cdxml", "mnxml", "xml",
-			"jpg" , "jpeg" , "gif" , "tif" , "tiff" , "png" , "ico" , "bmp" , "sh", "mo", "po"]
+			"jpg", "jpeg", "gif", "tif", "tiff", "png", "ico", "bmp", "sh", "mo", "po"]
 	# Format for stroring time values
 	dtFormat = "%Y-%m-%d %H:%M:%S"
 

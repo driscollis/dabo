@@ -27,7 +27,7 @@ class dDataControlMixin(dDataControlMixinBase):
 		"""Select all text in the control."""
 		try:
 			self.SetInsertionPoint(1)   # Best of all worlds (really)
-			self.SetSelection(-1,-1)    # select all text
+			self.SetSelection(-1, -1)    # select all text
 		except AttributeError:
 			# Only works for text controls
 			pass
@@ -36,7 +36,7 @@ class dDataControlMixin(dDataControlMixinBase):
 	def selectNone(self):
 		"""Select no text in the control."""
 		try:
-			self.SetSelection(0,0)
+			self.SetSelection(0, 0)
 		except AttributeError:
 			# Only works for text controls
 			pass

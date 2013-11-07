@@ -528,7 +528,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		"""
 		for r in range(oldGrid.HighRow+1):
 			for c in range(oldGrid.HighCol+1):
-				szitm = oldGrid.FindItemAtPosition( (r,c) )
+				szitm = oldGrid.FindItemAtPosition( (r, c) )
 				itm = oldGrid.getItem(szitm)
 				if itm is None:
 					continue
@@ -552,7 +552,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		cols = self.GetCols()
 		vgap = self.GetVGap()
 		hgap = self.GetHGap()
-		x2,y2 = x,y
+		x2, y2 = x, y
 		rhts = self.GetRowHeights()
 		dc.SetPen(wx.Pen(self.outlineColor, self.outlineWidth, self.outlineStyle))
 		for hh in rhts:
@@ -566,7 +566,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 			dc.DrawRectangle(x2, y2, ww, h)
 			x2 += ww+hgap
 		dc.SetPen(wx.Pen(self.outlineColor, self.outlineWidth, self.outlineStyle))
-		dc.DrawRectangle(x,y,w,h)
+		dc.DrawRectangle(x, y, w, h)
 
 		for ch in self.Children:
 			if ch.IsSizer():

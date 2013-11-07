@@ -1368,7 +1368,7 @@ class ReportWriter(object):
 			band = self.ReportForm[b]
 			bandObjs.append(band)
 		for b in bandObjs:
-			framesets += [(idx,f,b) for (idx,f) in enumerate(b["Objects"])
+			framesets += [(idx, f, b) for (idx, f) in enumerate(b["Objects"])
 						  if type(f) == Frameset and len(f["Objects"]) == 1
 						  and isinstance(f["Objects"][0], Paragraph)]
 		return framesets
@@ -1387,7 +1387,7 @@ class ReportWriter(object):
 					m[k] = v
 			f.parent[idx] = m
 
-	def storeSpanningObject(self, obj, origin=(0,0), group=None):
+	def storeSpanningObject(self, obj, origin=(0, 0), group=None):
 		"""Store the passed spanning object for printing when the group or
 		page ends. Pass the group expr to identify group headers, or None to refer
 		to the pageHeader.
@@ -1400,9 +1400,9 @@ class ReportWriter(object):
 		if obj not in spanList:
 			spanList.append(obj)
 
-	def drawSpanningObjects(self, origin=(0,0), group=None):
+	def drawSpanningObjects(self, origin=(0, 0), group=None):
 		"""Draw all spanning objects. Called when page is changing or group is ending."""
-		x,y = origin
+		x, y = origin
 		if y is None:
 			# endPage();beginPage();endPage() cycle probably having to do with a group
 			# header or footer being too tall for the page. Punt.
@@ -1436,7 +1436,7 @@ class ReportWriter(object):
 		except KeyError:
 			pass
 
-	def draw(self, obj, origin=(0,0), availableHeight=None, deferred=None):
+	def draw(self, obj, origin=(0, 0), availableHeight=None, deferred=None):
 		"""Draw the given object on the Canvas.
 
 		The object is a dictionary containing properties, and	origin is the (x,y)
@@ -1452,7 +1452,7 @@ class ReportWriter(object):
 		neededHeight = 0
 		objType = obj.__class__.__name__
 		c = self.Canvas
-		x,y = origin
+		x, y = origin
 
 		## We'll be tweaking with the canvas settings below, so we need to save
 		## the state first so we can restore when done. Do not do any short-circuit
@@ -2217,7 +2217,7 @@ class ReportWriter(object):
 		page_count_objects = self.page_count_objects.get(pageNum, [])
 		for x, y, obj, expr in page_count_objects:
 			obj["expr_pagecount"] = expr.replace("^^^PageCount^^^", ustr(self.PageCount))
-			self.draw(obj, (x,y))
+			self.draw(obj, (x, y))
 			del obj["expr_pagecount"]
 
 	def write(self, save=True):
@@ -2458,7 +2458,7 @@ class ReportWriter(object):
 							y = reprintGroupHeaders(group, bandDict, y, "page")
 						else:
 							# Move to next column
-							self.drawSpanningObjects((pageFooterOrigin[0],y))
+							self.drawSpanningObjects((pageFooterOrigin[0], y))
 							self.clearSpanningObjects(group)
 							self._currentColumn += 1
 							y = pageHeaderOrigin[1]
@@ -2489,11 +2489,11 @@ class ReportWriter(object):
 
 			# Non-detail band special cases:
 			if band == "pageHeader":
-				x,y = pageHeaderOrigin
+				x, y = pageHeaderOrigin
 			elif band == "pageFooter":
-				x,y = pageFooterOrigin
+				x, y = pageFooterOrigin
 			elif band in ("pageBackground", "pageForeground"):
-				x,y = 0,1
+				x, y = 0, 1
 				width, height = pageWidth-1, pageHeight-1
 
 			x = ml + (self._currentColumn * (self._columnWidth + self._columnPadding))
@@ -2578,7 +2578,7 @@ class ReportWriter(object):
 						del_deferred_idxs.append(idx)
 
 			if band == "groupFooter":
-				self.drawSpanningObjects((x,y), group)
+				self.drawSpanningObjects((x, y), group)
 				self.clearSpanningObjects(group)
 
 			del_deferred_idxs.sort(reverse=True)
@@ -2631,7 +2631,7 @@ class ReportWriter(object):
 			y1 = y
 			if self.being_deferred:
 				y1 = self.getPt(self.ReportForm["PageFooter"].getProp("Height"))
-			self.drawSpanningObjects((x,y1))
+			self.drawSpanningObjects((x, y1))
 			for band in ("pageFooter", "pageForeground"):
 				printBand(band)
 			self.Canvas.showPage()

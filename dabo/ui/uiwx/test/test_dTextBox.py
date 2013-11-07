@@ -78,13 +78,13 @@ class Test_dTextBox(unittest.TestCase):
 		self.assertEqual(txt.Value, datetime.date.today())
 		self.mockUserInput("2006-05-03")
 		self.assertTrue(isinstance(txt.Value, datetime.date))
-		self.assertEqual(txt.Value, datetime.date(2006,5,3))
+		self.assertEqual(txt.Value, datetime.date(2006, 5, 3))
 		txt.Value = None
 		self.assertEqual(txt.Value, None)
 		self.mockUserInput("hi there")
 		self.assertEqual(txt.Value, None)
 		self.mockUserInput("2006-05-03")
-		self.assertEqual(txt.Value, datetime.date(2006,5,3))
+		self.assertEqual(txt.Value, datetime.date(2006, 5, 3))
 
 	def testDateTimeValue(self):
 		txt = self.txt

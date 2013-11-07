@@ -11,8 +11,8 @@ class dFormMain(Tkinter.Tk, fm.dFormMixin):
 		preClass = Tkinter.Tk
 		fm.dFormMixin.__init__(self, preClass, parent, properties, *args, **kwargs)
 
-		self.Size = (640,480)
-		self.Position = (0,0)
+		self.Size = (640, 480)
+		self.Position = (0, 0)
 
 #		if wx.Platform != '__WXMAC__':
 #			self.CreateStatusBar()

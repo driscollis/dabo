@@ -1024,7 +1024,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				# native field type is not. Ignore these. NOTE: we have to deal with the
 				# string representation of these classes, as there is no primitive for either
 				# 'DateTime' or 'Date'.
-				dtStrings = ("<type 'DateTime'>", "<type 'Date'>", "<type 'datetime.datetime'>","<type 'datetime.date'>")
+				dtStrings = ("<type 'DateTime'>", "<type 'Date'>", "<type 'datetime.datetime'>", "<type 'datetime.date'>")
 				if ustr(fldType) in dtStrings and isinstance(val, basestring):
 					ignore = True
 				elif issubclass(fldType, basestring) and isinstance(val, basestring):

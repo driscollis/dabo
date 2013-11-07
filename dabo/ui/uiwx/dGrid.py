@@ -2712,7 +2712,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			if fcolor is None:
 				fcolor = self.HeaderForeColor
 				if fcolor is None:
-					fcolor = (0,0,0)
+					fcolor = (0, 0, 0)
 			bcolor = colObj.HeaderBackColor
 			if bcolor is None:
 				bcolor = self.HeaderBackColor
@@ -3247,22 +3247,22 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if wholeWord:
 			if matchCase:
 				srch = r"\b%s\b" % findString
-				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
-						   if op((r,c), rowcol)
+				findGen = ((r, c) for r in range(self.RowCount) for c in range(self.ColumnCount)
+						   if op((r, c), rowcol)
 						   and re.search(srch, ustr(self.GetValue(r, c))))
 			else:
 				srch = r"\b%s\b" % findString.lower()
-				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
-						   if op((r,c), rowcol)
+				findGen = ((r, c) for r in range(self.RowCount) for c in range(self.ColumnCount)
+						   if op((r, c), rowcol)
 						   and re.search(srch, ustr(self.GetValue(r, c)).lower()))
 		else:
 			if matchCase:
-				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
-						   if op((r,c), rowcol)
+				findGen = ((r, c) for r in range(self.RowCount) for c in range(self.ColumnCount)
+						   if op((r, c), rowcol)
 						   and findString in ustr(self.GetValue(r, c)))
 			else:
-				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
-						   if op((r,c), rowcol)
+				findGen = ((r, c) for r in range(self.RowCount) for c in range(self.ColumnCount)
+						   if op((r, c), rowcol)
 						   and findString.lower() in ustr(self.GetValue(r, c)).lower())
 		if action == "Find":
 			try:
@@ -3738,7 +3738,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 		if dragging:
 			self._lastHeaderMousePosition = evt.EventData["mousePosition"]
-			x,y = self._lastHeaderMousePosition
+			x, y = self._lastHeaderMousePosition
 
 			if not headerIsSizing and (self.getColNumByX(x) == self.getColNumByX(x-5) == self.getColNumByX(x+5)):
 				if not headerIsDragging:
@@ -3746,7 +3746,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					if self.MovableColumns and curCol and curCol.Movable:
 						# A header reposition is beginning
 						self._headerDragging = True
-						self._headerDragFrom = (x,y)
+						self._headerDragFrom = (x, y)
 				else:
 					# already dragging.
 					begCol = self.getColNumByX(self._headerDragFrom[0])
@@ -3776,10 +3776,10 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		it is possible a column needs to change position. If we were clicking,
 		then it is a sort operation.
 		"""
-		x,y = evt.EventData["mousePosition"]
+		x, y = evt.EventData["mousePosition"]
 		if self._headerDragging:
 			# A drag action is ending
-			self._headerDragTo = (x,y)
+			self._headerDragTo = (x, y)
 
 			begCol = self.getColNumByX(self._headerDragFrom[0])
 			curCol = self.getColNumByX(x)
@@ -4103,7 +4103,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		startPoints = []
 		nextVal = -1
 		maxIdx = len(seq)-1
-		for idx,pt in enumerate(seq):
+		for idx, pt in enumerate(seq):
 			if idx == 0:
 				startPoints.append(pt)
 				nextVal = pt+1

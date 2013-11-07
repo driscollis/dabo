@@ -51,7 +51,7 @@ daboTypes = {
 		"L": buffer,              ## BLOB
 		}
 
-pythonTypes = dict([[v,k] for k,v in daboTypes.items()])
+pythonTypes = dict([[v, k] for k, v in daboTypes.items()])
 pythonTypes[str] = "C"
 pythonTypes[unicode] = "C"
 del k, v, Decimal

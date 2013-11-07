@@ -18,13 +18,13 @@ class connHandler(xml.sax.ContentHandler):
 		self.connDict = {}
 		self.blankConn = {
 				"name": "",
-				"dbtype" : "",
-				"host" : "",
-				"remotehost" : "",
-				"database" : "",
-				"user" : "",
-				"password" : "",
-				"port" : "",
+				"dbtype": "",
+				"host": "",
+				"remotehost": "",
+				"database": "",
+				"user": "",
+				"password": "",
+				"port": "",
 				"KeepAliveInterval": "",
 				}
 		self.currDict = self.blankConn.copy()

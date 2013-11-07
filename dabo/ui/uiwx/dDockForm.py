@@ -200,7 +200,7 @@ class dDockPanel(dabo.ui.dPanel):
 		self._Manager.addPane(self, name=nm,
 				typ=self._paramType, caption=self._propDelayDict.get("Caption", "dDockPanel"))
 		del self._paramType
-		self._PaneInfo.MinSize((50,50))
+		self._PaneInfo.MinSize((50, 50))
 		if self._propDelayDict:
 			self.setProperties(self._propDelayDict)
 		del self._propDelayDict

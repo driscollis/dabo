@@ -676,7 +676,7 @@ insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 
 		self.assertEqual(bizMain.isAnyChanged(), True)
 		self.assertEqual(bizMain.getChangedRows(), [0])
-		self.assertEqual(bizChild.getChangedRows(), [0,1])
+		self.assertEqual(bizChild.getChangedRows(), [0, 1])
 		if mode == "save":
 			bizMain.save()
 		elif mode == "cancel":

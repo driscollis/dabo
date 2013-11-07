@@ -130,17 +130,17 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin):
 		else: self.SetChoices ( choices )
 		gp = self
 		while gp != None :
-			gp.Bind ( wx.EVT_MOVE , self.onControlChanged, gp )
-			gp.Bind ( wx.EVT_SIZE , self.onControlChanged, gp )
+			gp.Bind ( wx.EVT_MOVE, self.onControlChanged, gp )
+			gp.Bind ( wx.EVT_SIZE, self.onControlChanged, gp )
 			gp = gp.GetParent()
 		self.Bind( wx.EVT_KILL_FOCUS, self.onControlChanged, self )
-		self.Bind( wx.EVT_TEXT , self.onEnteredText, self )
-		self.Bind( wx.EVT_KEY_DOWN , self.onKeyDown, self )
+		self.Bind( wx.EVT_TEXT, self.onEnteredText, self )
+		self.Bind( wx.EVT_KEY_DOWN, self.onKeyDown, self )
 		#If need drop down on left click
 		if dropDownClick:
-			self.Bind ( wx.EVT_LEFT_DOWN , self.onClickToggleDown, self )
-			self.Bind ( wx.EVT_LEFT_UP , self.onClickToggleUp, self )
-		self.dropdown.Bind( wx.EVT_LISTBOX , self.onListItemSelected, self.dropdownlistbox )
+			self.Bind ( wx.EVT_LEFT_DOWN, self.onClickToggleDown, self )
+			self.Bind ( wx.EVT_LEFT_UP, self.onClickToggleUp, self )
+		self.dropdown.Bind( wx.EVT_LISTBOX, self.onListItemSelected, self.dropdownlistbox )
 		self.dropdownlistbox.Bind(wx.EVT_LEFT_DOWN, self.onListClick)
 		self.dropdownlistbox.Bind(wx.EVT_LEFT_DCLICK, self.onListDClick)
 		self.dropdownlistbox.Bind(wx.EVT_LIST_COL_CLICK, self.onListColClick)
@@ -462,7 +462,7 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin):
 		for choice in choices :
 			longest = max(len(choice), longest)
 		longest += 3
-		itemcount = min( len( choices ) , 7 ) + 2
+		itemcount = min( len( choices ), 7 ) + 2
 		charheight = self.dropdownlistbox.GetCharHeight()
 		charwidth = self.dropdownlistbox.GetCharWidth()
 		self.popupsize = wx.Size( charwidth*longest, charheight*(itemcount+1) )
@@ -491,13 +491,13 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 		super(dAutoComplete, self)._initEvents()
 
 
-	def onKeyDown(self,evt):
+	def onKeyDown(self, evt):
 		"""This prevents dEvents from being passed to autocomplete's onKeyDown"""
 		if isinstance(evt, wx.KeyEvent):
 			super(dAutoComplete, self).onKeyDown(evt)
 
 
-	def onKeyUp(self,evt):
+	def onKeyUp(self, evt):
 		if isinstance(evt, wx.KeyEvent):
 			if evt.GetKeyCode() == wx.WXK_BACK:
 				#Make sure fillDynamicChoices() gets called on backspace as well
@@ -664,7 +664,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 			src = self._dataSource = None
 		return src
 
-	def _setDataSource(self,src):
+	def _setDataSource(self, src):
 		if self._constructed():
 			self._dataSource = src
 			dabo.ui.callAfter(self.listFromDS)
@@ -857,7 +857,7 @@ if __name__ == "__main__":
 					FontBold=True), alignment="center")
 			vs.appendSpacer(15)
 			vs.append(dabo.ui.dLabel(self, Caption="User defined choices (single-column)"))
-			vs.append(dAutoComplete(self, Choices=["Bob","Joe","Mary","Bill","Marcia","Eric"]), "x")
+			vs.append(dAutoComplete(self, Choices=["Bob", "Joe", "Mary", "Bill", "Marcia", "Eric"]), "x")
 			vs.appendSpacer(5)
 			vs.append(dabo.ui.dLabel(self, Caption="Data set (single-column)"))
 			vs.append(dAutoComplete(self, DataSet=ds, DataFields=["landmark"]), "x")

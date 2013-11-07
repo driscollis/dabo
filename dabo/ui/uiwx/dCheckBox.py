@@ -28,7 +28,7 @@ class dCheckBox(dcm.dDataControlMixin, wx.CheckBox):
 
 	def _initProperties(self):
 		self._3StateToValue = { wx.CHK_UNCHECKED : False, wx.CHK_CHECKED : True, wx.CHK_UNDETERMINED : None}
-		self._ValueTo3State = dict([[v,k] for k,v in self._3StateToValue.items()])
+		self._ValueTo3State = dict([[v, k] for k, v in self._3StateToValue.items()])
 		super(dCheckBox, self)._initProperties()
 
 

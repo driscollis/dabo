@@ -83,7 +83,7 @@ class Form(dabo.ui.dForm):
 		vs = self.Sizer
 		hs = dabo.ui.dSizer("h")
 		hs.append(dabo.ui.dButton(self, Caption=_("Save Changes"), DefaultButton=True, OnHit=self.onSave))
-		hs.appendSpacer((3,0))
+		hs.appendSpacer((3, 0))
 		hs.append(dabo.ui.dButton(self, Caption=_("Cancel Changes"), CancelButton=True, OnHit=self.onCancel))
 		vs.append(hs, alignment="right")
 

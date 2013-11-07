@@ -270,17 +270,17 @@ class MySQL(dBackend):
 						sql = sql + "TINYINT "
 					elif fld.Size == 2:
 						sql = sql + "SMALLINT "
-					elif fld.Size in (3,4):
+					elif fld.Size in (3, 4):
 						sql = sql + "INT "
-					elif fld.Size in (5,6,7,8):
+					elif fld.Size in (5, 6, 7, 8):
 						sql = sql + "BIGINT "
 					else:
 						raise #what should happen?
 
 				elif fld.DataType == "Float":
-					if fld.Size in (0,1,2,3,4):
+					if fld.Size in (0, 1, 2, 3, 4):
 						sql = sql + "FLOAT(" + ustr(fld.TotalDP) + "," + ustr(fld.RightDP) + ") "
-					elif fld.Size in (5,6,7,8):
+					elif fld.Size in (5, 6, 7, 8):
 						sql = sql + "DOUBLE(" + ustr(fld.TotalDP) + "," + ustr(fld.RightDP) + ") "
 					else:
 						raise #what should happen?
@@ -332,7 +332,7 @@ class MySQL(dBackend):
 					sql = sql + ","
 
 				if sql.count("PRIMARY KEY ") > 1:
-					sql = sql.replace("PRIMARY KEY ","") + "PRIMARY KEY(" + ",".join(pks) + "),"
+					sql = sql.replace("PRIMARY KEY ", "") + "PRIMARY KEY(" + ",".join(pks) + "),"
 
 			if sql[-1:] == ",":
 				sql = sql[:-1]

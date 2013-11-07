@@ -518,7 +518,7 @@ class DesignerClassConverter(dObject):
 					szType = atts["Orientation"]
 					for unneeded in ("SlotCount", "classID"):
 						atts.pop(unneeded, None)
-					propString = ", ".join(["%s='%s'" % (k,v) for k,v in list(atts.items())])
+					propString = ", ".join(["%s='%s'" % (k, v) for k, v in list(atts.items())])
 					if isBorderSizer:
 						prnt = "currParent, "
 				if self.CreateDesignerControls:
@@ -803,7 +803,7 @@ class DesignerClassConverter(dObject):
 		ret = ""
 		while not ret or ret in self._generatedNames:
 			# The empty string is always in the list, so it will run at least once.
-			ret = "%s_%s" % (nm, random.randint(0,99999))
+			ret = "%s_%s" % (nm, random.randint(0, 99999))
 		self._generatedNames.append(ret)
 		return ret
 

@@ -27,7 +27,7 @@ for daboName in daboNames:
 daboNames = list(dabo_to_wx.items())
 daboNames.sort()
 
-for k,v in dabo_to_wx.items():
+for k, v in dabo_to_wx.items():
 	wxClasses = wx_to_dabo.setdefault(v, [])
 	wxClasses.append(k)
 
