@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import __builtin__
+from six.moves import builtins
 import time
 import wx
 import wx.stc as stc
@@ -367,7 +367,7 @@ class dShell(dControlMixin, wx.py.shell.Shell):
 class dShellForm(dSplitForm):
 	def _onDestroy(self, evt):
 		self._clearOldHistory()
-		__builtin__.raw_input = self._oldRawInput
+		builtins.raw_input = self._oldRawInput
 
 
 	def _beforeInit(self, pre):
@@ -388,7 +388,7 @@ class dShellForm(dSplitForm):
 		# but doesn't set it back on destroy, resulting in errors later
 		# on if something other than PyShell asks for raw_input (pdb, for
 		# example).
-		self._oldRawInput = __builtin__.raw_input
+		self._oldRawInput = builtins.raw_input
 		self.bindEvent(dEvents.Destroy, self._onDestroy)
 
 		splt = self.Splitter

@@ -210,8 +210,8 @@ if importDebugger:
 	# 		debugout("Another Message", self.Caption)
 	# to their code for debugging.
 	# (I added 'debugo' as an homage to Whil Hentzen!)
-	import __builtin__
-	__builtin__.debugo = __builtin__.debugout = debugout
+	from six.moves import builtins
+	builtins.debugo = builtins.debugout = debugout
 
 if implicitImports:
 	from . import dColors
