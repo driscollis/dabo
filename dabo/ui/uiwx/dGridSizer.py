@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from . import dPemMixin
@@ -169,12 +170,12 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		"""Sets the 'growable' status of one or more columns."""
 		# If the colNum argument was passed first, switch it with the
 		# expand argument
-		if isinstance(expand, basestring):
+		if isinstance(expand, sixBasestring):
 			expand, colNum = colNum, expand
 		if isinstance(colNum, (list, tuple)):
 			for col in colNum:
 				self.setColExpand(expand, col, proportion)
-		elif isinstance(colNum, basestring):
+		elif isinstance(colNum, sixBasestring):
 			if colNum.lower() == "all":
 				for col in range(self.HighCol+1):
 					self.setColExpand(expand, col, proportion)
@@ -195,12 +196,12 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		"""Sets the 'growable' status of one or more rows."""
 		# If the rowNum argument was passed first, switch it with the
 		# expand argument
-		if isinstance(expand, basestring):
+		if isinstance(expand, sixBasestring):
 			expand, rowNum = rowNum, expand
 		if isinstance(rowNum, (list, tuple)):
 			for row in rowNum:
 				self.setRowExpand(expand, row, proportion)
-		elif isinstance(rowNum, basestring):
+		elif isinstance(rowNum, sixBasestring):
 			if rowNum.lower() == "all":
 				for row in range(self.HighRow+1):
 					self.setRowExpand(expand, row, proportion)
@@ -585,7 +586,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		return self.GetHGap()
 
 	def _setHGap(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = int(val)
 		self.SetHGap(val)
 
@@ -615,7 +616,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		return self._maxRows
 
 	def _setMaxRows(self, rows):
-		if isinstance(rows, basestring):
+		if isinstance(rows, sixBasestring):
 			rows = int(rows)
 		self._maxRows = rows
 		if rows:
@@ -627,7 +628,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		return self._maxCols
 
 	def _setMaxCols(self, cols):
-		if isinstance(cols, basestring):
+		if isinstance(cols, sixBasestring):
 			cols = int(cols)
 		self._maxCols = cols
 		if cols:
@@ -646,7 +647,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 		return self.GetVGap()
 
 	def _setVGap(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = int(val)
 		self.SetVGap(val)
 

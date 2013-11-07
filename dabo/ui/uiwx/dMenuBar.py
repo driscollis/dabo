@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from . import dPemMixin as pm
@@ -144,7 +145,7 @@ class dMenuBar(pm.dPemMixin, wx.MenuBar):
 		"""
 		if isinstance(indexOrMenu, dabo.ui.dMenu):
 			index = self.getMenuIndex(indexOrMenu.Caption)
-		elif isinstance(indexOrMenu, basestring):
+		elif isinstance(indexOrMenu, sixBasestring):
 			# They passed a caption
 			index = self.getMenuIndex(indexOrMenu)
 		else:

@@ -3,6 +3,7 @@
 @note: Color setting doesn't work for this control. It's a wx issue.
 """
 # TODO: get SystemError on this one wait for Robin
+from six import string_types as sixBasestring
 import datetime
 import wx
 	
@@ -133,7 +134,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 
 	def setToMonthDay(self, day):
 		val = self.Value
-		if isinstance(day, basestring):
+		if isinstance(day, sixBasestring):
 			if day[:1].lower() == "f":
 				val = val.replace(day=1)
 			elif day[:1].lower() == "l":
@@ -149,7 +150,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 
 	def setToYearDay(self, day):
 		val = self.Value
-		if isinstance(day, basestring):
+		if isinstance(day, sixBasestring):
 			if day[:1].lower() == "f":
 				val = val.replace(month=1, day=1)
 			elif day[:1].lower() == "l":
@@ -226,7 +227,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 		return val
 
 	def _getWxValue(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = datetime.datetime.strptime(val, "%Y-%m-%d")
 		elif isinstance(val, tuple):
 			val = datetime.datetime(*val)

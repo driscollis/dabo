@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from dabo.ui import makeDynamicProperty
@@ -263,7 +264,7 @@ class dListControl(dcm.dControlItemMixin,
 
 	def setColumnWidth(self, col, wd):
 		"""Sets the width of the specified column."""
-		if isinstance(wd, basestring):
+		if isinstance(wd, sixBasestring):
 			self.autoSizeColumn(col)
 		else:
 			self.SetColumnWidth(col, wd)
@@ -315,7 +316,7 @@ class dListControl(dcm.dControlItemMixin,
 				currCol += 1
 		else:
 			if col < self.ColumnCount:
-				if not isinstance(tx, basestring) and self.AutoConvertToString:
+				if not isinstance(tx, sixBasestring) and self.AutoConvertToString:
 					tx = u"%s" % tx
 				if dabo.ui.phoenix:
 					if insert:
@@ -433,7 +434,7 @@ class dListControl(dcm.dControlItemMixin,
 		"""
 		if key is None:
 			key = ustr(img)
-		if isinstance(img, basestring):
+		if isinstance(img, sixBasestring):
 			img = dabo.ui.strToBmp(img)
 		il = self.GetImageList(wx.IMAGE_LIST_NORMAL)
 		if not il:
@@ -471,7 +472,7 @@ class dListControl(dcm.dControlItemMixin,
 
 
 	def setItemBackColor(self, itm, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			color = dColors.colorTupleFromName(val)
 		else:
 			color = val
@@ -483,7 +484,7 @@ class dListControl(dcm.dControlItemMixin,
 
 
 	def setItemForeColor(self, itm, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			color = dColors.colorTupleFromName(val)
 		else:
 			color = val
@@ -598,7 +599,7 @@ class dListControl(dcm.dControlItemMixin,
 		# Called when a column was marked to expand, and then
 		# changed to a normal column.
 		cc = self.ColumnCount
-		if isinstance(col, basestring):
+		if isinstance(col, sixBasestring):
 			# Last column
 			col = cc - 1
 		if col < cc:
@@ -660,7 +661,7 @@ class dListControl(dcm.dControlItemMixin,
 	def _setExpandColumn(self, val):
 		if self._constructed():
 			columnCount = self.ColumnCount
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = val.upper().strip()
 			else:
 				if val >= columnCount and columnCount > 0:
@@ -795,7 +796,7 @@ class dListControl(dcm.dControlItemMixin,
 		if self._constructed():
 			if isinstance(val, int):
 				self.Select(val)
-			elif isinstance(val, basestring):
+			elif isinstance(val, sixBasestring):
 				self.Select(self.FindItem(-1, val))
 		else:
 			self._properties["Value"] = val

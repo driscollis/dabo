@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import types
 import re
 import warnings
@@ -1445,7 +1446,7 @@ class dBizobj(dObject):
 				self.__filterPKVirtual.append(self.getFieldVal(self.KeyField))
 
 		else:
-			if isinstance(virtValue, basestring) and isinstance(expr, basestring):
+			if isinstance(virtValue, sixBasestring) and isinstance(expr, sixBasestring):
 				virtLower = virtValue.lower()
 				exprLower = expr.lower()
 

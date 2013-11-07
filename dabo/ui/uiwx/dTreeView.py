@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import re
 import os
 import glob
@@ -83,7 +84,7 @@ class dNode(dObject):
 		return self.tree.GetItemBackgroundColour(self.itemID).Get()
 
 	def _setBackColor(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		self.tree.SetItemBackgroundColour(self.itemID, val)
 
@@ -213,7 +214,7 @@ class dNode(dObject):
 		return self.tree.GetItemTextColour(self.itemID).Get()
 
 	def _setForeColor(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		self.tree.SetItemTextColour(self.itemID, val)
 
@@ -593,7 +594,7 @@ class dTreeView(dcm.dControlMixin, wx.TreeCtrl):
 				wd, ht = il.GetSize(0)
 		if key is None:
 			key = ustr(img)
-		if isinstance(img, basestring):
+		if isinstance(img, sixBasestring):
 			img = dabo.ui.strToBmp(img, width=wd, height=ht)
 		idx = il.Add(img)
 		self.__imageList[key] = idx
@@ -718,7 +719,7 @@ class dTreeView(dcm.dControlMixin, wx.TreeCtrl):
 			nodes = self.nodes
 		else:
 			nodes = top.Descendents
-		if isinstance(srch, basestring):
+		if isinstance(srch, sixBasestring):
 			ret = [n for n in nodes
 				if n.Caption == srch ]
 		elif isinstance(srch, wx.TreeItemId):
@@ -740,7 +741,7 @@ class dTreeView(dcm.dControlMixin, wx.TreeCtrl):
 			nodes = self.nodes
 		else:
 			nodes = top.Descendents
-		if isinstance(srchPat, basestring):
+		if isinstance(srchPat, sixBasestring):
 			ret = [n for n in nodes
 				if re.match(srchPat, n.Caption) ]
 		return ret
@@ -978,7 +979,7 @@ class dTreeView(dcm.dControlMixin, wx.TreeCtrl):
 		addRoot = (topNode is None)
 		if addRoot:
 			self.DeleteAllItems()
-		if isinstance(stru[0], basestring):
+		if isinstance(stru[0], sixBasestring):
 			# We're at the end of the recursion. Just append the node
 			self.appendNode(topNode, stru[0])
 		else:

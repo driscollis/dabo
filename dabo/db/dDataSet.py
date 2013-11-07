@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import re
 import operator
@@ -117,7 +118,7 @@ class dDataSet(tuple):
 			scope = self._fldReplace(scope, "rec")
 
 		literal = True
-		if isinstance(valOrExpr, basestring):
+		if isinstance(valOrExpr, sixBasestring):
 			if valOrExpr.strip()[0] == "=":
 				literal = False
 				valOrExpr = valOrExpr.replace("=", "", 1)
@@ -509,7 +510,7 @@ class dDataSet(tuple):
 #
 #
 # 	def processFields(self, fields, aliasDict):
-# 		if isinstance(fields, basestring):
+# 		if isinstance(fields, sixBasestring):
 # 			fields = fields.split(",")
 # 		for num, fld in enumerate(fields):
 # 			fld = fld.replace(" AS ", " as ").replace(" As ", " as ").strip()
@@ -541,7 +542,7 @@ class dDataSet(tuple):
 # 		if where is None:
 # 			whereClause = ""
 # 		else:
-# 			if isinstance(where, basestring):
+# 			if isinstance(where, sixBasestring):
 # 				where = [where]
 # 			for wh in where:
 # 				whereList.append(self._fldReplace(wh))
@@ -707,7 +708,7 @@ class dDataSet(tuple):
 # 			tmpLeftCond = "%s['%s']" % tuple(tmpLeftCond.split("."))
 # 			leftVal = eval(tmpLeftCond)
 #
-# 			if isinstance(leftVal, basestring):
+# 			if isinstance(leftVal, sixBasestring):
 # 				leftVal = "'%s'" % leftVal
 # 			rightWhere = rightCond.replace(rightAlias + ".", "") + "== %s" % leftVal
 # 			rightRecs = rightDS.select(fields=rightFields, where=rightWhere)

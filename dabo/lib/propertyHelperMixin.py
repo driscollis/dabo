@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import string
 from dabo.dLocalize import _
 import collections
@@ -155,7 +156,7 @@ class PropertyHelperMixin(object):
 		if isinstance(propertySequence, (list, tuple)):
 			_fillPropDict(propertySequence)
 		else:
-			if isinstance(propertySequence, basestring):
+			if isinstance(propertySequence, sixBasestring):
 				# propertySequence is actually a string property name:
 				# append to the propertyArguments tuple.
 				propertyArguments = list(propertyArguments)

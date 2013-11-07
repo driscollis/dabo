@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import wx
 try:
@@ -70,7 +71,7 @@ class dBorderlessButton(cm.dControlMixin, platebtn.PlateButton):
 
 	def _setBackColorHover(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			if isinstance(val, tuple):
 				self._backColoHover = val

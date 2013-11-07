@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import os
 import time
@@ -38,14 +39,14 @@ class SplashScreen(wx.Frame):
 		wx.Frame.__init__(self, None, -1, style=style)
 
 		self.SetBackgroundStyle(wx.BG_STYLE_CUSTOM)
-		if isinstance(bitmap, basestring):
+		if isinstance(bitmap, sixBasestring):
 			# Convert it
 			self._bmp = dabo.ui.pathToBmp(bitmap)
 		else:
 			self._bmp = bitmap
 
 		if maskColor is not None:
-			if isinstance(maskColor, basestring):
+			if isinstance(maskColor, sixBasestring):
 				maskColor = dColors.colorTupleFromName(maskColor)
 			self._bmp.SetMask(wx.Mask(self._bmp, maskColor))
 
@@ -304,7 +305,7 @@ these automatic updates.""").replace("\n", " ")
 							"Please check your internet connection and try again later."), title=_("Update Failed"))
 					answer = False
 					self.dApp._resetWebUpdateCheck()
-				elif isinstance(success, basestring):
+				elif isinstance(success, sixBasestring):
 					# Error message was returned
 					dabo.ui.stop(success, title=_("Update Failure"))
 				elif success is False:
@@ -428,7 +429,7 @@ these automatic updates.""").replace("\n", " ")
 		if frm is None:
 			if self.dApp.MainFormClass is not None:
 				mfc = self.dApp.MainFormClass
-				if isinstance(mfc, basestring):
+				if isinstance(mfc, sixBasestring):
 					# It is a path to .cdxml file
 					frm = self.dApp.MainForm = dabo.ui.createForm(mfc)
 				else:
@@ -1092,7 +1093,7 @@ these automatic updates.""").replace("\n", " ")
 					value = win.GetValue()
 				except AttributeError:
 					value = None
-				if not isinstance(value, basestring):
+				if not isinstance(value, sixBasestring):
 					dabo.log.error(_("Active control isn't text-based."))
 					return
 
@@ -1137,7 +1138,7 @@ these automatic updates.""").replace("\n", " ")
 		Adds the specified menu to the top of the list of
 		MRU prompts for that menu.
 		"""
-		if isinstance(menuOrCaption, basestring):
+		if isinstance(menuOrCaption, sixBasestring):
 			# They passed the menu caption directly
 			cap = menuOrCaption
 		else:
@@ -1205,7 +1206,7 @@ these automatic updates.""").replace("\n", " ")
 
 	def getMRUListForMenu(self, menu):
 		"""Gets the current list of MRU entries for the given menu."""
-		if isinstance(menu, basestring):
+		if isinstance(menu, sixBasestring):
 			# They passed the menu caption directly
 			cap = menu
 		else:

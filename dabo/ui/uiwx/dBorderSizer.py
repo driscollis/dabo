@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from dabo.dLocalize import _
@@ -21,7 +22,7 @@ class dBorderSizer(dabo.ui.dSizerMixin, wx.StaticBoxSizer):
 		self._border = 0
 		self._parent = None
 		# Make sure that they got the params in the right order
-		if isinstance(box, basestring):
+		if isinstance(box, sixBasestring):
 			box, orientation = orientation, box
 		if not isinstance(box, dabo.ui.dBox):
 			prnt = box

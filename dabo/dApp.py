@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 from six.moves import configparser
 from six.moves import cStringIO
 import datetime
@@ -1543,7 +1544,7 @@ try again when it is running.
 		return v
 
 	def _setNoneDisp(self, val):
-		assert isinstance(val, basestring)
+		assert isinstance(val, sixBasestring)
 		self._noneDisplay = val
 
 

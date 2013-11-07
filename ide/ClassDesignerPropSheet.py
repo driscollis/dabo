@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import os
 import pydoc
 import dabo.ui
@@ -341,7 +342,7 @@ class PropSheet(dabo.ui.dPanel):
 
 
 	def setCustomEditor(self, ed, propName):
-		if isinstance(ed, basestring):
+		if isinstance(ed, sixBasestring):
 			# it is the name of a method in this class
 			ed = eval("self.%s" % ed)
 		self._custEditor = ed
@@ -782,7 +783,7 @@ class PropertyGrid(dabo.ui.dGrid):
 
 	def customCanSetValueAs(self, row, col, typ):
 		if col == 0:
-			return isinstance(typ, basestring)
+			return isinstance(typ, sixBasestring)
 		else:
 			pd = self.getPropDictForRow(row)
 			if pd["type"] == "multi":

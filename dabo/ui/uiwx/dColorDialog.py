@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 import dabo.dConstants as kons
@@ -14,7 +15,7 @@ class dColorDialog(wx.ColourDialog):
 		dat.SetChooseFull(True)
 
 		if color is not None:
-			if isinstance(color, basestring):
+			if isinstance(color, sixBasestring):
 				try:
 					color = dColors.colorTupleFromName(color)
 					dat.SetColour(color)

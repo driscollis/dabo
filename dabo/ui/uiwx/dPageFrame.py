@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import wx
 import dabo
@@ -279,7 +280,7 @@ class dDockTabs(dPageFrameMixin, aui.AuiNotebook):
 			pg = pgCls
 		else:
 			# See if the 'pgCls' is either some XML or the path of an XML file
-			if isinstance(pgCls, basestring):
+			if isinstance(pgCls, sixBasestring):
 				xml = pgCls
 				from dabo.lib.DesignerClassConverter import DesignerClassConverter
 				conv = DesignerClassConverter()
@@ -393,7 +394,7 @@ if _USE_FLAT:
 		def _setActiveTabColor(self, val):
 			if self._constructed():
 				self._activeTabColor = val
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					val = dColors.colorTupleFromName(val)
 				if isinstance(val, tuple):
 					self.SetActiveTabColour(wx.Colour(*val))
@@ -414,7 +415,7 @@ if _USE_FLAT:
 		def _setActiveTabTextColor(self, val):
 			if self._constructed():
 				self._activeTabTextColor = val
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					val = dColors.colorTupleFromName(val)
 				if isinstance(val, tuple):
 					self.SetActiveTabTextColour(wx.Colour(*val))
@@ -435,7 +436,7 @@ if _USE_FLAT:
 		def _setInactiveTabTextColor(self, val):
 			if self._constructed():
 				self._inactiveTabTextColor = val
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					val = dColors.colorTupleFromName(val)
 				if isinstance(val, tuple):
 					self.SetNonActiveTabTextColour(wx.Colour(*val))
@@ -456,7 +457,7 @@ if _USE_FLAT:
 		def _setTabAreaColor(self, val):
 			if self._constructed():
 				self._tabAreaColor = val
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					val = dColors.colorTupleFromName(val)
 				if isinstance(val, tuple):
 					self.SetTabAreaColour(wx.Colour(*val))

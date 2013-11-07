@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import unittest
 import datetime
 from decimal import Decimal
@@ -294,7 +295,7 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 		"""
 		cur = self.cur
 		rec = cur.Record
-		self.assertIsInstance(rec.cfield, basestring)
+		self.assertIsInstance(rec.cfield, sixBasestring)
 		self.assertIsInstance(rec.ifield, int)
 		self.assertIsInstance(rec.nfield, Decimal)
 		self.assertEqual(dabo.convertFloatToDecimal, True)

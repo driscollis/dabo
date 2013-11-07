@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import os
 
 import dabo.ui
@@ -137,7 +138,7 @@ class LayoutSaverMixin(dObject):
 		desProps = self.DesignerProps.keys()
 		if isinstance(self, (dabo.ui.dForm, dabo.ui.dFormMain)) and hasattr(self, "UseSizers"):
 			desProps += ["UseSizers"]
-		elif isinstance(self, self.Controller.pagedControls) and isinstance(self.PageClass, basestring):
+		elif isinstance(self, self.Controller.pagedControls) and isinstance(self.PageClass, sixBasestring):
 			desProps += ["PageClass"]
 		elif isinstance(self, dlgs.Wizard):
 			desProps += ["PageCount"]
@@ -205,7 +206,7 @@ class LayoutSaverMixin(dObject):
 					"FontFace", "HAlign", "Name", "RegID", "SelectionMode",
 					"ToolTipText", "VAlign", "Value") and (not prop.startswith("Border")
 					and not prop.startswith("Header") and not prop.startswith("Sizer_")):
-				if isinstance(val, basestring) and os.path.exists(val):
+				if isinstance(val, sixBasestring) and os.path.exists(val):
 					# It's a path; convert it to a relative path
 					if isinstance(self, (dabo.ui.dForm, dabo.ui.dFormMain, dabo.ui.dDialog)):
 						ref = self._classFile
@@ -226,7 +227,7 @@ class LayoutSaverMixin(dObject):
 					continue
 				if prop not in propsToInclude:
 					dv = defVals[prop]
-					if not isinstance(val, basestring) and isinstance(dv, basestring):
+					if not isinstance(val, sixBasestring) and isinstance(dv, sixBasestring):
 						# Try to convert
 						if isinstance(val, bool):
 							dv = (dv.lower() == "true")
@@ -245,7 +246,7 @@ class LayoutSaverMixin(dObject):
 					if dv == val:
 						continue
 
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				strval = val
 			else:
 				strval = unicode(val)

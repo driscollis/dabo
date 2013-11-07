@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx.html
 import os
 import re
@@ -155,7 +156,7 @@ class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
 		if not self._constructed():
 			self._properties["Page"] = val
 			return
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			try:
 				if os.path.exists(val):
 					file = open(val, "r")

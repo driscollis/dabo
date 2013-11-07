@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import re
 import datetime
 import time
@@ -113,7 +114,7 @@ class dTextBoxMixinBase(dcm.dDataControlMixin):
 		if not self:
 			# The control is being destroyed
 			return
-		if not isinstance(self.Value, basestring):
+		if not isinstance(self.Value, sixBasestring):
 			#Don't bother if it isn't a string type
 			return
 		length = self.TextLength
@@ -140,7 +141,7 @@ class dTextBoxMixinBase(dcm.dDataControlMixin):
 			# The control is being destroyed
 			return
 		currVal = self.Value
-		if not isinstance(currVal, basestring):
+		if not isinstance(currVal, sixBasestring):
 			# Don't bother if it isn't a string type
 			return
 		case = self.ForceCase
@@ -588,7 +589,7 @@ class dTextBoxMixin(dTextBoxMixinBase):
 		in case they need specialized behavior. The value returned from this
 		function will be what is displayed in the UI textbox.
 		"""
-		if isinstance(value, basestring):
+		if isinstance(value, sixBasestring):
 			# keep it unicode instead of converting to str
 			strVal = value
 		elif isinstance(value, datetime.datetime):

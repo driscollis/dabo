@@ -1,6 +1,6 @@
-﻿#!/usr/bin/env python
+﻿﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+from six import string_types as sixBasestring
 import gettext
 from . import locale
 import os
@@ -94,7 +94,7 @@ def setLanguage(lang=None, charset=None):
 	global _domains, _currentTrans
 	lang = _languageAliases.get(lang.lower(), lang)
 
-	if lang is not None and isinstance(lang, basestring):
+	if lang is not None and isinstance(lang, sixBasestring):
 		lang = [lang]
 
 	daboTranslation = None

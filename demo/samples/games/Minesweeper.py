@@ -15,7 +15,7 @@ back to a blank square (ready to clear).
 
 You win when all squares are either flagged as mines or cleared.
 """
-
+from six import string_types as sixBasestring
 import datetime
 import random
 import dabo.db
@@ -833,7 +833,7 @@ this to work."""
 				vs.append1x(hs)
 
 				playername = self.Application.PreferenceManager.playername
-				if isinstance(playername, basestring):
+				if isinstance(playername, sixBasestring):
 					self.txtName.Value = playername
 				else:
 					self.txtName.Value = ""

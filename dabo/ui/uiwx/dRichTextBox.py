@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 # TODO: wait for Robin's feed back
+from six import string_types as sixBasestring
 import os
 import wx
 import wx.richtext
@@ -47,7 +48,7 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		"""
 		if fileOrObj is None:
 			fileOrObj = dabo.ui.getFile("xml", "html")
-		if isinstance(fileOrObj, basestring):
+		if isinstance(fileOrObj, sixBasestring):
 			mthdName = "LoadFile"
 		else:
 			mthdName = "LoadStream"

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import time
 import types
@@ -1054,7 +1055,7 @@ class dPemMixin(dPemMixinBase):
 		object's constructor.
 		"""
 		# See if the 'classRef' is either some XML or the path of an XML file
-		if isinstance(classRef, basestring):
+		if isinstance(classRef, sixBasestring):
 			xml = classRef
 			from dabo.lib.DesignerClassConverter import DesignerClassConverter
 			conv = DesignerClassConverter()
@@ -1257,10 +1258,10 @@ class dPemMixin(dPemMixinBase):
 			kids = self.Children
 		if not kids:
 			return
-		if isinstance(filt, basestring):
+		if isinstance(filt, sixBasestring):
 			filt = (filt, )
 
-		if isinstance(instancesOf, basestring):
+		if isinstance(instancesOf, sixBasestring):
 			instancesOf = (instancesOf,)
 		if instancesOf is None:
 			instancesOf = tuple()
@@ -1438,7 +1439,7 @@ class dPemMixin(dPemMixinBase):
 	def _getWxColour(self, val):
 		"""Convert Dabo colors to wx.Colour objects"""
 		ret = None
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		if isinstance(val, tuple):
 			ret = wx.Colour(*val)
@@ -1668,7 +1669,7 @@ class dPemMixin(dPemMixinBase):
 	def drawBitmap(self, bmp, x=0, y=0, mode=None, persist=True,
 	               transparent=True, visible=True, dc=None, useDefaults=False):
 		"""Draws a bitmap on the object at the specified position."""
-		if isinstance(bmp, basestring):
+		if isinstance(bmp, sixBasestring):
 			bmp = dabo.ui.strToBmp(bmp)
 		obj = DrawObject(self, Bitmap=bmp, Shape="bmp",
 		                 Xpos=x, Ypos=y, Transparent=transparent, DrawMode=mode,
@@ -1955,7 +1956,7 @@ class dPemMixin(dPemMixinBase):
 
 	def _setBackColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			if val is None:
 				self.SetBackgroundColour(wx.NullColour)
@@ -1972,7 +1973,7 @@ class dPemMixin(dPemMixinBase):
 
 	def _setBorderColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._borderColor = val
 			if self._border:
@@ -2296,7 +2297,7 @@ class dPemMixin(dPemMixinBase):
 
 	def _setForeColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			if val != self.GetForegroundColour().Get():
 				self.SetForegroundColour(val)
@@ -2434,7 +2435,7 @@ class dPemMixin(dPemMixinBase):
 
 	def _setMousePointer(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				# Name of a cursor. This can be either the full names, such
 				# as 'Cursor_Bullseye', or just 'Bullseye'. It could also be a sizing
 				# direction, such as 'NWSE'.
@@ -3334,7 +3335,7 @@ class DrawObject(dObject):
 			if self.PenColor is None:
 				pc = dColors.colorTupleFromName("black")
 			else:
-				if isinstance(self.PenColor, basestring):
+				if isinstance(self.PenColor, sixBasestring):
 					pc = dColors.colorTupleFromName(self.PenColor)
 				else:
 					pc = self.PenColor
@@ -3360,7 +3361,7 @@ class DrawObject(dObject):
 		if fill is None:
 			brush = wx.TRANSPARENT_BRUSH
 		else:
-			if isinstance(fill, basestring):
+			if isinstance(fill, sixBasestring):
 				fill = dColors.colorTupleFromName(fill)
 			brush = wx.Brush(fill, style=sty)
 		dc.SetBrush(brush)
@@ -3555,7 +3556,7 @@ class DrawObject(dObject):
 		return self._gradientColor1
 
 	def _setGradientColor1(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		if self._gradientColor1 != val:
 			self._gradientColor1 = val
@@ -3566,7 +3567,7 @@ class DrawObject(dObject):
 		return self._gradientColor2
 
 	def _setGradientColor2(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		if self._gradientColor2 != val:
 			self._gradientColor2 = val
@@ -3577,7 +3578,7 @@ class DrawObject(dObject):
 		return self._hatchStyle
 
 	def _setHatchStyle(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = val.lower()
 		if self._hatchStyle != val:
 			self._hatchStyle = val
@@ -3597,7 +3598,7 @@ class DrawObject(dObject):
 		return self._lineStyle
 
 	def _setLineStyle(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = val.lower()
 		if self._lineStyle != val:
 			self._lineStyle = val

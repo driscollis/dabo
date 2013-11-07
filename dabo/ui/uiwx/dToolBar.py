@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # TODO: dToolbarItem issue
+from six import string_types as sixBasestring
 import os.path
 import wx
 import dabo, dabo.ui
@@ -150,7 +151,7 @@ class dToolBar(cm.dControlMixin, wx.ToolBar):
 	def _appendInsertButton(self, pos, caption, pic, toggle, tip, help,
 			*args, **kwargs):
 		"""Common code for the append|insert|prependButton() functions."""
-		if isinstance(pic, basestring):
+		if isinstance(pic, sixBasestring):
 			# path was passed
 			picBmp = dabo.ui.strToBmp(pic)
 		else:

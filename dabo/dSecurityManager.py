@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import time
 import dabo
 from dabo.dObject import dObject
@@ -154,7 +155,7 @@ class dSecurityManager(dObject):
 			return ''
 
 	def _setUserCaption(self, value):
-		if isinstance(value, basestring):
+		if isinstance(value, sixBasestring):
 			self._userCaption = value
 		else:
 			raise TypeError('User caption must be string or unicode.')

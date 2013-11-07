@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx, dabo, dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
@@ -110,7 +111,7 @@ class dComboBox(dcm.dControlItemMixin, wx.ComboBox):
 		if not self:
 			# The control is being destroyed
 			return
-		if not isinstance(self.GetValue(), basestring):
+		if not isinstance(self.GetValue(), sixBasestring):
 			#Don't bother if it isn't a string type
 			return
 		length = self.TextLength
@@ -132,7 +133,7 @@ class dComboBox(dcm.dControlItemMixin, wx.ComboBox):
 		if not self:
 			# The control is being destroyed
 			return
-		if not isinstance(self.GetValue(), basestring):
+		if not isinstance(self.GetValue(), sixBasestring):
 			# Don't bother if it isn't a string type
 			return
 		case = self.ForceCase

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import os
 import copy
@@ -144,7 +145,7 @@ def DesignerController():
 				parents.append(rf["Groups"])
 			else:
 				# Normal report object. Place it in all selected bands.
-				if isinstance(typ, basestring):
+				if isinstance(typ, sixBasestring):
 					if typ[:7] == "Field: ":
 						# Testcursor field. Create string object with expr of this field.
 						defaultProps["expr"] = "self.%s" % typ[7:].strip()
@@ -1115,7 +1116,7 @@ class DesignerBand(DesignerPanel):
 					old = dragObject.getProp(propName)
 
 					unit = "pt"
-					if isinstance(old, basestring) and len(old) > 3:
+					if isinstance(old, sixBasestring) and len(old) > 3:
 						if old[-4] == "pica":
 							unit = "pica"
 						elif old[-2].isalpha():
@@ -1753,7 +1754,7 @@ class ReportDesigner(dabo.ui.dScrollPanel):
 					if parentBand not in parentBands:
 						parentBands.append(parentBand)
 
-					if isinstance(val, basestring) and len(val) > 3:
+					if isinstance(val, sixBasestring) and len(val) > 3:
 						if val[-4] == "pica":
 							unit = "pica"
 						elif val[-2].isalpha():

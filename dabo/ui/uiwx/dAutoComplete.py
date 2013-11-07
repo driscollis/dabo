@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import dabo
 import wx
 import dabo.dEvents as dEvents
@@ -508,7 +510,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 		ds = self.DataSource
 		if isinstance(ds, dabo.biz.dBizobj):
 			return ds
-		if isinstance(ds, basestring) and self.Form is not None:
+		if isinstance(ds, sixBasestring) and self.Form is not None:
 			form = self.Form
 			while form is not None:
 				if hasattr(form, "getBizobj"):
@@ -567,7 +569,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 			#Find search index
 			try:
 				if self.SearchField is not None:
-					if isinstance(self.SearchField, basestring):
+					if isinstance(self.SearchField, sixBasestring):
 						colSearch = colKeys.index(self.SearchField)
 					else:
 						colSearch = self.SearchField
@@ -579,7 +581,7 @@ class dAutoComplete(dcm.dControlMixin, TextCtrlAutoComplete):
 			#Find fetch index
 			try:
 				if self.FetchField is not None:
-					if isinstance(self.FetchField, basestring):
+					if isinstance(self.FetchField, sixBasestring):
 						colFetch = colKeys.index(self.FetchField)
 					else:
 						colFetch = self.FetchField		

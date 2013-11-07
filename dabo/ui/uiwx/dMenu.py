@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import wx
 import dabo
@@ -310,7 +311,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 		Returns the menu item specified by either its index or caption. In the
 		case that an actual menu item is passed, simply returns that item.
 		"""
-		if isinstance(capIdxOrItem, basestring):
+		if isinstance(capIdxOrItem, sixBasestring):
 			ret = self.getItem(capIdxOrItem)
 		elif isinstance(capIdxOrItem, int):
 			ret = self.Children[capIdxOrItem]

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from dabo.dLocalize import _
@@ -50,11 +51,11 @@ class dHyperLink(dcm.dControlMixin, AlignmentMixin, hyperlink.HyperLinkCtrl):
 	def _setColors(self):
 		"""Updated the link with the specified colors."""
 		lc, vc, rc = self.LinkColor, self.VisitedColor, self.HoverColor
-		if isinstance(lc, basestring):
+		if isinstance(lc, sixBasestring):
 			lc = dColors.colorTupleFromName(lc)
-		if isinstance(vc, basestring):
+		if isinstance(vc, sixBasestring):
 			vc = dColors.colorTupleFromName(vc)
-		if isinstance(rc, basestring):
+		if isinstance(rc, sixBasestring):
 			rc = dColors.colorTupleFromName(rc)
 		self.SetColours(lc, vc, rc)
 		self.UpdateLink(True)

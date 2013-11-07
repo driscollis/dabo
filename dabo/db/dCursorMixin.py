@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # dabo/db/dCursorMixin
+from six import string_types as sixBasestring
 
 import datetime
 import time
@@ -31,7 +32,7 @@ class dCursorMixin(dObject):
 	def __init__(self, sql="", *args, **kwargs):
 		self._convertStrToUnicode = True
 		self._initProperties()
-		if sql and isinstance(sql, basestring) and len(sql) > 0:
+		if sql and isinstance(sql, sixBasestring) and len(sql) > 0:
 			self.UserSQL = sql
 		# Attributes used for M-M relationships
 		self._isMM = False
@@ -253,9 +254,9 @@ class dCursorMixin(dObject):
 		if pythonType in (unicode,):
 			# Unicode conversion happens below.
 			pass
-		elif pythonType in (datetime.datetime,) and isinstance(field_val, basestring):
+		elif pythonType in (datetime.datetime,) and isinstance(field_val, sixBasestring):
 			return tryToCorrect(dates.getDateTimeFromString, field_val, field_name)
-		elif pythonType in (datetime.date,) and isinstance(field_val, basestring):
+		elif pythonType in (datetime.date,) and isinstance(field_val, sixBasestring):
 			return tryToCorrect(dates.getDateFromString, field_val, field_name)
 		elif pythonType in (Decimal,):
 			ds = self.DataStructure
@@ -644,7 +645,7 @@ class dCursorMixin(dObject):
 		# lists contain the sort value in the zeroth element, and the row as
 		# the first element.
 		# First, see if we are comparing strings
-		compString = isinstance(sortList[0][0], basestring)
+		compString = isinstance(sortList[0][0], sixBasestring)
 
 		if compString and not caseSensitive:
 			sortKey = caseInsensitiveSortKey
@@ -716,7 +717,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 	def escape(self, val):
 		"""Provides the proper escaping of values in XML output"""
 		ret = val
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			if ("\n" in val) or ("<" in val) or ("&" in val):
 				ret = "<![CDATA[%s]]>" % val.encode(self.Encoding)
 		return ret
@@ -841,7 +842,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		ret = self.__tmpPK
 		# Decrement the temp PK value
 		self.__tmpPK -= 1
-		if isinstance(pkValue, basestring):
+		if isinstance(pkValue, sixBasestring):
 			ret = "%s-dabotmp" % ret
 		return ret
 
@@ -1000,7 +1001,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		if fldType is not None and val is not None:
 			if fldType != type(val):
 				convTypes = (str, unicode, int, float, long, complex)
-				if issubclass(fldType, basestring) and isinstance(val, convTypes):
+				if issubclass(fldType, sixBasestring) and isinstance(val, convTypes):
 					val = ustr(val)
 				elif issubclass(fldType, int) and isinstance(val, bool):
 					# convert bool to int (original field val was bool, but UI
@@ -1014,7 +1015,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 					# convert int to long (original field val was long, but UI
 					# changed to int.
 					val = long(val)
-				elif fldType is buffer and isinstance(val, basestring):
+				elif fldType is buffer and isinstance(val, sixBasestring):
 					# BLOB backend field wants buffer, but it is in a python string.
 					val = memoryview(val)
 
@@ -1025,9 +1026,9 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				# string representation of these classes, as there is no primitive for either
 				# 'DateTime' or 'Date'.
 				dtStrings = ("<type 'DateTime'>", "<type 'Date'>", "<type 'datetime.datetime'>", "<type 'datetime.date'>")
-				if ustr(fldType) in dtStrings and isinstance(val, basestring):
+				if ustr(fldType) in dtStrings and isinstance(val, sixBasestring):
 					ignore = True
-				elif issubclass(fldType, basestring) and isinstance(val, basestring):
+				elif issubclass(fldType, sixBasestring) and isinstance(val, sixBasestring):
 					ignore = True
 				elif val is None or fldType is type(None):
 					# Any field type can potentially hold None values (NULL). Ignore these.
@@ -1035,7 +1036,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				elif isinstance(val, dNoEscQuoteStr):
 					# Sometimes you want to set it to a sql function, equation, ect.
 					ignore = True
-				elif issubclass(fldType, basestring) and isinstance(val, buffer):
+				elif issubclass(fldType, sixBasestring) and isinstance(val, buffer):
 					# Eliminate type error reported for blob fields.
 					ignore = True
 				elif fld in nonUpdateFields:
@@ -1661,7 +1662,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 					# add value to expression
 					fieldType = [ds[1] for ds in self.DataStructure if ds[0] == kk][0]
 					val = vv[1]
-					if fieldType == "L" or (isinstance(val, basestring) and "\0" in val):
+					if fieldType == "L" or (isinstance(val, sixBasestring) and "\0" in val):
 						val = self.formatBLOB(val)
 					#elif fieldType in ("D", "T"):
 					#	val = self.formatDateTime(val)
@@ -1706,7 +1707,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				for kf in keyFields:
 					fld = self.BackendObject.encloseNames(kf, self.AutoQuoteNames)
 					val = self.getFieldVal(kf)
-					if isinstance(val, basestring):
+					if isinstance(val, sixBasestring):
 						val = "'" + val.encode(self.Encoding) + "' "
 					elif isinstance(val, (datetime.date, datetime.datetime)):
 						val = self.formatDateTime(val)
@@ -2181,7 +2182,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		if simpleKey:
 			# Determine if we are seeking string values
 			field_type = self._types.get(fld, type(sortList[0][0]))
-			compString = issubclass(field_type, basestring)
+			compString = issubclass(field_type, sixBasestring)
 		else:
 			compString = False
 
@@ -2241,11 +2242,11 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 
 					ret = len(sortList) - 1
 					for idx, testVal in enumerate(searchList):
-						if isinstance(testVal, basestring) and isinstance(matchVal, basestring):
+						if isinstance(testVal, sixBasestring) and isinstance(matchVal, sixBasestring):
 							if len(testVal) >= len(matchVal) and testVal[:len(matchVal)] == matchVal:
 								ret = sortList[idx][1]
 								break
-						elif not isinstance(matchVal, basestring) and testVal > matchVal:
+						elif not isinstance(matchVal, sixBasestring) and testVal > matchVal:
 							ret = idx
 							break
 				else:
@@ -2271,7 +2272,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			raise dException.MissingPKException(
 					_("checkPK failed; no primary key specified"))
 
-		if isinstance(kf, basestring):
+		if isinstance(kf, sixBasestring):
 			kf = [kf]
 		# Make sure that there is a field with that name in the data set
 		try:
@@ -2317,7 +2318,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			if ret:
 				ret.append(" AND ")
 			pkVal = getPkVal(fld)
-			if isinstance(pkVal, basestring):
+			if isinstance(pkVal, sixBasestring):
 				ret.extend([tblPrefix, fldSafe, "='", pkVal.encode(self.Encoding), "' "])
 			elif isinstance(pkVal, (datetime.date, datetime.datetime)):
 				ret.extend([tblPrefix, fldSafe, "=", self.formatDateTime(pkVal), " "])
@@ -2345,7 +2346,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				continue
 			fieldType = [ds[1] for ds in self.DataStructure if ds[0] == fld][0]
 			val = new_val
-			if fieldType == "L" or (isinstance(val, basestring) and "\0" in val):
+			if fieldType == "L" or (isinstance(val, sixBasestring) and "\0" in val):
 				val = self.formatBLOB(val)
 			# elif fieldType in ("D", "T"):
 			#		val = self.formatDateTime(val)
@@ -2362,7 +2363,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 	def escQuote(self, val):
 		"""Escape special characters in SQL strings."""
 		ret = val
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			ret = self.BackendObject.escQuote(val)
 		return ret
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import dabo
 from dabo.ui.dDataControlMixinBase import dDataControlMixinBase
 from dabo.dLocalize import _
@@ -45,9 +46,9 @@ class dDataControlMixin(dDataControlMixinBase):
 	def _coerceValue(self, val, oldval):
 		convTypes = (str, unicode, int, float, long, complex)
 		oldType = type(oldval)
-		if isinstance(val, convTypes) and isinstance(oldval, basestring):
+		if isinstance(val, convTypes) and isinstance(oldval, sixBasestring):
 			val = ustr(val)
-		elif isinstance(oldval, int) and isinstance(val, basestring):
+		elif isinstance(oldval, int) and isinstance(val, sixBasestring):
 			val = int(val if val else "0")
 		elif isinstance(oldval, int) and isinstance(val, bool):
 			# convert bool to int (original field val was bool, but UI

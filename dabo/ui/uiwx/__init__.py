@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import os
 import re
@@ -1287,7 +1288,7 @@ def sortList(chc, Caption="", ListCaption=""):
 	needConvert = False
 	for itm in chc:
 		key = itm
-		if not isinstance(itm, basestring):
+		if not isinstance(itm, sixBasestring):
 			needConvert = True
 			key = ustr(itm)
 			strChc.append(key)

@@ -9,7 +9,7 @@
 # Then, in your code, simply call:
 #
 #	utils.foo()
-
+from six import string_types as sixBasestring
 import os
 osp = os.path
 import sys
@@ -213,7 +213,7 @@ def ustr(value):
 	if isinstance(value, Exception):
 		return exceptionToUnicode(value)
 	try:
-		## Faster for all-ascii strings and converting from non-basestring types::
+		## Faster for all-ascii strings and converting from non-sixBasestring types::
 		return unicode(value)
 	except UnicodeDecodeError:
 		# Most likely there were bytes whose integer ordinal were > 127 and so the
@@ -319,7 +319,7 @@ def resolveAttributePathing(atts, pth=None, abspath=False):
 	"""
 	prfx = getPathAttributePrefix()
 	pathsToConvert = ((kk, vv) for kk, vv in list(atts.items())
-			if isinstance(vv, basestring) and vv.startswith(prfx))
+			if isinstance(vv, sixBasestring) and vv.startswith(prfx))
 	for convKey, convVal in pathsToConvert:
 		# Strip the path designator
 		convVal = convVal.replace(prfx, "")

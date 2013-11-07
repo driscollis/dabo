@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import copy
 import sys
 import datetime
@@ -871,7 +872,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setBackColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._gridColAttr.SetBackgroundColour(val)
 			self._refreshGrid()
@@ -903,7 +904,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setCellBackColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._setCellProp("SetBackgroundColour", val)
 		else:
@@ -937,7 +938,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setCellForeColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._setCellProp("SetTextColour", val)
 		else:
@@ -1016,7 +1017,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setDataType(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				if val.lower().strip() in ("str", "string", "char", "varchar", ""):
 					val = "str"
 			if self._dataType == val:
@@ -1167,7 +1168,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setForeColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._gridColAttr.SetTextColour(val)
 			self._refreshGrid()
@@ -1259,7 +1260,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setHeaderBackColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._headerBackColor = val
 			self._refreshHeader()
@@ -1276,7 +1277,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setHeaderForeColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._headerForeColor = val
 			self._refreshHeader()
@@ -1334,7 +1335,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _setAutoHorizontalAlignment(self):
 		dt = self.DataType
-		if isinstance(dt, basestring):
+		if isinstance(dt, sixBasestring):
 			if dt in ("decimal", "float", "long", "integer"):
 				self._setHorizontalAlignment("Right", _autoAlign=True)
 
@@ -2407,7 +2408,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if colTypes is None:
 			colTypes = {}
 
-		if isinstance(ds, basestring) or isinstance(ds, dabo.biz.dBizobj):
+		if isinstance(ds, sixBasestring) or isinstance(ds, dabo.biz.dBizobj):
 			# Assume it is a bizobj datasource.
 			if self.DataSource != ds:
 				self.DataSource = ds
@@ -2616,7 +2617,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		Set colNum='all' to auto-size all columns. Set persist=True to persist the
 		new width to the user settings table.
 		"""
-		if isinstance(colNum, basestring) and colNum.lower() == "all":
+		if isinstance(colNum, sixBasestring) and colNum.lower() == "all":
 			self.BeginBatch()
 			self._inAutoSizeLoop = True
 			for ii in range(len(self.Columns)):
@@ -2740,7 +2741,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				left = headerRect[0] + sortIconBuffer
 				top = headerRect[1] + sortIconBuffer
 				brushColor = self.SortIndicatorColor
-				if isinstance(brushColor, basestring):
+				if isinstance(brushColor, sixBasestring):
 					brushColor = dColors.colorTupleFromName(brushColor)
 				dc.SetBrush(wx.Brush(brushColor, wx.SOLID))
 				if self.sortOrder == "DESC":
@@ -3045,7 +3046,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 						dataType = "decimal"
 					else:
 						dataType = None
-					sortingStrings = isinstance(sortList[0][0], basestring)
+					sortingStrings = isinstance(sortList[0][0], sixBasestring)
 				else:
 					sortingStrings = dataType in ("unicode", "string")
 
@@ -3131,7 +3132,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		compString = False
 		for row in sortList:
 			if row[0] is not None:
-				compString = isinstance(row[0], basestring)
+				compString = isinstance(row[0], sixBasestring)
 				break
 
 		if not compString:
@@ -3163,11 +3164,11 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if compString:
 			if caseSensitive:
 				mtchs = [vv for vv in sortList
-						 if isinstance(vv[0], basestring) and vv[0].startswith(srchVal)]
+						 if isinstance(vv[0], sixBasestring) and vv[0].startswith(srchVal)]
 			else:
 				srchVal = srchVal.lower()
 				mtchs = [vv for vv in sortList
-						 if isinstance(vv[0], basestring) and vv[0].lower().startswith(srchVal)]
+						 if isinstance(vv[0], sixBasestring) and vv[0].lower().startswith(srchVal)]
 		else:
 			mtchs = [vv for vv in sortList
 					 if vv[0] == srchVal]
@@ -3181,7 +3182,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					match = (fldval == srchVal)
 				else:
 					# Case-insensitive string search.
-					match = (isinstance(fldval, basestring) and fldval.lower() == srchVal)
+					match = (isinstance(fldval, sixBasestring) and fldval.lower() == srchVal)
 				if match:
 					newRow = row
 					break
@@ -3192,7 +3193,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					# requested matching value. If so, update the value of 'ret'. If not,
 					# we have passed the matching value, so there's no point in
 					# continuing the search, but we mu
-					if compString and not caseSensitive and isinstance(fldval, basestring):
+					if compString and not caseSensitive and isinstance(fldval, sixBasestring):
 						toofar = fldval.lower() > srchVal
 					else:
 						toofar = fldval > srchVal
@@ -3270,7 +3271,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					newR, newC = next(findGen)
 					targetVal = self.GetValue(newR, newC)
 					targetString = ustr(targetVal)
-					if isinstance(targetVal, (basestring, datetime.datetime, datetime.date)):
+					if isinstance(targetVal, (sixBasestring, datetime.datetime, datetime.date)):
 						# Values can be inexact matches
 						break
 					else:
@@ -3284,7 +3285,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				ret = False
 		elif action == "Replace":
 			val = self.GetValue(currRow, currCol)
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				self.SetValue(currRow, currCol, val.replace(findString, replaceString))
 				ret = True
 			elif isinstance(val, bool):
@@ -3504,7 +3505,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		lnSep = dabo.copyLineSeparator
 
 		def valEscape(val):
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				# Need to escape tabs and newlines
 				escval = val.replace("\t", "\\t").replace("\n", "\\n")
 				if strSep:
@@ -3567,7 +3568,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		ds = self.DataSource
 		if isinstance(ds, dabo.biz.dBizobj):
 			return ds
-		if isinstance(ds, basestring) and self.Form is not None:
+		if isinstance(ds, sixBasestring) and self.Form is not None:
 			form = self.Form
 			while form is not None:
 				if hasattr(form, "getBizobj"):
@@ -4723,7 +4724,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 	def _setHeaderBackColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._headerBackColor = val
 			self.refresh()
@@ -4737,7 +4738,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 	def _setHeaderForeColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self._headerForeColor = val
 			self.refresh()
@@ -4821,7 +4822,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if val is None:
 			self._noneDisplay = self.__noneDisplayDefault
 		else:
-			assert isinstance(val, basestring)
+			assert isinstance(val, sixBasestring)
 			self._noneDisplay = val
 
 
@@ -5005,7 +5006,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 	def _setSelectionBackColor(self, val):
 		if self._constructed():
 			self._selectionBackColor = val
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self.SetSelectionBackground(val)
 		else:
@@ -5018,7 +5019,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 	def _setSelectionForeColor(self, val):
 		if self._constructed():
 			self._selectionForeColor = val
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self.SetSelectionForeground(val)
 		else:

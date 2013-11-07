@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import os
 import dabo.ui
 if __name__ == "__main__":
@@ -161,7 +162,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			return
 
 		cnt = self.Controller
-		if cnt.openingClassXML or not isinstance(pgCls, basestring):
+		if cnt.openingClassXML or not isinstance(pgCls, sixBasestring):
 			tmpPgCls = self.Controller.getControlClass(dui.dPage)
 			pg = self.insertPage(pos, tmpPgCls, ignoreOverride=True)
 			pg.Sizer = LayoutSizer("v")
@@ -1127,7 +1128,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 
 	def _setHiliteBorderColor(self, val):
 		if self._constructed():
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				try:
 					val = dColors.colorTupleFromName(val)
 				except: pass

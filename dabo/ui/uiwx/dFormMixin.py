@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import os
 import sys
 import wx
@@ -90,7 +91,7 @@ class dFormMixin(pm.dPemMixin):
 		app = self.Application
 		mbc = self.MenuBarClass
 		if app and mbc and self.ShowMenuBar:
-			if isinstance(mbc, basestring):
+			if isinstance(mbc, sixBasestring):
 				self.MenuBar = dabo.ui.createMenuBar(mbc, self)
 			else:
 				self.MenuBar = mbc()
@@ -804,7 +805,7 @@ class dFormMixin(pm.dPemMixin):
 				ico = val
 			else:
 				setIconFunc = self.SetIcons
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					icon_strs = (val,)
 				else:
 					icon_strs = val

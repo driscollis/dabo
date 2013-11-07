@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import os
 import dabo.ui
 if __name__ == "__main__":
@@ -29,7 +30,7 @@ class MenuSaverMixin(object):
 			else:
 				# Custom-defined property; that's saved elsewhere
 				continue
-			if isinstance(val, basestring) and os.path.exists(val):
+			if isinstance(val, sixBasestring) and os.path.exists(val):
 				# It's a path; convert it to a relative path
 				if isinstance(self, dabo.ui.dForm):
 					ref = self.Form._menuBarFile
@@ -38,7 +39,7 @@ class MenuSaverMixin(object):
 				ref = os.path.abspath(ref)
 				val = dabo.lib.utils.getPathAttributePrefix() + \
 						dabo.lib.utils.relativePath(val, ref)
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				strval = val
 			else:
 				strval = unicode(val)
@@ -477,7 +478,7 @@ class CaptionBitmapPanel(CaptionPanel):
 
 	def _setBitmap(self, val):
 		self._bitmap = val
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			bmp = dabo.ui.strToBmp(val)
 		else:
 			bmp = val

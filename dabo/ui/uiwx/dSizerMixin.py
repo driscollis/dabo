@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from . import dPemMixin
@@ -460,7 +461,7 @@ class dSizerMixin(dObject):
 		elif lowprop == "spacing":
 			if isinstance(val, int):
 				val = (val, val)
-			elif isinstance(val, basestring):
+			elif isinstance(val, sixBasestring):
 				val = (int(val), int(val))
 			try:
 				ret = itm.SetSpacer(val)
@@ -505,7 +506,7 @@ class dSizerMixin(dObject):
 					return
 				# Clear the 'all' flag
 				flg = flg & ~pdBorder["all"]
-				if isinstance(val, basestring):
+				if isinstance(val, sixBasestring):
 					val = [val]
 				lowval = [vv.lower() for vv in val]
 				if "all" in lowval:
@@ -583,7 +584,7 @@ class dSizerMixin(dObject):
 			else:
 				self.outlineColor = wx.RED
 		else:
-			if isinstance(self.outlineColor, basestring):
+			if isinstance(self.outlineColor, sixBasestring):
 				# translate to a wx.Colour
 				self.outlineColor = wx.NamedColour(self.outlineColor)
 		if self.outlineWidth is None:
@@ -595,7 +596,7 @@ class dSizerMixin(dObject):
 		if self.outlineStyle is None:
 			self.outlineStyle = wx.SHORT_DASH
 		else:
-			if isinstance(self.outlineStyle, basestring):
+			if isinstance(self.outlineStyle, sixBasestring):
 				sty = self.outlineStyle.lower()
 				if sty == "dot":
 					self.outlineStyle = wx.DOT
@@ -692,7 +693,7 @@ class dSizerMixin(dObject):
 			# the separate halign and valign values.
 			# If alignment is passed as a single string instead of a tuple,
 			# convert it.
-			if isinstance(alignment, basestring):
+			if isinstance(alignment, sixBasestring):
 				alignFlags = (alignment, )
 			else:
 				alignFlags = alignment
@@ -713,7 +714,7 @@ class dSizerMixin(dObject):
 			elif flag == "middle":
 				_wxFlags = _wxFlags | self.middleFlag
 
-		if isinstance(borderSides, basestring):
+		if isinstance(borderSides, sixBasestring):
 			borderSides = (borderSides, )
 		if borderSides is None:
 			# Add any default borders. If no defaults set, set it to the default 'all'
@@ -813,7 +814,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultBorder(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = int(val)
 		self._defaultBorder = val
 
@@ -826,7 +827,7 @@ class dSizerMixin(dObject):
 			return False
 
 	def _setDefaultBorderAll(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._defaultBorderBottom = self._defaultBorderTop = \
 				self._defaultBorderLeft = self._defaultBorderRight = val
@@ -840,7 +841,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultBorderBottom(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._defaultBorderBottom = val
 
@@ -853,7 +854,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultBorderLeft(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._defaultBorderLeft = val
 
@@ -866,7 +867,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultBorderRight(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._defaultBorderRight = val
 
@@ -879,7 +880,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultBorderTop(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._defaultBorderTop = val
 
@@ -892,7 +893,7 @@ class dSizerMixin(dObject):
 			return ret
 
 	def _setDefaultSpacing(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = int(val)
 		self._defaultSpacing = val
 
@@ -954,7 +955,7 @@ class dSizerMixin(dObject):
 			return default
 
 	def _setVisible(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = (val.lower()[0] in ("t", "y"))
 		self._visible = val
 		self.ShowItems(val)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import re
 import random
 
@@ -168,7 +169,7 @@ colors.sort()
 
 
 def hexToDec(hx):
-	if not isinstance(hx, basestring):
+	if not isinstance(hx, sixBasestring):
 		raise TypeError("Input must be a string")
 	# Define a dict of char-value pairs
 	hex = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8,

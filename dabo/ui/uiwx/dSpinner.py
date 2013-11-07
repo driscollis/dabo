@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import locale
 from decimal import Decimal as decimal
@@ -256,7 +257,7 @@ class dSpinner(dabo.ui.dDataPanel, wx.Control):
 		type. If such a conversion is not possible, returns None.
 		"""
 		ret = val
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			if val.count(locale.localeconv()["decimal_point"]) > 0:
 				func = decimal
 			else:

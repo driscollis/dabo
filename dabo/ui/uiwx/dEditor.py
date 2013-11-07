@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 
 import sys
 import os
@@ -880,7 +881,7 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 	def changeFontSize(self, fontSize):
 		if not self:
 			return
-		if isinstance(fontSize, basestring):
+		if isinstance(fontSize, sixBasestring):
 			if fontSize.startswith("+"):
 				newSize = self._fontSize + int(fontSize[1:])
 			elif fontSize.startswith("-"):
@@ -2036,7 +2037,7 @@ Do you want to overwrite it?""")
 		return self._bookmarkBackColor
 
 	def _setBookmarkBackColor(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		if isinstance(val, tuple):
 			self._bookmarkBackColor = val
@@ -2049,7 +2050,7 @@ Do you want to overwrite it?""")
 		return self._bookmarkForeColor
 
 	def _setBookmarkForeColor(self, val):
-		if isinstance(val, basestring):
+		if isinstance(val, sixBasestring):
 			val = dColors.colorTupleFromName(val)
 		if isinstance(val, tuple):
 			self._bookmarkForeColor = val
@@ -2280,7 +2281,7 @@ Do you want to overwrite it?""")
 	def _setSelectionBackColor(self, val):
 		if self._constructed():
 			self._selectionBackColor = val
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self.SetSelBackground(1, val)
 		else:
@@ -2303,7 +2304,7 @@ Do you want to overwrite it?""")
 	def _setSelectionForeColor(self, val):
 		if self._constructed():
 			self._selectionForeColor = val
-			if isinstance(val, basestring):
+			if isinstance(val, sixBasestring):
 				val = dColors.colorTupleFromName(val)
 			self.SetSelForeground(1, val)
 		else:
@@ -2714,7 +2715,7 @@ Do you want to overwrite it?""")
 			position. If UseTabs is True this should be set to False. (default=False)  (bool)"""))
 
 	Value = property(_getValue, _setValue, None,
-		             _("""Specifies the current contents of the editor.  (basestring)"""))
+		             _("""Specifies the current contents of the editor.  (sixBasestring)"""))
 
 	WordWrap = property(_getWordWrap, _setWordWrap, None,
 		                _("""Controls whether text lines that are wider than the window

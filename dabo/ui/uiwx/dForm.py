@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import time
 import wx
@@ -701,7 +702,7 @@ Database error message: %s""") % 	err
 		if isinstance(dataSource, dabo.biz.dBizobj):
 			return dataSource
 
-		if isinstance(dataSource, basestring) and \
+		if isinstance(dataSource, sixBasestring) and \
 				dataSource.lower() == "form":
 			# The form isn't using bizobjs, but locally-bound data
 			# controls

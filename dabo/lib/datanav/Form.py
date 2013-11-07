@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import os
 import traceback
@@ -994,7 +995,7 @@ class Form(dabo.ui.dForm):
 		return getattr(self, "_customSQL", None)
 
 	def _setCustomSQL(self, val):
-		assert val is None or isinstance(val, basestring)
+		assert val is None or isinstance(val, sixBasestring)
 		self._customSQL = val
 
 

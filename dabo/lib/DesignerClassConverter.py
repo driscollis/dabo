@@ -4,6 +4,7 @@ and return the class object represented by that file. Right now it's wxPython-
 specific, since we only support wxPython, but I suppose that it could be updated
 later on to support other UI toolkits.
 """
+from six import string_types as sixBasestring
 from datetime import datetime
 import time
 import os
@@ -539,7 +540,7 @@ class DesignerClassConverter(dObject):
 				self.classText += LINESEP + self._spcText % locals()
 
 			elif clsname == "LayoutPanel":
-				if isinstance(szInfo, basestring):
+				if isinstance(szInfo, sixBasestring):
 					szInfo = eval(szInfo)
 				defSizerInfo = {"Expand": True,  "Proportion": 1}
 				defSizerInfo.update(szInfo)
@@ -560,7 +561,7 @@ class DesignerClassConverter(dObject):
 				except IndexError:
 					typ = "H"
 				szDefaults = desUtil.getDefaultSizerProps(nm, typ)
-				if isinstance(szInfo, basestring):
+				if isinstance(szInfo, sixBasestring):
 					szInfo = eval(szInfo)
 				szDefaults.update(szInfo)
 				szInfo = szDefaults

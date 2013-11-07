@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import sys
 import xml.sax
 from StringIO import StringIO
@@ -159,7 +160,7 @@ def fileRef(ref=""):
 	XML to the parser. Returns a file-like object, or None.
 	"""
 	ret = None
-	if isinstance(ref, basestring):
+	if isinstance(ref, sixBasestring):
 		if os.path.exists(ref):
 			ret = file(ref)
 		else:

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import string
 import types
 import new
@@ -50,7 +51,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 					# The properties value has precedence, so ignore.
 					continue
 				typ = type(getattr(self, prop))
-				if not issubclass(typ, basestring):
+				if not issubclass(typ, sixBasestring):
 					if issubclass(typ, bool):
 						val = (val == "True")
 					elif typ is NONE_TYPE:

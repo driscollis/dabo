@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import copy
 import datetime
 
@@ -82,7 +83,7 @@ else:
 
 
 def addReportTTFontFilePath(paths):
-	if isinstance(paths, basestring):
+	if isinstance(paths, sixBasestring):
 		paths = (paths,)
 	for path in paths:
 		TTFSearchPath.append(path)
@@ -149,7 +150,7 @@ def getFloatLeading(obj):
 	adj_factor = .1  ## (amount to adjust for each "+" or "-")
 
 	def getadj():
-		if not isinstance(leading, basestring):
+		if not isinstance(leading, sixBasestring):
 			return 0.0
 		adj = leading[6:].strip()
 		adj_float = 0.0
@@ -161,9 +162,9 @@ def getFloatLeading(obj):
 				adj_float -= adj_amt
 		return adj_float
 
-	if leading is None or (isinstance(leading, basestring) and leading[:6].lower() == "single"):
+	if leading is None or (isinstance(leading, sixBasestring) and leading[:6].lower() == "single"):
 		return size + getadj()
-	elif isinstance(leading, basestring) and leading[:6].lower() == "double":
+	elif isinstance(leading, sixBasestring) and leading[:6].lower() == "double":
 		return (2 * size) + getadj()
 	try:
 		return float(leading)
@@ -1797,7 +1798,7 @@ class ReportWriter(object):
 
 			if img is None:
 				pass
-			elif isinstance(img, basestring) and "\0" not in img:
+			elif isinstance(img, sixBasestring) and "\0" not in img:
 				trial_paths = [".", self.HomeDirectory]
 				if self.Application:
 					trial_paths.append(self.Application.HomeDirectory)
@@ -2028,7 +2029,7 @@ class ReportWriter(object):
 			else:
 				expr = fobject.getProp("expr")
 
-			if isinstance(s, basestring):
+			if isinstance(s, sixBasestring):
 				expr = expr.encode(self.Encoding)
 			else:
 				expr = ustr(expr)
@@ -2823,7 +2824,7 @@ class ReportWriter(object):
 		page = _form["page"]
 		pageSize = page.getProp("size")
 
-		if isinstance(pageSize, basestring):
+		if isinstance(pageSize, sixBasestring):
 			# reportlab expects the pageSize to be upper case:
 			pageSize = pageSize.upper()
 			# convert to the reportlab pageSize value (tuple(width,height)):
@@ -2889,7 +2890,7 @@ class ReportWriter(object):
 			if element == "type":
 				continue
 			child = {"name": element, "children": []}
-			if isinstance(form[element], basestring):
+			if isinstance(form[element], sixBasestring):
 				child["cdata"] = form[element]
 			elif element.lower() == "testcursor":
 				cursor = []
@@ -3135,7 +3136,7 @@ class ReportWriter(object):
 		return v
 
 	def _setOutputFile(self, val):
-		if not isinstance(val, basestring):
+		if not isinstance(val, sixBasestring):
 			# We assume it is either a file or file-like object
 			self._outputFile = val
 		else:

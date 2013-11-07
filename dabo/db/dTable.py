@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 from dabo.dLocalize import _
 import dabo.dException as dException
 from dabo.dObject import dObject
@@ -158,7 +159,7 @@ class dIndex(dObject):
 		return self._fields
 
 	def _setFields(self, fields):
-		if isinstance(fields, basestring):
+		if isinstance(fields, sixBasestring):
 			flds = fields.split()
 			self._fields = tuple(flds)
 		elif isinstance(fields, list):

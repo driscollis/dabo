@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import string_types as sixBasestring
 import wx
 import dabo
 from .dDataControlMixin import dDataControlMixin
@@ -367,7 +368,7 @@ class dControlItemMixin(dDataControlMixin):
 			for string in value:
 				if string is None:
 					continue
-				if isinstance(string, basestring):
+				if isinstance(string, sixBasestring):
 					index = self.FindString(string)
 					if index < 0:
 						raise ValueError(_("String must be present in the choices: '%s'") % string)
