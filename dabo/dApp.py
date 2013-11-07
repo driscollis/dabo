@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import ConfigParser
+from six.moves import configparser
 from six.moves import cStringIO
 import datetime
 import glob
