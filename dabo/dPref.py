@@ -462,7 +462,7 @@ class dPref(object):
 		return mkTree(vs)
 
 
-	def __nonzero__(self):
+	def __bool__(self):
 		"""Preference instances should always evaluate to a boolean False,
 		as they represent a lack of a value; i.e., a dot-separated path, but
 		not an actual stored value."""
