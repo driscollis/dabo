@@ -908,7 +908,7 @@ class dBizobj(dObject):
 		rowCount = self.RowCount
 		if not rowCount > 0:
 			return
-		return self.scanRows(func, range(rowCount), *args, **kwargs)
+		return self.scanRows(func, list(range(rowCount)), *args, **kwargs)
 
 
 	def scanRows(self, func, rows, *args, **kwargs):

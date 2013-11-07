@@ -43,7 +43,7 @@ class _ListColumnAccessor(object):
 
 	def __getslice__(self, start, end):
 		return [self.__dabo_getitem__(col)
-				for col in xrange(start, end)]
+				for col in range(start, end)]
 
 
 
@@ -150,9 +150,9 @@ class dListControl(dcm.dControlItemMixin,
 
 	def _getCurrentData(self):
 		ds = []
-		for row in xrange(self.RowCount):
+		for row in range(self.RowCount):
 			rr = []
-			for col in xrange(self.ColumnCount):
+			for col in range(self.ColumnCount):
 				rr.append(self.GetItem(row, col).GetText())
 			ds.append(rr)
 		return ds
@@ -180,7 +180,7 @@ class dListControl(dcm.dControlItemMixin,
 		"""
 		self.lockDisplay()
 		ds = self._getCurrentData()
-		wds = [self.getColumnWidth(col) for col in xrange(self.ColumnCount)]
+		wds = [self.getColumnWidth(col) for col in range(self.ColumnCount)]
 		expandCol = self.ExpandColumn
 		self.clear()
 		if dabo.ui.phoenix:
@@ -197,13 +197,13 @@ class dListControl(dcm.dControlItemMixin,
 
 	def getCaptionForColumn(self, colnum):
 		"""Convenience method for getting the caption for a given column number."""
-		captions = [self.GetColumn(ii).GetText() for ii in xrange(self.ColumnCount)]
+		captions = [self.GetColumn(ii).GetText() for ii in range(self.ColumnCount)]
 		return captions[colnum]
 
 
 	def setCaptionForColumn(self, colnum, val):
 		"""Convenience method for setting the caption for a given column number."""
-		captions = [self.GetColumn(ii).GetText() for ii in xrange(self.ColumnCount)]
+		captions = [self.GetColumn(ii).GetText() for ii in range(self.ColumnCount)]
 		captions[colnum] = val
 		self.setColumns(captions)
 
@@ -243,7 +243,7 @@ class dListControl(dcm.dControlItemMixin,
 		warning if the control is not set to MultipleSelect.
 		"""
 		if self.MultipleSelect:
-			for row in xrange(self.RowCount):
+			for row in range(self.RowCount):
 				self.select(row)
 		else:
 			dabo.log.error("'selectAll()' may only be called on List Controls that designated as MultipleSelect")
@@ -251,7 +251,7 @@ class dListControl(dcm.dControlItemMixin,
 
 	def unselectAll(self):
 		"""De-selects all rows."""
-		for row in xrange(self.RowCount):
+		for row in range(self.RowCount):
 			self.unselect(row)
 	# Override the default selectNone to something appropriate for this control.
 	selectNone = unselectAll
@@ -285,7 +285,7 @@ class dListControl(dcm.dControlItemMixin,
 	def autoSizeColumns(self, colList=None):
 		"""Auto-sizes all the columns."""
 		if colList is None:
-			colList = xrange(self.ColumnCount)
+			colList = range(self.ColumnCount)
 		for col in colList:
 			self.autoSizeColumn(col)
 
@@ -561,7 +561,7 @@ class dListControl(dcm.dControlItemMixin,
 	def _getItemDataDict(self):
 		"""Return a dict with the items as keys, and the ItemData as values."""
 		ret = {}
-		for row in xrange(self.RowCount):
+		for row in range(self.RowCount):
 			ret[row] = self.GetItemData(row)
 		return ret
 
@@ -574,7 +574,7 @@ class dListControl(dcm.dControlItemMixin,
 		data = []
 		# Don't allow the default -1 for sort column.
 		col = max(0, self._sortColumn)
-		for row in xrange(self.RowCount):
+		for row in range(self.RowCount):
 			try:
 				itm = self.GetItem(row, col)
 				data.append((itm.GetText(), row))

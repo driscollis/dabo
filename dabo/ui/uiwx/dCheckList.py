@@ -33,7 +33,7 @@ class dCheckList(dcm.dControlItemMixin, wx.CheckListBox):
 		# Need to override the native method, as this reports the
 		# line with focus, not the checked items.
 		ret = []
-		for cnt in xrange(self.Count):
+		for cnt in range(self.Count):
 			if self.IsChecked(cnt):
 				ret.append(cnt)
 		return ret
@@ -41,13 +41,13 @@ class dCheckList(dcm.dControlItemMixin, wx.CheckListBox):
 
 	def selectAll(self):
 		"""Set all items to checked."""
-		for cnt in xrange(self.Count):
+		for cnt in range(self.Count):
 			self.Check(cnt, True)
 
 
 	def clearSelections(self):
 		"""Set all items to unchecked."""
-		for cnt in xrange(self.Count):
+		for cnt in range(self.Count):
 			self.Check(cnt, False)
 	# Just to keep the naming consistent
 	selectNone = clearSelections
@@ -55,7 +55,7 @@ class dCheckList(dcm.dControlItemMixin, wx.CheckListBox):
 
 	def invertSelections(self):
 		"""Switch all the items from False to True, and vice-versa."""
-		for cnt in xrange(self.Count):
+		for cnt in range(self.Count):
 			self.Check(cnt, not self.IsChecked(cnt))
 
 

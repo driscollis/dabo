@@ -327,7 +327,7 @@ class TestForm(dabo.ui.dForm):
 		hsz.append(lbl)
 		dd = dabo.ui.dDropdownList(self, DataSource=pgf,
 				DataField="SelectedPageNumber", ValueMode="Position",
-				Choices=["%s" % ii for ii in xrange(pgf.PageCount)])
+				Choices=["%s" % ii for ii in range(pgf.PageCount)])
 		hsz.append(dd)
 		self.Sizer.append(hsz, halign="center", border=8)
 		self.layout()

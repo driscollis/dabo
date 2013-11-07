@@ -197,7 +197,7 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin):
 			#load the sorted data into the listbox
 			dd = self.dropdownlistbox
 			choices = [dd.GetItem(x, self._colSearch).GetText()
-					for x in xrange(dd.GetItemCount())]
+					for x in range(dd.GetItemCount())]
 		else:
 			choices = self._choices
 		for numCh, choice in enumerate(choices):
@@ -390,7 +390,7 @@ class TextCtrlAutoComplete (wx.TextCtrl, listmix.ColumnSorterMixin):
 			if self._selectCallback:
 				dd = self.dropdownlistbox
 				values = [dd.GetItem(sel, x).GetText()
-						for x in xrange(dd.GetColumnCount())]
+						for x in range(dd.GetColumnCount())]
 				self._selectCallback( values )
 			self.SetValue (itemtext)
 			self.SetInsertionPointEnd ()

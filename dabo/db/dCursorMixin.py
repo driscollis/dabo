@@ -1392,7 +1392,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			vflds = [f for f in flds if f in vFieldKeys]
 			flds = [f for f in flds if f not in vFieldKeys]
 		ds = []
-		for row in xrange(rowStart, rows):
+		for row in range(rowStart, rows):
 			rec = _records[row]
 			_correctFieldTypesIfNeeded(rec)
 			tmprec = dict([(k, rec[k]) for k in flds if k in rec])
@@ -2171,7 +2171,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		# Copy the specified field vals and their row numbers to a list, and
 		# add those lists to the sort list
 		sortList = []
-		for row in xrange(0, self.RowCount):
+		for row in range(0, self.RowCount):
 			if simpleKey:
 				rowval = self.getFieldVal(fld, row=row)
 			else:

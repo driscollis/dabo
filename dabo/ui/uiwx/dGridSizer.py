@@ -176,7 +176,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 				self.setColExpand(expand, col, proportion)
 		elif isinstance(colNum, basestring):
 			if colNum.lower() == "all":
-				for col in xrange(self.HighCol+1):
+				for col in range(self.HighCol+1):
 					self.setColExpand(expand, col, proportion)
 			else:
 				raise ValueError(
@@ -202,7 +202,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 				self.setRowExpand(expand, row, proportion)
 		elif isinstance(rowNum, basestring):
 			if rowNum.lower() == "all":
-				for row in xrange(self.HighRow+1):
+				for row in range(self.HighRow+1):
 					self.setRowExpand(expand, row, proportion)
 			else:
 				raise ValueError(

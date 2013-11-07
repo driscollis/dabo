@@ -2751,7 +2751,7 @@ class dPemMixin(dPemMixinBase):
 				self._transparency = val
 				incr = (val - oldVal) / 10
 				newVal = oldVal
-				for i in xrange(10):
+				for i in range(10):
 					newVal = int(round(newVal + incr, 0))
 					newVal = min(max(newVal, 0), 255)
 					self.SetTransparent(newVal)

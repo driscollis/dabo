@@ -2362,7 +2362,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			colDict[col.DataField] = val
 		# Now add as many rows as specified
 		ds = []
-		for cnt in xrange(self.emptyRowsToAdd):
+		for cnt in range(self.emptyRowsToAdd):
 			ds.append(colDict)
 
 		self.emptyRowsToAdd = 0
@@ -2527,7 +2527,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if self.SameSizeRows:
 			ret = self.RowHeight * self.RowCount
 		else:
-			ret = sum([self.GetRowSize(r) for r in xrange(self.RowCount)])
+			ret = sum([self.GetRowSize(r) for r in range(self.RowCount)])
 		if self.ShowHeaders:
 			ret += self.HeaderHeight
 		if addScrollBar and self.isScrollBarVisible("h"):
@@ -3246,21 +3246,21 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		if wholeWord:
 			if matchCase:
 				srch = r"\b%s\b" % findString
-				findGen = ((r,c) for r in xrange(self.RowCount) for c in xrange(self.ColumnCount)
+				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
 						   if op((r,c), rowcol)
 						   and re.search(srch, ustr(self.GetValue(r, c))))
 			else:
 				srch = r"\b%s\b" % findString.lower()
-				findGen = ((r,c) for r in xrange(self.RowCount) for c in xrange(self.ColumnCount)
+				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
 						   if op((r,c), rowcol)
 						   and re.search(srch, ustr(self.GetValue(r, c)).lower()))
 		else:
 			if matchCase:
-				findGen = ((r,c) for r in xrange(self.RowCount) for c in xrange(self.ColumnCount)
+				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
 						   if op((r,c), rowcol)
 						   and findString in ustr(self.GetValue(r, c)))
 			else:
-				findGen = ((r,c) for r in xrange(self.RowCount) for c in xrange(self.ColumnCount)
+				findGen = ((r,c) for r in range(self.RowCount) for c in range(self.ColumnCount)
 						   if op((r,c), rowcol)
 						   and findString.lower() in ustr(self.GetValue(r, c)).lower())
 		if action == "Find":
@@ -3537,16 +3537,16 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			copySections = []
 			for rangeTuple in sel:
 				zrow, zcol = zip(*rangeTuple)
-				rowrange = range(zrow[0], zrow[1] + 1)
-				colrange = range(zcol[0], zcol[1] + 1)
+				rowrange = list(range(zrow[0], zrow[1] + 1))
+				colrange = list(range(zcol[0], zcol[1] + 1))
 				copySections.append(valuesForRange(rowrange, colrange))
 			txtToCopy = lnSep.join(copySections)
 		else:
 			if selmode == "Row":
 				rowrange = sel
-				colrange = range(0, self.ColumnCount)
+				colrange = list(range(0, self.ColumnCount))
 			else:
-				rowrange = range(0, self.RowCount)
+				rowrange = list(range(0, self.RowCount))
 				colrange = sel
 			txtToCopy = valuesForRange(rowrange, colrange)
 		self.Application.copyToClipboard(txtToCopy)
@@ -4960,7 +4960,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				for tlz, brz in zip(tl, br):
 					r1 = tlz[0]
 					r2 = brz[0]
-					ret += range(r1, r2+1)
+					ret += list(range(r1, r2+1))
 			if not ret:
 				# Only a single cell selected
 				ret = [self.GetGridCursorRow()]
@@ -4972,7 +4972,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				for tlz, brz in zip(tl, br):
 					c1 = tlz[1]
 					c2 = brz[1]
-					ret += range(c1, c2+1)
+					ret += list(range(c1, c2+1))
 			if not ret:
 				# Only a single cell selected
 				ret = [self.GetGridCursorCol()]

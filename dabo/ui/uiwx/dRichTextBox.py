@@ -498,7 +498,7 @@ class RichTextTestForm(dabo.ui.dForm):
 		tb.appendControl(self.tbFontFace)
 		self.tbFontSize = dabo.ui.dDropdownList(tb, Caption="FontSize",
 				ValueMode="String", OnHit=self.onSetFontSize)
-		self.tbFontSize.Choices = [ustr(i) for i in xrange(6, 129)]
+		self.tbFontSize.Choices = [ustr(i) for i in range(6, 129)]
 
 		# Tried a spinner, but this doesn't work in toolbars.
 # 		self.tbFontSize = dabo.ui.dSpinner(tb,

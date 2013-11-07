@@ -194,7 +194,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 		rotCount = (ds - 1) % 4
 		if mirrored:
 			img = img.Mirror()
-		for rot in xrange(rotCount):
+		for rot in range(rotCount):
 			img = img.Rotate90(True)
 
 		w, h = origW, origH = self.Width, self.Height

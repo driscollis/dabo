@@ -474,7 +474,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 		item itself.
 		"""
 		cap = cleanMenuCaption(cap, "&_")
-		for pos in xrange(self.GetMenuItemCount()):
+		for pos in range(self.GetMenuItemCount()):
 			itm = self.FindItemByPosition(pos)
 			itmCap = cleanMenuCaption(itm.GetLabel(), "&_")
 			if itmCap == cap:

@@ -36,7 +36,7 @@ class dListBox(dcm.dControlItemMixin, wx.ListBox):
 
 	def selectAll(self):
 		if self.MultipleSelect:
-			for ii in xrange(self.Count):
+			for ii in range(self.Count):
 				self.SetSelection(ii)
 
 
@@ -46,7 +46,7 @@ class dListBox(dcm.dControlItemMixin, wx.ListBox):
 
 	def invertSelections(self):
 		"""Switch all the items from False to True, and vice-versa."""
-		for ii in xrange(self.Count):
+		for ii in range(self.Count):
 			if self.IsSelected(ii):
 				self.Deselect(ii)
 			else:
