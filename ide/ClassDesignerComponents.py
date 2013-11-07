@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import os
@@ -234,8 +235,8 @@ class LayoutSaverMixin(dObject):
 							dv = (dv.lower() == "true")
 						elif isinstance(val, int):
 							dv = int(dv)
-						elif isinstance(val, long):
-							dv = long(dv)
+						elif isinstance(val, sixLong):
+							dv = sixLong(dv)
 						elif isinstance(val, float):
 							dv = float(dv)
 						elif dv in dabo.dColors.colors:

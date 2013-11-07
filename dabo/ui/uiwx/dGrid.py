@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
@@ -141,7 +142,7 @@ class dGridDataTable(wxGTclass):
 					bool : "bool",
 					int : "integer",
 					float : "float",
-					long : "long",
+					sixLong : "long",
 					datetime.date : "date",
 					datetime.datetime : "datetime",
 					datetime.time : "time",
@@ -531,7 +532,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 			datetime.datetime : self.stringRendererClass,
 			bool : self.boolRendererClass,
 			int : self.intRendererClass,
-			long : self.longRendererClass,
+			sixLong : self.longRendererClass,
 			float : self.floatRendererClass,
 			Decimal: self.decimalRendererClass,
 			list : self.listRendererClass}
@@ -553,7 +554,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 			datetime.datetime : self.stringEditorClass,
 			bool : self.boolEditorClass,
 			int : self.intEditorClass,
-			long : self.longEditorClass,
+			sixLong : self.longEditorClass,
 			float : self.floatEditorClass,
 			Decimal: self.decimalEditorClass,
 			list : self.listEditorClass}
@@ -3040,7 +3041,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 						dataType = "unicode"
 					elif isinstance(f, str):
 						dataType = "string"
-					elif isinstance(f, long):
+					elif isinstance(f, sixLong):
 						dataType = "long"
 					elif isinstance(f, int):
 						dataType = "int"
@@ -3145,11 +3146,11 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					srchVal = int(srchVal)
 				except ValueError:
 					srchVal = int(0)
-			elif isinstance(listval, long):
+			elif isinstance(listval, sixLong):
 				try:
-					srchVal = long(srchVal)
+					srchVal = sixLong(srchVal)
 				except ValueError:
-					srchVal = long(0)
+					srchVal = sixLong(0)
 			elif isinstance(listval, float):
 				try:
 					srchVal = float(srchVal)

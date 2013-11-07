@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 import re
 import datetime
 import wx
@@ -47,7 +48,7 @@ if __name__ == "__main__":
 
 	class LongText(TestBase):
 		def afterInit(self):
-			self.Value = long(23)
+			self.Value = sixLong(23)
 
 	class FloatText(TestBase):
 		def afterInit(self):

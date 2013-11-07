@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
@@ -553,7 +554,7 @@ class dTextBoxMixin(dTextBoxMixinBase):
 			try:
 				if isint:
 					if strVal.endswith("L"):
-						return long(strVal)
+						return sixLong(strVal)
 					return int(strVal)
 				else:
 					try:

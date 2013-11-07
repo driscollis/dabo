@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # dabo/db/dCursorMixin
+from six.types import LongType as sixLong
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 
@@ -1001,21 +1002,21 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		nonUpdateFields = self.getNonUpdateFields()
 		if fldType is not None and val is not None:
 			if fldType != type(val):
-				convTypes = (sixBasestring, int, float, long, complex)
+				convTypes = (sixBasestring, int, float, sixLong, complex)
 				if issubclass(fldType, sixBasestring) and isinstance(val, convTypes):
 					val = ustr(val)
 				elif issubclass(fldType, int) and isinstance(val, bool):
 					# convert bool to int (original field val was bool, but UI
 					# changed to int.
 					val = int(val)
-				elif issubclass(fldType, int) and isinstance(val, long):
+				elif issubclass(fldType, int) and isinstance(val, sixLong):
 					# convert long to int (original field val was int, but UI
 					# changed to long.
 					val = int(val)
-				elif issubclass(fldType, long) and isinstance(val, int):
+				elif issubclass(fldType, sixLong) and isinstance(val, int):
 					# convert int to long (original field val was long, but UI
 					# changed to int.
-					val = long(val)
+					val = sixLong(val)
 				elif fldType is buffer and isinstance(val, sixBasestring):
 					# BLOB backend field wants buffer, but it is in a python string.
 					val = memoryview(val)
@@ -2195,11 +2196,11 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				except ValueError:
 					val = int(0)
 
-			elif issubclass(field_type, long):
+			elif issubclass(field_type, sixLong):
 				try:
-					val = long(val)
+					val = sixLong(val)
 				except ValueError:
-					val = long(0)
+					val = sixLong(0)
 
 			elif issubclass(field_type, float):
 				try:

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import sys
@@ -64,7 +65,7 @@ class dDataSet(tuple):
 		# Register the converters
 		sqlite.register_converter("decimal", self._convert_decimal)
 
-		self._typeDict = {int: "integer", long: "integer", str: "text",
+		self._typeDict = {int: "integer", sixLong: "integer", str: "text",
 				sixUnicode: "text", float: "real", datetime.date: "date",
 				datetime.datetime: "timestamp", Decimal: "decimal"}
 

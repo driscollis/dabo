@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six.types import LongType as sixLong
 from six import text_type as sixUnicode
 import os
 import warnings
@@ -54,7 +55,7 @@ class dPref(object):
 		super(dPref, self).__init__()
 		self._parent = None
 		self._noneType = type(None)
-		self._typeDict = {int: "int", float: "float", long: "long", str: "str", sixUnicode: "unicode",
+		self._typeDict = {int: "int", float: "float", sixLong: "long", str: "str", sixUnicode: "unicode",
 				bool: "bool", list: "list", tuple: "tuple", datetime.date: "date", dict: "dict",
 				datetime.datetime: "datetime", Decimal: "decimal", self._noneType: "none",
 				dabo.db.dDataSet: "tuple"}
@@ -188,7 +189,7 @@ class dPref(object):
 		elif typ == "float":
 			ret = float(val)
 		elif typ == "long":
-			ret = long(val)
+			ret = sixLong(val)
 		elif typ == "bool":
 			ret = (val == "True")
 		elif typ in ("list", "tuple", "dict"):
