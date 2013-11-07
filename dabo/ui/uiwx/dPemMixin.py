@@ -151,7 +151,7 @@ class dPemMixin(dPemMixinBase):
 			del(self._preInitProperties["style"])
 			del(self._preInitProperties["id"])
 			del(self._preInitProperties["parent"])
-		elif isinstance(self, (wx.Timer, )):
+		elif isinstance(self, wx.Timer):
 			del(self._preInitProperties["style"])
 			del(self._preInitProperties["id"])
 			del(self._preInitProperties["parent"])
@@ -730,7 +730,7 @@ class dPemMixin(dPemMixinBase):
 		if self._finito:
 			return
 		self._needRedraw = bool(self._drawnObjects)
-		if sys.platform.startswith("win") and isinstance(self, (dabo.ui.dFormMixin,)):
+		if sys.platform.startswith("win") and isinstance(self, dabo.ui.dFormMixin):
 			dabo.ui.callAfterInterval(200, self.update)
 		self.raiseEvent(dEvents.Resize, evt)
 

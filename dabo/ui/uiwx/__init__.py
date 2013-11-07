@@ -475,7 +475,7 @@ def getEventData(wxEvt):
 				except (AttributeError, TypeError, assertionException):
 					pass
 
-	if isinstance(wxEvt, (wx.SplitterEvent,)):
+	if isinstance(wxEvt, wx.SplitterEvent):
 		if wxEvt.GetEventType() == wx.wxEVT_COMMAND_SPLITTER_DOUBLECLICKED:
 			ed["mousePosition"] = (wxEvt.GetX(), wxEvt.GetY())
 		else:
