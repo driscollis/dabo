@@ -1066,7 +1066,7 @@ class dBizobj(dObject):
 		"""
 		global _scanExceptionId
 		exHash = hash(ex)
-		if _scanExceptionId <> exHash:
+		if _scanExceptionId != exHash:
 			_scanExceptionId = exHash
 			return True
 		else:
@@ -1100,7 +1100,7 @@ class dBizobj(dObject):
 		if rowCnt:
 			if status[1] is not None:
 				self._positionUsingPK(status[1], False)
-			if status[1] is None or status[1] <> self.getPK():
+			if status[1] is None or status[1] != self.getPK():
 				try:
 					self._moveToRowNum(status[2], False)
 				except StandardError as e:
@@ -2734,7 +2734,7 @@ afterDelete() which is only called after a delete().""")
 		Handles current cursor key value changes.
 		"""
 		oldKey = self.__currentCursorKey
-		if newKey <> oldKey:
+		if newKey != oldKey:
 			self.__cursors[newKey] = self.__cursors.pop(oldKey)
 			self.__currentCursorKey = newKey
 

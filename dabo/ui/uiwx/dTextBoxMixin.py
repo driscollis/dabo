@@ -157,7 +157,7 @@ class dTextBoxMixinBase(dcm.dDataControlMixin):
 			newValue = currVal.title()
 		else:
 			newValue = currVal
-		if currVal <> newValue:
+		if currVal != newValue:
 			self.Value = newValue
 			self.InsertionPosition = insPos
 			self.SelectionLength = selLen

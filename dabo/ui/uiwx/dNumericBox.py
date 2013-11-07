@@ -287,7 +287,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 			chkVal = int(val)
 			if chkVal != val:
 				val = Decimal(str(val))
-			elif chkVal <> 0:
+			elif chkVal != 0:
 				val = chkVal
 			else:
 				val = None
