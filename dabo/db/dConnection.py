@@ -65,7 +65,7 @@ class dConnection(dObject):
 			def __init__(self, *args, **kwargs):
 				for cls in (dCursorMixin, cursorClass):
 					try:
-						apply(cls.__init__, (self, ) + args, kwargs)
+						cls.__init__(*(self, ) + args, **kwargs)
 					except AttributeError:
 						pass
 

@@ -295,9 +295,9 @@ class dBizobj(dObject):
 			superCursor = secondary
 			def __init__(self, *args, **kwargs):
 				if hasattr(main, "__init__"):
-					apply(main.__init__, (self,) + args, kwargs)
+					main.__init__(*(self,) + args, **kwargs)
 				if hasattr(secondary, "__init__"):
-					apply(secondary.__init__, (self,) + args, kwargs)
+					secondary.__init__(*(self,) + args, **kwargs)
 		return	cursorMix
 
 
