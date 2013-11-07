@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import wx
 import dabo
@@ -673,7 +674,7 @@ class dListControl(dcm.dControlItemMixin,
 					if self._expandColumn:
 						self._resetSize(self._expandColumn)
 					self._expandColumn = val
-					if isinstance(val, (int, long)):
+					if isinstance(val, (sixInt)):
 						# Need to decrease by one, since the mixin uses a 1-based column numbering
 						self.setResizeColumn(val + 1)
 					else:

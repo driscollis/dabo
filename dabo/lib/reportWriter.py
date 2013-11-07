@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import copy
@@ -2193,7 +2194,7 @@ class ReportWriter(object):
 		> print self.getPt(1)
 		1
 		"""
-		if isinstance(val, (int, long, float)):
+		if isinstance(val, (sixInt, float)):
 			# return as-is as the pt value.
 			return val
 		else:

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """dDataControlMixin.py: Provide behavior common to all	data-aware dControls."""
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import dabo
 import dabo.ui
@@ -355,7 +356,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 
 
 	def getShortDataType(self, value):
-		if isinstance(value, (int, long)):
+		if isinstance(value, (sixInt)):
 			return "I"
 		elif isinstance(value, sixBasestring):
 			return "C"

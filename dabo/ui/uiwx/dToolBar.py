@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # TODO: dToolbarItem issue
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import os.path
 import wx
@@ -271,7 +272,7 @@ class dToolBar(cm.dControlMixin, wx.ToolBar):
 		the item is deleted as well. If release is False, a reference to the  object
 		will be returned, and the caller is responsible for deleting it.
 		"""
-		if isinstance(idxOrItem, (int, long)):
+		if isinstance(idxOrItem, (sixInt)):
 			idx = idxOrItem
 			itm = self.Children[idx]
 		else:

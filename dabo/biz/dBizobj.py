@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import types
 import re
@@ -2288,7 +2289,7 @@ class dBizobj(dObject):
 
 	def formatForQuery(self, val):
 		"""
-		Wrap up any value(int, long, string, date, date-time, decimal, none)
+		Wrap up any value(sixInt, string, date, date-time, decimal, none)
 		for use to be in a query.
 		"""
 		return self._CurrentCursor.formatForQuery(val)

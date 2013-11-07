@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import sys
 import locale
@@ -355,7 +356,7 @@ class dSpinner(dabo.ui.dDataPanel, wx.Control):
 	def _setValue(self, val):
 		if self._constructed():
 			self._proxy_textbox._inDataUpdate = self._inDataUpdate
-			if isinstance(val, (int, long, float, decimal)):
+			if isinstance(val, (sixInt, float, decimal)):
 				self._proxy_textbox.Value = val
 			else:
 				numVal = self._numericStringVal(val)

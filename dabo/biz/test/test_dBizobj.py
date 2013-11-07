@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 import unittest
 import dabo
 import dabo.db
@@ -140,7 +141,7 @@ insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 		self.assertEqual(cur._mementos[biz.Record.pk]["cField"], "Paul Keith McNett")
 		biz.setFieldVal("iField", 80)
 		self.assertEqual(biz.Record.iField, 80)
-		self.assertTrue(isinstance(biz.Record.iField, (int, long)))
+		self.assertTrue(isinstance(biz.Record.iField, (sixInt)))
 		self.assertEqual(cur._mementos[self.biz.Record.pk]["iField"], 23)
 
 	def test_RowCount(self):

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 import sys
 import time
 import re
@@ -67,7 +68,7 @@ class dBackend(dObject):
 		if isinstance(val, (datetime.date, datetime.datetime)):
 			# Some databases have specific rules for formatting date values.
 			return self.formatDateTime(val)
-		elif isinstance(val, (int, long, float)):
+		elif isinstance(val, (sixInt, float)):
 			return ustr(val)
 		elif isinstance(val, decimal.Decimal):
 			return ustr(val)

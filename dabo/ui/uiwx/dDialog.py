@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 import warnings
 import wx
 import dabo
@@ -472,7 +473,7 @@ class dStandardButtonDialog(dDialog):
 		for prmpt, typ, rid in seq:
 			chc = None
 			gs.append(dabo.ui.dLabel(self, Caption=prmpt), halign="right")
-			if typ in (int, long):
+			if typ in (sixInt):
 				cls = dabo.ui.dSpinner
 			elif typ is bool:
 				cls = dabo.ui.dCheckBox

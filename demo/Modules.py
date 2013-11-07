@@ -16,6 +16,7 @@ header from the Main.py file from which they were lifted:
 # Licence:		wxWindows license
 #----------------------------------------------------------------------------
 """
+from six import integer_types as sixInt
 import os
 import sys
 import traceback

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import unittest
 import datetime
@@ -146,7 +147,7 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 		self.assertEqual(cur._mementos[cur.Record.pk]["cfield"].rstrip(), "Paul Keith McNett")
 		cur.setFieldVal("ifield", 80)
 		self.assertEqual(cur.Record.ifield, 80)
-		self.assertTrue(isinstance(cur.Record.ifield, (int, long)))
+		self.assertTrue(isinstance(cur.Record.ifield, (sixInt)))
 		self.assertEqual(cur._mementos[self.cur.Record.pk]["ifield"], 23)
 
 		# Querying or setting a field that doesn't exist should raise

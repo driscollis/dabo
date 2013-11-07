@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import re
@@ -12,7 +13,7 @@ from . import dKeys
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 import decimal
-numericTypes = (int, long, decimal.Decimal, float)
+numericTypes = (sixInt, decimal.Decimal, float)
 valueErrors = (ValueError, decimal.InvalidOperation)
 
 # Make this locale-independent

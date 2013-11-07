@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import string
 import types
@@ -61,7 +62,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 							val = typ(val)
 						except ValueError as e:
 							# Sometimes int values can be stored as floats
-							if typ in (int, long):
+							if typ in (sixInt):
 								val = float(val)
 							else:
 								raise e

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
 import copy
@@ -185,7 +186,7 @@ class dGridDataTable(wxGTclass):
 				lowtyp = "decimal"
 		if lowtyp in (bool, "bool", "boolean", "logical", "l"):
 			ret = wx.grid.GRID_VALUE_BOOL
-		if lowtyp in (int, long, "int", "integer", "bigint", "i", "long"):
+		if lowtyp in (sixInt, "int", "integer", "bigint", "i", "long"):
 			ret = wx.grid.GRID_VALUE_NUMBER
 		elif lowtyp in (sixBasestring, "char", "varchar", "text", "c", "s"):
 			ret = wx.grid.GRID_VALUE_STRING
@@ -3440,7 +3441,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		ValueError will be raised. If you prefer to simply log the error without
 		raising an exception, pass True to the logOnly parameter (default=False).
 		"""
-		if isinstance(colOrIdx, (int, long)):
+		if isinstance(colOrIdx, (sixInt)):
 			return self.Columns[colOrIdx] if returnColumn else colOrIdx
 		elif isinstance(colOrIdx, dColumn):
 			return colOrIdx if returnColumn else self.Columns.index(colOrIdx)
