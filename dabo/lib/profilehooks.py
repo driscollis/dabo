@@ -100,7 +100,7 @@ import atexit
 import inspect
 import sys
 import re
-import cPickle as pickle
+from six.moves import cPickle as pickle
 
 # For profiling
 from profile import Profile
