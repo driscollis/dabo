@@ -177,7 +177,7 @@ if __name__ == "__main__":
 	for s in stringsToTranslate:
 		max_len[s] = len(s)
 	translatedStrings = []
-	for lang in sorted(set(_languageAliases.values()) - set(("en",))):
+	for lang in sorted(set(_languageAliases.values()) - {"en"}):
 		translatedStringsLine = [lang]
 		setLanguage(lang)
 		for s in stringsToTranslate:

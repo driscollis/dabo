@@ -368,8 +368,8 @@ class dPref(object):
 		for rec in rs:
 			tmpDict[rec["ckey"][keylen:keylen+len(rec["ckey"].split(".")[keydots])]] = None
 		# Now add any cached entries
-		ret = list(set(tmpDict) | set([kk for kk in self._cache
-			if kk.startswith(key) and not isinstance(kk, dPref)]))
+		ret = list(set(tmpDict) | {kk for kk in self._cache
+			if kk.startswith(key) and not isinstance(kk, dPref)})
 		return ret
 
 
