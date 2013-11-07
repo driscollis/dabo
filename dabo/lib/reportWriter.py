@@ -43,7 +43,7 @@ sudo apt-get install python-imaging
 del(_failedLibs)
 #######################################################
 
-import cStringIO
+from six.moves import cStringIO
 import reportlab.pdfgen.canvas as canvas
 import reportlab.graphics.shapes as shapes
 import reportlab.lib.pagesizes as pagesizes

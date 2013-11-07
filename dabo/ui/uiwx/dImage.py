@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import cStringIO
+from six.moves import cStringIO
 import imghdr
 import os
 

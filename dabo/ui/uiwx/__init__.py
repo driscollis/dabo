@@ -6,7 +6,7 @@ import glob
 import urllib
 import datetime
 import time
-import cStringIO
+from six.moves import cStringIO
 import warnings
 import traceback
 import dabo
