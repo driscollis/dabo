@@ -181,7 +181,7 @@ select table_schema + '.' + table_name AS table_name
 			"VAR_STRING": "C",
 			"YEAR": "?"}[nativeType.upper()]
 		except KeyError:
-			print 'KeyError:', nativeType
+			print('KeyError:', nativeType)
 			ret = '?'
 		return ret
 

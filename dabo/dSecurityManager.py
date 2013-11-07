@@ -198,7 +198,7 @@ if __name__ == "__main__":
 
 	class TestSM(dSecurityManager):
 		def validateLogin(self, user, passwd):
-			print user, passwd
+			print(user, passwd)
 			if user == "paul" and passwd == "23":
 				return True
 			return False

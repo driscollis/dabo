@@ -515,7 +515,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 					if not ret:
 						ret = ["None"]
 		if ret is None:
-			print "NO PROP:", prop, itm
+			print("NO PROP:", prop, itm)
 		return ret
 
 

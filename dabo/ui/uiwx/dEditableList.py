@@ -239,7 +239,7 @@ class _dEditableList_test(dEditableList):
 		# wxPython destroys and re-creates the control when you
 		# edit, add or delete an entry.
 		if self._finito:
-			print "Result:", self.Choices
+			print("Result:", self.Choices)
 
 
 if __name__ == "__main__":

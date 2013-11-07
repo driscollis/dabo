@@ -932,17 +932,17 @@ class _dListControl_test(dListControl):
 		#self.HeaderVisible = False
 
 	def onHit(self, evt):
-		print "KeyValue: ", self.KeyValue
-		print "PositionValue: ", self.PositionValue
-		print "StringValue: ", self.StringValue
-		print "Value: ", self.Value
+		print("KeyValue: ", self.KeyValue)
+		print("PositionValue: ", self.PositionValue)
+		print("StringValue: ", self.StringValue)
+		print("Value: ", self.Value)
 
 	def onListSelection(self, evt):
-		print "List Selection!", self.Value, self.LastSelectedIndex, self.SelectedIndices
+		print("List Selection!", self.Value, self.LastSelectedIndex, self.SelectedIndices)
 
 
 	def onListDeselection(self, evt):
-		print "Row deselected:", evt.EventData["index"]
+		print("Row deselected:", evt.EventData["index"])
 
 
 if __name__ == "__main__":

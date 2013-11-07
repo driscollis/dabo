@@ -1348,33 +1348,33 @@ class _dTreeView_test(dTreeView):
 		self.ImageSize = (16, 16)
 
 	def onHit(self, evt):
-		print "Hit!"
+		print("Hit!")
 
 	def onContextMenu(self, evt):
-		print "Context menu on tree"
+		print("Context menu on tree")
 
 	def onMouseRightClick(self, evt):
-		print "Mouse Right Click on tree"
+		print("Mouse Right Click on tree")
 
 	def onTreeSelection(self, evt):
-		print "Selected node caption:", evt.EventData["selectedCaption"]
+		print("Selected node caption:", evt.EventData["selectedCaption"])
 
 	def onTreeItemCollapse(self, evt):
-		print "Collapsed node caption:", evt.EventData["selectedCaption"]
+		print("Collapsed node caption:", evt.EventData["selectedCaption"])
 
 	def onTreeItemExpand(self, evt):
-		print "Expanded node caption:", evt.EventData["selectedCaption"]
+		print("Expanded node caption:", evt.EventData["selectedCaption"])
 
 	def onTreeItemContextMenu(self, evt):
 		itm = evt.itemID
 		node = self.find(itm)[0]
-		print "Context menu on item:", node.Caption
+		print("Context menu on item:", node.Caption)
 
 	def onTreeBeginDrag(self, evt):
-		print "Beginning drag for %s" % evt.selectedCaption
+		print("Beginning drag for %s" % evt.selectedCaption)
 
 	def onTreeEndDrag(self, evt):
-		print "Ending drag for %s" % evt.selectedCaption
+		print("Ending drag for %s" % evt.selectedCaption)
 
 
 

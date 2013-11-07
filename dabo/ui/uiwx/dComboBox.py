@@ -302,18 +302,18 @@ class _dComboBox_test(dComboBox):
 	def beforeAppendOnEnter(self):
 		txt = self._textToAppend.strip().lower()
 		if txt == "dabo":
-			print _("Attempted to add Dabo to the list!!!")
+			print(_("Attempted to add Dabo to the list!!!"))
 			return False
 		elif txt.find("nixon") > -1:
 			self._textToAppend = "Tricky Dick"
 
 
 	def onHit(self, evt):
-		print "KeyValue: ", self.KeyValue
-		print "PositionValue: ", self.PositionValue
-		print "StringValue: ", self.StringValue
-		print "Value: ", self.Value
-		print "UserValue: ", self.UserValue
+		print("KeyValue: ", self.KeyValue)
+		print("PositionValue: ", self.PositionValue)
+		print("StringValue: ", self.StringValue)
+		print("Value: ", self.Value)
+		print("UserValue: ", self.UserValue)
 
 
 if __name__ == "__main__":

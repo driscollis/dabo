@@ -625,10 +625,10 @@ class _dRadioList_test(dRadioList):
 
 
 	def onHit(self, evt):
-		print "KeyValue: ", self.KeyValue
-		print "PositionValue: ", self.PositionValue
-		print "StringValue: ", self.StringValue
-		print "Value: ", self.Value
+		print("KeyValue: ", self.KeyValue)
+		print("PositionValue: ", self.PositionValue)
+		print("StringValue: ", self.StringValue)
+		print("Value: ", self.Value)
 
 
 

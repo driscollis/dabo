@@ -37,9 +37,9 @@ if __name__ == "__main__":
 
 		def onValueChanged(self, evt):
 			if self.IsSecret:
-				print "%s changed, but the new value is a secret! " % self.Name
+				print("%s changed, but the new value is a secret! " % self.Name)
 			else:
-				print "%s.onValueChanged:" % self.Name, self.Value, type(self.Value)
+				print("%s.onValueChanged:" % self.Name, self.Value, type(self.Value))
 
 	class IntText(TestBase):
 		def afterInit(self):

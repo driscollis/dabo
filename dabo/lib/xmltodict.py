@@ -211,7 +211,7 @@ def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):
 				ret["importStatements"] = codeDict.pop("importStatements", "")
 				desUtil.addCodeToClassDict(ret, codeDict)
 			except StandardError as e:
-				print "Failed to parse code file:", e
+				print("Failed to parse code file:", e)
 	return ret
 
 
@@ -425,9 +425,9 @@ def addInheritedInfo(src, super, updateCode=False):
 if __name__ == "__main__":
 	test_dict = {"name": "test", "attributes":{"path": "c:\\temp\\name",
 			"problemChars": "Welcome to <Jos\xc3\xa9's \ Stuff!>\xc2\xae".decode("latin-1")}}
-	print "test_dict:", test_dict
+	print("test_dict:", test_dict)
 	xml = dicttoxml(test_dict)
-	print "xml:", xml
+	print("xml:", xml)
 	test_dict2 = xmltodict(xml)
-	print "test_dict2:", test_dict2
-	print "same?:", test_dict == test_dict2
+	print("test_dict2:", test_dict2)
+	print("same?:", test_dict == test_dict2)

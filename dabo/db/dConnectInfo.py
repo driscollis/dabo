@@ -304,9 +304,9 @@ class dConnectInfo(dObject):
 
 if __name__ == "__main__":
 	test = dConnectInfo()
-	print test.DbType
+	print(test.DbType)
 	test.DbType = "MySQL"
-	print test.DbType
+	print(test.DbType)
 	test.DbType = "SQLite"
-	print test.DbType
+	print(test.DbType)
 

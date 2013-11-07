@@ -215,7 +215,7 @@ class dHyperLink(dcm.dControlMixin, AlignmentMixin, hyperlink.HyperLinkCtrl):
 
 class _dHyperLink_test(dHyperLink):
 	def _onHit(self, evt):
-		print "hit"
+		print("hit")
 
 
 	def afterInit(self):

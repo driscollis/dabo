@@ -49,10 +49,10 @@ class _dDropdownList_test(dDropdownList):
 
 
 	def onValueChanged(self, evt):
-		print "KeyValue: ", self.KeyValue
-		print "PositionValue: ", self.PositionValue
-		print "StringValue: ", self.StringValue
-		print "Value: ", self.Value
+		print("KeyValue: ", self.KeyValue)
+		print("PositionValue: ", self.PositionValue)
+		print("StringValue: ", self.StringValue)
+		print("Value: ", self.Value)
 
 
 if __name__ == "__main__":

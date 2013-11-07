@@ -296,7 +296,7 @@ class dAutoBizobj(dBizobj):
 					try:
 						self.save()
 					except dException.DBQueryException as e:
-						print 'failed'
+						print('failed')
 						if self._conn in g._toExc:
 							g._toExc[self._conn] = g._toExc[self._conn].append(e.sql)
 						else:

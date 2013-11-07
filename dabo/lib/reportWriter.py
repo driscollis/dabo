@@ -75,7 +75,7 @@ if False:
 	try:
 		from reportlab.platypus.para import Paragraph as ParaClass
 	except ImportError:
-		print "No Para class, using Paragraph."
+		print("No Para class, using Paragraph.")
 		ParaClass = platypus.Paragraph
 else:
 	ParaClass = platypus.Paragraph
@@ -1320,7 +1320,7 @@ class ReportWriter(object):
 
 	def undo(self):
 		if not self.undoLog:
-			print "nothing to undo"
+			print("nothing to undo")
 			return
 		obj, prop, oldval, newval = self.undoLog.pop()
 		obj.setProp(prop, oldval, logUndo=False)
@@ -1331,22 +1331,22 @@ class ReportWriter(object):
 
 	def _onReportCancel(self):
 		if self.PrintStatus:
-			print "Report cancelled."
+			print("Report cancelled.")
 			sys.stdout.flush()
 
 	def _onReportBegin(self):
 		if self.PrintStatus:
-			print "Report Begin."
+			print("Report Begin.")
 			sys.stdout.flush()
 
 	def _onReportIteration(self):
 		if self.PrintStatus:
-			print "Processing row %s of %s..." % (self.RecordNumber + 1, len(self.Cursor))
+			print("Processing row %s of %s..." % (self.RecordNumber + 1, len(self.Cursor)))
 			sys.stdout.flush()
 
 	def _onReportEnd(self):
 		if self.PrintStatus:
-			print "Report End."
+			print("Report End.")
 
 	def getFramesetCount(self):
 		"""Returns the number of framesets in the report."""
@@ -3345,7 +3345,7 @@ if __name__ == "__main__":
 		for reportForm in sys.argv[1:]:
 			if reportForm == "tempfile":
 				import tempfile
-				print "Creating tempfile.pdf from samplespec.rfxml"
+				print("Creating tempfile.pdf from samplespec.rfxml")
 				rw.ReportFormFile = "samplespec.rfxml"
 				rw.OutputFile = tempfile.TemporaryFile()
 				rw.write()
@@ -3355,9 +3355,9 @@ if __name__ == "__main__":
 				f.close()
 			else:
 				output = "./%s.pdf" % os.path.splitext(reportForm)[0]
-				print "Creating %s from report form %s..." % (output, reportForm)
+				print("Creating %s from report form %s..." % (output, reportForm))
 				rw.ReportFormFile = reportForm
 				rw.OutputFile = output
 				rw.write()
 	else:
-		print "Usage: reportWriter <specFile> [<specFile>...]"
+		print("Usage: reportWriter <specFile> [<specFile>...]")

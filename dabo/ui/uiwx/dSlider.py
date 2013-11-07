@@ -203,7 +203,7 @@ class _dSlider_test(dSlider):
 #  		self.TickPosition = "Left"
 
 	def onHit(self, evt):
-		print "Hit! Value =", self.Value
+		print("Hit! Value =", self.Value)
 
 
 if __name__ == "__main__":

@@ -106,7 +106,7 @@ class RemoteConnector(object):
 		try:
 			res = self.UrlOpener.open(url, data=prm)
 		except urllib2.HTTPError as e:
-			print "ERR", e
+			print("ERR", e)
 			return
 		encdata = res.read()
 		self._storeEncodedDataSet(encdata)
@@ -190,7 +190,7 @@ class RemoteConnector(object):
 				# Not a Dabo application server
 				return "404 Not Found"
 		except urllib2.HTTPError as e:
-			print dir(e)
+			print(dir(e))
 			errText = e.read()
 			errMsg = "\n".join(errText.splitlines()[4:])
 			dabo.log.error(_("HTTP Error getting app list: %s") % e)

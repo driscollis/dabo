@@ -431,29 +431,29 @@ class _dSpinner_test(dSpinner):
 		self.Width = 80
 
 	def onHit(self, evt):
-		print "HIT!", self.Value, "Hit Type", evt.hitType
+		print("HIT!", self.Value, "Hit Type", evt.hitType)
 
 	def onValueChanged(self, evt):
-		print "Value Changed", self.Value
-		print "___"
+		print("Value Changed", self.Value)
+		print("___")
 
 	def onInteractiveChange(self, evt):
-		print "Interactive Change", self.Value
+		print("Interactive Change", self.Value)
 
 	def onSpinUp(self, evt):
-		print "Spin up event."
+		print("Spin up event.")
 
 	def onSpinDown(self, evt):
-		print "Spin down event."
+		print("Spin down event.")
 
 	def onSpinner(self, evt):
-		print "Spinner event."
+		print("Spinner event.")
 
 
 if __name__ == "__main__":
 	from dabo.dApp import dApp
 	class Test(dabo.ui.dForm):
-		def OH(self, evt): print "HIT"
+		def OH(self, evt): print("HIT")
 		def afterInitAll(self):
 			self.spn = _dSpinner_test(self, Value=3, OnHit=self.OH)
 			self.spn2 = dSpinner(self, Value=3, Max=10, Min=1, Top=75, Width=60)

@@ -109,7 +109,7 @@ class dPref(object):
 					crs.execute("select ctype, cvalue from daboprefs where ckey = ? ", (param, ))
 					rec = crs.getCurrentRecord()
 				except StandardError as e:
-					print "QUERY ERR", e
+					print("QUERY ERR", e)
 					rec = {}
 				if rec:
 					ret = self._decodeType(rec)
@@ -505,36 +505,36 @@ if __name__ == "__main__":
 	a.b.anotherValue = "Another Second"
 	a.b.c.CrazyMan = "Ed"
 
-	print a.getPrefKeys()
-	print a.b.getPrefKeys()
-	print a.b.c.getPrefKeys()
+	print(a.getPrefKeys())
+	print(a.b.getPrefKeys())
+	print(a.b.c.getPrefKeys())
 
 	a.deletePref("b.c")
-	print a.getPrefs(True)
+	print(a.getPrefs(True))
 	a.deletePref("b.c", True)
-	print a.getPrefs(True)
+	print(a.getPrefs(True))
 
-	print "Just 'a' prefs:"
-	print a.getPrefs()
-	print
-	print "'a' prefs and all sub-prefs:"
-	print a.getPrefs(True)
+	print("Just 'a' prefs:")
+	print(a.getPrefs())
+	print()
+	print("'a' prefs and all sub-prefs:")
+	print(a.getPrefs(True))
 
 	zz=a.getSubPrefKeys()
-	print "SUB PREFS", zz
+	print("SUB PREFS", zz)
 	zz = a.getPrefKeys()
-	print "PREF KEYS", zz
+	print("PREF KEYS", zz)
 
 	a.AutoPersist = False
 	a.b.shouldntStay = "XXXXXXXXXX"
 
-	print "BEFORE FLUSH", a.b.getPrefKeys()
+	print("BEFORE FLUSH", a.b.getPrefKeys())
 	a.flushCache()
-	print "AFTER FLUSH", a.b.getPrefKeys()
+	print("AFTER FLUSH", a.b.getPrefKeys())
 
-	print "DELETE ONE"
+	print("DELETE ONE")
 	a.deletePref("anotherValue")
-	print a.getPrefs(True)
-	print "DELETE ALL"
+	print(a.getPrefs(True))
+	print("DELETE ALL")
 	a.deleteAllPrefs()
-	print a.getPrefs(True)
+	print(a.getPrefs(True))

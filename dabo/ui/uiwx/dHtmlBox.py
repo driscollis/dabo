@@ -308,11 +308,11 @@ class _dHtmlBox_test(dHtmlBox):
 		""" % datetime.date.today().year
 
 	def onMouseLeftDown(self, evt):
-		print "mousedown"
+		print("mousedown")
 		self.SetFocusIgnoringChildren()
 
 	def onKeyDown(self, evt):
-		print "Key Code:", evt.EventData["keyCode"]
+		print("Key Code:", evt.EventData["keyCode"])
 
 
 def textChangeHandler(evt):

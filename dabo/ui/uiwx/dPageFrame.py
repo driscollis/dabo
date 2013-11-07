@@ -694,7 +694,7 @@ class TestMixin(object):
 		self.Pages[3].BackColor = "yellow"
 
 	def onPageChanged(self, evt):
-		print "Page number changed from %s to %s" % (evt.oldPageNum, evt.newPageNum)
+		print("Page number changed from %s to %s" % (evt.oldPageNum, evt.newPageNum))
 
 class _dPageToolBar_test(TestMixin, dPageToolBar):
 	def afterInit(self):
@@ -774,7 +774,7 @@ if _USE_FLAT:
 			self.Form.fitToSizer()
 
 	def onPageChanged(self, evt):
-		print "Page number changed from %s to %s" % (evt.oldPageNum, evt.newPageNum)
+		print("Page number changed from %s to %s" % (evt.oldPageNum, evt.newPageNum))
 
 
 

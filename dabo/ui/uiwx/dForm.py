@@ -1156,9 +1156,9 @@ class _dForm_test(dForm):
 	def afterInit(self):
 		self.Caption = _("Regular Form")
 	def onActivate(self, evt):
-		print _("Activate")
+		print(_("Activate"))
 	def onDeactivate(self, evt):
-		print _("Deactivate")
+		print(_("Deactivate"))
 
 class _dBorderlessForm_test(dBorderlessForm):
 	def afterInit(self):

@@ -423,6 +423,6 @@ class dObject(PropertyHelperMixin, EventMixin):
 if __name__ == "__main__":
 	from dabo.dApp import dApp
 	d = dObject()
-	print d.Application
+	print(d.Application)
 	app = dApp()
-	print d.Application
+	print(d.Application)

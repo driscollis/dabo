@@ -129,7 +129,7 @@ class DesignerClassConverter(dObject):
 				dct["importStatements"] = codeDict.pop("importStatements", "")
 				desUtil.addCodeToClassDict(dct, codeDict)
 			except StandardError as e:
-				print "Failed to parse code file:", e
+				print("Failed to parse code file:", e)
 
 
 	def importJsonSource(self, src):

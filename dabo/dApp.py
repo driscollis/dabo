@@ -81,7 +81,7 @@ class TempFileHolder(object):
 				except OSError as e:
 					if not f.endswith(".pyc"):
 						# Don't worry about the .pyc files, since they may not be there
-						print "Could not delete %s: %s" % (f, e)
+						print("Could not delete %s: %s" % (f, e))
 		except StandardError as e:
 			# In these rare cases, Python has already 'gone away', so just bail
 			pass
@@ -263,14 +263,14 @@ class dApp(dObject):
 				code, msg = e.reason
 				if code == 61:
 					# Connection refused; server's down
-					print _("""
+					print(_("""
 
 
 The connection was refused by the server. Most likely this means that
 the server is not running. Please have that problem corrected, and
 try again when it is running.
 
-""")
+"""))
 					sys.exit(61)
 
 		self._afterInit()

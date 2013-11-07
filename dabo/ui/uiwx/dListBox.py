@@ -91,18 +91,18 @@ class _dListBox_test(dListBox):
 		self.Value = 23
 
 	def onHit(self, evt):
-		print "HIT:"
-		print "\tKeyValue: ", self.KeyValue
-		print "\tPositionValue: ", self.PositionValue
-		print "\tStringValue: ", self.StringValue
-		print "\tValue: ", self.Value
-		print "\tCount: ", self.Count
+		print("HIT:")
+		print("\tKeyValue: ", self.KeyValue)
+		print("\tPositionValue: ", self.PositionValue)
+		print("\tStringValue: ", self.StringValue)
+		print("\tValue: ", self.Value)
+		print("\tCount: ", self.Count)
 
 	def onMouseLeftDoubleClick(self, evt):
-		print "double click at position %s" % self.PositionValue
+		print("double click at position %s" % self.PositionValue)
 
 	def onMouseLeftDown(self, evt):
-		print "mousedown"
+		print("mousedown")
 
 if __name__ == "__main__":
 	from . import test

@@ -5568,17 +5568,17 @@ class _dGrid_test(dGrid):
 			self.addColumn(DataField="i_%s" % i, Caption="i_%s" % i)
 
 	def onScrollLineUp(self, evt):
-		print "LINE UP orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("LINE UP orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 	def onScrollLineDown(self, evt):
-		print "LINE DOWN orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("LINE DOWN orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 	def onScrollPageUp(self, evt):
-		print "PAGE UP orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("PAGE UP orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 	def onScrollPageDown(self, evt):
-		print "PAGE DOWN orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("PAGE DOWN orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 	def onScrollThumbDrag(self, evt):
-		print "DRAG orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("DRAG orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 	def onScrollThumbRelease(self, evt):
-		print "THUMB RELEASE orientation =", evt.orientation, " scrollpos =", evt.scrollpos
+		print("THUMB RELEASE orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 
 if __name__ == '__main__':
 	from dabo.dApp import dApp

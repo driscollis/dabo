@@ -130,7 +130,7 @@ if __name__ == "__main__":
 
 	conn = dConnection(ci).getConnection()
 	cursor = conn.cursor()
-	print cursor.execute("select * from recipes order by iid limit 10")
+	print(cursor.execute("select * from recipes order by iid limit 10"))
 	for row in cursor.fetchall():
-		print row[0], row[1]
+		print(row[0], row[1])
 

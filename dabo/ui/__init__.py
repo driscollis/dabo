@@ -63,7 +63,7 @@ def loadUI(uiType):
 		except Exception as e:
 			retVal = False
 			# Record the actual problem
-			print _("ui.loadUI failed: %s") % e
+			print(_("ui.loadUI failed: %s") % e)
 			traceback.print_exc()
 	else:
 		if currType == typ:

@@ -98,18 +98,18 @@ class _dCheckList_test(dCheckList):
 		self.Value = 23
 
 	def onHit(self, evt):
-		print "HIT:"
-		print "\tKeyValue: ", self.KeyValue
-		print "\tPositionValue: ", self.PositionValue
-		print "\tStringValue: ", self.StringValue
-		print "\tValue: ", self.Value
-		print "\tCount: ", self.Count
+		print("HIT:")
+		print("\tKeyValue: ", self.KeyValue)
+		print("\tPositionValue: ", self.PositionValue)
+		print("\tStringValue: ", self.StringValue)
+		print("\tValue: ", self.Value)
+		print("\tCount: ", self.Count)
 
 	def onMouseLeftDoubleClick(self, evt):
-		print "double click"
+		print("double click")
 
 	def onMouseLeftDown(self, evt):
-		print "mousedown"
+		print("mousedown")
 
 if __name__ == "__main__":
 	from . import test

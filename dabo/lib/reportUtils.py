@@ -153,4 +153,4 @@ if __name__ == "__main__":
 	      {"name": "A & B Motors"},
 	      {"name": '9" Nails'},
 	      {"name": "<None>"}]
-	print getTestCursorXmlFromDataSet(ds)
+	print(getTestCursorXmlFromDataSet(ds))

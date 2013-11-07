@@ -181,7 +181,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 		elif key in (dabo.ui.dKeys.key_Delete, dabo.ui.dKeys.key_Back):
 			self.Value = None
 		else:
-			print key
+			print(key)
 
 	def _setCustomDate(self):
 		days = dabo.ui.getInt(
@@ -385,7 +385,7 @@ if __name__ == "__main__":
 	class TestBase(dDatePicker):
 
 		def onValueChanged(self, evt):
-			print "onValueChanged"
+			print("onValueChanged")
 
 	test.Test().runTest(TestBase, AllowNullDate=True, Value=datetime.date(1970,12,03))
 	test.Test().runTest(TestBase, BackColor="orange", PickerMode="Spin", AllowNullDate=True)

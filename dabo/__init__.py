@@ -294,5 +294,5 @@ app.start()
 		open(fname, "w").write(txt)
 	os.chmod("main.py", 0744)
 	os.chdir(currLoc)
-	print "Application '%s' has been created for you" % homedir
+	print("Application '%s' has been created for you" % homedir)
 

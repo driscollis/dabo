@@ -273,15 +273,15 @@ class FuncProfile:
         funcname = self.fn.__name__
         filename = self.fn.__code__.co_filename
         lineno = self.fn.__code__.co_firstlineno
-        print
-        print "*** PROFILER RESULTS ***"
-        print "%s (%s:%s)" % (funcname, filename, lineno)
-        print "function called %d times" % self.ncalls,
+        print()
+        print("*** PROFILER RESULTS ***")
+        print("%s (%s:%s)" % (funcname, filename, lineno))
+        print("function called %d times" % self.ncalls, end=' ')
         if self.skipped:
-            print "(%d calls not profiled)" % self.skipped
+            print("(%d calls not profiled)" % self.skipped)
         else:
-            print
-        print
+            print()
+        print()
         stats = self.stats
         if self.filename:
             pickle.dump(stats, file(self.filename, 'w'))
@@ -362,15 +362,15 @@ class HotShotFuncProfile:
         funcname = self.fn.__name__
         filename = self.fn.__code__.co_filename
         lineno = self.fn.__code__.co_firstlineno
-        print
-        print "*** PROFILER RESULTS ***"
-        print "%s (%s:%s)" % (funcname, filename, lineno)
-        print "function called %d times" % self.ncalls,
+        print()
+        print("*** PROFILER RESULTS ***")
+        print("%s (%s:%s)" % (funcname, filename, lineno))
+        print("function called %d times" % self.ncalls, end=' ')
         if self.skipped:
-            print "(%d calls not profiled)" % self.skipped
+            print("(%d calls not profiled)" % self.skipped)
         else:
-            print
-        print
+            print()
+        print()
         stats = hotshot.stats.load(self.logfilename)
         # hotshot.stats.load takes ages, and the .prof file eats megabytes, but
         # a pickled stats object is small and fast
@@ -426,11 +426,11 @@ class HotShotFuncCoverage:
         funcname = self.fn.__name__
         filename = self.fn.__code__.co_filename
         lineno = self.fn.__code__.co_firstlineno
-        print
-        print "*** COVERAGE RESULTS ***"
-        print "%s (%s:%s)" % (funcname, filename, lineno)
-        print "function called %d times" % self.ncalls
-        print
+        print()
+        print("*** COVERAGE RESULTS ***")
+        print("%s (%s:%s)" % (funcname, filename, lineno))
+        print("function called %d times" % self.ncalls)
+        print()
         fs = FuncSource(self.fn)
         reader = hotshot.log.LogReader(self.logfilename)
         for what, (filename, lineno, funcname), tdelta in reader:
@@ -447,7 +447,7 @@ class HotShotFuncCoverage:
                     lineno = fs.firstcodelineno
                 fs.mark(lineno)
         reader.close()
-        print fs
+        print(fs)
 
 
 class TraceFuncCoverage:
@@ -503,20 +503,20 @@ class TraceFuncCoverage:
         funcname = self.fn.__name__
         filename = self.fn.__code__.co_filename
         lineno = self.fn.__code__.co_firstlineno
-        print
-        print "*** COVERAGE RESULTS ***"
-        print "%s (%s:%s)" % (funcname, filename, lineno)
-        print "function called %d times" % self.ncalls
-        print
+        print()
+        print("*** COVERAGE RESULTS ***")
+        print("%s (%s:%s)" % (funcname, filename, lineno))
+        print("function called %d times" % self.ncalls)
+        print()
         fs = FuncSource(self.fn)
         for (filename, lineno), count in list(self.tracer.counts.items()):
             if filename != fs.filename:
                 continue
             fs.mark(lineno, count)
-        print fs
+        print(fs)
         never_executed = fs.count_never_executed()
         if never_executed:
-            print "%d lines were not executed." % never_executed
+            print("%d lines were not executed." % never_executed)
 
 
 class FuncSource:
@@ -608,8 +608,8 @@ def timecall(fn):
             funcname = fn.__name__
             filename = fn.__code__.co_filename
             lineno = fn.__code__.co_firstlineno
-            print >> sys.stderr, "\n  %s (%s:%s):\n    %.3f seconds\n" % (
-                                        funcname, filename, lineno, duration)
+            print("\n  %s (%s:%s):\n    %.3f seconds\n" % (
+                                        funcname, filename, lineno, duration), file=sys.stderr)
     new_fn.__doc__ = fn.__doc__
     return new_fn
 

@@ -151,7 +151,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 						ret = (hnd.GetName(), hnd.GetExtension())
 						break
 				except StandardError as e:
-					print "ERROR", e
+					print("ERROR", e)
 		return ret
 
 

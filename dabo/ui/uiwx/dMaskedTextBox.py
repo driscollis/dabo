@@ -507,7 +507,7 @@ versions of wxPython)"""), halign="right")
 			chk = evt.EventObject
 			cap = chk.Caption
 			val = chk.Value
-			print cap, val
+			print(cap, val)
 			txts = (self.charText, self.numText, self.dateText)
 			if cap in "!^":
 				# Char

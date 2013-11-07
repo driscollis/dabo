@@ -50,7 +50,7 @@ class dPemMixin(dabo.ui.dPemMixinBase.dPemMixinBase):
 		self._initName(name, _explicitName=_explicitName)
 
 		self._afterInit()
-		print properties
+		print(properties)
 		try:
 			self.setProperties(properties)
 		except:
@@ -605,6 +605,6 @@ class dPemMixin(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 if __name__ == "__main__":
 	o = dPemMixin()
-	print o.BaseClass
+	print(o.BaseClass)
 	o.BaseClass = "dForm"
-	print o.BaseClass
+	print(o.BaseClass)

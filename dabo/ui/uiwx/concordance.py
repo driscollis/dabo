@@ -36,9 +36,9 @@ wxNames = list(wx_to_dabo.items())
 wxNames.sort()
 
 for eachItem in daboNames:
-	print "%s = %s" % (eachItem[0], eachItem[1])
+	print("%s = %s" % (eachItem[0], eachItem[1]))
 
-print "\n\n"
+print("\n\n")
 
 for eachItem in wxNames:
-	print "%s = %s" % (eachItem[0], ", ".join(eachItem[1]))
+	print("%s = %s" % (eachItem[0], ", ".join(eachItem[1])))

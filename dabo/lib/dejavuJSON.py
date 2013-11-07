@@ -15,13 +15,13 @@ import sys
 try:
 	from simplejson import JSONEncoder, JSONDecoder
 except ImportError:
-	print """
+	print("""
 
 The required 'simplejson' module is not present.
 
 Please install that module before using the web features of Dabo.
 
-"""
+""")
 	sys.exit()
 
 __all__ = ["Encoder", "Decoder", "Converter"]

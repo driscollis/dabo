@@ -76,9 +76,9 @@ if __name__ == "__main__":
 	d = CaselessDict()
 	d["PaulMcNett"] = 35
 	d["Bananas"] = 42
-	print list(d.keys())
-	print list(d.items())
-	print d["PAULMCNETT"]
-	print "pAULmCNETT" in d
-	print "pAULmCNETTy" in d
-	print d
+	print(list(d.keys()))
+	print(list(d.items()))
+	print(d["PAULMCNETT"])
+	print("pAULmCNETT" in d)
+	print("pAULmCNETTy" in d)
+	print(d)

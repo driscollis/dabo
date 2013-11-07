@@ -108,10 +108,10 @@ class _dTimer_test(dPanel.dPanel):
 		self.slowTimer.start()
 
 	def onFastTimerHit(self, evt):
-		print "fast timer fired!"
+		print("fast timer fired!")
 
 	def onSlowTimerHit(self, evt):
-		print "slow timer fired!"
+		print("slow timer fired!")
 
 
 if __name__ == "__main__":
