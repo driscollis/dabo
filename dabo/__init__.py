@@ -4,10 +4,9 @@
 
 http://dabodev.com
 """
-from __future__ import absolute_import
 import sys
 import os
-from . import locale
+import locale
 import logging
 import logging.handlers
 from .settings import *
