@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from dabo.dLocalize import _
 from dabo.dObject import dObject
-from dConnectInfo import dConnectInfo
-from dCursorMixin import dCursorMixin
+from .dConnectInfo import dConnectInfo
+from .dCursorMixin import dCursorMixin
 
 
 class dConnection(dObject):
@@ -121,7 +121,7 @@ class dConnection(dObject):
 
 
 if __name__ == "__main__":
-	from dConnectInfo import dConnectInfo
+	from .dConnectInfo import dConnectInfo
 	ci = dConnectInfo(DbType="MySQL")
 	ci.Host = "paulmcnett.com"
 	ci.Database = "dabotest"

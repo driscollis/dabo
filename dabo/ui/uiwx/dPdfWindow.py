@@ -8,7 +8,7 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dControlMixin as cm
+from . import dControlMixin as cm
 from dabo.dLocalize import _
 
 # Need to define this exception class for x-platform
@@ -53,6 +53,6 @@ class _dPdfWindow_test(dPdfWindow):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dPdfWindow_test)
 

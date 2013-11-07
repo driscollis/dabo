@@ -3,8 +3,8 @@ import os
 import sys
 import wx
 import dabo
-import dPemMixin as pm
-import dMenu
+from . import dPemMixin as pm
+from . import dMenu
 import dabo.icons
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
@@ -775,7 +775,7 @@ class dFormMixin(pm.dPemMixin):
 	def _getFloatingPanel(self):
 		if not self._floatingPanel:
 			# Have to import it here, as it requires that dFormMixin be defined.
-			from dDialog import _FloatDialog
+			from .dDialog import _FloatDialog
 			self._floatingPanel = _FloatDialog(owner=None, parent=self)
 		return self._floatingPanel
 

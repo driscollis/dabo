@@ -6,11 +6,11 @@ http://dabodev.com
 """
 import sys
 import os
-import locale
+from . import locale
 import logging
 import logging.handlers
-from settings import *
-from version import __version__
+from .settings import *
+from .version import __version__
 
 # dApp will change the following values upon its __init__:
 dAppRef = None
@@ -182,7 +182,7 @@ def setDbLogFile(fname, level=None):
 if localizeDabo:
 	# Install localization service for dabo. dApp will install localization service
 	# for the user application separately.
-	import dLocalize
+	from . import dLocalize
 	dLocalize.install("dabo")
 
 # On some platforms getfilesystemencoding() and even getdefaultlocale()
@@ -191,7 +191,7 @@ fileSystemEncoding = (sys.getfilesystemencoding()
 		or locale.getdefaultlocale()[1] or defaultEncoding)
 
 if importDebugger:
-	from dBug import logPoint
+	from .dBug import logPoint
 	try:
 		import pudb as pdb
 	except ImportError:
@@ -199,7 +199,7 @@ if importDebugger:
 	trace = pdb.set_trace
 
 	def debugout(*args):
-		from lib.utils import ustr
+		from .lib.utils import ustr
 		txtargs = [ustr(arg) for arg in args]
 		txt = " ".join(txtargs)
 		log = logging.getLogger("Debug")
@@ -214,13 +214,13 @@ if importDebugger:
 	__builtin__.debugo = __builtin__.debugout = debugout
 
 if implicitImports:
-	import dColors
-	import dEvents
+	from . import dColors
+	from . import dEvents
 	import dabo.db
 	import dabo.biz
 	import dabo.ui
-	from dApp import dApp
-	from dPref import dPref
+	from .dApp import dApp
+	from .dPref import dPref
 
 # Store the base path to the framework
 frameworkPath = os.path.dirname(__file__)

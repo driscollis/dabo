@@ -9,8 +9,8 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dControlMixin as cm
-import dDataControlMixin as dcm
+from . import dControlMixin as cm
+from . import dDataControlMixin as dcm
 
 
 class _BasePanelMixin(object):
@@ -510,7 +510,7 @@ if __name__ == "__main__":
 # 	app.start()
 
 
-	import test
+	from . import test
 	test.Test().runTest(_dPanel_test)
 	test.Test().runTest(_dScrollPanel_test)
 

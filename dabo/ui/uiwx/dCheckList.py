@@ -4,7 +4,7 @@ import dabo
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlItemMixin as dcm
+from . import dControlItemMixin as dcm
 from dabo.dLocalize import _
 
 
@@ -112,6 +112,6 @@ class _dCheckList_test(dCheckList):
 		print "mousedown"
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dCheckList_test)
 

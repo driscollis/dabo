@@ -15,7 +15,7 @@ import dabo
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlMixin as cm
+from . import dControlMixin as cm
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 
@@ -541,5 +541,5 @@ class _dLinePlot_test(dLinePlot):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dLinePlot_test)

@@ -5,7 +5,7 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dDataControlMixin as dcm
+from . import dDataControlMixin as dcm
 from dabo.dLocalize import _
 
 
@@ -152,6 +152,6 @@ class _dCheckBox_test3_b(dCheckBox):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(
 		(_dCheckBox_test, _dCheckBox_test3_a, _dCheckBox_test3_b))

@@ -12,10 +12,10 @@ from dabo.dLocalize import _
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-from dSplitForm import dSplitForm
+from .dSplitForm import dSplitForm
 from dabo.ui import makeDynamicProperty
 from dabo.ui import dKeys
-from dControlMixin import dControlMixin
+from .dControlMixin import dControlMixin
 
 
 class _LookupPanel(dabo.ui.dPanel):

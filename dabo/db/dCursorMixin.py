@@ -11,7 +11,7 @@ import dabo.dConstants as kons
 from dabo.dLocalize import _
 import dabo.dException as dException
 from dabo.dObject import dObject
-from dNoEscQuoteStr import dNoEscQuoteStr
+from .dNoEscQuoteStr import dNoEscQuoteStr
 from dabo.db.dDataSet import dDataSet
 from dabo.lib import dates
 from dabo.lib.utils import noneSortKey, caseInsensitiveSortKey

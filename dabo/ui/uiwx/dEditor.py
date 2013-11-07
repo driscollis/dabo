@@ -18,8 +18,8 @@ if __name__ == "__main__":
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors
 from dabo.dLocalize import _
-import dDataControlMixin as dcm
-import dTimer
+from . import dDataControlMixin as dcm
+from . import dTimer
 
 LexerDic = {
     "ada": stc.STC_LEX_ADA,
@@ -2733,5 +2733,5 @@ class _dEditor_test(dEditor):
 		self.Language = "Python"
 
 if __name__ == '__main__':
-	import test
+	from . import test
 	test.Test().runTest(_dEditor_test)

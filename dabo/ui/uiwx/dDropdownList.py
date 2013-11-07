@@ -2,7 +2,7 @@
 import wx, dabo, dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlItemMixin as dcm
+from . import dControlItemMixin as dcm
 from dabo.dLocalize import _
 
 
@@ -56,5 +56,5 @@ class _dDropdownList_test(dDropdownList):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dDropdownList_test)

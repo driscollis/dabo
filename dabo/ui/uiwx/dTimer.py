@@ -6,8 +6,8 @@ if __name__ == "__main__":
 
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
-from dPemMixin import dPemMixin as PM
-import dPanel
+from .dPemMixin import dPemMixin as PM
+from . import dPanel
 
 
 class dTimer(PM):
@@ -115,5 +115,5 @@ class _dTimer_test(dPanel.dPanel):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dTimer_test)

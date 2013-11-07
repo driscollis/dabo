@@ -2,7 +2,7 @@
 import time
 import dabo
 from dabo.dObject import dObject
-from dLocalize import _
+from .dLocalize import _
 
 
 class dSecurityManager(dObject):

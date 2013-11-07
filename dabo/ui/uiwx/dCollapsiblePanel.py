@@ -5,10 +5,10 @@ if __name__ == "__main__":
 
 import wx
 import dabo
-import dControlMixin as dcm
+from . import dControlMixin as dcm
 import wx.lib.agw.pycollapsiblepane as pcp
 from dabo.dLocalize import _
-from dPanel import dPanel
+from .dPanel import dPanel
 
 
 class dCollapsiblePanel(dcm.dControlMixin, pcp.PyCollapsiblePane):
@@ -130,5 +130,5 @@ class _CollapsiblePanelTest(dCollapsiblePanel):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_CollapsiblePanelTest)

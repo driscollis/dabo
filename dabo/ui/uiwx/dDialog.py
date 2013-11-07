@@ -8,8 +8,8 @@ if __name__ == "__main__":
 import dabo.dEvents as dEvents
 import dabo.dConstants as kons
 from dabo.dLocalize import _
-import dFormMixin as fm
-import dPemMixin as pm
+from . import dFormMixin as fm
+from . import dPemMixin as pm
 from dabo.ui import makeDynamicProperty
 
 
@@ -667,7 +667,7 @@ class _FloatDialog(dDialog):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(dDialog)
 	test.Test().runTest(dStandardButtonDialog)
 	test.Test().runTest(dOkCancelDialog)

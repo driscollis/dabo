@@ -11,7 +11,7 @@ from dabo.ui.dPemMixinBase import dPemMixinBase
 import dabo.dEvents as dEvents
 import dabo.dException as dException
 import dabo.dColors as dColors
-import dKeys
+from . import dKeys
 from dabo.dObject import dObject
 from dabo.ui import makeDynamicProperty
 from dabo.lib.utils import dictStringify
@@ -133,9 +133,9 @@ class dPemMixin(dPemMixinBase):
 		properties = dictStringify(properties)
 
 		# Hacks to fix up various things:
-		import dMenuBar, dMenuItem, dMenu, dSlidePanelControl, dToggleButton
+		from . import dMenuBar, dMenuItem, dMenu, dSlidePanelControl, dToggleButton
 		if wx.VERSION >= (2, 8, 8):
-			import dBorderlessButton
+			from . import dBorderlessButton
 		if isinstance(self, (dMenuItem.dMenuItem, dMenuItem.dSeparatorMenuItem)):
 			# Hack: wx.MenuItem doesn't take a style arg,
 			# and the parent arg is parentMenu.

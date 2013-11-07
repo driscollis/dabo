@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import gettext
-import locale
+from . import locale
 import os
 import sys
 import warnings

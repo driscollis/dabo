@@ -9,7 +9,7 @@ if __name__ == "__main__":
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-from dPageFrameMixin import dPageFrameMixin
+from .dPageFrameMixin import dPageFrameMixin
 import dabo.dColors as dColors
 
 _USE_AGW = True
@@ -779,7 +779,7 @@ if _USE_FLAT:
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dPageFrame_test)
 	test.Test().runTest(_dPageToolBar_test)
 	test.Test().runTest(_dPageList_test)

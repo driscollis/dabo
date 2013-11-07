@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from attributes import *
-from children import *
+from .attributes import *
+from .children import *
 
 
 class SerializableMeta(type):

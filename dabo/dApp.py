@@ -6,7 +6,7 @@ import glob
 import imp
 import inspect
 import json
-import locale
+from . import locale
 import logging
 import os
 import shutil
@@ -26,7 +26,7 @@ from dabo.lib.SimpleCrypt import SimpleCrypt
 from dabo.dObject import dObject
 from dabo.dPref import dPref
 from dabo import dUserSettingProvider
-from dSecurityManager import dSecurityManager
+from .dSecurityManager import dSecurityManager
 from dabo.lib.utils import ustr
 from dabo.lib.utils import cleanMenuCaption
 

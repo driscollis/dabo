@@ -19,9 +19,9 @@ import dabo.dEvents as dEvents
 import dabo.dException as dException
 from dabo.dLocalize import _, n_
 from dabo.lib.utils import ustr
-import dControlMixin as cm
-import dKeys
-import dUICursors
+from . import dControlMixin as cm
+from . import dKeys
+from . import dUICursors
 import dabo.biz
 import dabo.dColors as dColors
 from dabo.dObject import dObject
@@ -490,7 +490,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 	def _beforeInit(self):
 		# Define the cell renderer and editor classes
-		import gridRenderers
+		from . import gridRenderers
 		self.stringRendererClass = wx.grid.GridCellStringRenderer
 		self.wrapStringRendererClass = wx.grid.GridCellAutoWrapStringRenderer
 		self.boolRendererClass = gridRenderers.BoolRenderer

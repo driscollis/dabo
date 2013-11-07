@@ -7,7 +7,7 @@ import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dControlMixin as cm
+from . import dControlMixin as cm
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
 
@@ -241,6 +241,6 @@ class _dGlWindow_test2(dGlWindow):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dGlWindow_test)
 	test.Test().runTest(_dGlWindow_test2)

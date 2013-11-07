@@ -9,7 +9,7 @@ import dabo
 if __name__ == "__main__":
 	import dabo.ui
 	dabo.ui.loadUI("wx")
-import dControlMixin as dcm
+from . import dControlMixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
@@ -243,5 +243,5 @@ class _dEditableList_test(dEditableList):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dEditableList_test)

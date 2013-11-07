@@ -3,7 +3,7 @@ import sys
 import xml.sax
 from StringIO import StringIO
 import os.path
-from xmltodict import escQuote
+from .xmltodict import escQuote
 import dabo
 import dabo.lib.utils as utils
 from dabo.dLocalize import _

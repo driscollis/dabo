@@ -10,10 +10,10 @@ if dabo.ui.phoenix:
 else:
 	import wx.lib.hyperlink as hyperlink
 	
-import dControlMixin as dcm
+from . import dControlMixin as dcm
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors
-from alignmentMixin import AlignmentMixin
+from .alignmentMixin import AlignmentMixin
 
 
 
@@ -233,5 +233,5 @@ class _dHyperLink_test(dHyperLink):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dHyperLink_test)

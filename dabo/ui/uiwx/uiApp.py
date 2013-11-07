@@ -595,7 +595,7 @@ these automatic updates.""").replace("\n", " ")
 #			loc = os.path.dirname(dabo.ui.uiwx.__file__)
 #			pth = os.path.join(loc, "inspector.cdxml")
 #			self.inspectorWindow = dabo.ui.createForm(pth, parent=context, show=False)
-			from object_inspector import InspectorFormClass
+			from .object_inspector import InspectorFormClass
 			self.inspectorWindow = InspectorFormClass(parent=context)
 		insp = self.inspectorWindow
 		insp.createObjectTree()

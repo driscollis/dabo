@@ -7,7 +7,7 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 from dabo.dLocalize import _
-import dTextBoxMixin as tbm
+from . import dTextBoxMixin as tbm
 
 
 
@@ -351,7 +351,7 @@ class dMaskedTextBox(tbm.dTextBoxMixin, masked.TextCtrl):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 
 	class MaskedForm(dabo.ui.dForm):
 		def afterInit(self):

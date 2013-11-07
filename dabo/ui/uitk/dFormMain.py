@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """ dFormMain.py """
 import Tkinter
-import dFormMixin as fm
+from . import dFormMixin as fm
 
 class dFormMain(Tkinter.Tk, fm.dFormMixin):
 	""" This is the main top-level form for the application.
@@ -31,5 +31,5 @@ class dFormMain(Tkinter.Tk, fm.dFormMixin):
 	def setStatusText(self, text): pass
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(dFormMain)

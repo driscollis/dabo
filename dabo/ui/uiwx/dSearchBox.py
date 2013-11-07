@@ -6,7 +6,7 @@ import dabo, dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dTextBoxMixin as tbm
+from . import dTextBoxMixin as tbm
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 from dabo.ui import makeDynamicProperty
@@ -169,7 +169,7 @@ class dSearchBox(tbm.dTextBoxMixin, wx.SearchCtrl):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	import datetime
 
 	# This test sets up several textboxes, each editing different data types.

@@ -9,7 +9,7 @@ from dabo.dObject import dObject
 from dabo.lib.utils import ustr
 from dabo.ui import dPanel
 from . import QRY_OPERATOR
-import Grid
+from . import Grid
 import collections
 
 ASC, DESC = (n_("asc"), n_("desc"))

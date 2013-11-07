@@ -6,8 +6,8 @@ import dabo, dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dControlMixin as cm
-import dMenu
+from . import dControlMixin as cm
+from . import dMenu
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 from dabo.dObject import dObject
@@ -669,5 +669,5 @@ class _dToolBar_test(dToolBar):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dToolBar_test)

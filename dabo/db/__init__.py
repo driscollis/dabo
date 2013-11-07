@@ -30,11 +30,11 @@ some rows from a backend database in a script. Here's an example of that::
 #       dabo.biz.dBiz. I think this logic should be here in dabo.db.
 import datetime
 from decimal import Decimal
-from dConnection import dConnection
-from dCursorMixin import dCursorMixin
-from dConnectInfo import dConnectInfo
-from dTable import dTable
-from dDataSet import dDataSet
+from .dConnection import dConnection
+from .dCursorMixin import dCursorMixin
+from .dConnectInfo import dConnectInfo
+from .dTable import dTable
+from .dDataSet import dDataSet
 import dabo
 from dabo.dException import FieldNotFoundException
 

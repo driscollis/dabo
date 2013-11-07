@@ -7,7 +7,7 @@ import dabo
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlMixin as dcm
+from . import dControlMixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
@@ -1380,7 +1380,7 @@ class _dTreeView_test(dTreeView):
 
 if __name__ == "__main__":
 	from dabo.dApp import dApp
-	import test
+	from . import test
 
 	class TreeViewTestForm(dabo.ui.dForm):
 		def afterInit(self):

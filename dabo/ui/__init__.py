@@ -231,4 +231,4 @@ def makeProxyProperty(dct, nm, proxyAtts):
 # Because some of IDEs uses lexical analysis (Wing) instead of the dynamic
 # analysis (PyDev), the following code should make them happy.
 if False:
-	from uiwx import *
+	from .uiwx import *

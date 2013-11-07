@@ -7,9 +7,9 @@ import dabo.dEvents as dEvents
 import dabo.ui
 from dabo.dLocalize import _
 import dabo.lib.reportUtils as reportUtils
-import PageFrame
-import Page
-import Grid
+from . import PageFrame
+from . import Page
+from . import Grid
 # See if the reporting libraries are present
 _has_reporting_libs = True
 try:

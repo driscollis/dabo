@@ -1068,5 +1068,5 @@ class _dDockForm_test(dDockForm):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dDockForm_test)

@@ -7,8 +7,8 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 import dabo.dEvents as dEvents
-import dTextBoxMixin as dtbm
-import dDataControlMixin as ddcm
+from . import dTextBoxMixin as dtbm
+from . import dDataControlMixin as ddcm
 from decimal import Decimal
 from types import NoneType
 from dabo.dLocalize import _
@@ -388,7 +388,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 
 	class _testDecimal2(dNumericBox):
 		def initProperties(self):

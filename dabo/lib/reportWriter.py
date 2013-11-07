@@ -65,7 +65,7 @@ from reportlab.pdfbase.pdfmetrics import registerFont, getRegisteredFontNames
 from reportlab.pdfbase.ttfonts import TTFont, TTFError
 from reportlab.rl_config import TTFSearchPath
 import Image as PILImage
-import reportUtils
+from . import reportUtils
 
 # The below block tried to use the experimental para.Paragraph which
 # handles more html tags, including hyperlinks. However, I couldn't

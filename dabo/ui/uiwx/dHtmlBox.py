@@ -13,7 +13,7 @@ import dabo.dEvents as dEvents
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlMixin as cm
+from . import dControlMixin as cm
 try:
 	import webbrowser as wb
 except ImportError:

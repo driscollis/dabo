@@ -11,7 +11,7 @@ import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dControlMixin as cm
+from . import dControlMixin as cm
 from dabo.dLocalize import _
 import dabo.dColors as dColors
 from dabo.ui import makeDynamicProperty
@@ -190,5 +190,5 @@ class _dBorderlessButton_test(dBorderlessButton):
 		self.Form.layout()
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dBorderlessButton_test)

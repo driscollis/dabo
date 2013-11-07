@@ -49,5 +49,5 @@ class dColorDialog(wx.ColourDialog):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(dColorDialog)

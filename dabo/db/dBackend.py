@@ -10,9 +10,9 @@ from dabo.dLocalize import _
 import dabo.dException as dException
 from dabo.dObject import dObject
 from dabo.db import dTable
-from dNoEscQuoteStr import dNoEscQuoteStr
+from .dNoEscQuoteStr import dNoEscQuoteStr
 from dabo.lib.utils import ustr
-from dCursorMixin import dCursorMixin
+from .dCursorMixin import dCursorMixin
 
 
 class dBackend(dObject):

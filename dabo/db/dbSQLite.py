@@ -5,9 +5,9 @@ import re
 import dabo
 from dabo.dLocalize import _
 from dabo.dException import dException, DBFileDoesNotExistException
-from dBackend import dBackend
-from dNoEscQuoteStr import dNoEscQuoteStr as dNoEQ
-from dCursorMixin import dCursorMixin
+from .dBackend import dBackend
+from .dNoEscQuoteStr import dNoEscQuoteStr as dNoEQ
+from .dCursorMixin import dCursorMixin
 from dabo.lib.utils import ustr
 
 

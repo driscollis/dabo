@@ -2,11 +2,11 @@
 import wx, dabo, dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-import dControlItemMixin as dcm
+from . import dControlItemMixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
-import dKeys
+from . import dKeys
 
 
 class dComboBox(dcm.dControlItemMixin, wx.ComboBox):
@@ -317,5 +317,5 @@ class _dComboBox_test(dComboBox):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dComboBox_test)

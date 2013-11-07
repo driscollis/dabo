@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import wx
 import dabo
-import dPemMixin
-import dSizerMixin
+from . import dPemMixin
+from . import dSizerMixin
 
 class dSizer(dSizerMixin.dSizerMixin, wx.BoxSizer):
 	def __init__(self, *args, **kwargs ):

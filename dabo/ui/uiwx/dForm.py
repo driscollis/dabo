@@ -8,11 +8,11 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 import dabo.dEvents as dEvents
-import dFormMixin as fm
+from . import dFormMixin as fm
 import dabo.dException as dException
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-from dDialog import dDialog
+from .dDialog import dDialog
 
 
 class BaseForm(fm.dFormMixin):
@@ -1176,7 +1176,7 @@ class _dBorderlessForm_test(dBorderlessForm):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dForm_test)
 	test.Test().runTest(_dBorderlessForm_test)
 

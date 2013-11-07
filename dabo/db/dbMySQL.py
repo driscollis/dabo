@@ -3,11 +3,11 @@ import datetime
 import decimal
 import dabo
 from dabo.dLocalize import _
-from dBackend import dBackend
+from .dBackend import dBackend
 import dabo.dException as dException
-from dNoEscQuoteStr import dNoEscQuoteStr as dNoEQ
+from .dNoEscQuoteStr import dNoEscQuoteStr as dNoEQ
 from dabo.lib.utils import ustr
-from dCursorMixin import dCursorMixin
+from .dCursorMixin import dCursorMixin
 
 class MySQLAutoReconnectCursor(dCursorMixin):
 	def execute(self, sql, params=None, errorClass=None, convertQMarks=False):

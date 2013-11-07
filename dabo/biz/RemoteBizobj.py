@@ -8,7 +8,7 @@ from dabo.dLocalize import _
 import dabo.dConstants as kons
 from dabo.lib.connParser import importConnections
 import dabo.dException as dException
-from dBizobj import dBizobj
+from .dBizobj import dBizobj
 
 
 

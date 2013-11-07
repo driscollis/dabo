@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import wx
 import dabo
-import dPemMixin as pm
-import dMenu
+from . import dPemMixin as pm
+from . import dMenu
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 

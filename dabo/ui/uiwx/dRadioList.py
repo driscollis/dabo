@@ -7,8 +7,8 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
-import dDataControlMixin as dcm
-import dControlItemMixin as cim
+from . import dDataControlMixin as dcm
+from . import dControlItemMixin as cim
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
@@ -633,5 +633,5 @@ class _dRadioList_test(dRadioList):
 
 
 if __name__ == "__main__":
-	import test
+	from . import test
 	test.Test().runTest(_dRadioList_test)
