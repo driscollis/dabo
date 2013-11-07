@@ -1015,7 +1015,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 					val = long(val)
 				elif fldType is buffer and isinstance(val, basestring):
 					# BLOB backend field wants buffer, but it is in a python string.
-					val = buffer(val)
+					val = memoryview(val)
 
 			if fldType != type(val):
 				ignore = False
@@ -2023,7 +2023,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			elif typ is None:
 				newval = None
 			elif typ is buffer:
-				newval = buffer("")
+				newval = memoryview("")
 			else:
 				try:
 					newval = typ()
