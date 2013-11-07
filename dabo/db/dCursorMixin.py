@@ -16,6 +16,7 @@ from dabo.db.dDataSet import dDataSet
 from dabo.lib import dates
 from dabo.lib.utils import noneSortKey, caseInsensitiveSortKey
 from dabo.lib.utils import ustr
+import collections
 
 cursor_flags = (kons.CURSOR_MEMENTO, kons.CURSOR_NEWFLAG,
 		kons.CURSOR_TMPKEY_FIELD, kons.CURSOR_FIELD_TYPES_CORRECTED)
@@ -1965,9 +1966,9 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		def setDefault(field, val):
 			if field in rec:
 				# If it is a function, execute it to get the value, else use literal.
-				if callable(val):
+				if isinstance(val, collections.Callable):
 					val = val()
-				elif isinstance(val, tuple) and val and callable(val[0]):
+				elif isinstance(val, tuple) and val and isinstance(val[0], collections.Callable):
 					# This is a tuple consisting of a function and zero to many parameters
 					fnc = val[0]
 					prms = val[1:]

@@ -8,6 +8,7 @@ from dabo.dObject import dObject
 from dabo.dPref import dPref
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
+import collections
 
 
 
@@ -146,7 +147,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 			except dException.FieldNotFoundException:
 				# See if DataField refers to an attribute of the bizobj:
 				att = getattr(src, self.DataField, None)
-				if callable(att):
+				if isinstance(att, collections.Callable):
 					self.Value = method()
 				else:
 					self.Value = att
@@ -158,7 +159,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 				if not isinstance(src, basestring):
 					att = getattr(src, self.DataField, None)
 					if att is not None:
-						self._srcIsInstanceMethod = callable(att)
+						self._srcIsInstanceMethod = isinstance(att, collections.Callable)
 
 			if src is None:
 				# Could be testing
@@ -269,7 +270,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 							att = getattr(self.Source, self.DataField, None)
 							if att is None:
 								raise
-							if callable(att):
+							if isinstance(att, collections.Callable):
 								return
 							setattr(self.Source, self.DataField, curVal)
 						except (dException.NoRecordsException, dException.RowNotFoundException):
@@ -282,7 +283,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 							if isinstance(self.DataSource, basestring):
 								self._srcIsInstanceMethod = False
 							else:
-								self._srcIsInstanceMethod = callable(getattr(src, self.DataField))
+								self._srcIsInstanceMethod = isinstance(getattr(src, self.DataField), collections.Callable)
 						if self._srcIsInstanceMethod:
 							return
 						if isinstance(src, basestring):
@@ -521,7 +522,7 @@ class dDataControlMixinBase(dabo.ui.dControlMixin):
 									form = form.Form
 							if self.__src:
 								self._srcIsBizobj = True
-				elif callable(ds):
+				elif isinstance(ds, collections.Callable):
 					# Instead of a fixed source, call the function to determine the source.
 					# We *don't* want to store the result in self.__src!
 					return ds()

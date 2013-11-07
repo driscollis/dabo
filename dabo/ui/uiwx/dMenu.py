@@ -3,6 +3,7 @@ import sys
 import wx
 import dabo
 from dabo.ui import makeDynamicProperty
+import collections
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 import dPemMixin as pm
@@ -104,7 +105,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 			except AttributeError:
 				de = None
 			if de is not None:
-				if callable(de):
+				if isinstance(de, collections.Callable):
 					item.Enabled = de()
 			if isinstance(item, dMenu):
 				item._setDynamicEnabled()

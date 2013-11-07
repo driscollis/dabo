@@ -10,6 +10,7 @@ from dabo.lib.utils import ustr
 from dabo.ui import dPanel
 from . import QRY_OPERATOR
 import Grid
+import collections
 
 ASC, DESC = (n_("asc"), n_("desc"))
 
@@ -311,7 +312,7 @@ class SelectPage(Page):
 					# boolean fields won't have a control; opVal will
 					# be either 'Is True' or 'Is False'
 					matchVal = (opVal == QRY_OPERATOR.TRUE)
-				elif callable(ctrl):
+				elif isinstance(ctrl, collections.Callable):
 					try:
 						matchVal = ctrl()
 					except AttributeError:

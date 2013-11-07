@@ -6,6 +6,7 @@ from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from dabo.lib.propertyHelperMixin import _DynamicList
 from dabo.ui import makeDynamicProperty
+import collections
 
 
 
@@ -313,7 +314,7 @@ class dControlItemMixin(dDataControlMixin):
 
 	def _setSortFunction(self, val):
 		if self._constructed():
-			if callable(val):
+			if isinstance(val, collections.Callable):
 				self._sortFunction = val
 				if not isinstance(self, dabo.ui.dListControl):
 					# Force a re-ordering

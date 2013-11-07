@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import string
 from dabo.dLocalize import _
+import collections
 
 
 class PropertyHelperMixin(object):
@@ -253,7 +254,7 @@ class PropertyHelperMixin(object):
 		for evtName, mthd in kwEvtDict.items():
 			from dabo import dEvents
 			evt = dEvents.__dict__[evtName]
-			if callable(mthd):
+			if isinstance(mthd, collections.Callable):
 				self.bindEvent(evt, mthd)
 			else:
 				# A string that needs to be eval'd after construction was passed.
