@@ -5,13 +5,11 @@ import wx
 import dabo.dEvents as dEvents
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-<<<<<<< HEAD
-from . import dControlMixin as dcm
-import locale, wx, sys, cStringIO
-=======
+
 from . import controlmixin as dcm
-import locale, wx, sys, io
->>>>>>> 2ad9b38... - dialog.py works again
+import locale, wx, sys
+from six.moves import cStringIO
+
 import wx.lib.mixins.listctrl as listmix
 from wx import ImageFromStream, BitmapFromImage
 
