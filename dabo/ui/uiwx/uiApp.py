@@ -291,7 +291,7 @@ these automatic updates.""").replace("\n", " ")
 				self._setUpdatePathLocations()
 				try:
 					success = self.dApp._updateFramework()
-				except IOError, e:
+				except IOError as e:
 					dabo.log.error(_("Cannot update files; Error: %s") % e)
 					dabo.ui.info(_("You do not have permission to update the necessary files. "
 							"Please re-run the app with administrator privileges."), title=_("Permission Denied"))
@@ -1192,7 +1192,7 @@ these automatic updates.""").replace("\n", " ")
 					continue
 				try:
 					menu.remove(itm)
-				except (IndexError, ValueError), e:
+				except (IndexError, ValueError) as e:
 					pass
 			# Add them all back
 			lnks = {}

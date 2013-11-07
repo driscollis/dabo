@@ -67,7 +67,7 @@ class Serializable(object):
 			value = self.srcValues.get(attrName, None)
 			try:
 				value = attrType.evaluate(value, env)
-			except Exception, e:
+			except Exception as e:
 				import traceback
 				traceback.print_exc()
 				raise Exception("Error validating value %r for attribute %r (type %r) "

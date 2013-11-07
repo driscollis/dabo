@@ -143,7 +143,7 @@ class PropertyHelperMixin(object):
 					if getter is not None:
 						try:
 							propDict[prop] = getter(self)
-						except Exception, e:
+						except Exception as e:
 							propDict[prop] = e
 					else:
 						if not ignoreErrors:

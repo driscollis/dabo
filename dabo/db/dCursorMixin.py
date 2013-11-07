@@ -245,7 +245,7 @@ class dCursorMixin(dObject):
 		def tryToCorrect(func, field_val, field_name):
 			try:
 				return func(field_val)
-			except Exception, e:
+			except Exception as e:
 				tfv = type(field_val)
 				dabo.log.error(_("_correctFieldType() failed for field: "
 						"'%(field_name)s' (%(func)s); value: %(field_val)s (%(tfv)s)") % locals())
@@ -285,7 +285,7 @@ class dCursorMixin(dObject):
 		if isinstance(field_val, str) and self._convertStrToUnicode:
 			try:
 				return field_val.decode(self.Encoding)
-			except UnicodeDecodeError, e:
+			except UnicodeDecodeError as e:
 				# Try some common encodings:
 				ok = False
 				for enc in ("utf-8", "latin-1", "iso-8859-1"):
@@ -323,11 +323,11 @@ class dCursorMixin(dObject):
 		if sql:
 			try:
 				sql = sql.decode(self.Encoding).replace("\n", " ")
-			except UnicodeDecodeError, e:
+			except UnicodeDecodeError as e:
 				sql = "(couldn't decode sql)"
 		try:
 			params = ", ".join("%s" % p for p in params)
-		except UnicodeDecodeError, e:
+		except UnicodeDecodeError as e:
 			params = "(couldn't decode params)"
 
 		try:
@@ -357,7 +357,7 @@ class dCursorMixin(dObject):
 				res = self.superCursor.execute(self, sql)
 				if not self.IsPrefCursor:
 					self._dblogExecute("execute()", sql)
-		except Exception, e:
+		except Exception as e:
 			# There can be cases where errors are expected. In those cases, the
 			# calling routine will pass the class of the expected error, and will
 			# handle it appropriately.
@@ -399,7 +399,7 @@ class dCursorMixin(dObject):
 
 		try:
 			_records = self.fetchall()
-		except Exception, e:
+		except Exception as e:
 			_records = dabo.db.dDataSet()
 			# Database errors need to be decoded from database encoding.
 			try:
@@ -1576,7 +1576,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		def saverow(row):
 			try:
 				self.__saverow(row)
-			except dException.DBQueryException, e:
+			except dException.DBQueryException as e:
 				# Error was encountered. Raise an exception so that the
 				# calling bizobj can rollback the transaction if necessary
 				try:
@@ -1586,7 +1586,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				dabo.dbActivityLog.info(
 						_("DBQueryException encountered in save(): %s") % errMsg)
 				raise e
-			except StandardError, e:
+			except StandardError as e:
 				errMsg = ustr(e)
 				if "connect" in errMsg.lower():
 					dabo.dbActivityLog.info(
@@ -2028,7 +2028,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			else:
 				try:
 					newval = typ()
-				except Exception, e:
+				except Exception as e:
 					dabo.log.error(_("Failed to create newval for field '%s'") % field_alias)
 					dabo.log.error(ustr(e))
 					newval = u""

@@ -191,13 +191,13 @@ def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):
 			xmlContent = xmlContent.encode(encoding)
 		try:
 			ret = parser.Parse(xmlContent)
-		except expat.ExpatError, e:
+		except expat.ExpatError as e:
 			errmsg = _("The XML in '%(xml)s' is not well-formed and cannot be parsed: %(e)s") % locals()
 	else:
 		# argument must have been raw xml:
 		try:
 			ret = parser.Parse(xml)
-		except expat.ExpatError, e:
+		except expat.ExpatError as e:
 			errmsg = _("An invalid XML string was encountered: %s") % e
 	if errmsg:
 		raise dabo.dException.XmlException(errmsg)
@@ -210,7 +210,7 @@ def xmltodict(xml, attsToSkip=[], addCodeFile=False, encoding=None):
 				codeDict = desUtil.parseCodeFile(codeContent)
 				ret["importStatements"] = codeDict.pop("importStatements", "")
 				desUtil.addCodeToClassDict(ret, codeDict)
-			except StandardError, e:
+			except StandardError as e:
 				print "Failed to parse code file:", e
 	return ret
 

@@ -99,7 +99,7 @@ class Test(object):
 				continue
 			try:
 				mod = __import__(modname)
-			except ImportError, e:
+			except ImportError as e:
 				print "ImportError:", e
 				continue
 			objname = "_%s_test" % modname
@@ -107,7 +107,7 @@ class Test(object):
 				print "Trying to instantiate %s..." % objname
 				try:
 					obj = mod.__dict__[objname](panel)
-				except StandardError, e:
+				except StandardError as e:
 					print "+++++++++++++++++++++++++++++++++++++++"
 					print "+++ Instantiating %s caused:" % objname
 					print traceback.print_exception(*sys.exc_info())

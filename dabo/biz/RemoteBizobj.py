@@ -179,25 +179,25 @@ class RemoteBizobj(dBizobj):
 
 			try:
 				self.saveAll()
-			except dException.ConnectionLostException, e:
+			except dException.ConnectionLostException as e:
 				if primary:
 					self._CurrentCursor.rollbackTransaction()
 					return (500, _("Connection to database was lost."))
 				else:
 					raise
-			except dException.NoRecordsException, e:
+			except dException.NoRecordsException as e:
 				if primary:
 					self._CurrentCursor.rollbackTransaction()
 					return (204, _("No records were saved."))
 				else:
 					raise
-			except dException.BusinessRuleViolation, e:
+			except dException.BusinessRuleViolation as e:
 				if primary:
 					self._CurrentCursor.rollbackTransaction()
 					return (409, _("Business Rule Violation: %s.") % e)
 				else:
 					raise
-			except dException.DBQueryException, e:
+			except dException.DBQueryException as e:
 				if primary:
 					self._CurrentCursor.rollbackTransaction()
 					return (400, _("Database Query Exception: %s.") % e)

@@ -379,7 +379,7 @@ class ReportObject(CaselessDict):
 				return self[prop]
 			try:
 				return eval(self[prop])
-			except Exception, e:
+			except Exception as e:
 				# eval() failed. Return the default or the exception string.
 				if returnException:
 					return e

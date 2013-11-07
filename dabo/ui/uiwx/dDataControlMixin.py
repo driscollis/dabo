@@ -78,7 +78,7 @@ class dDataControlMixin(dDataControlMixinBase):
 					setter = self.ChangeValue
 				try:
 					setter(val)
-				except (TypeError, ValueError), e:
+				except (TypeError, ValueError) as e:
 					nm = self._name
 					dabo.log.error(_("Could not set value of %(nm)s to %(val)s. Error message: %(e)s")
 							% locals())

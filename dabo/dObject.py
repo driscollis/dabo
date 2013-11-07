@@ -58,7 +58,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 					else:
 						try:
 							val = typ(val)
-						except ValueError, e:
+						except ValueError as e:
 							# Sometimes int values can be stored as floats
 							if typ in (int, long):
 								val = float(val)
@@ -255,7 +255,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 			try:
 				code = code.replace("\n]", "]")
 				compCode = compile(code, "", "exec")
-			except SyntaxError, e:
+			except SyntaxError as e:
 				snm = self.Name
 				dabo.log.error(_("Method '%(nm)s' of object '%(snm)s' has the following error: %(e)s") % locals())
 				continue

@@ -14,7 +14,7 @@ import Grid
 _has_reporting_libs = True
 try:
 	import dabo.lib.reportWriter as lrw
-except ImportError, e:
+except ImportError as e:
 	_has_reporting_libs = False
 from dabo.lib.utils import ustr
 
@@ -332,7 +332,7 @@ class Form(dabo.ui.dForm):
 		# Make sure that the grid is properly updated.
 		try:
 			self.PageFrame.Pages[1].BrowseGrid.refresh()
-		except AttributeError, e:
+		except AttributeError as e:
 			# Grid may not even exist yet.
 			if "BrowseGrid" in ustr(e):
 				pass
@@ -572,7 +572,7 @@ class Form(dabo.ui.dForm):
 					Encoding=biz.Encoding)
 			try:
 				rw.write()
-			except (UnicodeDecodeError,), e:
+			except (UnicodeDecodeError,) as e:
 				#error_string = traceback.format_exc()
 				error_string = ustr(e)
 				row_number = rw.RecordNumber

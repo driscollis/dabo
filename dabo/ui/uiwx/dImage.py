@@ -150,7 +150,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 					if hnd.LoadFile(fname):
 						ret = (hnd.GetName(), hnd.GetExtension())
 						break
-				except StandardError, e:
+				except StandardError as e:
 					print "ERROR", e
 		return ret
 
@@ -245,7 +245,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 		self.Freeze()
 		try:
 			self.SetBitmap(self.Bitmap)
-		except TypeError, e: pass
+		except TypeError as e: pass
 		self.Thaw()
 		self.SetSize((origW, origH))
 		self._inShowPic = False

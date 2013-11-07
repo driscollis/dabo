@@ -1973,7 +1973,7 @@ Do you want to overwrite it?""")
 			cd = "\n".join(code2exec)
 			try:
 				exec cd in self._namespaces
-			except StandardError, e:
+			except StandardError as e:
 				pass
 
 
@@ -2509,7 +2509,7 @@ Do you want to overwrite it?""")
 			if self.Text != val:
 				try:
 					self.Text = val
-				except TypeError, e:
+				except TypeError as e:
 					nm = self._name
 					dabo.log.error(_("Could not set value of %(nm)s to %(val)s. Error message: %(e)s")
 								   % locals())

@@ -75,7 +75,7 @@ class MySQL(dBackend):
 			self._connection = dbapi.connect(host=connectInfo.Host,
 					user = connectInfo.User, passwd = connectInfo.revealPW(),
 					db=connectInfo.Database, port=port, charset=charset, **kwargs)
-		except Exception, e:
+		except Exception as e:
 			try:
 				errMsg = ustr(e).decode(self.Encoding)
 			except UnicodeError:

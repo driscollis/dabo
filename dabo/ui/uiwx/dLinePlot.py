@@ -6,7 +6,7 @@ try:
 	import numpy.oldnumeric as _Numeric
 except ImportError:
 	_Numeric = False
-except StandardError, e:
+except StandardError as e:
 	# Report the error, and abandon the import
 	dabo.log.error(_("Error importing numpy.oldnumeric: %s") % e)
 	_Numeric = False

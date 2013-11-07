@@ -933,7 +933,7 @@ class dBizobj(dObject):
 				ret = func(*args, **kwargs)
 				if self.exitScan:
 					break
-		except Exception, e:
+		except Exception as e:
 			if self._logScanException(e):
 				nm = self.Name
 				ue = ustr(e)
@@ -969,7 +969,7 @@ class dBizobj(dObject):
 					ret = func(*args, **kwargs)
 				if self.exitScan:
 					break
-		except Exception, e:
+		except Exception as e:
 			if self._logScanException(e):
 				nm = self.Name
 				ue = ustr(e)
@@ -1019,7 +1019,7 @@ class dBizobj(dObject):
 			for key in cursors:
 				self._CurrentCursor = key
 				ret = self.scan(_callFunc, reverse=reverse, scanRequeryChildren=False)
-		except Exception, e:
+		except Exception as e:
 			if self._logScanException(e):
 				nm = self.Name
 				ue = ustr(e)
@@ -1103,7 +1103,7 @@ class dBizobj(dObject):
 			if status[1] is None or status[1] <> self.getPK():
 				try:
 					self._moveToRowNum(status[2], False)
-				except StandardError, e:
+				except StandardError as e:
 					# Perhaps the row was deleted; at any rate, leave the pointer
 					# at the end of the data set
 					row = rowCnt - 1

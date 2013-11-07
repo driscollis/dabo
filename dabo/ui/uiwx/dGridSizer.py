@@ -336,7 +336,7 @@ class dGridSizer(dSizerMixin.dSizerMixin, wx.GridBagSizer):
 			szit = obj.ControllingSizerItem
 		try:
 			row, col = szit.GetSpan()
-		except dabo.ui.assertionException, e:
+		except dabo.ui.assertionException as e:
 			# Window isn't controlled by this sizer
 			row, col = None, None
 		return (row, col)

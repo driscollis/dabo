@@ -108,7 +108,7 @@ class dPref(object):
 				try:
 					crs.execute("select ctype, cvalue from daboprefs where ckey = ? ", (param, ))
 					rec = crs.getCurrentRecord()
-				except StandardError, e:
+				except StandardError as e:
 					print "QUERY ERR", e
 					rec = {}
 				if rec:

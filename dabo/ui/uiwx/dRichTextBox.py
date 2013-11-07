@@ -57,7 +57,7 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 			try:
 				if mthd(buff, fileOrObj):
 					break
-			except StandardError, e:
+			except StandardError as e:
 				print e, type(e)
 		dabo.ui.callAfter(self.Form.refresh)
 

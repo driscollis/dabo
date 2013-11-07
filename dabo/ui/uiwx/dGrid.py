@@ -2127,7 +2127,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 	def SetValue(self, row, col, val):
 		try:
 			self._Table.SetValue(row, col, val)
-		except StandardError, e:
+		except StandardError as e:
 			super(dGrid, self).SetCellValue(row, col, val)
 			# Update the main data source
 			self._setCellValue(row, col, val)
@@ -2145,7 +2145,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				biz.setFieldVal(fld, val)
 			else:
 				self.DataSet[row][fld] = val
-		except StandardError, e:
+		except StandardError as e:
 			dabo.log.error("Cannot update data set: %s" % e)
 
 
@@ -2205,7 +2205,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				return None
 		try:
 			pyType = biz.getDataTypeForField(df)
-		except ValueError, e:
+		except ValueError as e:
 			dabo.log.error(e)
 			return None
 		return pyType
@@ -2290,7 +2290,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 	def _updateDaboVisibleColumns(self):
 		try:
 			self._daboVisibleColumns = [e[0] for e in enumerate(self._columns) if e[1].Visible]
-		except dabo.ui.assertionException, e:
+		except dabo.ui.assertionException as e:
 			# Can happen when an editor is active and columns resize
 			vis = []
 			for pos, col in enumerate(self._columns):
@@ -4010,7 +4010,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 						try:
 							bizobj.RowNumber = newRow
 							self.Form.update()
-						except dException.BusinessRuleViolation, e:
+						except dException.BusinessRuleViolation as e:
 							dabo.ui.stop(e)
 							dabo.ui.callAfter(self.refresh)
 				else:

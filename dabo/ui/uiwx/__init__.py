@@ -349,7 +349,7 @@ def setAfter(obj, prop, val):
 	try:
 		fnc = getattr(obj.__class__, prop).fset
 		wx.CallAfter(fnc, obj, val)
-	except StandardError, e:
+	except StandardError as e:
 		dabo.log.error(_("setAfter() failed to set property '%(prop)s' to value '%(val)s': %(e)s.")
 				       % locals())
 
@@ -362,7 +362,7 @@ def setAfterInterval(interval, obj, prop, val):
 	try:
 		fnc = getattr(obj.__class__, prop).fset
 		callAfterInterval(interval, fnc, obj, val)
-	except StandardError, e:
+	except StandardError as e:
 		dabo.log.error(_("setAfterInterval() failed to set property '%(prop)s' to value '%(val)s': %(e)s.")
 				       % locals())
 
@@ -424,7 +424,7 @@ def busyInfo(msg="Please wait...", *args, **kwargs):
 def continueEvent(evt):
 	try:
 		evt.Skip()
-	except AttributeError, e:
+	except AttributeError as e:
 		# Event could be a Dabo event, not a wx event
 		if isinstance(evt, dEvents.dEvent):
 			pass
@@ -436,7 +436,7 @@ def continueEvent(evt):
 def discontinueEvent(evt):
 	try:
 		evt.Skip(False)
-	except AttributeError, e:
+	except AttributeError as e:
 		# Event could be a Dabo event, not a wx event
 		if isinstance(evt, dEvents.dEvent):
 			pass
@@ -1355,7 +1355,7 @@ def _checkForRawXML(srcFile):
 	if not isRawXML:
 		try:
 			srcFile = utils.resolvePathAndUpdate(srcFile)
-		except IOError, e:
+		except IOError as e:
 			dabo.log.error(_("Class file '%s' not found") % srcFile)
 			raise
 	return srcFile, isRawXML
@@ -1467,7 +1467,7 @@ def createMenuBar(src, form=None, previewFunc=None):
 			# Not JSON
 			try:
 				src = utils.resolvePathAndUpdate(src)
-			except IOError, e:
+			except IOError as e:
 				stop(e, _("File Not Found"))
 				return
 		mnd = dabo.lib.xmltodict.xmltodict(src)

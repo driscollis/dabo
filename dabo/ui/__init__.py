@@ -60,7 +60,7 @@ def loadUI(uiType):
 		try:
 			exec("from %s import *" % mods[typ], globals())
 			retVal = True
-		except Exception, e:
+		except Exception as e:
 			retVal = False
 			# Record the actual problem
 			print _("ui.loadUI failed: %s") % e

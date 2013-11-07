@@ -265,7 +265,7 @@ class dPemMixin(dPemMixinBase):
 		"""Returns True if the ui object has been fully created yet, False otherwise."""
 		try:
 			return self is self._pemObject
-		except Exception, e:
+		except Exception as e:
 			return False
 
 
@@ -481,7 +481,7 @@ class dPemMixin(dPemMixinBase):
 				continue
 			try:
 				mthd = eval(mthdString)
-			except (AttributeError, NameError), e:
+			except (AttributeError, NameError) as e:
 				dabo.log.error(_("Could not evaluate method '%(mthdString)s': %(e)s") % locals())
 				continue
 			self.bindEvent(evt, mthd)
@@ -987,7 +987,7 @@ class dPemMixin(dPemMixinBase):
 					return
 				try:
 					self._obj.Thaw()
-				except StandardError, e:
+				except StandardError as e:
 					# Create an error log message. We can't record the obj reference,
 					# since it is most likely deleted, but the presence of these messages
 					# will ensure that possible problems will not be silenced.
@@ -3968,7 +3968,7 @@ class _DropTarget(wx.DropTarget):
 			if mthd:
 				try:
 					mthd(param, x, y)
-				except TypeError, e:
+				except TypeError as e:
 					# Older implementation that doesn't accept x, y
 					mthd(param)
 		return defResult

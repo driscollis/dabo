@@ -60,7 +60,7 @@ class RemoteConnector(object):
 			prm = None
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError, e:
+		except urllib2.HTTPError as e:
 			if reRaise:
 				raise
 			dabo.log.error("HTTPError: %s" % e)
@@ -105,7 +105,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError, e:
+		except urllib2.HTTPError as e:
 			print "ERR", e
 			return
 		encdata = res.read()
@@ -120,7 +120,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError, e:
+		except urllib2.HTTPError as e:
 			# There was a problem on the server side. Re-raise the appropriate
 			# exception so that the UI can handle it.
 			errcode = e.code
@@ -176,7 +176,7 @@ class RemoteConnector(object):
 		res = None
 		try:
 			res = jsonDecode(self._read(listURL, reRaise=True))
-		except urllib2.URLError, e:
+		except urllib2.URLError as e:
 			try:
 				code, msg = e.reason
 			except AttributeError:
@@ -189,7 +189,7 @@ class RemoteConnector(object):
 			elif code == 404:
 				# Not a Dabo application server
 				return "404 Not Found"
-		except urllib2.HTTPError, e:
+		except urllib2.HTTPError as e:
 			print dir(e)
 			errText = e.read()
 			errMsg = "\n".join(errText.splitlines()[4:])
@@ -251,7 +251,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError, e:
+		except urllib2.HTTPError as e:
 			errcode = e.code
 			errText = e.read()
 			errMsg = "\n".join(errText.splitlines()[4:])
@@ -290,7 +290,7 @@ class RemoteConnector(object):
 			url = self._getManifestUrl(appname, "files", ustr(filecode))
 			try:
 				res = self.UrlOpener.open(url)
-			except urllib2.HTTPError, e:
+			except urllib2.HTTPError as e:
 				dabo.log.error(_("HTTP Error retrieving files: %s") % e)
 			# res holds a zip file
 			f = StringIO(res.read())
