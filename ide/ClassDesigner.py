@@ -1424,7 +1424,7 @@ class ClassDesigner(dApp):
 				strVal = val
 			else:
 				strVal = ustr(val)
-			if typ in (str, unicode) or ((typ is list) and isinstance(val, sixBasestring)):
+			if typ in (sixBasestring) or ((typ is list) and isinstance(val, sixBasestring)):
 				# Escape any single quotes, and then enclose
 				# the value in single quotes
 				strVal = "u'" + self.escapeQt(strVal) + "'"

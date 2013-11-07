@@ -186,7 +186,7 @@ class dGridDataTable(wxGTclass):
 			ret = wx.grid.GRID_VALUE_BOOL
 		if lowtyp in (int, long, "int", "integer", "bigint", "i", "long"):
 			ret = wx.grid.GRID_VALUE_NUMBER
-		elif lowtyp in (str, unicode, "char", "varchar", "text", "c", "s"):
+		elif lowtyp in (sixBasestring, "char", "varchar", "text", "c", "s"):
 			ret = wx.grid.GRID_VALUE_STRING
 		elif lowtyp in (float, "float", "f", "decimal"):
 			ret = wx.grid.GRID_VALUE_FLOAT

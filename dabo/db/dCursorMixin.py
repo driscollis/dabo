@@ -1000,7 +1000,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		nonUpdateFields = self.getNonUpdateFields()
 		if fldType is not None and val is not None:
 			if fldType != type(val):
-				convTypes = (str, unicode, int, float, long, complex)
+				convTypes = (sixBasestring, int, float, long, complex)
 				if issubclass(fldType, sixBasestring) and isinstance(val, convTypes):
 					val = ustr(val)
 				elif issubclass(fldType, int) and isinstance(val, bool):

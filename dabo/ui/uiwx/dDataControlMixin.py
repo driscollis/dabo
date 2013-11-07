@@ -44,7 +44,7 @@ class dDataControlMixin(dDataControlMixinBase):
 
 
 	def _coerceValue(self, val, oldval):
-		convTypes = (str, unicode, int, float, long, complex)
+		convTypes = (sixBasestring, int, float, long, complex)
 		oldType = type(oldval)
 		if isinstance(val, convTypes) and isinstance(oldval, sixBasestring):
 			val = ustr(val)

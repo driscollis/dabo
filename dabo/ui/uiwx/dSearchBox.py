@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # TODO: getting a Runtimeerror dMenuItem has been deleted
+from six import string_types as sixBasestring
 import wx
 
 import dabo, dabo.ui
@@ -94,7 +95,7 @@ class dSearchBox(tbm.dTextBoxMixin, wx.SearchCtrl):
 	def _setupMenuFromList(self, valueList):
 		menu = dabo.ui.dMenu()
 		for value in valueList:
-			if not type(value) in (str, unicode):
+			if not type(value) in (sixBasestring):
 				raise ValueError("All elements in the List must be strings")
 			else:
 				menu.append(value)
