@@ -96,7 +96,7 @@ class DesignerClassConverter(dObject):
 		#   for compiling. This allows for full Python introspection.
 		compClass = compile(self.classText, self._classFileName, "exec")
 		nmSpace = {}
-		exec compClass in nmSpace
+		exec(compClass, nmSpace)
 		return nmSpace[self.mainClassName]
 
 
@@ -300,7 +300,7 @@ class DesignerClassConverter(dObject):
 		tmpSpace = {}
 		stmnt = "from %s import %s" % (modpath, shortClsName)
 		try:
-			exec stmnt in tmpSpace
+			exec(stmnt, tmpSpace)
 		except (ImportError, ValueError):
 			pass
 		isWiz = issubclass(tmpSpace.get(shortClsName), dlgs.Wizard)

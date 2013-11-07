@@ -1871,7 +1871,7 @@ Do you want to overwrite it?""")
 		if args:
 			classdef = "class self(%s): pass" % args
 			try:
-				exec classdef in self._namespaces
+				exec(classdef, self._namespaces)
 			except NameError:
 				# Class is not in the namespace
 				pass
@@ -1972,7 +1972,7 @@ Do you want to overwrite it?""")
 		if code2exec:
 			cd = "\n".join(code2exec)
 			try:
-				exec cd in self._namespaces
+				exec(cd, self._namespaces)
 			except StandardError as e:
 				pass
 

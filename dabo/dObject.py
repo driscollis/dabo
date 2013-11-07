@@ -263,9 +263,9 @@ class dObject(PropertyHelperMixin, EventMixin):
 			# NOTE: if the method name and the name in the 'def' statement
 			# are not the same, the results are undefined, and will probably crash.
 			nmSpace = {}
-			exec compCode in nmSpace
+			exec(compCode, nmSpace)
 			mthd = nmSpace[nm]
-			exec "self.%s = %s.__get__(self)" % (nm, nm)
+			exec("self.%s = %s.__get__(self)" % (nm, nm))
 			newMethod = new.instancemethod(mthd, self)
 			setattr(self, nm, newMethod)
 
