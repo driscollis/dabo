@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import ConfigParser
-from cStringIO import StringIO
+from six.moves import cStringIO
 import datetime
 import glob
 import imp
@@ -614,7 +614,7 @@ try again when it is running.
 		if not respContent:
 			# No update
 			return False
-		f = StringIO(respContent)
+		f = cStringIO.StringIO(respContent)
 		zip = ZipFile(f)
 		zipfiles = zip.namelist()
 		if "DELETEDFILES" in zipfiles:

@@ -9,7 +9,7 @@ import re
 import pickle
 from os.path import join as pathjoin
 from zipfile import ZipFile
-from cStringIO import StringIO
+from six.moves import cStringIO
 
 import dabo
 import dabo.dException as dException
@@ -293,7 +293,7 @@ class RemoteConnector(object):
 			except urllib2.HTTPError as e:
 				dabo.log.error(_("HTTP Error retrieving files: %s") % e)
 			# res holds a zip file
-			f = StringIO(res.read())
+			f = cStringIO.StringIO(res.read())
 			zip = ZipFile(f)
 			for pth in zip.namelist():
 				tm = chgs.get(pth)
