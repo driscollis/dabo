@@ -891,7 +891,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 					_("Row #%(row)s requested, but the data set has only %(cnt)s row(s),") % locals())
 		self._correctFieldTypesIfNeeded(rec)
 		if isinstance(fld, (tuple, list)):
-			return map(functools.partial(self.getFieldVal, row=row), fld)
+			return list(map(functools.partial(self.getFieldVal, row=row), fld))
 		if fld in rec:
 			return rec[fld]
 		elif fld in self.VirtualFields:
@@ -2045,7 +2045,7 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		if includeNewUnchanged:
 			# We need to also count all new records
 			chKeys |= set(self._newRecords)
-		return map(self._getRowByPk, chKeys)
+		return list(map(self._getRowByPk, chKeys))
 
 
 	def _getRecordByPk(self, pk, raiseRowNotFound=True):

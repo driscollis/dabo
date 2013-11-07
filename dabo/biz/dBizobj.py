@@ -1322,7 +1322,7 @@ class dBizobj(dObject):
 					ret = self.getParentPK()
 				else:
 					flds = fld.replace(" ", "").split(",")
-					ret = map(self.Parent.getFieldVal, tuple(flds))
+					ret = list(map(self.Parent.getFieldVal, tuple(flds)))
 					if len(ret) == 1:
 						ret = ret[0]
 					else:
