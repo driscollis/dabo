@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import urllib
-import urllib2
+from six.moves import urllib
 import urlparse
 import sys
 import os
@@ -60,7 +59,7 @@ class RemoteConnector(object):
 			prm = None
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError as e:
+		except urllib.error.HTTPError as e:
 			if reRaise:
 				raise
 			dabo.log.error("HTTPError: %s" % e)
@@ -105,7 +104,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError as e:
+		except urllib.error.HTTPError as e:
 			print("ERR", e)
 			return
 		encdata = res.read()
@@ -120,7 +119,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError as e:
+		except urllib.error.HTTPError as e:
 			# There was a problem on the server side. Re-raise the appropriate
 			# exception so that the UI can handle it.
 			errcode = e.code
@@ -176,7 +175,7 @@ class RemoteConnector(object):
 		res = None
 		try:
 			res = jsonDecode(self._read(listURL, reRaise=True))
-		except urllib2.URLError as e:
+		except urllib.error.URLError as e:
 			try:
 				code, msg = e.reason
 			except AttributeError:
@@ -189,7 +188,7 @@ class RemoteConnector(object):
 			elif code == 404:
 				# Not a Dabo application server
 				return "404 Not Found"
-		except urllib2.HTTPError as e:
+		except urllib.error.HTTPError as e:
 			print(dir(e))
 			errText = e.read()
 			errMsg = "\n".join(errText.splitlines()[4:])
@@ -251,7 +250,7 @@ class RemoteConnector(object):
 		prm = urllib.urlencode(params)
 		try:
 			res = self.UrlOpener.open(url, data=prm)
-		except urllib2.HTTPError as e:
+		except urllib.error.HTTPError as e:
 			errcode = e.code
 			errText = e.read()
 			errMsg = "\n".join(errText.splitlines()[4:])
@@ -261,7 +260,7 @@ class RemoteConnector(object):
 			else:
 				dabo.log.error(_("HTTP Error syncing files: %s") % e)
 				return
-		except urllib2.URLError:
+		except urllib.error.URLError:
 			# Right now re-raise it and let the UI handle it
 			raise
 		nonpickleRet = res.read()
@@ -290,7 +289,7 @@ class RemoteConnector(object):
 			url = self._getManifestUrl(appname, "files", ustr(filecode))
 			try:
 				res = self.UrlOpener.open(url)
-			except urllib2.HTTPError as e:
+			except urllib.error.HTTPError as e:
 				dabo.log.error(_("HTTP Error retrieving files: %s") % e)
 			# res holds a zip file
 			f = cStringIO.StringIO(res.read())
@@ -380,9 +379,9 @@ class RemoteConnector(object):
 	def _getUrlOpener(self):
 		if self._urlOpener is None:
 			# Create an OpenerDirector with support for HTTP Digest Authentication...
-			auth_handler = urllib2.HTTPDigestAuthHandler()
+			auth_handler = urllib.HTTPDigestAuthHandler()
 			auth_handler.add_password(None, self.RemoteHost, self.UserName, self.Password)
-			self._urlOpener = urllib2.build_opener(auth_handler)
+			self._urlOpener = urllib.build_opener(auth_handler)
 		return self._urlOpener
 
 
@@ -406,7 +405,7 @@ class RemoteConnector(object):
 			_("URL for the remote server  (read-only) (str)"))
 
 	UrlOpener = property(_getUrlOpener, None, None,
-			_("Reference to the object that opens URLs and optionally authenticates.  (read-only) (urllib2.urlopener)"))
+			_("Reference to the object that opens URLs and optionally authenticates.  (read-only) (urllib.urlopener)"))
 
 	UserName = property(_getUserName, None, None,
 			_("Username for authentication on the remote server  (str)"))

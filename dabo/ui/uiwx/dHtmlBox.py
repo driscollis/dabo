@@ -4,8 +4,7 @@ import os
 import re
 import string
 import types
-import urllib2
-import urlparse
+from six.moves import urllib
 import datetime
 import dabo
 from dabo.dLocalize import _
@@ -168,15 +167,15 @@ class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
 					# See if the current page starts with it
 					if self._page.startswith("http://"):
 						# Join it to the current URL
-						val = urlparse.urljoin(self._page, val)
+						val = urllib.parse.urljoin(self._page, val)
 					else:
 						# Assume that it's an HTTP request
 						val = "http://" + val
-				url = urllib2.urlopen(val)
+				url = urllib.urlopen(val)
 				self._source = url.read()
 				self.LoadPage(val)
 				self._page = val
-			except urllib2.URLError:
+			except urllib.error.URLError:
 				self._source = "<html><body>Cannot Open URL %s</body><html>" % (val,)
 				self._page = ""
 				self.SetPage(self._source)

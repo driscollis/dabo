@@ -3,7 +3,7 @@ import sys
 import os
 import re
 import glob
-import urllib
+from six.moves import urllib
 import datetime
 import time
 from six.moves import cStringIO

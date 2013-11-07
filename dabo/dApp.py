@@ -12,7 +12,7 @@ import os
 import shutil
 import sys
 import tempfile
-import urllib2
+from six.moves import urllib
 import warnings
 from xml.sax._exceptions import SAXParseException
 from zipfile import ZipFile
@@ -259,7 +259,7 @@ class dApp(dObject):
 		if rp:
 			try:
 				rp.syncFiles()
-			except urllib2.URLError as e:
+			except urllib.error.URLError as e:
 				code, msg = e.reason
 				if code == 61:
 					# Connection refused; server's down
@@ -286,7 +286,7 @@ try again when it is running.
 		if rp:
 			try:
 				rp.syncFiles()
-			except urllib2.URLError as e:
+			except urllib.error.URLError as e:
 				# Cannot sync; record the error and move on
 				dabo.log.error(_("File re-sync failed. Reason: %s") % e)
 
@@ -581,8 +581,8 @@ try again when it is running.
 			# See if there is a later version
 			url = "%s/check/%s" % (dabo.webupdate_urlbase, dabo.__version__)
 			try:
-				resp = urllib2.urlopen(url).read()
-			except urllib2.URLError as e:
+				resp = urllib.urlopen(url).read()
+			except urllib.error.URLError as e:
 				# Could not connect
 				dabo.log.error(_("Could not connect to the Dabo servers: %s") % e)
 				return e
@@ -603,7 +603,7 @@ try again when it is running.
 		"""
 		fileurl = "%s/files/%s" % (dabo.webupdate_urlbase, dabo.__version__)
 		try:
-			resp = urllib2.urlopen(fileurl)
+			resp = urllib.urlopen(fileurl)
 		except Exception as e:
 			# No internet access, or Dabo site is down.
 			dabo.log.error(_("Cannot access the Dabo site. Error: %s") % e)
