@@ -7,9 +7,14 @@ import os
 
 import wx
 import dabo
+
 if __name__ == "__main__":
 	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.lib import utils
@@ -176,7 +181,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 		else:
 			isOK = self._Image.Ok()
 			bmp = wx.EmptyBitmap(1, 1)
-			
+
 		if isOK:
 			# No image to display
 			self.Bitmap = bmp
@@ -276,7 +281,7 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 			else:
 				self._bmp = wx.EmptyBitmap(1, 1, 1)
 				self.__image = wx.EmptyImage(1, 1)		# self._bmp.ConvertToImage()
-				
+
 			self._showPic()
 			return
 		elif isinstance(val, wx.Image):

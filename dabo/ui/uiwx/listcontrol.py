@@ -3,9 +3,15 @@ from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import wx
 import dabo
-from dabo.ui import makeDynamicProperty
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 import wx.lib.mixins.listctrl	as ListMixin
 from . import controlitemmixin as dcm
 import dabo.dColors as dColors
@@ -186,7 +192,7 @@ class dListControl(dcm.dControlItemMixin,
 		expandCol = self.ExpandColumn
 		self.clear()
 		if dabo.ui.phoenix:
-			self.ClearAll()			
+			self.ClearAll()
 		else:
 			self.DeleteAllColumns()
 		for col in colList:
@@ -329,7 +335,7 @@ class dListControl(dcm.dControlItemMixin,
 						new_item = self.InsertStringItem(row, tx)
 					else:
 						new_item = self.SetStringItem(row, col, tx)
-					
+
 			else:
 				# should we raise an error? Add the column automatically?
 				pass
