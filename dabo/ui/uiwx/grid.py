@@ -23,7 +23,11 @@ import dabo
 from dabo.ui import makeDynamicProperty
 from functools import reduce
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 import dabo.dEvents as dEvents
 import dabo.dException as dException
 from dabo.dLocalize import _, n_
@@ -499,16 +503,16 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 
 	def _beforeInit(self):
 		# Define the cell renderer and editor classes
-		from . import gridRenderers
+		from . import gridrenderers
 		self.stringRendererClass = wx.grid.GridCellStringRenderer
 		self.wrapStringRendererClass = wx.grid.GridCellAutoWrapStringRenderer
-		self.boolRendererClass = gridRenderers.BoolRenderer
+		self.boolRendererClass = gridrenderers.BoolRenderer
 		self.intRendererClass = wx.grid.GridCellNumberRenderer
 		self.longRendererClass = wx.grid.GridCellNumberRenderer
 		self.decimalRendererClass = wx.grid.GridCellFloatRenderer
 		self.floatRendererClass = wx.grid.GridCellFloatRenderer
 		self.listRendererClass = wx.grid.GridCellStringRenderer
-		self.imageRendererClass = gridRenderers.ImageRenderer
+		self.imageRendererClass = gridrenderers.ImageRenderer
 		self.stringEditorClass = wx.grid.GridCellTextEditor
 		self.wrapStringEditorClass = wx.grid.GridCellAutoWrapStringEditor
 		self.boolEditorClass = wx.grid.GridCellBoolEditor
@@ -2274,7 +2278,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			self.SetDefaultRowSize(rowSize)
 		tbl = self._Table
 		if tbl:
-	
+
 			if self.emptyRowsToAdd and self.Columns:
 				# Used for display purposes when no data is present.
 				self._addEmptyRows()
@@ -2283,13 +2287,13 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			if not self._sortRestored:
 				dabo.ui.callAfter(self._restoreSort)
 				self._sortRestored = True
-	
+
 			# This will make sure that the current selection mode is activated.
 			# We can't do it until after the first time the grid is filled.
 			if not self._modeSet:
 				self._modeSet = True
 				self.SelectionMode = self.SelectionMode
-	
+
 			# I've found that both refresh calls are needed sometimes, especially
 			# on Linux when manually moving a column header with the mouse.
 			dabo.ui.callAfterInterval(200, self.refresh)

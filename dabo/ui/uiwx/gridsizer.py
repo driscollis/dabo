@@ -46,7 +46,7 @@ class dGridSizer(sizermixin.dSizerMixin, wx.GridBagSizer):
 			bad = ", ".join(list(kwargs.keys()))
 			raise TypeError(("Invalid keyword arguments passed to dGridSizer: %s") % bad)
 
-		dSizerMixin.dSizerMixin.__init__(self, *args, **kwargs)
+		sizermixin.dSizerMixin.__init__(self, *args, **kwargs)
 
 
 	def append(self, item, layout="normal", row=-1, col=-1,
@@ -65,7 +65,7 @@ class dGridSizer(sizermixin.dSizerMixin, wx.GridBagSizer):
 				isSpacer = True
 			else:
 				isSpacer = False
-				
+
 			if dabo.ui.phoenix:
 				if isSpacer:
 					szItem = self.Add(item[0], item[1], (targetRow, targetCol), span=(rowSpan, colSpan))
