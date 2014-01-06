@@ -366,7 +366,7 @@ class dScrollPanel(_PanelMixin, wx.ScrolledWindow):
 	def _getChildren(self):
 		ret = super(dScrollPanel, self)._getChildren()
 		return [kid for kid in ret
-				if isinstance(kid, dabo.ui.dPemMixinBase.dPemMixinBase)]
+				if isinstance(kid, dabo.ui.pemmixinbase.dPemMixinBase)]
 
 	def _setChildren(self, val):
 		super(dScrollPanel, self)._setChildren(val)

@@ -325,7 +325,7 @@ def callAfterInterval(interval, func, *args, **kwargs):
 		defunct = _callAfterIntervalReferences.pop((_func_ref, args), None)
 		try:
 			_func(*args, **kwargs)
-		except wx._core.PyDeadObjectError:
+		except deadObjectException:
 			pass
 
 	if phoenix:
