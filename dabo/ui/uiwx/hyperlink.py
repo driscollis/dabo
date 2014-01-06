@@ -3,14 +3,20 @@ from six import string_types as sixBasestring
 import wx
 import dabo
 from dabo.dLocalize import _
-from dabo.ui import makeDynamicProperty
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 if dabo.ui.phoenix:
 	import wx.lib.agw.hyperlink as hyperlink
 else:
 	import wx.lib.hyperlink as hyperlink
-	
+
 from . import controlmixin as dcm
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors

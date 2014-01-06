@@ -38,7 +38,7 @@ if phoenix:
             "wx.lib.calendar", "wx.lib.masked", "wx.lib.buttons")
 else:
 	tLibs = ("wx", "wx.stc", "wx.lib.foldpanelbar", "wx.gizmos",
-	         "wx.lib.calendar", "wx.lib.masked", "wx.lib.buttons")	
+	         "wx.lib.calendar", "wx.lib.masked", "wx.lib.buttons")
 for lib in tLibs:
 
 	if getattr(sys, "frozen", False):
@@ -2000,7 +2000,7 @@ def getImagePath(nm, url=False):
 
 	if ret and url:
 		if wx.Platform == "__WXMSW__":
-			ret = "file:%s" % urllib.pathname2url(ret).replace("|", ":")
+			ret = "file:%s" % urllib.request.pathname2url(ret).replace("|", ":")
 			ret = re.sub(r"([A-Z])\|/", r"\1/", ret, re.I)
 		else:
 			ret = "file://%s" % ret

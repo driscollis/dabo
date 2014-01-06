@@ -2,10 +2,13 @@
 from wx import glcanvas
 import wx
 import dabo
-import dabo.ui
 
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import controlmixin as cm
 from dabo.dLocalize import _
@@ -61,13 +64,13 @@ class dGlWindow(cm.dControlMixin, glcanvas.GLCanvas):
 			self._context = glcanvas.GLContext(self)
 			self._context.SetCurrent(self)
 			self.SwapBuffers()
-		
+
 
 	def onResize(self, event):
 		if not dabo.ui.phoenix:
 			if self.GetContext():
 				self.SetCurrent()
-			
+
 		glViewport(0, 0, self.Width, self.Height)
 
 
