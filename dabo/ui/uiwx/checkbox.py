@@ -3,7 +3,11 @@ import wx
 import dabo
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import datacontrolmixin as dcm
 from dabo.dLocalize import _
@@ -14,7 +18,7 @@ class dCheckBox(dcm.dDataControlMixin, wx.CheckBox):
 	def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
 		self._baseClass = dCheckBox
 		if dabo.ui.phoenix:
-			preClass = wx.CheckBox	
+			preClass = wx.CheckBox
 		else:
 			preClass = wx.PreCheckBox
 		dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,

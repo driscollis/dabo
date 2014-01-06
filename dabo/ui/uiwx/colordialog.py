@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 from six import string_types as sixBasestring
 import wx
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
 import dabo
 import dabo.dConstants as kons
 import dabo.dColors as dColors

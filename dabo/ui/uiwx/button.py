@@ -10,7 +10,6 @@ if __name__ == "__main__":
 		import dabo.ui.uiwx
 		__package__ = "dabo.ui.uiwx"
 
-
 from . import controlmixin as cm
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents

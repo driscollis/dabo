@@ -1,8 +1,14 @@
 # -*- coding: utf-8 -*-
 from six import string_types as sixBasestring
-import wx, dabo, dabo.ui
+import wx
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+import dabo
+
 from . import controlitemmixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _

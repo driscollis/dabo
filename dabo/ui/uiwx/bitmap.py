@@ -4,7 +4,11 @@ import dabo
 import dabo.ui
 
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import controlmixin as cm
 from . import imagemixin as dim
