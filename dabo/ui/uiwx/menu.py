@@ -137,7 +137,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 				wx.App.SetMacAboutMenuItemId(id_)
 				cap = daboItem.Parent.Caption
 				wx.App.SetMacHelpMenuTitleName(cap)
-			else:	
+			else:
 				wx.App_SetMacAboutMenuItemId(id_)
 				cap = daboItem.Parent.Caption
 				wx.App_SetMacHelpMenuTitleName(cap)
@@ -529,7 +529,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
 		return daboChildren
 
 	def _preInitUI(self, kwargs):
-		# TODO: waiting to hear from Robin on overload issue 
+		# TODO: waiting to hear from Robin on overload issue
 		style = kwargs.get("style", 0)
 		kwargs['style'] = style
 		return kwargs

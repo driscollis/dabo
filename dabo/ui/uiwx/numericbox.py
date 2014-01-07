@@ -3,9 +3,15 @@ import locale
 import wx
 import wx.lib.masked as masked
 import dabo
-from dabo.ui import makeDynamicProperty
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 import dabo.dEvents as dEvents
 from . import textboxmixin as dtbm
 from . import datacontrolmixin as ddcm
@@ -53,7 +59,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 				                                           "BackColor", wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOW))
 		else:
 			kwargs["validBackgroundColour"] = self._extractKey((properties, attProperties, kwargs),
-						                                               "BackColor", wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOW))			
+						                                               "BackColor", wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOW))
 		kwargs["invalidBackgroundColour"] = self._extractKey((properties, attProperties, kwargs),
 				                                             "InvalidBackColor", "Yellow")
 		kwargs["signedForegroundColour"] = self._extractKey((properties, attProperties, kwargs),

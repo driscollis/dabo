@@ -2,21 +2,26 @@
 """
 @note: Color setting doesn't work for this control. It's a wx issue.
 """
-# TODO: get SystemError on this one wait for Robin
+# TODO: get "SystemError: NULL result without error in PyObject_Call"  on this one wait for Robin
 from six import string_types as sixBasestring
 import datetime
 import wx
-	
+
 import dabo
 
 if __name__ == "__main__":
 	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
 if dabo.ui.phoenix:
 	import wx.adv
 	dpc = wx.adv
 else:
 	dpc = wx
+
 from . import datacontrolmixin as dcm
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr

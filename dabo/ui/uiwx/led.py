@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TODO: lib.GenButton.DoEraseBackground is missing - waiting for Robin's feedback
 import wx
 import dabo
 import dabo.ui

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# TODO: wait for Robin
+# TODO: wait for Robin to do the work for wx.media
 import wx
 import wx.media
 import dabo

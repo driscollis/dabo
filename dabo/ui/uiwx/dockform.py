@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# TODO: closing the floating pane is still causing an assert
+# TODO: closing the floating pane is still causing an except on CloseEvent.GetVeto
 import wx
 try:
 	import wx.lib.agw.aui as aui
@@ -11,6 +11,9 @@ import dabo
 if __name__ == "__main__":
 	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 from dabo.ui import makeDynamicProperty

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TODO: runs but plot is too small, nearly not showing
 import wx
 import wx.lib.plot as plot
 
@@ -12,9 +13,14 @@ except Exception as e:
 	_Numeric = False
 
 import dabo
-from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 from . import controlmixin as cm
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
