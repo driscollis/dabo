@@ -1,15 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# TODO: wait for Robin's feed back
+# TODO: Robin hasn't converted richtext completely, i.e. RichTextXMLHandler
 from six import string_types as sixBasestring
 import os
 import wx
 import wx.richtext
 import dabo
-from dabo.ui import makeDynamicProperty
-if __name__ == "__main__":
-	dabo.ui.loadUI("wx")
 
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 from . import datacontrolmixin as dcm
 import dabo.dColors as dColors
 from dabo.dLocalize import _

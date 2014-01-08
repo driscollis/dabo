@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# TODO: waiting for Robin, getting a RunTimeError in dMenu.remove even after using check for dead item
 from six import string_types as sixBasestring
 import sys
 import wx
@@ -331,6 +332,9 @@ class dMenu(pm.dPemMixin, wx.Menu):
 			# Menu has already been destroyed.
 			return
 		item = self._resolveItem(capIdxOrItem)
+		if not item:
+			# Menuitem has already been destroyed
+			return
 		id_ = item.GetId()
 		try:
 			del self._daboChildren[id_]

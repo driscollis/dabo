@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
-# TODO: dToolbarItem issue
+# TODO: dToolbarItem doesn't find/have 'bindEvent'
 from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import os.path
 import wx
-import dabo, dabo.ui
+import dabo
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import controlmixin as cm
 from . import dMenu
@@ -16,7 +21,7 @@ from dabo.dObject import dObject
 from dabo.ui import makeDynamicProperty
 
 
-class dToolBar(cm.dControlMixin, wx.ToolBar):
+class dToolBar(wx.ToolBar, cm.dControlMixin):
 	"""
 	Creates a toolbar, which is a menu-like collection of icons.
 
