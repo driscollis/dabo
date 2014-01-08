@@ -3,9 +3,14 @@
 from six import string_types as sixBasestring
 import wx
 
-import dabo, dabo.ui
+import dabo
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import textboxmixin as tbm
 from dabo.dLocalize import _
@@ -95,7 +100,7 @@ class dSearchBox(tbm.dTextBoxMixin, wx.SearchCtrl):
 	def _setupMenuFromList(self, valueList):
 		menu = dabo.ui.dMenu()
 		for value in valueList:
-			if not type(value) in (sixBasestring):
+			if not isinstance(value, sixBasestring):
 				raise ValueError("All elements in the List must be strings")
 			else:
 				menu.append(value)

@@ -3,10 +3,15 @@ import sys
 import time
 import wx
 import dabo
-from dabo.ui import makeDynamicProperty
-if __name__ == "__main__":
-	dabo.ui.loadUI("wx")
 
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 from . import datacontrolmixin as dcm
 from . import controlitemmixin as cim
 import dabo.dEvents as dEvents

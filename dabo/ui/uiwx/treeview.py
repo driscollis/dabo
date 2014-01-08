@@ -5,9 +5,15 @@ import os
 import glob
 import wx
 import dabo
-from dabo.ui import makeDynamicProperty
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 from . import controlmixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _

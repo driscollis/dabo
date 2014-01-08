@@ -2,9 +2,15 @@
 from six import string_types as sixBasestring
 import wx
 import dabo
-from dabo.ui import makeDynamicProperty
+
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 if dabo.ui.phoenix:
 	import wx.lib.agw.foldpanelbar as fpb
 else:

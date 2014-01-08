@@ -8,12 +8,15 @@ import operator
 import wx
 import dabo
 
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
 from dabo.ui import makeDynamicProperty
 from dabo.ui import makeProxyProperty
-if __name__ == "__main__":
-	dabo.ui.loadUI("wx")
-
-
 from . import datacontrolmixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _

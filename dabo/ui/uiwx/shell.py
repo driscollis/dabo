@@ -10,7 +10,11 @@ import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
 if __name__ == "__main__":
+	import dabo.ui
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from .splitform import dSplitForm
 from dabo.ui import makeDynamicProperty

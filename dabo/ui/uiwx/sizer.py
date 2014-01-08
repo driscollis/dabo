@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 import wx
 import dabo
+
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
 from . import pemmixin
 from . import sizermixin
 

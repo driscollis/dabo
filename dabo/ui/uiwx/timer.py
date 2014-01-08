@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 import dabo
-from dabo.ui import makeDynamicProperty
-if __name__ == "__main__":
-	dabo.ui.loadUI("wx")
 
+if __name__ == "__main__":
+	import dabo.ui
+	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
+
+from dabo.ui import makeDynamicProperty
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from .pemmixin import dPemMixin as PM
