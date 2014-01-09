@@ -292,7 +292,7 @@ app.start()
 		fname = "%s/__init__.py" % dd
 		txt = template % locals()
 		open(fname, "w").write(txt)
-	os.chmod("main.py", 0744)
+	os.chmod("main.py", 0o744)
 	os.chdir(currLoc)
 	print("Application '%s' has been created for you" % homedir)
 
