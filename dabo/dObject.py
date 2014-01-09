@@ -3,7 +3,6 @@ from six import integer_types as sixInt
 from six import string_types as sixBasestring
 import string
 import types
-import new
 import dabo
 from dabo.lib.propertyHelperMixin import PropertyHelperMixin
 from dabo.lib.eventMixin import EventMixin
@@ -268,7 +267,7 @@ class dObject(PropertyHelperMixin, EventMixin):
 			exec(compCode, nmSpace)
 			mthd = nmSpace[nm]
 			exec("self.%s = %s.__get__(self)" % (nm, nm))
-			newMethod = new.instancemethod(mthd, self)
+			newMethod = types.MethodType(mthd, self)
 			setattr(self, nm, newMethod)
 
 

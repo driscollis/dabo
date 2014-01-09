@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from six.moves import urllib
-import urlparse
 import sys
 import os
 import re
@@ -168,7 +167,7 @@ class RemoteConnector(object):
 		If an app name is passed, run it directly if it exists on the server.
 		"""
 		# Just use the first 3 split parts.
-		scheme, host, path = urlparse.urlsplit(url)[:3]
+		scheme, host, path = urllib.parse.urlsplit(url)[:3]
 		path = path.lstrip("/")
 		self._baseURL = "%s://%s" % (scheme, host)
 		listURL = "%s://%s/manifest" % (scheme, host)

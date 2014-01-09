@@ -54,13 +54,16 @@ daboTypes = {
 		"D": datetime.date,          ## date
 		"T": datetime.datetime,      ## datetime
 		"N": Decimal,                ## decimal (numeric)
-		"L": buffer,                 ## BLOB
+		"L": memoryview,             ## BLOB
 		}
 
 pythonTypes = dict([[v, k] for k, v in daboTypes.items()])
 pythonTypes[str] = "C"
 pythonTypes[sixUnicode] = "C"
-del k, v, Decimal
+if six.PY2:
+	del k, v, Decimal
+else:
+	del Decimal
 
 def getPythonType(daboType):
 	"""Given a char type code like "I" or "C", return the associated Python type."""

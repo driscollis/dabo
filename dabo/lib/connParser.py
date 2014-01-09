@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
+import six
 from six import string_types as sixBasestring
 import sys
 import xml.sax
-from StringIO import StringIO
+from six import StringIO
 import os.path
 from .xmltodict import escQuote
 import dabo
