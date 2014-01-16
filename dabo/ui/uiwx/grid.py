@@ -2684,9 +2684,6 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		This method handles all of the display for the header, including writing
 		the Captions along with any sort indicators.
 		"""
-		# TODO: Phoenix has no wx.IntersectRect
-		# TODO: Phoenix has wx.GridColumnHeaderRenderer, maybe of us?
-		return
 		if self._inHeaderPaint:
 			return
 		self._inHeaderPaint = True
