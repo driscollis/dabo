@@ -393,5 +393,5 @@ if __name__ == "__main__":
 		def onValueChanged(self, evt):
 			print("onValueChanged")
 
-	test.Test().runTest(TestBase, AllowNullDate=True, Value=datetime.date(1970, 12, 03))
+	test.Test().runTest(TestBase, AllowNullDate=True, Value=datetime.date(1970, 12, 3))
 	test.Test().runTest(TestBase, BackColor="orange", PickerMode="Spin", AllowNullDate=True)
