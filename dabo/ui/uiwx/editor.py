@@ -2,13 +2,10 @@
 # -*- coding: utf-8 -*-
 from six import string_types as sixBasestring
 
-import sys
 import os
 import re
 import keyword
-import code
 import inspect
-import compiler
 import wx
 import wx.stc as stc
 import dabo
