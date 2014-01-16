@@ -97,7 +97,7 @@ def makeDynamicProperty(prop, additionalDoc=None):
 
 	"""
 	propName = None
-	frame = inspect.currentframe(1)
+	frame = inspect.currentframe()
 	for k, v in list(frame.f_locals.items()):
 		if v is prop:
 			propName = k
