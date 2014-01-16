@@ -265,7 +265,7 @@ class EventMixin(object):
 	def getEventList(cls):
 		"""Return a list of valid Dabo event names for this object."""
 		el = cls.getValidEvents()
-		el = [e.__name__ for e in el if e.__name__[0] in string.uppercase]
+		el = [e.__name__ for e in el if e.__name__[0] in string.ascii_uppercase]
 		el.sort()
 		return el
 	getEventList = classmethod(getEventList)
