@@ -16,7 +16,6 @@ import dabo.dEvents as dEvents
 from . import textboxmixin as dtbm
 from . import datacontrolmixin as ddcm
 from decimal import Decimal
-from types import NoneType
 from dabo.dLocalize import _
 
 
@@ -289,7 +288,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 		val = ddcm.dDataControlMixin._getValue(self)
 		if self._lastDataType is Decimal:
 			val = Decimal(str(val))
-		elif self._lastDataType is NoneType:
+		elif self._lastDataType is None:
 			chkVal = int(val)
 			if chkVal != val:
 				val = Decimal(str(val))
