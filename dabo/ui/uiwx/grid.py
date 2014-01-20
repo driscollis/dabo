@@ -832,8 +832,7 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 					editor = editorClass()
 				else:
 					editor = editorClass(**kwargs)
-		# TODO: throws assertionerror, Robin?
-		#self._gridColAttr.SetEditor(editor)
+		self._gridColAttr.SetEditor(editor)
 
 
 	def _updateRenderer(self):
