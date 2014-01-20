@@ -201,7 +201,6 @@ class dPemMixin(dPemMixinBase):
 			self._setNameAndProperties(properties, **kwargs)
 
 		self._initEvents()
-		self._afterInit()
 
 		dPemMixinBase.__init__(self)  ## don't use super(), or wx init called 2x.
 
@@ -210,6 +209,7 @@ class dPemMixin(dPemMixinBase):
 			# with fastNameSet on, that never happened. Call it manually:
 			self.autoBindEvents()
 
+		self._afterInit()
 		# Create a method that gets called after all the other objects that are being
 		# added have completed. A good use of this is when you want to call code in the
 		# afterInit() of a form, but the controls it needs to work with haven't yet been
