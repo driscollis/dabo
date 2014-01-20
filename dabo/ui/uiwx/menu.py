@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# TODO: waiting for Robin, getting a RunTimeError in dMenu.remove even after using check for dead item
 from six import string_types as sixBasestring
 import sys
 import wx
