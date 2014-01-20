@@ -349,8 +349,9 @@ class dCursorMixin(dObject):
 		# retrieving the data. However, many cursor classes can only return
 		# row information as a list, not as a dictionary. This method will
 		# detect that, and convert the results to a dictionary.
-		if isinstance(sql, sixUnicode):
-			sql = sql.encode(self.Encoding)
+		if six.PY2:
+			if isinstance(sql, sixUnicode):
+				sql = sql.encode(self.Encoding)
 		if convertQMarks:
 			sql = self._qMarkToParamPlaceholder(sql)
 		# Some backends, notably Firebird, require that fields be specially marked.
@@ -374,7 +375,10 @@ class dCursorMixin(dObject):
 
 			# Database errors need to be decoded from database encoding.
 			try:
-				errMsg = sixUnicode(str(e), self.Encoding)
+				if six.PY2:
+					errMsg = sixUnicode(e, self.Encoding)
+				else:
+					errMsg = sixUnicode(e)
 			except UnicodeError:
 				errMsg = ustr(e)
 			# If this is due to a broken connection, let the user know.

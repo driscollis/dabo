@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import six
 from six.moves import builtins
 import time
 import wx
@@ -392,7 +393,10 @@ class dShellForm(dSplitForm):
 		# but doesn't set it back on destroy, resulting in errors later
 		# on if something other than PyShell asks for raw_input (pdb, for
 		# example).
-		self._oldRawInput = raw_input
+		if six.PY2:
+			self._oldRawInput = raw_input
+		else:
+			self._oldRawInput = input
 		self.bindEvent(dEvents.Destroy, self._onDestroy)
 
 		splt = self.Splitter
