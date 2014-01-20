@@ -236,8 +236,10 @@ class dSizerMixin(dObject):
 			itm = self.Add(spacer, proportion=proportion, userData=self)
 		else:
 			itm = self.Insert(pos, spacer, proportion=proportion, userData=self)
-		# TODO: wait for Robin
-		#itm.setSpacing = itm.SetSpacer
+		if dabo.ui.phoenix:
+			itm.setSpacing = itm.AssignSpacer
+		else:
+			itm.setSpacing = itm.SetSpacer
 		return itm
 
 
@@ -464,7 +466,10 @@ class dSizerMixin(dObject):
 			elif isinstance(val, sixBasestring):
 				val = (int(val), int(val))
 			try:
-				ret = itm.SetSpacer(val)
+				if dabo.ui.phoenix:
+					ret = itm.AssignSpacer(val)
+				else:
+					ret = itm.SetSpacer(val)
 				ret = True
 			except AttributeError:
 				pass
