@@ -58,13 +58,9 @@ class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
 		# Bind the native events
 		self.Bind(wxcal.EVT_CALENDAR, self.__onWxCalendar)
 		self.Bind(wxcal.EVT_CALENDAR_SEL_CHANGED, self.__onWxDateChanged)
-		# Todo: fake and wait for Robin
-		#self.Bind(wxcal.EVT_CALENDAR_DAY, self.__onWxDayChanged)
-		#self.Bind(wxcal.EVT_CALENDAR_MONTH, self.__onWxMonthChanged)
-		#self.Bind(wxcal.EVT_CALENDAR_YEAR, self.__onWxYearChanged)
-		self.Bind(wxcal.EVT_CALENDAR_SEL_CHANGED, self.__onWxDayChanged)
-		self.Bind(wxcal.EVT_CALENDAR_SEL_CHANGED, self.__onWxMonthChanged)
-		self.Bind(wxcal.EVT_CALENDAR_SEL_CHANGED, self.__onWxYearChanged)
+		self.Bind(wxcal.EVT_CALENDAR_DAY, self.__onWxDayChanged)
+		self.Bind(wxcal.EVT_CALENDAR_MONTH, self.__onWxMonthChanged)
+		self.Bind(wxcal.EVT_CALENDAR_YEAR, self.__onWxYearChanged)
 
 		self.Bind(wxcal.EVT_CALENDAR_WEEKDAY_CLICKED, self.__onWxDayHeaderClicked)
 		self.bindEvent(dEvents.CalendarDateChanged, self.__onDateChanged)
