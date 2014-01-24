@@ -342,7 +342,6 @@ class dMenu(pm.dPemMixin, wx.Menu):
 
 		# Needed to keep dPemMixin mixed-in in wxPython 2.8
 		if dabo.ui.phoenix:
-			# TODO: is this enough to replace org code? 'this' is not there
 			val = wx.Menu.Remove(self, item)
 		else:
 			val = wx.Menu.RemoveItem(self, item)
