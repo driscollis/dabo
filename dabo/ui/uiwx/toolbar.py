@@ -197,12 +197,12 @@ class dToolBar(wx.ToolBar, cm.dControlMixin):
 		tbiClass = self.ToolbarItemClass
 		butt = tbiClass(tool, *args, **kwargs)
 
-		try:
-			self.SetToggle(id_, toggle)
-		except dabo.ui.assertionException:
-			## The AssertionError: not implemented occurs on wxMac, even though
-			## SetToggle() obviously is implemented, because it does work.
-			pass
+		#try:
+			#self.SetToggle(id_, toggle)
+		#except dabo.ui.assertionException:
+			### The AssertionError: not implemented occurs on wxMac, even though
+			### SetToggle() obviously is implemented, because it does work.
+			#pass
 		self._realize()
 
 		# Store the button reference
