@@ -201,7 +201,6 @@ from . import uicursors
 from . import gridrenderers
 from .pageframemixin import dPageFrameMixin
 from .autocomplete import dAutoComplete
-from dAutoComplete import dAutoComplete
 
 
 # Needs importing after at least dPanel:
