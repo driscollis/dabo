@@ -163,7 +163,7 @@ def fileRef(ref=""):
 	ret = None
 	if isinstance(ref, sixBasestring):
 		if os.path.exists(ref):
-			ret = file(ref)
+			ret = open(ref)
 		else:
 			ret = StringIO(ref)
 	return ret
