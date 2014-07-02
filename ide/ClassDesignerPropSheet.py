@@ -7,7 +7,7 @@ import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 from dabo.dLocalize import _
-from dabo.ui import dKeys as dKeys
+from dabo.ui import keys as dKeys
 import dabo.dEvents as dEvents
 from ClassDesignerComponents import LayoutPanel
 from ClassDesignerComponents import LayoutSpacerPanel
@@ -158,9 +158,10 @@ class PropSheet(dabo.ui.dPanel):
 
 	def dataSetFromPropDict(self, propDict):
 		props = propDict.keys()
-		props.sort()
 		if self.propGrid.sortOrder == "DESC":
-			props.reverse()
+			props = sorted(props, reverse=True)
+		else:
+			props = sorted(props)
 		obj = self._selected
 		mult = len(obj) > 1
 		ds = []
@@ -320,7 +321,7 @@ class PropSheet(dabo.ui.dPanel):
 			self.Controller.updatePropVal(prop, val, typ)
 			if prop.startswith("Font"):
 				self.updateGridValues()
-		except PropertyUpdateException, e:
+		except PropertyUpdateException as e:
 			dabo.ui.stop(_("Could not set property '%(prop)s' to value '%(val)s'\nReason: '%(e)s'")
 					% locals())
 			self.updateGridValues()
@@ -711,7 +712,7 @@ class PropertyGrid(dabo.ui.dGrid):
 			return None
 		try:
 			return self.propDict[prop]
-		except KeyError, e:
+		except KeyError as e:
 			return None
 # 			print "PROP DICT ERROR: >%s<, row=%s" % (prop, row)
 
@@ -734,7 +735,7 @@ class PropertyGrid(dabo.ui.dGrid):
 							(self.getValue(row, 0), self.Controller.Selection[0]))
 				continue
 			if not isinstance(pd, dict):
-				print _("BAD PROP DICT:"), pd, type(pd), _("ROW"), row
+				print(_("BAD PROP DICT:"), pd, type(pd), _("ROW"), row)
 				continue
 			typ = pd["type"]
 			rnd = self.stringRendererClass
@@ -769,7 +770,7 @@ class PropertyGrid(dabo.ui.dGrid):
 
 			if not isinstance(pd, dict):
 				if pd is not None:
-					print _("BAD PROP DICT:"), pd, type(pd), _("ROW="), row
+					print(_("BAD PROP DICT:"), pd, type(pd), _("ROW="), row)
 			else:
 				if pd["type"] == "multi":
 					# This is a catch-all setting for props such as 'Value' that

@@ -12,7 +12,7 @@ from dabo.dReportWriter import dReportWriter
 from dabo.lib.reportWriter import *
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-from dabo.ui import dKeys
+from dabo.ui import keys
 import ClassDesignerPropSheet
 
 
@@ -2492,7 +2492,7 @@ class ReportDesignerForm(dabo.ui.dDockForm):
 		fileMenu = mb.getMenu("base_file")
 		editMenu = mb.getMenu("base_edit")
 		viewMenu = mb.getMenu("base_view")
-		dIcons = dabo.ui.dIcons
+		dIcons = dabo.ui.icons
 
 		fileMenu.prependSeparator()
 
