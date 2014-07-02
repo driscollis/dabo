@@ -16,15 +16,19 @@ from dabo.lib.utils import ustr
 from dabo.lib import utils
 import dabo.dEvents as dEvents
 
-# Very VERY first thing: ensure a minimal wx is selected, but only if
-# wx hasn't already been imported, and if we aren't running frozen:
-if "wx" not in sys.modules and not getattr(sys, "frozen", False):
-	minWx = "2.8"
-	try:
-		import wxversion
-	except ImportError:
-		sys.exit("wxPython needs to be at least version %s." % minWx)
-	wxversion.ensureMinimal(minWx)
+# TODO: review how this should be done correctly with Phoenix and Classic support
+import six
+# wxversion not available on Py3
+if six.PY2:
+	# Very VERY first thing: ensure a minimal wx is selected, but only if
+	# wx hasn't already been imported, and if we aren't running frozen:
+	if "wx" not in sys.modules and not getattr(sys, "frozen", False):
+		minWx = "2.8"
+		try:
+			import wxversion
+		except ImportError:
+			sys.exit("wxPython needs to be at least version %s." % minWx)
+		wxversion.ensureMinimal(minWx)
 
 ######################################################
 # Very first thing: check for proper wxPython build:
