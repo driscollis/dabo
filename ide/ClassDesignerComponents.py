@@ -434,7 +434,7 @@ class LayoutSaverMixin(dObject):
 					try:
 						kidDict = [cd for cd in childDict
 								if cd["attributes"]["classID"] == kidID][0]
-					except StandardError, e:
+					except StandardError as e:
 						kidDict = {}
 				except AttributeError:
 					kidDict = {}
@@ -478,7 +478,7 @@ class LayoutSaverMixin(dObject):
 					try:
 						szDict = [cd for cd in childDict
 								if cd["attributes"]["classID"] == szID][0]
-					except StandardError, e:
+					except StandardError as e:
 						szDict = {}
 				except AttributeError:
 					szDict = {}
@@ -614,7 +614,7 @@ class LayoutPanel(dabo.ui.dPanel, LayoutSaverMixin):
 
 
 	def onSelect(self, evt):
-		print "PANEL ON SELECT"
+		print("PANEL ON SELECT")
 
 
 	def onContextMenu(self, evt):
@@ -796,7 +796,7 @@ class LayoutPanel(dabo.ui.dPanel, LayoutSaverMixin):
 		cs = self.ControllingSizer
 		try:
 			cs.setItemProp(self, "ColSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -816,7 +816,7 @@ class LayoutPanel(dabo.ui.dPanel, LayoutSaverMixin):
 		cs = self.ControllingSizer
 		try:
 			cs.setItemProp(self, "RowSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -1086,7 +1086,7 @@ class LayoutSizerMixin(LayoutSaverMixin):
 						try:
 							winDict = [cd for cd in childDict
 									if cd["attributes"]["classID"] == winID][0]
-						except StandardError, e:
+						except StandardError as e:
 							winDict = {}
 					except AttributeError:
 						winDict = {}
@@ -1101,7 +1101,7 @@ class LayoutSizerMixin(LayoutSaverMixin):
 						try:
 							szrDict = [cd for cd in childDict
 									if cd["attributes"]["classID"] == szrID][0]
-						except StandardError, e:
+						except StandardError as e:
 							szrDict = {}
 					except AttributeError:
 						szrDict = {}
@@ -1416,7 +1416,7 @@ class LayoutSizerMixin(LayoutSaverMixin):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "ColSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -1435,7 +1435,7 @@ class LayoutSizerMixin(LayoutSaverMixin):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "RowSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -1730,7 +1730,7 @@ class LayoutGridSizer(LayoutSizerMixin, dabo.ui.dGridSizer):
 			try:
 				ret = [cd for cd in childDict
 						if cd["attributes"]["classID"] == objID][0]
-			except StandardError, e:
+			except StandardError as e:
 				ret = None
 		except AttributeError:
 			pass
@@ -1927,7 +1927,7 @@ class LayoutGridSizer(LayoutSizerMixin, dabo.ui.dGridSizer):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "ColSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -1946,7 +1946,7 @@ class LayoutGridSizer(LayoutSizerMixin, dabo.ui.dGridSizer):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "RowSpan", val)
-		except dabo.ui.GridSizerSpanException, e:
+		except dabo.ui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
