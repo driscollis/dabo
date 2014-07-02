@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import six
 from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
@@ -17,7 +18,12 @@ from dabo.lib.dates import getStringFromDate
 ######################################################
 # Very first thing: check for required libraries:
 _failedLibs = []
-for lib in ("reportlab", "Image"):
+if six.PY2:
+	_libsToCheck = ("reportlab", "Image")
+else:
+	# use Pillow instead of Pil
+	_libsToCheck = ("reportlab", "PIL")
+for lib in _libsToCheck:
 	try:
 		__import__(lib)
 	except ImportError:
@@ -67,7 +73,10 @@ from dabo.lib.utils import ustr, resolvePathAndUpdate
 from reportlab.pdfbase.pdfmetrics import registerFont, getRegisteredFontNames
 from reportlab.pdfbase.ttfonts import TTFont, TTFError
 from reportlab.rl_config import TTFSearchPath
-import Image as PILImage
+if six.PY2:
+	import Image as PILImage
+else:
+	from PIL import Image as PILImage
 from . import reportUtils
 
 # The below block tried to use the experimental para.Paragraph which
@@ -786,7 +795,7 @@ class PageHeader(Band):
 		super(PageHeader, self).initAvailableProps()
 		self.AvailableProps["ColumnBreakAfter"] = toPropDict(bool, False,
 		        """Specifies whether a column break is inserted after the band prints.
-		
+
 		        If True, the page header will reside in the first column instead of
 		        on top of the column set.""")
 
@@ -839,7 +848,7 @@ class Rectangle(Drawable):
 
 		self.AvailableProps["StrokeDashArray"] = toPropDict(tuple, None,
 		        """Specifies the stroke dash.
-		        
+
 		        For instance, (1,1) will give you a dotted look, (1,1,5,1) will
 		        give you a dash-dot look.""")
 
@@ -935,17 +944,17 @@ class Memo(String):
 
 		        Each column will be equal in width.
 		        """)
-		
+
 		self.AvailableProps["Leading"] = toPropDict(float, "single",
 				"""Specifies the font leading (how much space to leave between baselines).
 
 		        Leading <= 0 : nothing prints.
 		        Leading in (FontSize, "single", None) : single-space output.
 		        Leading in (FontSize * 2, "double") : double-space output.
-		         
+
 		        Add any number of "+" or "-" characters after "single" or "double" to increase
 		        or decrease the leading by 10% of the fontsize for each.
-		        
+
 		        If you choose to specify your own explicit numeric value for Leading, note
 		        that you'll have to remember to change it if you ever change the FontSize,
 		        to get the same relative spacing.
@@ -1045,7 +1054,7 @@ class BarGraph(Drawable):
 
 		self.AvailableProps["ScaleMode"] = toPropDict(str, "scale",
 		        """Specifies how to handle frame and image of differing size.
-		        
+
 		        "scale" will change the image size to fit the frame. "clip" will
 		        display the image in the frame as-is.""")
 
@@ -1931,7 +1940,7 @@ class ReportWriter(object):
 			c.drawImage(imageData, 0, 0, width, height, mask)
 
 		elif objType == "Barcode":
-			data = obj.getProp("expr")			
+			data = obj.getProp("expr")
 			bcFormat = obj.getProp("BarcodeFormat")
 			bcWidth = obj.getProp("BarWidth")
 			bcHeight = obj.getProp("BarHeight")
@@ -1944,7 +1953,7 @@ class ReportWriter(object):
 
 			bc = None
 			if bcFormat == "Standard39":
-				bc = code39.Standard39(data, 
+				bc = code39.Standard39(data,
 								       barHeight=bcHeight,
 								       barwidth=bcWidth,
 								       checksum=bcChecksum,
@@ -1954,7 +1963,7 @@ class ReportWriter(object):
 								       quiet=bcQuiet,
 								       stop=bcStop)
 			elif bcFormat == "Extended39":
-				bc = code39.Extended39(data, 
+				bc = code39.Extended39(data,
 								       barHeight=bcHeight,
 								       barwidth=bcWidth,
 								       checksum=bcChecksum,
@@ -1964,7 +1973,7 @@ class ReportWriter(object):
 								       quiet=bcQuiet,
 								       stop=bcStop)
 			elif bcFormat == "Standard93":
-				bc = code93.Standard93(data, 
+				bc = code93.Standard93(data,
 								       barHeight=bcHeight,
 								       barwidth=bcWidth,
 								       checksum=bcChecksum,
@@ -1974,7 +1983,7 @@ class ReportWriter(object):
 								       quiet=bcQuiet,
 								       stop=bcStop)
 			elif bcFormat == "Code128":
-				bc = code128.Code128(data, 
+				bc = code128.Code128(data,
 								     barHeight=bcHeight,
 								     barwidth=bcWidth,
 								     checksum=bcChecksum,
