@@ -116,7 +116,6 @@ class ImageRenderer(gRend):
 		dc.DestroyClippingRegion()
 
 
-
 class BoolRenderer(gRend):
 	"""The default wx Bool renderer is really ugly, so this is a replacement."""
 
@@ -210,6 +209,9 @@ class BoolRenderer(gRend):
 		dc.DestroyClippingRegion()
 
 
+	def Clone(self):
+		return BoolRenderer()
+
 
 class AbstractTextRenderer(gRend):
 	"""
@@ -269,3 +271,6 @@ class YesNoBoolRenderer(AbstractTextRenderer):
 		else:
 			dc.SetTextForeground((0, 128, 0))
 		dc.DrawText(txt, rect.x, rect.y)
+
+	def Clone(self):
+		return YesNoBoolRenderer()
