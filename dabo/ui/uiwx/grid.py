@@ -7,6 +7,8 @@ else:
 from six import integer_types as sixInt
 from six import text_type as sixUnicode
 from six import string_types as sixBasestring
+
+from operator import attrgetter
 import copy
 import sys
 import datetime
@@ -106,8 +108,9 @@ class dGridDataTable(wxGTclass):
 		if self.alternateRowColoring:
 			attr.SetBackgroundColour((self.rowColorEven, self.rowColorOdd)[row % 2])
 
+		# TODO: reported to wxPython-dev, probably not yet wrapped
 		# Prevents overwriting when a long cell has None in the one next to it.
-		attr.SetOverflow(False)
+		#attr.SetOverflow(False)
 		self.__cachedAttrs[(row, col)] = (attr.Clone(), time.time())
 		return attr
 
@@ -173,11 +176,8 @@ class dGridDataTable(wxGTclass):
 			col = colDefs[num]
 			if col.Order < 0:
 				col.Order = num
-		colDefs.sort(self.orderSort)
+		colDefs.sort(key=attrgetter('Order'))
 		self.colDefs = copy.copy(colDefs)
-
-	def orderSort(self, col1, col2):
-		return cmp(col1.Order, col2.Order)
 
 
 	def convertType(self, typ):
@@ -530,6 +530,7 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 			"datetime" : self.stringRendererClass,
 			"bool" : self.boolRendererClass,
 			"int" : self.intRendererClass,
+		    "integer" : self.intRendererClass,
 			"long" : self.longRendererClass,
 			"decimal" : self.decimalRendererClass,
 			"float" : self.floatRendererClass,
@@ -544,6 +545,7 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 			float : self.floatRendererClass,
 			Decimal: self.decimalRendererClass,
 			list : self.listRendererClass}
+
 		self.defaultEditors = {
 			"str" : self.stringEditorClass,
 			"string" : self.stringEditorClass,
@@ -688,7 +690,7 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 				kwargs["choices"] = self.getListEditorChoicesForRow(row)
 			elif edClass in (wx.grid.GridCellFloatEditor,):
 				kwargs["precision"] = self.Precision
-			editor = edClass(**kwargs)
+			editor = edClass()
 			attr.SetEditor(editor)
 #			if edClass is self.floatEditorClass:
 #				editor.SetPrecision(self.Precision)
@@ -1839,7 +1841,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		self._baseClass = dGrid
 		preClass = wx.grid.Grid
 
-		# ????
+		# Internal flag indicating that the grid table is set
 		self._gridTableIsSet = False
 		# Internal flag indicates update invoked by grid itself.
 		self._inUpdate = False
@@ -1993,6 +1995,10 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		# Make sure that the columns are sized properly
 		dabo.ui.callAfter(self._updateColumnWidths)
 
+		# lets create the data table now after grid is fully constructed
+		tbl = dGridDataTable(self)
+		self._setTable(tbl)
+		self.fillGrid()
 
 	@dabo.ui.deadCheck
 	def _afterInitAll(self):
@@ -2132,7 +2138,9 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		try:
 			ret = self._Table.GetValue(row, col, dynamicUpdate=dynamicUpdate)
 		except (AttributeError, TypeError):
-			ret = super(dGrid, self).GetValue(row, col)
+			# TODO: during test I got here and super has no GetValue, shouldn't that just return ""
+			#ret = super(dGrid, self).GetValue(row, col)
+			return ""
 		return ret
 
 
@@ -3063,7 +3071,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					# can't compare NoneType to these types:
 					sortKey = noneSortKey
 				else:
-					sortKey = None
+					sortKey = noneSortKey  # None causes TypeError: unorderable types: dict < dict in PY3
 				sortList.sort(key=sortKey, reverse=(sortOrder == "DESC"))
 
 				# Extract the rows into a new list, then set the dataSet to the new list
@@ -4228,7 +4236,11 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			left, right = evt.GetLeftCol(), evt.GetRightCol()
 		except AttributeError:
 			left = right = evt.GetCol()
-		if mode == wx.grid.Grid.wxGridSelectRows:
+		if dabo.ui.phoenix:
+		    gSelRow = wx.grid.Grid.GridSelectRows
+		else:
+		    gSelRow = wx.grid.Grid.wxGridSelectRows
+		if mode == gSelRow:
 			if (top != bott) or (top != origCol):
 				# Attempting to select a range
 				if top == origRow:
@@ -5051,13 +5063,19 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					dabo.ui.callAfter(self._setSelectionMode, val)
 			elif val2 == "co":
 				try:
-					self.SetSelectionMode(wx.grid.Grid.wxGridSelectColumns)
+					if dabo.ui.phoenix:
+						self.SetSelectionMode(wx.grid.Grid.GridSelectColumns)
+					else:
+						self.SetSelectionMode(wx.grid.Grid.wxGridSelectColumns)
 					self._selectionMode = "Col"
 				except dabo.ui.assertionException:
 					dabo.ui.callAfter(self._setSelectionMode, val)
 			else:
 				try:
-					self.SetSelectionMode(wx.grid.Grid.wxGridSelectCells)
+					if dabo.ui.phoenix:
+						self.SetSelectionMode(wx.grid.Grid.GridSelectCells)
+					else:
+						self.SetSelectionMode(wx.grid.Grid.wxGridSelectCells)
 					self._selectionMode = "Cell"
 				except dabo.ui.assertionException:
 					dabo.ui.callAfter(self._setSelectionMode, val)
@@ -5510,7 +5528,8 @@ class _dGrid_test(dGrid):
 			{"name" : "Halle Berry", "age" : thisYear - 1966, "coder" :	 False, "color": "orange"},
 			{"name" : "Steve Wozniak", "age" : thisYear - 1950, "coder" :  True, "color": "yellow"},
 			{"name" : "LeBron James", "age" : thisYear - 1984, "coder" :  False, "color": "gold"},
-			{"name" : "Madeline Albright", "age" : thisYear - 1937, "coder" :  False, "color": "red"}]
+			{"name" : "Madeline Albright", "age" : thisYear - 1937, "coder" :  False, "color": "red"}
+		]
 
 
 		for row in range(len(ds)):
@@ -5528,11 +5547,12 @@ class _dGrid_test(dGrid):
 	def afterInit(self):
 		super(_dGrid_test, self).afterInit()
 
-		self.addColumn(Name="Geek", DataField="coder", Caption="Geek?",
-				       Order=10, DataType="bool", Width=60, Sortable=False,
-				       Searchable=False, Editable=True, HeaderFontBold=False,
-				       HorizontalAlignment="Center", VerticalAlignment="Center",
-				       Resizable=False)
+		# TODO temp just for Py3 test
+		#self.addColumn(Name="Geek", DataField="coder", Caption="Geek?",
+				       #Order=10, DataType="bool", Width=60, Sortable=False,
+				       #Searchable=False, Editable=True, HeaderFontBold=False,
+				       #HorizontalAlignment="Center", VerticalAlignment="Center",
+				       #Resizable=False)
 
 		col = dColumn(self, Name="Person", Order=20, DataField="name",
 				      DataType="string", Width=200, Caption="Celebrity Name",
@@ -5556,9 +5576,10 @@ class _dGrid_test(dGrid):
 		# Since we're using a big font, set a minimum height for the editor
 		col.CustomEditorClass = dabo.ui.makeGridEditor(ColoredText, minHeight=40)
 
-		self.addColumn(Name="Age", Order=30, DataField="age",
-				       DataType="integer", Width=40, Caption="Age",
-				       Sortable=True, Searchable=True, Editable=True)
+		# TODO temp just for Py3 test
+		#self.addColumn(Name="Age", Order=30, DataField="age",
+				       #DataType="integer", Width=40, Caption="Age",
+				       #Sortable=True, Searchable=True, Editable=True)
 
 		col = dColumn(self, Name="Color", Order=40, DataField="color",
 				      DataType="string", Width=40, Caption="Favorite Color",
