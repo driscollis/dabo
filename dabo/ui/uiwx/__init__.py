@@ -1535,7 +1535,7 @@ def makeGridEditor(controlClass, minWidth=None, minHeight=None, **controlProps):
 			ht = rect.height+2
 			if self._minHeight:
 				ht = max(self._minHeight, ht)
-			self._control.SetDimensions(rect.x, rect.y, wd, ht, wx.SIZE_ALLOW_MINUS_ONE)
+			self._control.SetSize(rect.x, rect.y, wd, ht, wx.SIZE_ALLOW_MINUS_ONE)
 
 		def PaintBackground(self, rect, attr):
 			"""
