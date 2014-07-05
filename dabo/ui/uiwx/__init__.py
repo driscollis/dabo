@@ -1507,7 +1507,7 @@ def makeGridEditor(controlClass, minWidth=None, minHeight=None, **controlProps):
 			ctrl = self._control
 			grid = self._grid
 
-			if key == dKeys.key_Up and not mod and not shift:
+			if key == keys.key_Up and not mod and not shift:
 				grid.HideCellEditControl()
 				row = grid.CurrentRow - 1
 				if row < 0:
@@ -1515,7 +1515,7 @@ def makeGridEditor(controlClass, minWidth=None, minHeight=None, **controlProps):
 				grid.CurrentRow = row
 				evt.stop()
 
-			elif key == dKeys.key_Down and not mod and not shift:
+			elif key == keys.key_Down and not mod and not shift:
 				grid.HideCellEditControl()
 				row = grid.CurrentRow + 1
 				if row > grid.RowCount - 1:
