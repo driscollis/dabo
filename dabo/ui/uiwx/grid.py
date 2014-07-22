@@ -530,7 +530,7 @@ class dColumn(dabo.ui.pemmixinbase.dPemMixinBase):
 			"datetime" : self.stringRendererClass,
 			"bool" : self.boolRendererClass,
 			"int" : self.intRendererClass,
-		    "integer" : self.intRendererClass,
+			"integer" : self.intRendererClass,
 			"long" : self.longRendererClass,
 			"decimal" : self.decimalRendererClass,
 			"float" : self.floatRendererClass,
@@ -4237,9 +4237,9 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		except AttributeError:
 			left = right = evt.GetCol()
 		if dabo.ui.phoenix:
-		    gSelRow = wx.grid.Grid.GridSelectRows
+			gSelRow = wx.grid.Grid.GridSelectRows
 		else:
-		    gSelRow = wx.grid.Grid.wxGridSelectRows
+			gSelRow = wx.grid.Grid.wxGridSelectRows
 		if mode == gSelRow:
 			if (top != bott) or (top != origCol):
 				# Attempting to select a range
@@ -5549,10 +5549,10 @@ class _dGrid_test(dGrid):
 
 		# TODO temp just for Py3 test
 		#self.addColumn(Name="Geek", DataField="coder", Caption="Geek?",
-				       #Order=10, DataType="bool", Width=60, Sortable=False,
-				       #Searchable=False, Editable=True, HeaderFontBold=False,
-				       #HorizontalAlignment="Center", VerticalAlignment="Center",
-				       #Resizable=False)
+					#Order=10, DataType="bool", Width=60, Sortable=False,
+					#Searchable=False, Editable=True, HeaderFontBold=False,
+					#HorizontalAlignment="Center", VerticalAlignment="Center",
+					#Resizable=False)
 
 		col = dColumn(self, Name="Person", Order=20, DataField="name",
 				      DataType="string", Width=200, Caption="Celebrity Name",
@@ -5578,8 +5578,8 @@ class _dGrid_test(dGrid):
 
 		# TODO temp just for Py3 test
 		#self.addColumn(Name="Age", Order=30, DataField="age",
-				       #DataType="integer", Width=40, Caption="Age",
-				       #Sortable=True, Searchable=True, Editable=True)
+					#DataType="integer", Width=40, Caption="Age",
+					#Sortable=True, Searchable=True, Editable=True)
 
 		col = dColumn(self, Name="Color", Order=40, DataField="color",
 				      DataType="string", Width=40, Caption="Favorite Color",
