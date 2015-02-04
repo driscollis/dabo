@@ -189,6 +189,12 @@ class uiApp(dObject, wx.App):
 
 	def OnInit(self):
 		app = self.dApp
+		# As of wx3, locale must be set using wx.Locale; this can only be
+		# created after the wx.App's initialization, so locale is moved here
+		# (also note setting locale is no longer toolkit-agnostic, so other
+		# toolkit bindings would need to handle it internally)
+		if dabo.loadUserLocale:
+			self.locale = wx.Locale(wx.LANGUAGE_DEFAULT)
 		if not self.checkForUpdates():
 			return False
 		if app.showSplashScreen:
