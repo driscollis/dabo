@@ -5,6 +5,9 @@ import wx
 import dabo.dEvents as dEvents
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
+	if __package__ is None:
+		import dabo.ui.uiwx
+		__package__ = "dabo.ui.uiwx"
 
 from . import controlmixin as dcm
 import locale, wx, sys
@@ -41,7 +44,7 @@ def getSmallUpArrowBitmap():
 
 
 def getSmallUpArrowImage():
-	stream = cStringIO.StringIO(getSmallUpArrowData())
+	stream = cStringIO(getSmallUpArrowData())
 	if dabo.ui.phoenix:
 		return wx.Image(stream)
 	else:
@@ -66,7 +69,7 @@ def getSmallDnArrowBitmap():
 
 
 def getSmallDnArrowImage():
-	stream = cStringIO.StringIO(getSmallDnArrowData())
+	stream = cStringIO(getSmallDnArrowData())
 	if dabo.ui.phoenix:
 		return wx.Image(stream)
 	else:
