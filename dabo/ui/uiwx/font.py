@@ -11,16 +11,25 @@ import dabo.dEvents as dEvents
 class dFont(dObject, wx.Font):
 	"""This class wraps the various font properties into a single object."""
 	def __init__(self, properties=None, _nativeFont=None, *args, **kwargs):
+		# we sometimes get here with an invalid font passed in
+		if _nativeFont is not None and not _nativeFont.IsOk():
+			_nativeFont = None
 		if _nativeFont is not None:
 			self._nativeFont = _nativeFont
 		else:
-			self._nativeFont = wx.Font(dabo.defaultFontSize,
-					wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL,
-					wx.FONTWEIGHT_NORMAL)
+			self._nativeFont = wx.Font(pointSize=dabo.defaultFontSize,
+					family=wx.FONTFAMILY_DEFAULT, style=wx.FONTSTYLE_NORMAL,
+					weight=wx.FONTWEIGHT_NORMAL)
 		self._macNonScaledSize = 0
 
 		super(dFont, self).__init__(properties=properties, *args, **kwargs)
-		wx.Font.__init__(self, self._nativeFont)
+		# need to do it the long way, otherwise we get an exception
+		# "Required argument 'family' (pos 2) not found"
+		wx.Font.__init__(self,
+		                 self._nativeFont.PointSize,
+		                 self._nativeFont.Family,
+		                 self._nativeFont.Style,
+		                 self._nativeFont.Weight)
 
 
 	def _propsChanged(self):
