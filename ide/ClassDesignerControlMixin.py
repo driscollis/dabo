@@ -5,6 +5,7 @@ import os
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
+		
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 import dabo.dEvents as dEvents
@@ -16,9 +17,9 @@ from ClassDesignerComponents import LayoutBorderSizer
 from ClassDesignerComponents import LayoutGridSizer
 from ClassDesignerComponents import LayoutSaverMixin
 from ClassDesignerComponents import classFlagProp
-from dabo.ui.uiwx.dPageFrameMixin import dPageFrameMixin
+from dabo.ui.uiwx.pageframemixin import dPageFrameMixin
 from ClassDesignerExceptions import PropertyUpdateException
-from dabo.ui import dKeys
+#from dabo.ui import keys
 
 dui = dabo.ui
 

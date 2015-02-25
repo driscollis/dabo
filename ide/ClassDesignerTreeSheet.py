@@ -4,7 +4,6 @@ dabo.ui.loadUI("wx")
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-from dabo.ui import dKeys
 from ClassDesignerComponents import LayoutPanel
 from ClassDesignerComponents import LayoutBasePanel
 from ClassDesignerComponents import LayoutSpacerPanel

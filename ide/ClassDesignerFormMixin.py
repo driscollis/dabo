@@ -31,7 +31,7 @@ from ClassDesignerComponents import classFlagProp
 import dabo.lib.xmltodict as xtd
 import dabo.lib.DesignerUtils as desUtil
 import dabo.ui.dialogs as dlgs
-from dabo.ui import dKeys
+from dabo.ui import keys
 dui = dabo.ui
 
 
@@ -130,8 +130,8 @@ class ClassDesignerFormMixin(LayoutSaverMixin):
 
 	def onKeyChar(self, evt):
 		code = evt.keyCode
-		if code not in (dKeys.key_Left, dKeys.key_Right, dKeys.key_Up,
-				dKeys.key_Down, dKeys.key_Back, dKeys.key_Delete):
+		if code not in (keys.key_Left, keys.key_Right, keys.key_Up,
+				keys.key_Down, keys.key_Back, keys.key_Delete):
 			# We don't need to do anything
 			return
 		if self.UseSizers:
