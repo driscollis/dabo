@@ -827,7 +827,11 @@ class dPemMixin(dPemMixinBase):
 	def _getID(self):
 		"""Override the default behavior to return the wxPython ID."""
 		try:
-			ret = self.GetId()
+			# TODO: Phoenix this is needed so we get to _constructed in dGrid
+			if self:
+				ret = self.GetId()
+			else:
+				ret = wx.NewId()
 		except (TypeError, AttributeError):
 			# Object doesn't support GetID(), which includes trying
 			# to get the id of a not-yet-fully-instantiated wxPython
@@ -2468,7 +2472,11 @@ class dPemMixin(dPemMixinBase):
 
 	def _getName(self):
 		try:
-			name = self.GetName()
+			# TODO: Phoenix this is needed so we get to _constructed in dGrid
+			if self:
+				name = self.GetName()
+			else:
+				name = 'not yet instantiated'
 		except (TypeError, AttributeError):
 			# Some objects that inherit from dPemMixin (dMenu*) don't have GetName()
 			# or SetName() methods. Or, the wxPython object isn't fully

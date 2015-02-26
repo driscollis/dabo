@@ -2050,6 +2050,18 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 		super(dGrid, self)._initEvents()
 
+	def _constructed(self):
+		# TODO: Phoenix is there a better way
+		if dabo.ui.phoenix:
+			if self:
+				if self.GetTable():
+					return True
+				else:
+					return False
+			else:
+				return False
+		else:
+			return cm.dControlMixin._constructed(self)
 
 	def initHeader(self):
 		"""Initialize behavior for the grid header region."""
@@ -5539,7 +5551,7 @@ class _dGrid_test(dGrid):
 	def afterInit(self):
 		super(_dGrid_test, self).afterInit()
 
-		# TODO: Phoenix
+		# TODO: Phoenix has an issue with boolean columns
 		if not dabo.ui.phoenix:
 			self.addColumn(Name="Geek", DataField="coder", Caption="Geek?",
 				Order=10, DataType="bool", Width=60, Sortable=False,
@@ -5569,7 +5581,7 @@ class _dGrid_test(dGrid):
 		# Since we're using a big font, set a minimum height for the editor
 		col.CustomEditorClass = dabo.ui.makeGridEditor(ColoredText, minHeight=40)
 
-		# TODO: Phoenix
+		# TODO: Phoenix has an issue with int columns
 		if not dabo.ui.phoenix:
 			self.addColumn(Name="Age", Order=30, DataField="age",
 				DataType="integer", Width=40, Caption="Age",

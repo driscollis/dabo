@@ -642,15 +642,26 @@ class PropSheet(dabo.ui.dPanel):
 
 
 class PropertyGrid(dabo.ui.dGrid):
+	def __init__(self, *args, **kwargs):
+		super(PropertyGrid, self).__init__(*args, **kwargs)
+	
 	def initProperties(self):
-		self.SelectionMode = "Row"
-		self.MultipleSelection = False
-		self.RowColorEven = "papayawhip"
-		self.RowColorOdd = "white"
-		self.AlternateRowColoring = True
+		if not dabo.ui.phoenix:
+			self.SelectionMode = "Row"
+			self.MultipleSelection = False
+			self.RowColorEven = "papayawhip"
+			self.RowColorOdd = "white"
+			self.AlternateRowColoring = True
 
 
 	def afterInit(self):
+		if dabo.ui.phoenix:
+			self.SelectionMode = "Row"
+			self.MultipleSelection = False
+			self.RowColorEven = "papayawhip"
+			self.RowColorOdd = "white"
+			self.AlternateRowColoring = True
+
 		self._handler = None
 		self.HeaderHeight = 20
 
