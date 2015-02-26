@@ -573,7 +573,7 @@ class EditorForm(dabo.ui.dForm):
 		mb.remove(mb.getMenuIndex("base_view"))
 		runMenu = dabo.ui.dMenu(Caption=_("&Run"), MenuID="base_run")
 		mb.insertMenu(3, runMenu)
-		dIcons = dabo.ui.dIcons
+		dIcons = dabo.ui.icons
 
 		fileMenu.prependSeparator()
 		itm = fileMenu.prepend(_("Reload from Disk"), OnHit=self.onFileReload, ItemID="file_reload",
