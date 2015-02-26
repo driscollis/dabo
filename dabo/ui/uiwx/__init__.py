@@ -7,7 +7,7 @@ import glob
 from six.moves import urllib
 import datetime
 import time
-from six.moves import cStringIO
+from six import BytesIO
 import warnings
 import traceback
 import dabo
@@ -1856,8 +1856,11 @@ def bitmapFromData(data):
 
 
 def imageFromData(data):
-	stream = cStringIO.StringIO(data)
-	return ImageFromStream(stream)
+	stream = BytesIO(data)
+	if dabo.ui.phoenix:
+		return wx.Image(stream)
+	else:
+		return ImageFromStream(stream)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 
