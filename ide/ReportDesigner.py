@@ -4,6 +4,8 @@ from six import string_types as sixBasestring
 import sys
 import os
 import copy
+from functools import cmp_to_key
+
 import dabo.ui
 dabo.ui.loadUI("wx")
 from dabo.dApp import dApp
@@ -734,7 +736,7 @@ class ReportObjectTree(dabo.ui.dTreeView):
 			parentNode.FontSize = fontSize
 			parentNode.Object = frm
 			elements = frm.keys()
-			elements.sort(rw._elementSort)
+			elements.sort(key=cmp_to_key(rw._elementSort))
 			for name in elements:
 				self.recurseLayout(frm=frm[name], parentNode=parentNode)
 			return
