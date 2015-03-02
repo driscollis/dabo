@@ -2183,7 +2183,8 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			col = self.CurrentColumn
 		ret = self.GetValue(row, col, dynamicUpdate=False)
 		if isinstance(ret, str):
-			ret = ret.decode(self.Encoding)
+			if six.PY2:
+				ret = ret.decode(self.Encoding)
 		return ret
 
 	def setValue(self, row, col, val):
