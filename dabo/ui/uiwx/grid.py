@@ -4695,7 +4695,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 				self._restoreSort()
 				dabo.ui.callAfter(self.refresh)
 		else:
-			self._properties["DataSet"] = val
+			self._dataSet = val
 
 
 	def _getDataSource(self):
@@ -5064,7 +5064,10 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 					dabo.ui.callAfter(self._setSelectionMode, val)
 			elif val2 == "co":
 				try:
-					self.SetSelectionMode(wx.grid.Grid.wxGridSelectColumns)
+					if dabo.ui.phoenix:
+						self.SetSelectionMode(wx.grid.Grid.GridSelectColumns)
+					else:
+						self.SetSelectionMode(wx.grid.Grid.wxGridSelectColumns)
 					self._selectionMode = "Col"
 				except dabo.ui.assertionException:
 					dabo.ui.callAfter(self._setSelectionMode, val)
