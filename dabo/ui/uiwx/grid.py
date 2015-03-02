@@ -2686,7 +2686,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 			self._updateColumnWidths()
 
 
-	def _paintHeader(self, updateBox=None):
+	def _paintHeader(self, updateBox=None, paintevent=False):
 		"""
 		This method handles all of the display for the header, including writing
 		the Captions along with any sort indicators.
@@ -2698,10 +2698,10 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 		w.SetBackgroundColour((255, 255, 255))
 		if updateBox is None:
 			updateBox = w.GetClientRect()
-		try:
+		if paintevent:
 			# When called from OnPaint event, there should be PaintDC context.
 			dc = wx.PaintDC(w)
-		except dabo.ui.assertionException:
+		else:
 			dc = wx.ClientDC(w)
 		textAngle = {True: 90, False: 0}[self.VerticalHeaders]
 		self._columnMetrics = []
@@ -3067,11 +3067,14 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 				if sortingStrings and not caseSensitive:
 					sortKey = caseInsensitiveSortKey
-				elif dataType in ("date", "datetime"):
-					# can't compare NoneType to these types:
-					sortKey = noneSortKey
+				#elif dataType in ("date", "datetime"):
+					## can't compare NoneType to these types:
+					#sortKey = noneSortKey
 				else:
-					sortKey = None
+					# TODO: Phoenix, we get None to list at least on Py3
+					# do we need something more sophisticated then this???
+					# can't compare NoneType
+					sortKey = noneSortKey
 				sortList.sort(key=sortKey, reverse=(sortOrder == "DESC"))
 
 				# Extract the rows into a new list, then set the dataSet to the new list
@@ -4451,7 +4454,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 
 	def __onWxHeaderPaint(self, evt):
 		updateBox = self._getWxHeader().GetUpdateRegion().GetBox()
-		self._paintHeader(updateBox)
+		self._paintHeader(updateBox, paintevent=True)
 
 
 	def _getColRowForPosition(self, pos):
@@ -5528,15 +5531,17 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
 class _dGrid_test(dGrid):
 	def initProperties(self):
 		thisYear = datetime.datetime.now().year
+		tday = datetime.date.today()
+		yday = tday-datetime.timedelta(days=1)
 		ds = [
-				{"name" : "Ed Leafe", "age" : thisYear - 1957, "coder" :  True, "color": "cornsilk"},
-				{"name" : "Paul McNett", "age" : thisYear - 1969, "coder" :	 True, "color": "wheat"},
-				{"name" : "Ted Roche", "age" : thisYear - 1958, "coder" :  True, "color": "goldenrod"},
-				{"name" : "Derek Jeter", "age": thisYear - 1974, "coder" :	False, "color": "white"},
-				{"name" : "Halle Berry", "age" : thisYear - 1966, "coder" :	 False, "color": "orange"},
-				{"name" : "Steve Wozniak", "age" : thisYear - 1950, "coder" :  True, "color": "yellow"},
-				{"name" : "LeBron James", "age" : thisYear - 1984, "coder" :  False, "color": "gold"},
-				{"name" : "Madeline Albright", "age" : thisYear - 1937, "coder" :  False, "color": "red"}]
+				{"name" : "Ed Leafe", "age" : thisYear - 1957, "coder" :  True, "color": "cornsilk", "date": tday},
+				{"name" : "Paul McNett", "age" : thisYear - 1969, "coder" :	 True, "color": "wheat", "date": yday},
+				{"name" : "Ted Roche", "age" : thisYear - 1958, "coder" :  True, "color": "goldenrod", "date": tday},
+				{"name" : "Derek Jeter", "age": thisYear - 1974, "coder" :	False, "color": "white", "date": yday},
+				{"name" : "Halle Berry", "age" : thisYear - 1966, "coder" :	 False, "color": "orange", "date": tday},
+				{"name" : "Steve Wozniak", "age" : thisYear - 1950, "coder" :  True, "color": "yellow", "date": yday},
+				{"name" : "LeBron James", "age" : thisYear - 1984, "coder" :  False, "color": "gold", "date": tday},
+				{"name" : "Madeline Albright", "age" : thisYear - 1937, "coder" :  False, "color": "red", "date": yday}]
 
 
 		for row in range(len(ds)):
@@ -5593,6 +5598,11 @@ class _dGrid_test(dGrid):
 		col = dColumn(self, Name="Color", Order=40, DataField="color",
 				DataType="string", Width=40, Caption="Favorite Color",
 				Sortable=True, Searchable=True, Editable=True, Expand=False)
+		self.addColumn(col)
+
+		col = dColumn(self, Name="Color", Order=40, DataField="date",
+			          DataType="date", Width=40, Caption="Date",
+			          Sortable=True, Searchable=True, Editable=True, Expand=False)
 		self.addColumn(col)
 
 		col.ListEditorChoices = dColors.colors
