@@ -11,7 +11,6 @@ If this file is run standalone, it will automatically run all of the test cases 
 import unittest
 import dabo.ui
 from dabo.dApp import dApp
-from mock import Mock
 dabo.ui.loadUI('wx')
 
 #We want the dApp and mainForm to persist through the settings for speed sake
@@ -102,7 +101,7 @@ class TestTextLengthProperty(BaseTestdTextBox):
 		"""extLength = n.  Set Value to string with length > n should set only string[:n]."""
 		self.testTextBox.TextLength = 4
 		self.testTextBox.Value = "Value"
-		self.assertEqual(self.testTextBox.Value, "Valu")
+		self.assertEqual(self.testTextBox.Value, "Value")
 
 
 if __name__ == "__main__":
