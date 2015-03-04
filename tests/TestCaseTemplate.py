@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Test Case description goes here.
 
