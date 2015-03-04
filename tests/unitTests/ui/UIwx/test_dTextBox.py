@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Test Case for the dTextbox class.
 
@@ -91,13 +92,6 @@ class TestTextLengthProperty(wtc.WidgetTestCase):
 
 
 class Test_dTextBox(wtc.WidgetTestCase):
-
-	def mockUserInput(self, str_val, lose_focus=True):
-		txt = self.txt
-		txt._gotFocus()
-		txt.SetValue(str_val)
-		if lose_focus:
-			txt._lostFocus()
 
 	def testStringValue(self):
 		self.txt = self.form.addObject(dui.dTextBox)
