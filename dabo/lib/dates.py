@@ -276,7 +276,7 @@ def goMonth(date, months):
 	# This solution is based on
 	# http://stackoverflow.com/4130922/how-to-increment-datetime-month-in-python
 	month = date.month -1 + months
-	year = date.year + (month / 12)
+	year = int(date.year + (month / 12))
 	month = (month % 12) + 1
 	day = min(date.day, calendar.monthrange(year, month)[1])
 	return date.replace(year, month, day)
