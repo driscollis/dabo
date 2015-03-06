@@ -52,6 +52,7 @@ class WidgetTestCase(unittest.TestCase):
 		if lose_focus:
 			txt._lostFocus()
 
+	# not sure how to handle that with Dabo
 	def myYield(self, eventsToProcess=wx.EVT_CATEGORY_ALL):
 		"""
 		Since the tests are usually run before MainLoop is called then we
@@ -138,6 +139,7 @@ class WidgetTestCaseWithDB(unittest.TestCase):
 		self.form = dabo.ui.dForm()
 
 		frm = self.frm = dabo.ui.dForm(Caption="test_dForm")
+
 		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="cField", RegID="cField")
 		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="nField", RegID="nField")
 		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="iField", RegID="iField")
@@ -188,6 +190,7 @@ insert into %(childTableName)s (parent_fk, cInvNum) values (3, "IN00024");
 insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 """ % self.temp_table_name)
 
+	# not sure how to handle that with Dabo
 	def myYield(self, eventsToProcess=wx.EVT_CATEGORY_ALL):
 		"""
 		Since the tests are usually run before MainLoop is called then we
