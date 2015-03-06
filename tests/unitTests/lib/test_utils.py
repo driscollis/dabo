@@ -60,7 +60,8 @@ class Test_Utils(unittest.TestCase):
 			self.assertEqual(type(kk), str)
 
 
-	def test_Pathing(self):
+	@unittest.skipIf(sys.platform == 'win32', "only on non Windows systems")
+	def test_PathingOth(self):
 		prfx = utils.getPathAttributePrefix()
 		pth = "a/b/file2"
 		self.assertEqual(utils.resolvePath(pth), "a/b/file2")
@@ -80,6 +81,26 @@ class Test_Utils(unittest.TestCase):
 		utils.resolveAttributePathing(atts, "a1/")
 		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "../a/b/file2"})
 
+	@unittest.skipIf(sys.platform in ('linux2', 'darwin'), "only on non Windows systems")
+	def test_PathingWin(self):
+		prfx = utils.getPathAttributePrefix()
+		pth = "a/b/file2"
+		self.assertEqual(utils.resolvePath(pth), "a\\b\\file2")
+		pth2 = "../../file2"
+		self.assertEqual(utils.resolvePath(pth2, "a1\\b1"), "..\\..\\file2")
+		self.assertEqual(utils.relativePath(pth), "a\\b\\file2")
+		self.assertEqual(utils.relativePath(pth2), "..\\..\\file2")
+		self.assertEqual(utils.relativePath(pth, pth2), "..\\Temp\\relpath_tests_dir\\a\\b\\file2")
+		self.assertEqual(utils.relativePathList(pth, pth2), ["..", "Temp", "relpath_tests_dir", "a", "b", "file2"])
+		atts = {"Foo": "Bar", "ThePath": "%s..\\some\\file.txt" % prfx}
+		utils.resolveAttributePathing(atts, os.getcwd())
+		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "..\\some\\file.txt"})
+		atts = {"Foo": "Bar", "ThePath": "%sa/b/file2" % prfx}
+		utils.resolveAttributePathing(atts, os.getcwd())
+		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "a\\b\\file2"})
+		atts = {"Foo": "Bar", "ThePath": "%s..\\a\\b\\file2" % prfx}
+		utils.resolveAttributePathing(atts, "a1/")
+		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "..\\a\\b\\file2"})
+
 if __name__ == "__main__":
-	suite = unittest.TestLoader().loadTestsFromTestCase(Test_Utils)
-	unittest.TextTestRunner(verbosity=2).run(suite)
+	unittest.main()
