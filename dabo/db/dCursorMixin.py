@@ -1579,8 +1579,15 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			raise dException.NoRecordsException(
 					_("No records in dataset '%s'.") % self.Table)
 
-
+	def __iter__(self):
+		"""Python 2.6-3.x version"""
+		return self
+	
 	def __next__(self):
+		"""Python 2.6-3.x version"""
+		return self.next()
+	
+	def next(self):
 		"""Move the record pointer forward one position in the recordset."""
 		if self.RowCount > 0:
 			if self.RowNumber < (self.RowCount - 1):

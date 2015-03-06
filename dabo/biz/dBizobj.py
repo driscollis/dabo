@@ -342,8 +342,15 @@ class dBizobj(dObject):
 		self._afterPointerMove()
 		self.afterPrior()
 
+	def __iter__(self):
+		"""Python 2.6-3.x version"""		
+		return self
 
 	def __next__(self):
+		"""Python 2.6-3.x version"""
+		return self.next()
+	
+	def next(self):
 		"""
 		Move to the next record of the data set.
 
