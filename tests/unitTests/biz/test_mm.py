@@ -115,7 +115,6 @@ class Test_Many_To_Many(unittest.TestCase):
 		self.assertEqual(self.reccount("membership"), orig_fan_count + 3)
 
 
-	@unittest.skip("dBizobj' object has no attribute 'mmDisssociateValue")
 	def test_dissociate(self):
 		"""Verify that bizobj.mmDisssociateValue() works correctly."""
 		pbiz = self.person_biz
@@ -128,11 +127,10 @@ class Test_Many_To_Many(unittest.TestCase):
 		pbiz.mmAssociateValue(cbiz, "company", "Amalgamated Industries")
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 2)
-		pbiz.mmDisssociateValue(cbiz, "company", "Acme Manufacturing")
+		pbiz.mmDissociateValue(cbiz, "company", "Acme Manufacturing")
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 1)
 
-	@unittest.skip("dBizobj' object has no attribute 'mmDisssociateValue")
 	def test_dissociate_list(self):
 		"""Verify that bizobj.mmDisssociateValues() works correctly."""
 		pbiz = self.person_biz
@@ -143,11 +141,10 @@ class Test_Many_To_Many(unittest.TestCase):
 				"Dabo Incorporated"])
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 3)
-		pbiz.mmDisssociateValues(cbiz, "company", ["Acme Manufacturing", "Amalgamated Industries"])
+		pbiz.mmDissociateValues(cbiz, "company", ["Acme Manufacturing", "Amalgamated Industries"])
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 1)
 
-	@unittest.skip("dBizobj' object has no attribute 'mmDisssociateAll")
 	def test_dissociateAll(self):
 		"""Verify that bizobj.mmDisssociateAll() works correctly."""
 		pbiz = self.person_biz
@@ -163,7 +160,7 @@ class Test_Many_To_Many(unittest.TestCase):
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 5)
 		# Now disassociate all of them
-		pbiz.mmDisssociateAll(cbiz)
+		pbiz.mmDissociateAll(cbiz)
 		emp_count = self.reccount("employees", "person_id = %s" % leafe_pk)
 		self.assertEqual(emp_count, 0)
 
