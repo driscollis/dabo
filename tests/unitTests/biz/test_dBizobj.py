@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
+import sys
+
 from six import integer_types as sixInt
+
 import unittest
+
 import dabo
 import dabo.db
 import dabo.biz
@@ -104,9 +108,19 @@ insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 		biz.Record.combined_name = "shouldn't be able to set this"
 		self.assertEqual(biz.Record.combined_name, "PaulKeithMcNett:23")
 
-	def test_Encoding(self):
+	@unittest.skipIf(sys.platform in ('linux2', 'darwin'), "only on non Windows systems")
+	def test_EncodingOth(self):
 		biz = self.biz
-		self.assertEqual(biz.Encoding, dabo.getEncoding())
+		self.assertEqual(biz.Encoding, 'utf-8')
+		self.assertEqual(dabo.getEncoding(), 'cp1252')
+		biz.Encoding = "latin-1"
+		self.assertEqual(biz.Encoding, "latin-1")
+
+	@unittest.skipIf(sys.platform == 'win32', "only on non Windows systems")	
+	def test_EncodingWin(self):
+		biz = self.biz
+		self.assertEqual(biz.Encoding, 'utf-8')
+		self.assertEqual(dabo.getEncoding(), 'utf-8')
 		biz.Encoding = "latin-1"
 		self.assertEqual(biz.Encoding, "latin-1")
 
@@ -692,5 +706,4 @@ insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 		self.testChangesToTwoChildRecords("cancel")
 
 if __name__ == "__main__":
-	suite = unittest.TestLoader().loadTestsFromTestCase(Test_dBizobj)
-	unittest.TextTestRunner(verbosity=2).run(suite)
+	unittest.main()
