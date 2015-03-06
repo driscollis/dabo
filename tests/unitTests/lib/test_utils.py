@@ -4,6 +4,7 @@ import tempfile
 import os
 import shutil
 import sys
+import six
 import dabo
 from dabo.lib import utils
 
@@ -45,8 +46,8 @@ class Test_Utils(unittest.TestCase):
 
 
 	def test_StringFuncs(self):
-		teststring = "This is a very long string with Unicode chars: Žš”¯ and 1234567890"
-		revstring = "0987654321 dna ¯”šŽ :srahc edocinU htiw gnirts gnol yrev a si sihT"
+		teststring = u"This is a very long string with Unicode chars: Žš”¯ and 1234567890"
+		revstring = u"0987654321 dna ¯”šŽ :srahc edocinU htiw gnirts gnol yrev a si sihT"
 		self.assertEqual(utils.reverseText(teststring), revstring)
 		cap = "&File"
 		self.assertEqual(utils.cleanMenuCaption(cap), "File")
@@ -90,8 +91,13 @@ class Test_Utils(unittest.TestCase):
 		self.assertEqual(utils.resolvePath(pth2, "a1\\b1"), "..\\..\\file2")
 		self.assertEqual(utils.relativePath(pth), "a\\b\\file2")
 		self.assertEqual(utils.relativePath(pth2), "..\\..\\file2")
-		self.assertEqual(utils.relativePath(pth, pth2), "..\\Temp\\relpath_tests_dir\\a\\b\\file2")
-		self.assertEqual(utils.relativePathList(pth, pth2), ["..", "Temp", "relpath_tests_dir", "a", "b", "file2"])
+		if six.PY2:
+			self.assertEqual(utils.relativePath(pth, pth2), "..\\temp\\relpath_tests_dir\\a\\b\\file2")
+			self.assertEqual(utils.relativePathList(pth, pth2), ["..", "temp", "relpath_tests_dir", "a", "b", "file2"])
+		else:
+			self.assertEqual(utils.relativePath(pth, pth2), "..\\Temp\\relpath_tests_dir\\a\\b\\file2")
+			self.assertEqual(utils.relativePathList(pth, pth2), ["..", "Temp", "relpath_tests_dir", "a", "b", "file2"])
+			
 		atts = {"Foo": "Bar", "ThePath": "%s..\\some\\file.txt" % prfx}
 		utils.resolveAttributePathing(atts, os.getcwd())
 		self.assertEqual(atts, {"Foo": "Bar", "ThePath": "..\\some\\file.txt"})
