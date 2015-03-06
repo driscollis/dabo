@@ -27,7 +27,7 @@ db_tests = {"sqlite": True,
 
 
 
-class Test_dCursorMixin(object):
+class base_dCursorMixin(object):
 	def setUp(self, _doRequery=True):
 		cur = self.cur
 		self.createSchema()
@@ -315,7 +315,7 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 #    values ("Paul Keith McNett", 23, 23.23, 3.14159);
 #    values ("Edward Leafe", 42, 42.42, 0.999999);
 #    values ("Carl Karsten", 10223, 23032.76, 11);
-		self.assertEqual(rec.ffield, Decimal("3.14159"))
+		self.assertEqual(repr(rec.ffield), repr(Decimal('3.14159')))
 		self.assertEqual(str(rec.ffield), "3.14159")
 		next(cur)
 		self.assertEqual(rec.ffield, Decimal("0.999999"))
@@ -325,43 +325,43 @@ insert into %s (cfield, ifield, nfield) values (NULL, NULL, NULL)
 		self.assertEqual(str(rec.ffield), "11.0")
 
 
-class Test_dCursorMixin_sqlite(Test_dCursorMixin, unittest.TestCase):
+class test_dCursorMixin_sqlite(base_dCursorMixin, unittest.TestCase):
 	def setUp(self):
 		con = dabo.db.dConnection(DbType="SQLite", Database=":memory:")
 		self.cur = con.getDaboCursor()
 		self.temp_table_name = "unittest%s" % getRandomUUID().replace("-", "")[-17:]
-		super(Test_dCursorMixin_sqlite, self).setUp()
+		super(test_dCursorMixin_sqlite, self).setUp()
 
-
-class Test_dCursorMixin_mysql(Test_dCursorMixin, unittest.TestCase):
+@unittest.skipIf(not db_tests['mysql'], 'mySql tests not requested')
+class test_dCursorMixin_mysql(base_dCursorMixin, unittest.TestCase):
 	def setUp(self):
 		con = dabo.db.dConnection(DbType="MySQL", User="dabo_unittest",
 				password="T30T35DB4K30Z45I67N60", Database="dabo_unittest",
 				Host="paulmcnett.com")
 		self.cur = con.getDaboCursor()
 		self.temp_table_name = "unittest%s" % getRandomUUID().replace("-", "")[-17:]
-		super(Test_dCursorMixin_mysql, self).setUp()
+		super(test_dCursorMixin_mysql, self).setUp()
 
 	def tearDown(self):
 		self.cur.execute("drop table %s" % self.temp_table_name)
-		super(Test_dCursorMixin_mysql, self).tearDown()
+		super(test_dCursorMixin_mysql, self).tearDown()
 
-
-class Test_dCursorMixin_oracle(Test_dCursorMixin, unittest.TestCase):
+@unittest.skipIf(not db_tests['oracle'], 'Oracle tests not requested')
+class test_dCursorMixin_oracle(base_dCursorMixin, unittest.TestCase):
 	def setUp(self):
 		con = dabo.db.dConnection(DbType="Oracle", User="fwadm",
 				password="V7EE74E49H6BV27TA0J65G2AS21", Database="XE",
 				Host="athlon28")
 		self.cur = con.getDaboCursor()
 		self.temp_table_name = "unittest%s" % getRandomUUID().replace("-", "")[-17:]
-		super(Test_dCursorMixin_oracle, self).setUp()
+		super(test_dCursorMixin_oracle, self).setUp()
 
 	def tearDown(self):
 		self.cur.execute("drop table %s" % self.temp_table_name)
-		super(Test_dCursorMixin_mysql, self).tearDown()
+		super(test_dCursorMixin_mysql, self).tearDown()
 
-
-class Test_dCursorMixin_firebird(Test_dCursorMixin, unittest.TestCase):
+@unittest.skipIf(not db_tests['firebird'], 'Firebird tests not requested')
+class test_dCursorMixin_firebird(base_dCursorMixin, unittest.TestCase):
 	## NOTE: Firebird not set up completely yet. What is here is courtesy Uwe
 	##		 Grauer. We need insert statements, and we need a firebird server.
 	##		 I intend to set up a test server, but don't know when it will
@@ -421,13 +421,12 @@ insert into %s (jobid, cfield, ifield, nfield) values (%f, NULL, NULL, NULL)
 
 if __name__ == "__main__":
 	testClasses = []
-	mapping = {"sqlite": Test_dCursorMixin_sqlite,
-			"mysql": Test_dCursorMixin_mysql,
-			"firebird": Test_dCursorMixin_firebird,
-			"oracle": Test_dCursorMixin_oracle}
+	mapping = {"sqlite": test_dCursorMixin_sqlite,
+			"mysql": test_dCursorMixin_mysql,
+			"firebird": test_dCursorMixin_firebird,
+			"oracle": test_dCursorMixin_oracle}
 	for k, v in list(db_tests.items()):
 		if v:
 			testClasses.append(mapping[k])
 	for t in testClasses:
-		suite = unittest.TestLoader().loadTestsFromTestCase(t)
-		unittest.TextTestRunner(verbosity=2).run(suite)
+		unittest.main()
