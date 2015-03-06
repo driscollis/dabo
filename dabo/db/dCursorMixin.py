@@ -382,11 +382,14 @@ class dCursorMixin(dObject):
 			# Database errors need to be decoded from database encoding.
 			try:
 				if six.PY2:
-					errMsg = sixUnicode(e, self.Encoding)
+					errMsg = sixUnicode(e.message, self.Encoding)
 				else:
 					errMsg = sixUnicode(e)
 			except UnicodeError:
-				errMsg = ustr(e)
+				if six.PY2:
+					errMsg = ustr(e.message)
+				else:
+					errMsg = ustr(e)
 			# If this is due to a broken connection, let the user know.
 			# Different backends have different messages, but they
 			# should all contain the string 'connect' in them.
