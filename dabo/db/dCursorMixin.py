@@ -288,35 +288,38 @@ class dCursorMixin(dObject):
 		else:
 			return tryToCorrect(pythonType, field_val, field_name)
 
-		# Do the unicode conversion last:
-		if isinstance(field_val, str) and self._convertStrToUnicode:
-			try:
-				return field_val.decode(self.Encoding)
-			except UnicodeDecodeError as e:
-				# Try some common encodings:
-				ok = False
-				for enc in ("utf-8", "latin-1", "iso-8859-1"):
-					if enc != self.Encoding:
-						try:
-							ret = field_val.decode(enc)
-							ok = True
-						except UnicodeDecodeError:
-							continue
-						if ok:
-							# change self.Encoding and log the message
-							## pkm 2010-10-21: I think that mismatched encoding should be treated as exceptional,
-							##                 and shouldn't trigger changing the cursor Encoding which should
-							##                 have been set based on what the database reported (currently it is
-							##                 not set that way, but I hope it will be in the future). But it is
-							##                 nice to at least try some different common encodings if the default
-							##                 one doesn't work, especially since Dabo currently allows non-utf8-encoded
-							##                 bytes to get saved to the database.
-							#self.Encoding = enc
-							dabo.log.error(_("Field %(fname)s: Incorrect unicode encoding set; using '%(enc)s' instead")
-								% {'fname':field_name, 'enc':enc})
-							return ret
-				else:
-					raise
+		if six.PY2:
+			# Do the unicode conversion last:
+			if isinstance(field_val, str) and self._convertStrToUnicode:
+				try:
+					return field_val.decode(self.Encoding)
+				except UnicodeDecodeError as e:
+					# Try some common encodings:
+					ok = False
+					for enc in ("utf-8", "latin-1", "iso-8859-1"):
+						if enc != self.Encoding:
+							try:
+								ret = field_val.decode(enc)
+								ok = True
+							except UnicodeDecodeError:
+								continue
+							if ok:
+								# change self.Encoding and log the message
+								## pkm 2010-10-21: I think that mismatched encoding should be treated as exceptional,
+								##                 and shouldn't trigger changing the cursor Encoding which should
+								##                 have been set based on what the database reported (currently it is
+								##                 not set that way, but I hope it will be in the future). But it is
+								##                 nice to at least try some different common encodings if the default
+								##                 one doesn't work, especially since Dabo currently allows non-utf8-encoded
+								##                 bytes to get saved to the database.
+								#self.Encoding = enc
+								dabo.log.error(_("Field %(fname)s: Incorrect unicode encoding set; using '%(enc)s' instead")
+									% {'fname':field_name, 'enc':enc})
+								return ret
+					else:
+						raise
+			else:
+				return field_val
 
 			rfv = repr(field_val)
 			dabo.log.error(_("%(rfv)s couldn't be converted to %(pythonType)s (field %(field_name)s)")
@@ -329,7 +332,10 @@ class dCursorMixin(dObject):
 			params = tuple()
 		if sql:
 			try:
-				sql = sql.decode(self.Encoding).replace("\n", " ")
+				if six.PY2:
+					sql = sql.decode(self.Encoding).replace("\n", " ")
+				else:
+					sql = sql.replace("\n", " ")
 			except UnicodeDecodeError as e:
 				sql = "(couldn't decode sql)"
 		try:
@@ -414,7 +420,10 @@ class dCursorMixin(dObject):
 			_records = dabo.db.dDataSet()
 			# Database errors need to be decoded from database encoding.
 			try:
-				errMsg = ustr(e).decode(self.Encoding)
+				if six.PY2:
+					errMsg = ustr(e).decode(self.Encoding)
+				else:
+					errMsg = ustr(e)
 			except UnicodeError:
 				errMsg = ustr(e)
 			dabo.log.error("Error fetching records: (%s, %s)" % (type(e), errMsg))
@@ -1133,8 +1142,12 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		sql = self._qMarkToParamPlaceholder("select %s from %s where %s = ?"
 				% (pkCol, tbl, field))
 		try:
-			dabo.dbActivityLog.info("lookupPKWithAdd() SQL: %s, PARAMS: %s" % (
+			if six.PY2:
+				dabo.dbActivityLog.info("lookupPKWithAdd() SQL: %s, PARAMS: %s" % (
 					sql.decode(self.Encoding).replace("\n", " "), "(%s, )" % val))
+			else:
+				dabo.dbActivityLog.info("lookupPKWithAdd() SQL: %s, PARAMS: %s" % (
+					sql.replace("\n", " "), "(%s, )" % val))
 		except Exception:
 			# A problem with writing to the log, most likely due to encoding issues
 			try:
@@ -1191,9 +1204,14 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 			sql = self._qMarkToParamPlaceholder("delete from %s where %s = ? and %s = ?"
 					% (self._assocTable, self._assocPKColThis, self._assocPKColOther))
 			try:
-				dabo.dbActivityLog.info("mmDissociateValues() SQL: %s, PARAMS: %s" % (
+				if six.PY2:
+					dabo.dbActivityLog.info("mmDissociateValues() SQL: %s, PARAMS: %s" % (
 						sql.decode(self.Encoding).replace("\n", " "), str((self._assocTable,
-					self._assocPKColThis, self._assocPKColOther))))
+					            self._assocPKColThis, self._assocPKColOther))))
+				else:
+					dabo.dbActivityLog.info("mmDissociateValues() SQL: %s, PARAMS: %s" % (
+						sql.replace("\n", " "), str((self._assocTable,
+					                                 self._assocPKColThis, self._assocPKColOther))))
 			except Exception:
 				# A problem with writing to the log, most likely due to encoding issues
 				try:
@@ -1215,8 +1233,12 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		sql = self._qMarkToParamPlaceholder("delete from %s where %s = ?"
 				% (self._assocTable, self._assocPKColThis))
 		try:
-			dabo.dbActivityLog.info("mmDissociateAll() SQL: %s" % (
+			if six.PY2:
+				dabo.dbActivityLog.info("mmDissociateAll() SQL: %s" % (
 					sql.decode(self.Encoding).replace("\n", " ")))
+			else:
+				dabo.dbActivityLog.info("mmDissociateAll() SQL: %s" % (
+					sql.replace("\n", " ")))
 		except Exception:
 			dabo.dbActivityLog.info("mmDissociateAll() (failed to log SQL")
 		try:
@@ -1249,8 +1271,12 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 		sql = self._qMarkToParamPlaceholder("select * from %s where %s = ? and %s = ?"
 				% (self._assocTable, self._assocPKColThis, self._assocPKColOther))
 		try:
-			dabo.dbActivityLog.info("mmAddToBoth() SQL: %s, PARAMS: %s" % (
+			if six.PY2:
+				dabo.dbActivityLog.info("mmAddToBoth() SQL: %s, PARAMS: %s" % (
 					sql.decode(self.Encoding).replace("\n", " "), str((thisPK, otherPK))))
+			else:
+				dabo.dbActivityLog.info("mmAddToBoth() SQL: %s, PARAMS: %s" % (
+					sql.replace("\n", " "), str((thisPK, otherPK))))
 		except Exception:
 			# A problem with writing to the log, most likely due to encoding issues
 			try:
@@ -1591,7 +1617,10 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				# Error was encountered. Raise an exception so that the
 				# calling bizobj can rollback the transaction if necessary
 				try:
-					errMsg = ustr(e).decode(self.Encoding)
+					if six.PY2:
+						errMsg = ustr(e).decode(self.Encoding)
+					else:
+						errMsg = ustr(e)
 				except UnicodeError:
 					errMsg = ustr(e)
 				dabo.dbActivityLog.info(
@@ -2034,7 +2063,8 @@ xsi:noNamespaceSchemaLocation = "http://dabodev.com/schema/dabocursor.xsd">
 				newval = datetime.date.min
 			elif typ is None:
 				newval = None
-			elif typ is buffer:
+			# TODO: Phoenix is this correct
+			elif typ is memoryview:
 				newval = memoryview("")
 			else:
 				try:
