@@ -27,5 +27,4 @@ class Test_dConnectInfo(unittest.TestCase):
 
 
 if __name__ == "__main__":
-	suite = unittest.TestLoader().loadTestsFromTestCase(Test_dConnectInfo)
-	unittest.TextTestRunner(verbosity=2).run(suite)
+	unittest.main()
