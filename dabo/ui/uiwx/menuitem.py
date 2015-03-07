@@ -70,8 +70,9 @@ class dMenuItem(pm.dPemMixin, wx.MenuItem):
 			cap = "%s\t%s" % (cap, hk)
 		curr = self.GetItemLabel()
 		## pkm: On Windows at least, setting the Icon needs to happen before setting the caption.
-		self.SetBitmap(self.Icon)
-
+		if self.Kind == wx.ITEM_NORMAL:
+			self.SetBitmap(self.Icon)	
+		
 		if ustr(cap) != ustr(curr):
 			## Win32 seems to need to clear the caption first, or funkiness
 			## can arise. And win32 in wx2.8 needs for the caption to never be
