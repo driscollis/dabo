@@ -12,10 +12,14 @@ dabo = wtc.dabo
 
 class Test_dForm(wtc.WidgetTestCaseWithDB):
 
-	@unittest.skip("frm.cField.Value returns '' ")
+	#@unittest.skip("frm.cField.Value returns '' ")
 	def testSomeSanityThings(self):
 		frm = self.frm
 		biz = frm.getBizobj()
+		frm.update(interval=0)
+		frm.refresh(interval=0)
+		self.testYield()
+		self.waitFor(10)
 		self.assertEqual(biz.Record.cField, "Paul Keith McNett")
 		self.assertEqual(frm.cField.Value, "Paul Keith McNett")
 		frm.update(interval=0)  ## Need to force the update here which would otherwise happen 100 ms in the future.

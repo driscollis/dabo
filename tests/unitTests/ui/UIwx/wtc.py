@@ -140,9 +140,13 @@ class WidgetTestCaseWithDB(unittest.TestCase):
 
 		frm = self.frm = dabo.ui.dForm(Caption="test_dForm")
 
-		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="cField", RegID="cField")
-		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="nField", RegID="nField")
-		frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="iField", RegID="iField")
+		# TODO: deprecate addObject
+		#frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="cField", RegID="cField")
+		#frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="nField", RegID="nField")
+		#frm.addObject(dabo.ui.dTextBox, DataSource=biz.DataSource, DataField="iField", RegID="iField")
+		self.cField = dabo.ui.dTextBox(frm, DataSource=biz.DataSource, DataField="cField", RegID="cField")
+		self.nField = dabo.ui.dTextBox(frm, DataSource=biz.DataSource, DataField="nField", RegID="nField")
+		self.iField = dabo.ui.dTextBox(frm, DataSource=biz.DataSource, DataField="iField", RegID="iField")
 
 		## connect the biz to the frm:
 		frm.addBizobj(biz)
@@ -189,6 +193,10 @@ insert into %(childTableName)s (parent_fk, cInvNum) values (3, "IN00024");
 		self.biz._CurrentCursor.AuxCursor.execute("""
 insert into %s (cField, iField, nField) values (NULL, NULL, NULL)
 """ % self.temp_table_name)
+		
+	def testYield(self):
+		app = wx.GetApp()
+		app.SafeYield(self.frm, True)
 
 	# not sure how to handle that with Dabo
 	def myYield(self, eventsToProcess=wx.EVT_CATEGORY_ALL):
