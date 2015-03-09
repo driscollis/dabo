@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from six.moves import cStringIO
+from six import BytesIO
 import imghdr
 import os
 
@@ -284,8 +284,8 @@ class dImage(dcm, dim.dImageMixin, wx.StaticBitmap):
 			self._bmp = val
 			self.__image = val.ConvertToImage()
 			self._picture = "(stream)"
-		elif isinstance(val, buffer):
-			val = cStringIO.StringIO(val)
+		elif isinstance(val, memoryview):
+			val = BytesIO(val)
 			img = wx.EmptyImage()
 			img.LoadStream(val)
 			self._setPicture(img)
