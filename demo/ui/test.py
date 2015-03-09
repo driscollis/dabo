@@ -129,7 +129,7 @@ class Test(object):
 				else:
 					layout = "normal"
 
-				bs.append(obj, layout)
+				bs.append(obj, layout, 1)
 
 				if isinstance(obj, ui.dEditBox):
 					vs.append(bs, "expand")
