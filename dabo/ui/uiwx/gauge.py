@@ -2,14 +2,6 @@
 import wx
 import dabo
 from dabo.dLocalize import _
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from . import controlmixin as cm
 import dabo.dEvents as dEvents
@@ -96,32 +88,3 @@ class dGauge(cm.dControlMixin, wx.Gauge):
 	DynamicOrientation = makeDynamicProperty(Orientation)
 	DynamicRange = makeDynamicProperty(Range)
 	DynamicValue = makeDynamicProperty(Value)
-
-
-
-class _dGauge_test(dGauge):
-	def afterInit(self):
-		self._timer = dabo.ui.dTimer()
-		self._timer.bindEvent(dEvents.Hit, self.onTimer)
-		self._timer.Interval = 23
-		self._timer.start()
-
-	def initProperties(self):
-		self.Range = 1000
-		self.Value = 0
-		self.Width = 300
-
-	def onTimer(self, evt):
-		if not self:
-			return
-		if self.Value < self.Range:
-			self.Value += 1
-		else:
-			self._timer.stop()
-			self.Value = 0
-			self._timer.start()
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dGauge_test)
