@@ -3,12 +3,6 @@ from six import integer_types as sixInt
 import warnings
 import wx
 import dabo
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 import dabo.dEvents as dEvents
 import dabo.dConstants as kons
 from dabo.dLocalize import _
@@ -662,17 +656,3 @@ class _FloatDialog(dDialog):
 
 	Owner = property(_getOwner, _setOwner, None,
 			_("Control which is currently managing this window.  (varies)"))
-
-
-
-
-
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(dDialog)
-	test.Test().runTest(dStandardButtonDialog)
-	test.Test().runTest(dOkCancelDialog)
-	test.Test().runTest(dYesNoDialog)
