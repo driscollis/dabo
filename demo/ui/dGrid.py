@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+import dabo.ui
 if __name__ == "__main__":
-	import dabo.ui
 	dabo.ui.loadUI("wx")
 	if __package__ is None:
 		import dabo.ui.uiwx
@@ -115,70 +115,70 @@ class _dGrid_test(dGrid):
 	def onScrollThumbRelease(self, evt):
 		print("THUMB RELEASE orientation =", evt.orientation, " scrollpos =", evt.scrollpos)
 
-if __name__ == '__main__':
-	from dabo.dApp import dApp
-	class TestForm(dabo.ui.dForm):
-		def afterInit(self):
-			self.BackColor = "khaki"
-			g = self.grid = _dGrid_test(self, RegID="sampleGrid")
-			self.Sizer.append(g, 1, "x", border=0, borderSides="all")
-			self.Sizer.appendSpacer(10)
-			gsz = dabo.ui.dGridSizer(HGap=50)
 
-			chk = dabo.ui.dCheckBox(self, Caption="Allow Editing?", RegID="gridEdit",
-					DataSource=self.grid, DataField="Editable")
-			chk.update()
-			gsz.append(chk, row=0, col=0)
+class TestForm(dabo.ui.dForm):
+	def afterInit(self):
+		self.BackColor = "khaki"
+		g = self.grid = _dGrid_test(self, RegID="sampleGrid")
+		self.Sizer.append(g, 1, "x", border=0, borderSides="all")
+		self.Sizer.appendSpacer(10)
+		gsz = dabo.ui.dGridSizer(HGap=50)
 
-			chk = dabo.ui.dCheckBox(self, Caption="Show Headers",
-					RegID="showHeaders", DataSource=self.grid,
-					DataField="ShowHeaders")
-			gsz.append(chk, row=1, col=0)
-			chk.update()
+		chk = dabo.ui.dCheckBox(self, Caption="Allow Editing?", RegID="gridEdit",
+	            DataSource=self.grid, DataField="Editable")
+		chk.update()
+		gsz.append(chk, row=0, col=0)
 
-			chk = dabo.ui.dCheckBox(self, Caption="Allow Multiple Selection",
-					RegID="multiSelect", DataSource=self.grid,
-					DataField="MultipleSelection")
-			chk.update()
-			gsz.append(chk, row=2, col=0)
+		chk = dabo.ui.dCheckBox(self, Caption="Show Headers",
+	            RegID="showHeaders", DataSource=self.grid,
+	            DataField="ShowHeaders")
+		gsz.append(chk, row=1, col=0)
+		chk.update()
 
-			chk = dabo.ui.dCheckBox(self, Caption="Vertical Headers",
-					RegID="verticalHeaders", DataSource=self.grid,
-					DataField="VerticalHeaders")
-			chk.update()
-			gsz.append(chk, row=3, col=0)
+		chk = dabo.ui.dCheckBox(self, Caption="Allow Multiple Selection",
+	            RegID="multiSelect", DataSource=self.grid,
+	            DataField="MultipleSelection")
+		chk.update()
+		gsz.append(chk, row=2, col=0)
 
-			chk = dabo.ui.dCheckBox(self, Caption="Auto-adjust Header Height",
-					RegID="autoAdjust", DataSource=self.grid,
-					DataField="AutoAdjustHeaderHeight")
-			chk.update()
-			gsz.append(chk, row=4, col=0)
+		chk = dabo.ui.dCheckBox(self, Caption="Vertical Headers",
+	            RegID="verticalHeaders", DataSource=self.grid,
+	            DataField="VerticalHeaders")
+		chk.update()
+		gsz.append(chk, row=3, col=0)
 
-			radSelect = dabo.ui.dRadioList(self, Choices=["Row", "Col", "Cell"],
-					ValueMode="string", Caption="Sel Mode", BackColor=self.BackColor,
-					DataSource=self.grid, DataField="SelectionMode", RegID="radSelect")
-			radSelect.refresh()
-			gsz.append(radSelect, row=0, col=1, rowSpan=3)
+		chk = dabo.ui.dCheckBox(self, Caption="Auto-adjust Header Height",
+	            RegID="autoAdjust", DataSource=self.grid,
+	            DataField="AutoAdjustHeaderHeight")
+		chk.update()
+		gsz.append(chk, row=4, col=0)
 
-			def setVisible(evt):
-				col = g.getColByDataField("name")
-				but = evt.EventObject
-				col.Visible = not col.Visible
-				if col.Visible:
-					but.Caption = "Make Celebrity Invisible"
-				else:
-					but.Caption = "Make Celebrity Visible"
-			butVisible = dabo.ui.dButton(self, Caption="Toggle Celebrity Visibility",
-				OnHit=setVisible)
-			gsz.append(butVisible, row=5, col=0)
+		radSelect = dabo.ui.dRadioList(self, Choices=["Row", "Col", "Cell"],
+	            ValueMode="string", Caption="Sel Mode", BackColor=self.BackColor,
+	            DataSource=self.grid, DataField="SelectionMode", RegID="radSelect")
+		radSelect.refresh()
+		gsz.append(radSelect, row=0, col=1, rowSpan=3)
 
-			self.Sizer.append(gsz, halign="Center", border=10)
-			gsz.setColExpand(True, 1)
-			self.layout()
+		def setVisible(evt):
+			col = g.getColByDataField("name")
+			but = evt.EventObject
+			col.Visible = not col.Visible
+			if col.Visible:
+				but.Caption = "Make Celebrity Invisible"
+			else:
+				but.Caption = "Make Celebrity Visible"
+		butVisible = dabo.ui.dButton(self, Caption="Toggle Celebrity Visibility",
+	        OnHit=setVisible)
+		gsz.append(butVisible, row=5, col=0)
 
-			self.fitToSizer(20, 20)
+		self.Sizer.append(gsz, halign="Center", border=10)
+		gsz.setColExpand(True, 1)
+		self.layout()
+
+		self.fitToSizer(20, 20)
 
 if __name__ == "__main__":
+	from dabo.dApp import dApp
 	app = dApp(MainFormClass=TestForm)
 	app.setup()
 	app.MainForm.radSelect.setFocus()
