@@ -1,14 +1,6 @@
 # -*- coding: utf-8 -*-
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 import dabo.dConstants as kons
 from dabo.dLocalize import _
 
@@ -145,11 +137,3 @@ class dSaveDialog(dFileDialog):
 		super(dSaveDialog, self).__init__(parent=parent, message=message,
 				defaultPath=defaultPath, defaultFile=defaultFile,
 				wildcard=wildcard, style=style)
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(dFileDialog)
-	test.Test().runTest(dFolderDialog)
-	test.Test().runTest(dSaveDialog)

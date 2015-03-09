@@ -128,7 +128,7 @@ from .dialog import dDialog
 from .dialog import dStandardButtonDialog
 from .dialog import dOkCancelDialog
 from .dialog import dYesNoDialog
-#from dEditableList import dEditableList
+from .editablelist import dEditableList
 from .editbox import dEditBox
 from .editor import dEditor
 from .filedialog import dFileDialog

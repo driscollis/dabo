@@ -2,14 +2,6 @@
 import time
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import formmixin as fm
 
 
@@ -62,9 +54,3 @@ class dFormMain(dFormMainBase, wx.Frame):
 		##  we are modifying the dFormMain class definition globally.)
 
 		dFormMainBase.__init__(self, preClass, parent, properties, *args, **kwargs)
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(dFormMain)

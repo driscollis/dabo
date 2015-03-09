@@ -9,13 +9,6 @@ import inspect
 import wx
 import wx.stc as stc
 import dabo
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors
 from dabo.dLocalize import _
@@ -2726,13 +2719,3 @@ Do you want to overwrite it?""")
 
 	ZoomLevel = property(_getZoomLevel, _setZoomLevel, None,
 		                 _("Point increase/decrease from normal viewing size  (int)"))
-
-
-
-class _dEditor_test(dEditor):
-	def afterInit(self):
-		self.Language = "Python"
-
-if __name__ == '__main__':
-	from . import test
-	test.Test().runTest(_dEditor_test)

@@ -2,12 +2,6 @@
 from six import string_types as sixBasestring
 import wx
 import dabo
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 if dabo.ui.phoenix:
 	import wx.adv
 	giz = wx.adv
@@ -230,22 +224,3 @@ class dEditableList(dcm.dControlMixin, giz.EditableListBox):
 
 	_UpButton = property(_getUpButton, None, None,
 			_("Reference to the move item up button  (wx.Button)"))
-
-
-
-class _dEditableList_test(dEditableList):
-	def afterInit(self):
-		self.Choices = ["Johnny", "Joey", "DeeDee"]
-		self.Caption = "Gabba Gabba Hey"
-
-	def onDestroy(self, evt):
-		# Need to check this, because apparently under the hood
-		# wxPython destroys and re-creates the control when you
-		# edit, add or delete an entry.
-		if self._finito:
-			print("Result:", self.Choices)
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dEditableList_test)
