@@ -211,7 +211,7 @@ from .autocomplete import dAutoComplete
 from .dockform import dDockForm
 
 try:
-	from .linePlot import dLinePlot
+	from .lineplot import dLinePlot
 except ImportError:
 	pass
 

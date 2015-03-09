@@ -1,18 +1,9 @@
 # -*- coding: utf-8 -*-
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import controlmixin as cm
 from dabo.ui import makeDynamicProperty
 from dabo.lib.utils import ustr
-
 
 
 class dLine(cm.dControlMixin, wx.StaticLine):
@@ -70,14 +61,3 @@ class dLine(cm.dControlMixin, wx.StaticLine):
 						"If the Width is greater than the Height, it will be Horizontal. "
 						"Otherwise, it will be Vertical.")
 	DynamicOrientation = makeDynamicProperty(Orientation)
-
-
-class _dLine_test(dLine):
-	def initProperties(self):
-		self.Orientation = "Horizontal"
-		self.Width = 200
-		self.Height = 10
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dLine_test)

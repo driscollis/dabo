@@ -13,18 +13,10 @@ except Exception as e:
 	_Numeric = False
 
 import dabo
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from . import controlmixin as cm
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
-
 
 
 class _TraceMixin(object):
@@ -516,36 +508,3 @@ class dLinePlot(cm.dControlMixin, plot.PlotCanvas):
 		'none' - shows no axis or tick mark values
 		'min' - shows min bounding box values
 		'auto' - rounds axis range to sensible values"""))
-
-
-
-class _dLinePlot_test(dLinePlot):
-	def initProperties(self):
-		self.XAxisLabel = "X Axis"
-		self.YAxisLabel = "Y Axis"
-		self.Caption = "Title of Graph"
-
-
-	def afterInit(self):
-		# 1000 points cos function, plotted as blue line
-		self.appendLineFromEquation("2*_Numeric.cos(%s)", 5, 10, Caption="Blue Line", LineWidth=2, LineColor="blue")
-
-		line = []
-		for i in range(10):
-			line.append((i, float(i)/2))
-		self.appendLineFromPoints(line)
-
-		data1 = 2.*_Numeric.pi*_Numeric.arange(200)/200.
-		data1.shape = (100, 2)
-		data1[:, 1] = _Numeric.sin(data1[:, 0])
-		self.appendMarkerFromPoints(data1, Caption='Green Markers', Color='green', MarkerShape='circle', MarkerSize=1)
-
-		# A few more points...
-		points = [(0., 0.), (_Numeric.pi/4., 1.), (_Numeric.pi/2, 0.), (3.*_Numeric.pi/4., -1)]
-		self.appendMarkerFromPoints(points, Caption='Cross Legend', Color='blue', MarkerShape='cross')
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dLinePlot_test)
