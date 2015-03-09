@@ -2,12 +2,6 @@
 import datetime
 import wx
 import dabo
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 from . import datacontrolmixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
@@ -469,9 +463,3 @@ C: Popup Calendar to Select
 	ExtendedCalendar = property(_getExtendedCalendar, _setExtendedCalendar, None,
 			_("""When True, the calendar is displayed in a larger format with more controls
 			for quickly moving to any date. Default=False  (bool)"""))
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest((dDateTextBox, dDateTextBox))
