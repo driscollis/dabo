@@ -92,7 +92,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 
 	def _initEvents(self):
 		super(dDatePicker, self)._initEvents()
-		self.Bind(wx.EVT_DATE_CHANGED, self._onWxHit)
+		self.Bind(dpc.EVT_DATE_CHANGED, self._onWxHit)
 
 	def _onWxHit(self, evt):
 		self._userChanged = True
@@ -280,22 +280,22 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 					% locals())
 
 	def _getAllowNullDate(self):
-		return self._hasWindowStyleFlag(wx.DP_ALLOWNONE)
+		return self._hasWindowStyleFlag(dpc.DP_ALLOWNONE)
 
 	def _setAllowNullDate(self, val):
 		if val:
-			self._addWindowStyleFlag(wx.DP_ALLOWNONE)
+			self._addWindowStyleFlag(dpc.DP_ALLOWNONE)
 		else:
-			self._delWindowStyleFlag(wx.DP_ALLOWNONE)
+			self._delWindowStyleFlag(dpc.DP_ALLOWNONE)
 
 	def _getForceShowCentury(self):
-		return self._hasWindowStyleFlag(wx.DP_SHOWCENTURY)
+		return self._hasWindowStyleFlag(dpc.DP_SHOWCENTURY)
 
 	def _setForceShowCentury(self):
 		if val:
-			self._addWindowStyleFlag(wx.DP_SHOWCENTURY)
+			self._addWindowStyleFlag(dpc.DP_SHOWCENTURY)
 		else:
-			self._delWindowStyleFlag(wx.DP_SHOWCENTURY)
+			self._delWindowStyleFlag(dpc.DP_SHOWCENTURY)
 
 	def _getInvalidBackColor(self):
 		return self._invalidBackColor
@@ -327,7 +327,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 			self._properties["MinValue"] = val
 
 	def _getPickerMode(self):
-		if self._hasWindowStyleFlag(wx.DP_DROPDOWN):
+		if self._hasWindowStyleFlag(dpc.DP_DROPDOWN):
 			mode = "Dropdown"
 		else:
 			mode = "Spin"
@@ -336,7 +336,7 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 	def _setPickerMode(self, val):
 		mode = val[:1].lower()
 		if mode in "ds":
-			self._addWindowStyleFlag({"d": wx.DP_DROPDOWN, "s": wx.DP_SPIN}[mode])
+			self._addWindowStyleFlag({"d": dpc.DP_DROPDOWN, "s": dpc.DP_SPIN}[mode])
 		else:
 			raise ValueError(_("The only allowed values are: 'Dropdown', 'Spin'."))
 
@@ -382,16 +382,3 @@ class dDatePicker(dcm.dDataControlMixin, dpc.DatePickerCtrl):
 
 	DynamicMaxValue = makeDynamicProperty(MaxValue)
 	DynamicMinValue = makeDynamicProperty(MinValue)
-
-
-if __name__ == "__main__":
-	import datetime
-	from . import test
-
-	class TestBase(dDatePicker):
-
-		def onValueChanged(self, evt):
-			print("onValueChanged")
-
-	test.Test().runTest(TestBase, AllowNullDate=True, Value=datetime.date(1970, 12, 3))
-	test.Test().runTest(TestBase, BackColor="orange", PickerMode="Spin", AllowNullDate=True)
