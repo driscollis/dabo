@@ -172,7 +172,7 @@ class dLinePlot(cm.dControlMixin, plot.PlotCanvas):
 		coordinates = []
 		s = "value = %s" % equation
 		for index in range(len(pointList)):
-			exec(s % pointList[index])
+			exec(s % pointList[index], globals())
 			coordinates.append((pointList[index], value))
 		self.appendLineFromPoints(coordinates, LineColor, LineStyle, LineWidth, Caption)
 
@@ -194,14 +194,16 @@ class dLinePlot(cm.dControlMixin, plot.PlotCanvas):
 		marker.FillStyle = FillStyle
 		self.Traces.append(marker)
 		self.Redraw()
-
+		
+	def DoGetBestSize(self):
+		return self.canvas.GetSize()
 
 	def OnSize(self, event):
 		# The Buffer init is done here, to make sure the buffer is always
 		# the same size as the Window
 		Size  = self.canvas.GetClientSize()
-		Size.width = max(1, Size.width)
-		Size.height = max(1, Size.height)
+		Size.width = max(20, Size.width)
+		Size.height = max(20, Size.height)
 
 		# Make new offscreen bitmap: this bitmap will always have the
 		# current drawing in it, so it can be used to save the image to
