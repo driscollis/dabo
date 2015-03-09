@@ -6,7 +6,7 @@ import dabo.dEvents as dEvents
 
 from . import controlmixin as dcm
 import locale, wx, sys
-from six.moves import cStringIO
+from six import BytesIO
 
 import wx.lib.mixins.listctrl as listmix
 from wx import ImageFromStream, BitmapFromImage
@@ -23,7 +23,7 @@ Contributed to the wxPython project under the wxPython project's license.
 
 def getSmallUpArrowData():
 	return \
-"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x10\x00\x00\x00\x10\x08\x06\
+b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x10\x00\x00\x00\x10\x08\x06\
 \x00\x00\x00\x1f\xf3\xffa\x00\x00\x00\x04sBIT\x08\x08\x08\x08|\x08d\x88\x00\
 \x00\x00<IDAT8\x8dcddbf\xa0\x040Q\xa4{h\x18\xf0\xff\xdf\xdf\xffd\x1b\x00\xd3\
 \x8c\xcf\x10\x9c\x06\xa0k\xc2e\x08m\xc2\x00\x97m\xd8\xc41\x0c \x14h\xe8\xf2\
@@ -39,7 +39,7 @@ def getSmallUpArrowBitmap():
 
 
 def getSmallUpArrowImage():
-	stream = cStringIO(getSmallUpArrowData())
+	stream = BytesIO(getSmallUpArrowData())
 	if dabo.ui.phoenix:
 		return wx.Image(stream)
 	else:
@@ -64,7 +64,7 @@ def getSmallDnArrowBitmap():
 
 
 def getSmallDnArrowImage():
-	stream = cStringIO(getSmallDnArrowData())
+	stream = BytesIO(getSmallDnArrowData())
 	if dabo.ui.phoenix:
 		return wx.Image(stream)
 	else:
