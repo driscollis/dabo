@@ -2,14 +2,6 @@
 import wx
 import dabo
 import dabo.ui
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import controlmixin as cm
 from . import imagemixin as dim
 from dabo.dLocalize import _
@@ -30,14 +22,3 @@ class dBitmap(cm.dControlMixin, dim.dImageMixin, wx.StaticBitmap):
 
 		if picName:
 			self.Picture = picName
-
-
-
-class _dBitmap_test(dBitmap):
-	def initProperties(self):
-		self.Picture = "daboIcon016"
-#		self.Size = (40,30)
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dBitmap_test)

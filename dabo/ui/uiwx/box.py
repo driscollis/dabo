@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 import wx, dabo, dabo.ui
 
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import controlmixin as cm
 
 class dBox(cm.dControlMixin, wx.StaticBox):
@@ -26,13 +19,3 @@ class dBox(cm.dControlMixin, wx.StaticBox):
 
 	def _initEvents(self):
 		super(dBox, self)._initEvents()
-
-
-class _dBox_test(dBox):
-	def initProperties(self):
-		self.Width = 100
-		self.Height = 20
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dBox_test)

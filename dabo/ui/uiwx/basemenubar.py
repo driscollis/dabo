@@ -186,12 +186,3 @@ class dBaseMenuBar(dMenuBar):
 		self.viewMenu = self.appendMenu(ViewMenu(self, MenuID="base_view"))
 		self.helpMenu = self.appendMenu(HelpMenu(self, MenuID="base_help"))
 		super(dBaseMenuBar, self)._afterInit()
-
-
-
-if __name__ == "__main__":
-	from dabo.dApp import dApp
-	app = dApp()
-	app.setup()
-	app.MainForm.MenuBar = dBaseMenuBar()
-	app.start()
