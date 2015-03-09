@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 from six import string_types as sixBasestring
 import wx
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 import dabo
-
 from . import controlitemmixin as dcm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
@@ -281,48 +274,3 @@ class dComboBox(dcm.dControlItemMixin, wx.ComboBox):
 
 
 	DynamicUserValue = makeDynamicProperty(UserValue)
-
-
-
-class _dComboBox_test(dComboBox):
-	def initProperties(self):
-		self.setup()
-		self.AppendOnEnter = True
-
-
-	def setup(self):
-		# Simulating a database:
-		wannabeCowboys = ({"lname": "Reagan", "fname": "Ronald", "iid": 42},
-			{"lname": "Bush", "fname": "George W.", "iid": 23})
-
-		choices = []
-		keys = {}
-		for wannabe in wannabeCowboys:
-			choices.append("%s %s" % (wannabe['fname'], wannabe['lname']))
-			keys[wannabe["iid"]] = len(choices) - 1
-
-		self.Choices = choices
-		self.Keys = keys
-		self.ValueMode = 'key'
-
-
-	def beforeAppendOnEnter(self):
-		txt = self._textToAppend.strip().lower()
-		if txt == "dabo":
-			print(_("Attempted to add Dabo to the list!!!"))
-			return False
-		elif txt.find("nixon") > -1:
-			self._textToAppend = "Tricky Dick"
-
-
-	def onHit(self, evt):
-		print("KeyValue: ", self.KeyValue)
-		print("PositionValue: ", self.PositionValue)
-		print("StringValue: ", self.StringValue)
-		print("Value: ", self.Value)
-		print("UserValue: ", self.UserValue)
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dComboBox_test)

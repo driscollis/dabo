@@ -2,13 +2,6 @@
 import wx
 import dabo
 from dabo.ui import makeDynamicProperty
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import datacontrolmixin as dcm
 from dabo.dLocalize import _
 
@@ -134,28 +127,3 @@ class dCheckBox(dcm.dDataControlMixin, wx.CheckBox):
 	DynamicThreeState = makeDynamicProperty(ThreeState)
 	DynamicUserThreeState = makeDynamicProperty(UserThreeState)
 	DynamicValue = makeDynamicProperty(Value)
-
-
-
-class _dCheckBox_test(dCheckBox):
-	def initProperties(self):
-		self.Caption = _("Do you wish to pass?")
-
-class _dCheckBox_test3_a(dCheckBox):
-	def initProperties(self):
-		self.Caption = _("3-state / None; user 3-state:False")
-		self.ThreeState = True
-		self.Value = None
-
-class _dCheckBox_test3_b(dCheckBox):
-	def initProperties(self):
-		self.Caption = _("3-state / None; user 3-state:True")
-		self.ThreeState = True
-		self.UserThreeState = True
-		self.Value = None
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(
-		(_dCheckBox_test, _dCheckBox_test3_a, _dCheckBox_test3_b))
