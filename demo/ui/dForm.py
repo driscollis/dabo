@@ -2,9 +2,6 @@
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 
 from dabo.ui import dForm
 from dabo.ui import dBorderlessForm
@@ -37,7 +34,7 @@ class _dBorderlessForm_test(dBorderlessForm):
 
 
 if __name__ == "__main__":
-	from . import test
+	import test
 	test.Test().runTest(_dForm_test)
 	test.Test().runTest(_dBorderlessForm_test)
 

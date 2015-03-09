@@ -2,9 +2,6 @@
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 
 from dabo.ui import dColorDialog
 
@@ -27,5 +24,5 @@ class _dColorDialog_test(dColorDialog):
 
 
 if __name__ == "__main__":
-	from . import test
+	import test
 	test.Test().runTest(_dColorDialog_test)

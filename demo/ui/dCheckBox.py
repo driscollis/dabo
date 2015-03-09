@@ -2,9 +2,6 @@
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 
 from dabo.dLocalize import _
 
@@ -30,6 +27,6 @@ class _dCheckBox_test3_b(dCheckBox):
 
 
 if __name__ == "__main__":
-	from . import test
+	import test
 	test.Test().runTest(
 		(_dCheckBox_test, _dCheckBox_test3_a, _dCheckBox_test3_b))

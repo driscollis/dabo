@@ -2,9 +2,6 @@
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 
 from dabo.ui import dListBox
 
@@ -44,6 +41,6 @@ class _dListBox_test(dListBox):
 		print("mousedown")
 
 if __name__ == "__main__":
-	from . import test
+	import test
 	test.Test().runTest(_dListBox_test)
 

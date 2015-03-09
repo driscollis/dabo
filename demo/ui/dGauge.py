@@ -2,9 +2,6 @@
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
 
 from dabo.ui import dGauge
 from dabo.ui import dEvents
@@ -34,5 +31,5 @@ class _dGauge_test(dGauge):
 
 
 if __name__ == "__main__":
-	from . import test
+	import test
 	test.Test().runTest(_dGauge_test)
