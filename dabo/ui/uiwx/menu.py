@@ -5,8 +5,6 @@ import wx
 import dabo
 from dabo.ui import makeDynamicProperty
 import collections
-if __name__ == "__main__":
-	dabo.ui.loadUI("wx")
 from . import pemmixin as pm
 from . import icons
 from dabo.dLocalize import _

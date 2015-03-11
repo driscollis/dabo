@@ -178,6 +178,7 @@ from .pageframe import dPageToolBar
 from .pageframe import dPageList
 from .pageframe import dPageSelect
 from .pageframe import dDockTabs
+from .pageframe import dPageStyled
 from .pageframenotabs import dPageFrameNoTabs
 from .page import dPage
 from .pdfwindow import dPdfWindow
@@ -219,8 +220,6 @@ try:
 	from .richtextbox import dRichTextBox
 except ImportError:
 	pass
-
-from .pageframe import dPageStyled
 
 # Support the old names, but issue deprecation warnings.
 class dFoldPanelBar(dSlidePanelControl):

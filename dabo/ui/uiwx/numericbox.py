@@ -3,14 +3,6 @@ import locale
 import wx
 import wx.lib.masked as masked
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 import dabo.dEvents as dEvents
 from . import textboxmixin as dtbm
@@ -35,7 +27,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 		kwargs["selectOnEntry"] = self._extractKey((properties, attProperties, kwargs),
 				                                   "SelectOnEntry", self.SelectOnEntry)
 		groupChar = self._extractKey((properties, attProperties, kwargs),
-				                     "GroupChar", localeData["thousands_sep"].decode(enc))
+				                     "GroupChar", localeData["thousands_sep"])
 		# Group char can't be empty string.
 		if groupChar or groupChar >= " ":
 			kwargs["groupChar"] = groupChar
@@ -50,7 +42,7 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 		kwargs["useParensForNegatives"] = self._extractKey((properties, attProperties, kwargs),
 				                                           "ParensForNegatives", False)
 		kwargs["decimalChar"] = self._extractKey((properties, attProperties, kwargs),
-				                                 "DecimalChar", localeData["decimal_point"].decode(enc))
+				                                 "DecimalChar", localeData["decimal_point"])
 		kwargs["foregroundColour"] = self._extractKey((properties, attProperties, kwargs),
 				                                      "ForeColor", "Black")
 		if dabo.ui.phoenix:
@@ -390,18 +382,3 @@ class dNumericBox(dtbm.dTextBoxMixin, masked.NumCtrl):
 
 	DynamicMaxValue = makeDynamicProperty(MaxValue)
 	DynamicMinValue = makeDynamicProperty(MinValue)
-
-
-if __name__ == "__main__":
-	from . import test
-
-	class _testDecimal2(dNumericBox):
-		def initProperties(self):
-			self.Value = Decimal("1.23")
-			self.DecimalWidth = 3
-
-	class _testDecimal0(dNumericBox):
-		def initProperties(self):
-			self.Value = Decimal("23")
-			self.DecimalWidth = 0
-	test.Test().runTest((_testDecimal2, _testDecimal0))
