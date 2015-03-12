@@ -9,14 +9,6 @@ from wx.py import pseudo
 import dabo
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from .splitform import dSplitForm
 from dabo.ui import makeDynamicProperty
 from dabo.ui import keys
@@ -840,15 +832,3 @@ Ctrl-Up/Down to scroll through history."""))
 
 
 	DynamicSplitState = makeDynamicProperty(SplitState)
-
-
-
-def main():
-	from dabo.dApp import dApp
-	app = dApp(BasePrefKey="dabo.ui.dShellForm")
-	app.MainFormClass = dShellForm
-	app.setup()
-	app.start()
-
-if __name__ == "__main__":
-	main()

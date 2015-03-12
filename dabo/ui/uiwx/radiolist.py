@@ -3,14 +3,6 @@ import sys
 import time
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from . import datacontrolmixin as dcm
 from . import controlitemmixin as cim
@@ -607,36 +599,3 @@ class dRadioList(cim.dControlItemMixin, wx.Panel):
 	DynamicOrientation = makeDynamicProperty(Orientation)
 	DynamicPositionValue = makeDynamicProperty(PositionValue)
 	DynamicStringValue = makeDynamicProperty(StringValue)
-
-
-
-class _dRadioList_test(dRadioList):
-# 	def initProperties(self):
-# 		self.ShowBox = False
-
-	def afterInit(self):
-		self.Caption = "Developers"
-		self.BackColor = "lightyellow"
-		developers = [{"lname": "McNett", "fname": "Paul", "iid": 42},
-				{"lname": "Leafe", "fname": "Ed", "iid": 23},
-				{"lname": "Roche", "fname": "Ted", "iid": 11}]
-
-		self.Choices = ["%s %s" % (dev["fname"], dev["lname"]) for dev in developers]
-		developers.append({"lname": "Hentzen", "fname": "Whil", "iid": 93})
-		self.Choices = ["%s %s" % (dev["fname"], dev["lname"]) for dev in developers]
-		keys = [dev["iid"] for dev in developers]
-		self.Keys = keys
-		self.ValueMode = "key"
-
-
-	def onHit(self, evt):
-		print("KeyValue: ", self.KeyValue)
-		print("PositionValue: ", self.PositionValue)
-		print("StringValue: ", self.StringValue)
-		print("Value: ", self.Value)
-
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dRadioList_test)

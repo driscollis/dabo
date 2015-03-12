@@ -2,14 +2,6 @@
 import random
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from . import dForm
 import dabo.dEvents as dEvents
@@ -499,30 +491,3 @@ class dSplitter(cm.dControlMixin, wx.SplitterWindow):
 	DynamicPanel2 = makeDynamicProperty(Panel2)
 	DynamicSashPosition = makeDynamicProperty(SashPosition)
 	DynamicSplit = makeDynamicProperty(Split)
-
-
-
-class _dSplitter_test(dSplitter):
-	def __init__(self, *args, **kwargs):
-		kwargs["createPanes"] = True
-		super(_dSplitter_test, self).__init__(*args, **kwargs)
-
-	def initProperties(self):
-		self.Width = 250
-		self.Height = 200
-		self.MinimumPanelSize = 20
-		self.ShowPanelSplitMenu = True
-
-	def afterInit(self):
-		self.Panel1.BackColor = random.choice(list(dColors.colorDict.values()))
-		self.Panel2.BackColor = random.choice(list(dColors.colorDict.values()))
-
-
-	def onSashDoubleClick(self, evt):
-		if not dabo.ui.areYouSure("Remove the sash?", cancelButton=False):
-			evt.stop()
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dSplitter_test)

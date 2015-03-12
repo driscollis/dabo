@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 import wx, dabo, dabo.ui
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import datacontrolmixin as dcm
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
@@ -192,24 +184,3 @@ class dSlider(dcm.dDataControlMixin, wx.Slider):
 	DynamicMax = makeDynamicProperty(Max)
 	DynamicMin = makeDynamicProperty(Min)
 	DynamicShowLabels = makeDynamicProperty(ShowLabels)
-
-
-
-class _dSlider_test(dSlider):
-	def initProperties(self):
-		self.Size = (300, 300)
-		self.Max = 95
-		self.Min = 23
-		self.Value = 75
-		self.ShowLabels = True
-		# Try changing these to see their effects
-# 		self.Reversed = True
-#  		self.TickPosition = "Left"
-
-	def onHit(self, evt):
-		print("Hit! Value =", self.Value)
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dSlider_test)

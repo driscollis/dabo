@@ -175,8 +175,6 @@ class TestForm(dabo.ui.dForm):
 		self.fitToSizer(20, 20)
 
 if __name__ == "__main__":
-	from dabo.dApp import dApp
-	app = dApp(MainFormClass=TestForm)
-	app.setup()
-	app.MainForm.radSelect.setFocus()
-	app.start()
+	import test
+	test.Test().runTest(TestForm)
+	

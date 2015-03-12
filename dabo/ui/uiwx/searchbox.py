@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-# TODO: getting a Runtimeerror dMenuItem has been deleted
 from six import string_types as sixBasestring
 import wx
 
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import textboxmixin as tbm
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
@@ -171,75 +162,3 @@ class dSearchBox(tbm.dTextBoxMixin, wx.SearchCtrl):
 
 	SearchButtonVisible = property(_getSearchButtonVisible, _setSearchButtonVisible, None,
 		_("Tells whether or not the search button is visible (bool)"))
-
-
-
-if __name__ == "__main__":
-	from . import test
-	import datetime
-
-	# This test sets up several textboxes, each editing different data types.
-	class TestBase(dSearchBox):
-		def initProperties(self):
-			super(TestBase, self).initProperties()
-			self.LogEvents = ["ValueChanged", "searchButtonClicked", "SearchCancelButtonClicked"]
-			self.CancelButtonVisible = True
-			self.SearchButtonVisible = True
-			self.List = ("item 1", "item 2", "item 3")
-
-		def onValueChanged(self, evt):
-			if self.IsSecret:
-				print("%s changed, but the new value is a secret!" % self.Name)
-			else:
-				print("%s.onValueChanged:" % self.Name, self.Value, type(self.Value))
-
-		def onSearchButtonClicked(self, evt):
-			print("you pressed the search button")
-
-		def onSearchCancelButtonClicked(self, evt):
-			print("you pressed the cancel button")
-
-
-	class IntText(TestBase):
-		def afterInit(self):
-			self.Value = 23
-
-	class FloatText(TestBase):
-		def afterInit(self):
-			self.Value = 23.5
-			self.List = ['changed item 1', 'changed item 2']
-
-	class BoolText(TestBase):
-		def afterInit(self):
-			self.Value = False
-
-	class StrText(TestBase):
-		def afterInit(self):
-			self.Value = "Lunchtime"
-
-	class PWText(TestBase):
-		def __init__(self, *args, **kwargs):
-			kwargs["PasswordEntry"] = True
-			super(PWText, self).__init__(*args, **kwargs)
-		def afterInit(self):
-			self.Value = "TopSecret!"
-
-	class DateText(TestBase):
-		def afterInit(self):
-			self.Value = datetime.date.today()
-			self.List = ['historyItem 1', 'historyItem 2']
-
-	class DateTimeText(TestBase):
-		def afterInit(self):
-			self.Value = datetime.datetime.now()
-
-	testParms = [IntText, FloatText, StrText, PWText, BoolText, DateText, DateTimeText]
-
-	import decimal
-
-	class DecimalText(TestBase):
-		def afterInit(self):
-			self.Value = decimal.Decimal("23.42")
-
-	testParms.append(DecimalText)
-	test.Test().runTest(testParms)

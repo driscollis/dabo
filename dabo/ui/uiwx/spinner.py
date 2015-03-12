@@ -7,14 +7,6 @@ from decimal import Decimal as decimal
 import operator
 import wx
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from dabo.ui import makeProxyProperty
 from . import datacontrolmixin as dcm
@@ -422,45 +414,3 @@ class dSpinner(dabo.ui.dDataPanel, wx.Control):
 	SelectOnEntry = makeProxyProperty(_proxyDict, "SelectOnEntry", "_proxy_textbox")
 	ToolTipText = makeProxyProperty(_proxyDict, "ToolTipText", ("self", "_proxy_spinner", "_proxy_textbox"))
 	Visible = makeProxyProperty(_proxyDict, "Visible", ("self", "_proxy_spinner", "_proxy_textbox"))
-
-
-
-class _dSpinner_test(dSpinner):
-	def initProperties(self):
-		self.Max = 55
-		self.Min = 0
-		self.Value = 0
-		self.Increment = 8.75
-		self.SpinnerWrap = True
-		self.FontSize = 10
-		self.Width = 80
-
-	def onHit(self, evt):
-		print("HIT!", self.Value, "Hit Type", evt.hitType)
-
-	def onValueChanged(self, evt):
-		print("Value Changed", self.Value)
-		print("___")
-
-	def onInteractiveChange(self, evt):
-		print("Interactive Change", self.Value)
-
-	def onSpinUp(self, evt):
-		print("Spin up event.")
-
-	def onSpinDown(self, evt):
-		print("Spin down event.")
-
-	def onSpinner(self, evt):
-		print("Spinner event.")
-
-
-if __name__ == "__main__":
-	from dabo.dApp import dApp
-	class Test(dabo.ui.dForm):
-		def OH(self, evt): print("HIT")
-		def afterInitAll(self):
-			self.spn = _dSpinner_test(self, Value=3, OnHit=self.OH)
-			self.spn2 = dSpinner(self, Value=3, Max=10, Min=1, Top=75, Width=60)
-	app = dApp(MainFormClass=Test)
-	app.start()
