@@ -162,7 +162,7 @@ class dPemMixin(dPemMixinBase):
 			del self._preInitProperties["style"]
 			# This is needed because these classes require a 'parent' param.
 			kwargs["parent"] = parent
-		elif wx.VERSION >= (2, 8, 8) and isinstance(self, (wx.lib.platebtn.PlateButton)):
+		elif wx.VERSION <= (3, 0, 2) and isinstance(self, (wx.lib.platebtn.PlateButton)):
 			if not "phoenix" in wx.PlatformInfo:
 				self._preInitProperties["id_"] = self._preInitProperties["id"]
 				del self._preInitProperties["id"]
