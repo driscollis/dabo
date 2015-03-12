@@ -9,7 +9,7 @@ from dabo.ui import dTimer
 from dabo import dEvents
 
 
-class _dTimer_test(dPanel):
+class _dTimer_skip(dPanel):
 	def afterInit(self):
 		# Only setting this so that the test Caption is correct
 		self._baseClass = dTimer
@@ -29,4 +29,4 @@ class _dTimer_test(dPanel):
 
 if __name__ == "__main__":
 	import test
-	test.Test().runTest(_dTimer_test)
+	test.Test().runTest(_dTimer_skip)
