@@ -178,13 +178,9 @@ class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
 		"""
 		self._evtCalType = wxcal.EVT_CALENDAR.evtType[0]
 		self._evtCalSelType = wxcal.EVT_CALENDAR_SEL_CHANGED.evtType[0]
-		# TODO: fake them and wait for Robin
-		#self._evtCalDayType = wxcal.EVT_CALENDAR_DAY.evtType[0]
-		#self._evtCalMonthType = wxcal.EVT_CALENDAR_MONTH.evtType[0]
-		#self._evtCalYearType = wxcal.EVT_CALENDAR_YEAR.evtType[0]
-		self._evtCalDayType = wxcal.EVT_CALENDAR_SEL_CHANGED.evtType[0]
-		self._evtCalMonthType = wxcal.EVT_CALENDAR_SEL_CHANGED.evtType[0]
-		self._evtCalYearType = wxcal.EVT_CALENDAR_SEL_CHANGED.evtType[0]
+		self._evtCalDayType = wxcal.EVT_CALENDAR_DAY.evtType[0]
+		self._evtCalMonthType = wxcal.EVT_CALENDAR_MONTH.evtType[0]
+		self._evtCalYearType = wxcal.EVT_CALENDAR_YEAR.evtType[0]
 
 
 	### Begin property defs  ###

@@ -1,19 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# TODO: Robin hasn't converted richtext completely, i.e. RichTextXMLHandler
+# TODO: Phoenix Robin hasn't converted richtext completely, i.e. RichTextXMLHandler, GetSelectionRange
 from six import string_types as sixBasestring
 import os
 import wx
 import wx.richtext
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 from . import datacontrolmixin as dcm
 import dabo.dColors as dColors
@@ -88,13 +80,19 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 
 
 	def _getCurrentBackColor(self):
-		ds = self.GetDefaultStyle()
+		if dabo.ui.phoenix:
+			ds = self.GetDefaultStyleEx()
+		else:
+			ds = self.GetDefaultStyle()
 		ret = ds.GetBackgroundColour()[:3]
 		return ret
 
 
 	def _getCurrentForeColor(self):
-		ds = self.GetDefaultStyle()
+		if dabo.ui.phoenix:
+			ds = self.GetDefaultStyleEx()
+		else:
+			ds = self.GetDefaultStyle()
 		ret = ds.GetTextColour()[:3]
 		return ret
 
@@ -104,7 +102,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 
 
 	def _getCurrentFontFace(self):
-		ds = self.GetDefaultStyle()
+		if dabo.ui.phoenix:
+			ds = self.GetDefaultStyleEx()
+		else:
+			ds = self.GetDefaultStyle()
 		# Default to the current font face for the control
 		ret = self.FontFace
 		if ds.HasFont():
@@ -117,7 +118,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 
 
 	def _getCurrentFontSize(self):
-		ds = self.GetDefaultStyle()
+		if dabo.ui.phoenix:
+			ds = self.GetDefaultStyleEx()
+		else:
+			ds = self.GetDefaultStyle()
 		# Default to the current font face for the control
 		ret = self.FontSize
 		if ds.HasFont():
@@ -130,7 +134,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 
 
 	def _getCurrentStyle(self):
-		ds = self.GetDefaultStyle()
+		if dabo.ui.phoenix:
+			ds = self.GetDefaultStyleEx()
+		else:
+			ds = self.GetDefaultStyle()
 		out = []
 		if ds.HasFont():
 			fnt = ds.GetFont()

@@ -31,4 +31,7 @@ Cursor_Arrowwait = wx.CURSOR_ARROWWAIT
 
 
 def getStockCursor(id):
-	return wx.StockCursor(id)
+	if 'phoenix' in wx.PlatformInfo:
+		return wx.Cursor(id)
+	else:
+		return wx.StockCursor(id)

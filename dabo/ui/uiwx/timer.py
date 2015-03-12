@@ -1,13 +1,5 @@
 # -*- coding: utf-8 -*-
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from dabo.ui import makeDynamicProperty
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
@@ -99,26 +91,3 @@ class dTimer(PM):
 
 	DynamicEnabled = makeDynamicProperty(Enabled)
 	DynamicInterval = makeDynamicProperty(Interval)
-
-
-class _dTimer_test(panel.dPanel):
-	def afterInit(self):
-		# Only setting this so that the test Caption is correct
-		self._baseClass = dTimer
-		self.fastTimer = dTimer(self, Interval=500)
-		self.fastTimer.bindEvent(dEvents.Hit, self.onFastTimerHit)
-		self.slowTimer = dTimer(Interval=2000)
-		self.slowTimer.bindEvent(dEvents.Hit, self.onSlowTimerHit)
-		self.fastTimer.start()
-		self.slowTimer.start()
-
-	def onFastTimerHit(self, evt):
-		print("fast timer fired!")
-
-	def onSlowTimerHit(self, evt):
-		print("slow timer fired!")
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dTimer_test)

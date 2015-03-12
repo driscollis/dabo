@@ -2,20 +2,11 @@
 """
 @note: Color setting doesn't work for this control. It's a wx issue.
 """
-# TODO: get "SystemError: NULL result without error in PyObject_Call"  on this one wait for Robin
 from six import string_types as sixBasestring
 import datetime
 import wx
 
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 if dabo.ui.phoenix:
 	import wx.adv
 	dpc = wx.adv
@@ -29,13 +20,22 @@ from dabo.ui import makeDynamicProperty
 
 
 def dateTimePy2Wx(date):
-	if isinstance(date, datetime.date):
-		retVal = wx.DateTimeFromDMY(date.day, date.month - 1, date.year)
-	elif isinstance(date, datetime.datetime):
-		retVal = wx.DateTimeFromDMY(date.day, date.month - 1, date.year, date.hour,
-			date.minute, date.second, date.microsecond)
+	if dabo.ui.phoenix:
+		if isinstance(date, datetime.date):
+			retVal = wx.DateTime.FromDMY(date.day, date.month - 1, date.year)
+		elif isinstance(date, datetime.datetime):
+			retVal = wx.DateTime.FromDMY(date.day, date.month - 1, date.year, date.hour,
+				                        date.minute, date.second, date.microsecond)
+		else:
+			retVal = date
 	else:
-		retVal = date
+		if isinstance(date, datetime.date):
+			retVal = wx.DateTimeFromDMY(date.day, date.month - 1, date.year)
+		elif isinstance(date, datetime.datetime):
+			retVal = wx.DateTimeFromDMY(date.day, date.month - 1, date.year, date.hour,
+				date.minute, date.second, date.microsecond)
+		else:
+			retVal = date
 	return retVal
 
 

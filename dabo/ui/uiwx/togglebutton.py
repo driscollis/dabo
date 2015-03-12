@@ -2,14 +2,6 @@
 import wx
 import wx.lib.buttons as wxb
 import dabo
-
-if __name__ == "__main__":
-	import dabo.ui
-	dabo.ui.loadUI("wx")
-	if __package__ is None:
-		import dabo.ui.uiwx
-		__package__ = "dabo.ui.uiwx"
-
 from . import datacontrolmixin as dcm
 from . import imagemixin as dim
 from dabo.dLocalize import _
@@ -106,24 +98,3 @@ class dToggleButton(dcm.dDataControlMixin, dim.dImageMixin,
 
 	Picture = property(_getPicture, _setPicture, None,
 			_("Picture used for the normal (unselected) state  (str)"))
-
-
-class _dToggleButton_test(dToggleButton):
-	def afterInit(self):
-		self.Caption = "Toggle me!"
-		self.Size = (100, 31)
-		self.Picture = "themes/tango/22x22/apps/accessories-text-editor.png"
-		self.DownPicture = "themes/tango/22x22/apps/help-browser.png"
-
-	def onHit(self, evt):
-		if self.Value:
-			state = "down"
-		else:
-			state = "up"
-		bval = self.Value
-		self.Caption = _("State: %(state)s (Boolean: %(bval)s)") % locals()
-
-
-if __name__ == "__main__":
-	from . import test
-	test.Test().runTest(_dToggleButton_test)
