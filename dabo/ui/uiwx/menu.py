@@ -183,16 +183,11 @@ class dMenu(pm.dPemMixin, wx.Menu):
 
 	def appendMenu(self, menu):
 		"""Insert a dMenu at the bottom of the menu."""
-		dummySpacer = None
-		if not self.Children:
-			dummySpacer = self.append(" ")
 		wxMenuItem = self.AppendMenu(-1, menu.Caption, menu, help=menu.HelpText)
 #- 		wxMenuItem = self.AppendSubMenu(menu, menu.Caption, help=menu.HelpText)
 		menu._setId(wxMenuItem.GetId())
 		menu.Parent = self
 		self._daboChildren[wxMenuItem.GetId()] = menu
-		if dummySpacer:
-			self.remove(dummySpacer)
 		return menu
 
 
@@ -248,10 +243,6 @@ class dMenu(pm.dPemMixin, wx.Menu):
 			self.insertItem(pos, _item)
 			_item.Caption = caption
 			return _item
-		dummySpacer = None
-		if not self.Children:
-			dummySpacer = _actualCreation(" ", "", None, "")
-			dabo.ui.callAfter(self.remove, dummySpacer)
 		item = _actualCreation(caption, help, picture, menutype, *args, **kwargs)
 		return item
 
