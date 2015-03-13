@@ -355,7 +355,8 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
 
 	@dabo.ui.deadCheck
 	def __del__(self):
-		self._unRegisterFunc(self)
+		if self._unRegisterFunc:
+			self._unRegisterFunc(self)
 		super(dEditor, self).__del__()
 
 
