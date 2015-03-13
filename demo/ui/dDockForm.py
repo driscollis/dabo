@@ -4,6 +4,7 @@ if __name__ == "__main__":
 	dabo.ui.loadUI("wx")
 
 from dabo.ui import dDockForm
+from dabo import dEvents
 
 
 class _dDockForm_test(dDockForm):
@@ -12,7 +13,8 @@ class _dDockForm_test(dDockForm):
 		self.Size = (700, 500)
 
 	def afterInit(self):
-		self.fp = self.addPanel(Floating=True, BackColor="orange",
+		# TODO: Floating=True causes a crash on classic when closing this test
+		self.fp = self.addPanel(Floating=False, BackColor="orange",
 				Caption="Initially Floating", Top=70, Left=200, Size=(144, 100))
 		self.dp = self.addPanel(Floating=False, Caption="Initially Docked", BackColor="slateblue",
 				ShowCaption=False, ShowPinButton=True, ShowCloseButton=False,
@@ -25,7 +27,7 @@ class _dDockForm_test(dDockForm):
 				DataField="Dockable")
 		self.CenterPanel.Sizer.append(chk)
 		self.fp.DynamicCaption = self.capForOrange
-
+		
 	def capForOrange(self):
 		print("ORNG CAP", self.fp.Docked)
 		state = "Floating"
@@ -69,8 +71,7 @@ class _dDockForm_test(dDockForm):
 		print(nm + ".ShowPinButton:", obj.ShowPinButton)
 		print(nm + ".TopDockable:", obj.TopDockable)
 		print(nm + ".Visible:", obj.Visible)
-
-
+		
 
 if __name__ == "__main__":
 	import test
