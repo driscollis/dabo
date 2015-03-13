@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# TODO: Robin hasn't converted richtext completely, i.e. RichTextXMLHandler
 import dabo.ui
 if __name__ == "__main__":
 	dabo.ui.loadUI("wx")

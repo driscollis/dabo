@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# TODO: Phoenix Robin hasn't converted richtext completely, i.e. RichTextXMLHandler, GetSelectionRange
 from six import string_types as sixBasestring
 import os
 import wx
@@ -18,10 +17,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 	def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
 		self._baseClass = dRichTextBox
 		# Used to test if selection has any of the styles applied to any part of it.
-		if dabo.ui.phoenix:
+		if wx.VERSION < (2, 9):
 			self._styleObj = wx.TextAttr()
 		else:
-			self._styleObj = wx.richtext.TextAttrEx()
+			self._styleObj = wx.richtext.RichTextAttr()
 		self._styleObj.SetFlags(wx.TEXT_ATTR_BACKGROUND_COLOUR |
 				wx.TEXT_ATTR_FONT_FACE | wx.TEXT_ATTR_FONT_ITALIC |
 				wx.TEXT_ATTR_FONT_SIZE | wx.TEXT_ATTR_FONT_UNDERLINE |
@@ -45,6 +44,8 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		"""
 		if fileOrObj is None:
 			fileOrObj = dabo.ui.getFile("xml", "html")
+		if fileOrObj is None:
+			return
 		if isinstance(fileOrObj, sixBasestring):
 			mthdName = "LoadFile"
 		else:
@@ -183,7 +184,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		if not self.HasSelection():
 			return None
 		rng = self.GetSelectionRange()
-		ta = wx.richtext.TextAttrEx()
+		if wx.VERSION < (2, 9):
+			ta = wx.richtext.TextAttrEx()
+		else:
+			ta = wx.richtext.RichTextAttr()
 		st = self.GetStyleForRange(rng, ta)
 		return ta.BackgroundColour[:3]
 
@@ -195,8 +199,12 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 				ct = dColors.colorTupleFromName(val)
 				wxc = wx.Colour(*ct)
 			rng = self.GetSelectionRange()
-			ta = wx.richtext.TextAttrEx()
-			ta.SetFlags(wx.richtext.TEXT_ATTR_BACKGROUND_COLOUR)
+			if wx.VERSION < (2, 9):
+				ta = wx.richtext.TextAttrEx()
+				ta.SetFlags(wx.richtext.TEXT_ATTR_BACKGROUND_COLOUR)
+			else:
+				ta = wx.richtext.RichTextAttr()
+				ta.SetFlags(wx.TEXT_ATTR_BACKGROUND_COLOUR)
 			ta.SetBackgroundColour(wxc)
 			self.SetStyleEx(rng, ta)
 		else:
@@ -241,7 +249,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		if not self.HasSelection():
 			return None
 		rng = self.GetSelectionRange()
-		ta = wx.richtext.TextAttrEx()
+		if wx.VERSION < (2, 9):
+			ta = wx.richtext.TextAttrEx()
+		else:
+			ta = wx.richtext.RichTextAttr()
 		st = self.GetStyleForRange(rng, ta)
 		fnt = ta.Font
 		return fnt.FaceName
@@ -249,9 +260,14 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 	def _setSelectionFontFace(self, val):
 		if self._constructed():
 			rng = self.GetSelectionRange()
-			ta = wx.richtext.TextAttrEx()
-			ta.SetFontFaceName(val)
-			ta.SetFlags(wx.richtext.TEXT_ATTR_FONT_FACE)
+			if wx.VERSION < (2, 9):
+				ta = wx.richtext.TextAttrEx()
+				ta.SetFontFaceName(val)
+				ta.SetFlags(wx.richtext.TEXT_ATTR_FONT_FACE)
+			else:
+				ta = wx.richtext.RichTextAttr()
+				ta.SetFontFaceName(val)
+				ta.SetFlags(wx.TEXT_ATTR_FONT_FACE)
 			self.SetStyleEx(rng, ta)
 		else:
 			self._properties["SelectionFontFace"] = val
@@ -282,7 +298,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		if not self.HasSelection():
 			return None
 		rng = self.GetSelectionRange()
-		ta = wx.richtext.TextAttrEx()
+		if wx.VERSION < (2, 9):
+			ta = wx.richtext.TextAttrEx()
+		else:
+			ta = wx.richtext.RichTextAttr()
 		st = self.GetStyleForRange(rng, ta)
 		fnt = ta.Font
 		return fnt.GetPointSize()
@@ -290,9 +309,14 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 	def _setSelectionFontSize(self, val):
 		if self._constructed():
 			rng = self.GetSelectionRange()
-			ta = wx.richtext.TextAttrEx()
-			ta.SetFontSize(val)
-			ta.SetFlags(wx.richtext.TEXT_ATTR_FONT_SIZE)
+			if wx.VERSION < (2, 9):
+				ta = wx.richtext.TextAttrEx()
+				ta.SetFontSize(val)
+				ta.SetFlags(wx.richtext.TEXT_ATTR_FONT_SIZE)
+			else:
+				ta = wx.richtext.RichTextAttr()
+				ta.SetFontSize(val)
+				ta.SetFlags(wx.TEXT_ATTR_FONT_SIZE)
 			self.SetStyleEx(rng, ta)
 		else:
 			self._properties["SelectionFontSize"] = val
@@ -323,7 +347,10 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 		if not self.HasSelection():
 			return None
 		rng = self.GetSelectionRange()
-		ta = wx.richtext.TextAttrEx()
+		if wx.VERSION < (2, 9):
+			ta = wx.richtext.TextAttrEx()
+		else:
+			ta = wx.richtext.RichTextAttr()
 		st = self.GetStyleForRange(rng, ta)
 		return ta.TextColour[:3]
 
@@ -335,8 +362,12 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
 				ct = dColors.colorTupleFromName(val)
 				wxc = wx.Colour(*ct)
 			rng = self.GetSelectionRange()
-			ta = wx.richtext.TextAttrEx()
-			ta.SetFlags(wx.richtext.TEXT_ATTR_TEXT_COLOUR)
+			if wx.VERSION < (2, 9):
+				ta = wx.richtext.TextAttrEx()
+				ta.SetFlags(wx.richtext.TEXT_ATTR_TEXT_COLOUR)
+			else:
+				ta = wx.richtext.RichTextAttr()
+				ta.SetFlags(wx.TEXT_ATTR_TEXT_COLOUR)
 			ta.SetTextColour(wxc)
 			self.SetStyleEx(rng, ta)
 		else:
