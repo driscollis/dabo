@@ -1361,7 +1361,10 @@ class DesignerBand(DesignerPanel):
 			rect[2] += left_fudge
 			rect[1] += top_fudge
 			rect[3] += top_fudge + descent
-			dc.SetClippingRect(rect)
+			if dabo.ui.phoenix:
+				dc.SetClippingRegion(rect)
+			else:
+				dc.SetClippingRect(rect)
 
 			if False and rotation != 0:
 				# We lose the ability to have the alignment and exact rect positioning.
@@ -1853,9 +1856,9 @@ class ReportDesigner(dabo.ui.dScrollPanel):
 			dir_ = ""
 
 		if saveDialog:
-			style = wx.SAVE
+			style = wx.FD_SAVE
 		else:
-			style = wx.OPEN
+			style = wx.FD_OPEN
 
 		dlg = wx.FileDialog(self,
 				            message = prompt,
