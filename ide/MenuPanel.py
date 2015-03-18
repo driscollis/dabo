@@ -330,12 +330,13 @@ class AbstractMenuPanel(MenuSaverMixin, dabo.ui.dPanel):
 		return self._selected
 
 	def _setSelected(self, val):
-		if self._constructed():
-			self._selected = val
-			self.BackColor = {True: "white", False: BASE_BACKCOLOR}[val]
-			self.Parent.refresh()
-		else:
-			self._properties["Selected"] = val
+		if self:
+			if self._constructed():
+				self._selected = val
+				self.BackColor = {True: "white", False: BASE_BACKCOLOR}[val]
+				self.Parent.refresh()
+			else:
+				self._properties["Selected"] = val
 
 
 	Action = property(_getAction, _setAction, None,

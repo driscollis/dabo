@@ -1959,17 +1959,18 @@ class dPemMixin(dPemMixinBase):
 		return self.GetBackgroundColour().Get()
 
 	def _setBackColor(self, val):
-		if self._constructed():
-			if isinstance(val, sixBasestring):
-				val = dColors.colorTupleFromName(val)
-			if val is None:
-				self.SetBackgroundColour(wx.NullColour)
-			elif val != self.GetBackgroundColour().Get():
-				self.SetBackgroundColour(val)
-				# Background color changes don't result in an automatic refresh.
-				self.refresh()
-		else:
-			self._properties["BackColor"] = val
+		if self:
+			if self._constructed():
+				if isinstance(val, sixBasestring):
+					val = dColors.colorTupleFromName(val)
+				if val is None:
+					self.SetBackgroundColour(wx.NullColour)
+				elif val != self.GetBackgroundColour().Get():
+					self.SetBackgroundColour(val)
+					# Background color changes don't result in an automatic refresh.
+					self.refresh()
+			else:
+				self._properties["BackColor"] = val
 
 
 	def _getBorderColor(self):
@@ -2591,10 +2592,11 @@ class dPemMixin(dPemMixinBase):
 
 
 	def _getParent(self):
-		try:
-			return self.GetParent()
-		except TypeError:
-			return None
+		if self:
+			try:
+				return self.GetParent()
+			except TypeError:
+				return None
 
 	def _setParent(self, val):
 		if self._constructed():
