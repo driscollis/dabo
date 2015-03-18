@@ -65,7 +65,10 @@ class SplashScreen(wx.Frame):
 		w = self._bmp.GetWidth()
 		h = self._bmp.GetHeight()
 		self.SetSize((w, h))
-		reg = wx.RegionFromBitmap(self._bmp)
+		if dabo.ui.phoenix:
+			reg = wx.Region(self._bmp)
+		else:
+			reg = wx.RegionFromBitmap(self._bmp)
 		self.SetShape(reg)
 		self.CenterOnScreen()
 		if evt is not None:
