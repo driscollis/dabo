@@ -59,7 +59,7 @@ class dDialog(fm.dFormMixin, wx.Dialog):
 	def EndModal(self, *args, **kwargs):
 		self.saveSizeAndPosition()
 		self.hide()
-		if self.Modal:
+		if self.IsModal():
 			try:
 				super(dDialog, self).EndModal(*args, **kwargs)
 			except dabo.ui.assertionException:
