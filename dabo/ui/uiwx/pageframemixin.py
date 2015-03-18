@@ -407,8 +407,9 @@ class dPageFrameMixin(cm.dControlMixin):
 	@dabo.ui.deadCheck
 	def _setSelectedPage(self, pg):
 		if self._constructed():
-			idx = self._getPageIndex(pg)
-			self.SetSelection(idx)
+			if self.GetPageCount():
+				idx = self._getPageIndex(pg)
+				self.SetSelection(idx)
 		else:
 			self._properties["SelectedPage"] = pg
 
