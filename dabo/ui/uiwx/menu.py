@@ -183,7 +183,10 @@ class dMenu(pm.dPemMixin, wx.Menu):
 
 	def appendMenu(self, menu):
 		"""Insert a dMenu at the bottom of the menu."""
-		wxMenuItem = self.AppendMenu(-1, menu.Caption, menu, help=menu.HelpText)
+		if dabo.ui.phoenix:
+			wxMenuItem = self.Append(-1, menu.Caption, menu, helpString=menu.HelpText)
+		else:
+			wxMenuItem = self.AppendMenu(-1, menu.Caption, menu, help=menu.HelpText)
 #- 		wxMenuItem = self.AppendSubMenu(menu, menu.Caption, help=menu.HelpText)
 		menu._setId(wxMenuItem.GetId())
 		menu.Parent = self
@@ -193,7 +196,10 @@ class dMenu(pm.dPemMixin, wx.Menu):
 
 	def insertMenu(self, pos, menu):
 		"""Insert a dMenu before the specified position in the menu."""
-		wxMenuItem = self.InsertMenu(pos, -1, menu.Caption, menu, help=menu.HelpText)
+		if dabo.ui.phoenix:
+			wxMenuItem = self.Insert(pos, -1, menu.Caption, menu, help=menu.HelpText)
+		else:
+			wxMenuItem = self.InsertMenu(pos, -1, menu.Caption, menu, help=menu.HelpText)
 		menu._setId(wxMenuItem.GetId())
 		menu.Parent = self
 		self._daboChildren[wxMenuItem.GetId()] = menu
@@ -202,7 +208,10 @@ class dMenu(pm.dPemMixin, wx.Menu):
 
 	def prependMenu(self, menu):
 		"""Insert a dMenu at the top of the menu."""
-		wxMenuItem = self.PrependMenu(-1, menu.Caption, menu, help=menu.HelpText)
+		if dabo.ui.phoenix:
+			wxMenuItem = self.Prepend(-1, menu.Caption, menu, help=menu.HelpText)
+		else:
+			wxMenuItem = self.PrependMenu(-1, menu.Caption, menu, help=menu.HelpText)
 		menu._setId(wxMenuItem.GetId())
 		menu.Parent = self
 		self._daboChildren[wxMenuItem.GetId()] = menu
