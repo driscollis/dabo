@@ -59,13 +59,9 @@ class dDialog(fm.dFormMixin, wx.Dialog):
 	def EndModal(self, *args, **kwargs):
 		self.saveSizeAndPosition()
 		self.hide()
-		if self.IsModal():
-			try:
-				super(dDialog, self).EndModal(*args, **kwargs)
-			except dabo.ui.assertionException:
-				# The modal hack is causing problems in some edge cases.
-				pass
-
+		if self.Modal:
+			super(dDialog, self).EndModal(*args, **kwargs)
+			self.Modal = False
 
 	def _afterInit(self):
 		self.MenuBarClass = None
