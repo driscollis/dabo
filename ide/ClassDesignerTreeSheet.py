@@ -75,7 +75,8 @@ class TreeSheet(dui.dPanel):
 		if self._inAppSelection:
 			# Otherwise, this would be infinite recursion
 			return
-		dui.callAfter(self.Controller.treeSelect)
+		if hasattr(self.Controller, 'treeSelect'):
+			dui.callAfter(self.Controller.treeSelect)
 
 
 	def onTreeContextMenu(self, evt):
