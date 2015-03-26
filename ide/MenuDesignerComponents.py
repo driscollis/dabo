@@ -115,9 +115,9 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 		# We want Hover behavior
 		self.Hover = True
 		# Smooth the drawing
- 		self.Buffered = True
+		self.Buffered = True
 
- 		self._kids = [self._background, self._hotKeyText, self._capText]
+		self._kids = [self._background, self._hotKeyText, self._capText]
 
 	def getBack(self):
 		if self._selected:
@@ -491,7 +491,7 @@ class CaptionBitmapPanel(CaptionPanel):
 			self._bmp = None
 		self._bmp = self.drawBitmap(bmp, 5, 5, visible=self.Parent.Visible)
 
- 		self._kids.append(self._bmp)
+		self._kids.append(self._bmp)
 
 		wd = self._bmp.Width
 		# Move the text over to fit

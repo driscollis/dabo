@@ -66,7 +66,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 		for prop in self.DesignerProps.keys():
 			try:
 				self._propDefaults[prop] = getattr(self, prop)
-			except StandardError, e:
+			except StandardError as e:
 				nm = self.Name
 				dabo.log.error(_("Could not set default prop value: object: %(nm)s; property: %(prop)s; error: %(e)s")
 						% locals())
@@ -378,34 +378,34 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			ret = super(ClassDesignerControlMixin, self).getClass()
 		return ret
 
-
- 	def onAddChild(self, evt):
- 		nd = self.activeNode
- 		self.activeNode = None
- 		txt = dui.getString(_("New Node Caption?"), _("Adding Child Node"))
- 		if txt is not None:
- 			nd.appendChild(txt)
- 		self.Controller.updateLayout()
-
-
- 	def onAddSibling(self, evt):
- 		nd = self.activeNode
- 		self.activeNode = None
- 		txt = dui.getString(_("New Node Caption?"), _("Adding Sibling Node"))
- 		if txt is not None:
- 			nd.parent.appendChild(txt)
- 		self.Controller.updateLayout()
+	
+	def onAddChild(self, evt):
+		nd = self.activeNode
+		self.activeNode = None
+		txt = dui.getString(_("New Node Caption?"), _("Adding Child Node"))
+		if txt is not None:
+			nd.appendChild(txt)
+		self.Controller.updateLayout()
 
 
- 	def onDelNode(self, evt):
- 		nd = self.activeNode
- 		self.activeNode = None
- 		self.removeNode(nd)
- 		self.Controller.updateLayout()
+	def onAddSibling(self, evt):
+		nd = self.activeNode
+		self.activeNode = None
+		txt = dui.getString(_("New Node Caption?"), _("Adding Sibling Node"))
+		if txt is not None:
+			nd.parent.appendChild(txt)
+		self.Controller.updateLayout()
 
 
- 	def onChangeCaption(self, evt):
- 		if isinstance(self, dui.dTreeView):
+	def onDelNode(self, evt):
+		nd = self.activeNode
+		self.activeNode = None
+		self.removeNode(nd)
+		self.Controller.updateLayout()
+
+
+	def onChangeCaption(self, evt):
+		if isinstance(self, dui.dTreeView):
 			nd = self.activeNode
 			self.activeNode = None
 			target = nd
@@ -416,10 +416,10 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			title = _("Changing Caption")
 			defVal = self.Caption
 		txt = dui.getString(_("New Caption"), caption=title,
-				defaultValue=defVal, Width=500, SelectOnEntry=True)
+		        defaultValue=defVal, Width=500, SelectOnEntry=True)
 		if txt is not None:
 			target.Caption = txt
- 		self.Controller.updateLayout()
+		self.Controller.updateLayout()
 
 
 	def onPaste(self, evt):
@@ -648,7 +648,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			try:
 				ret = self.__class__.superControl._getChildren(self)
 			except:
-				print "NO SUPER CLASS FOUND!!!!!"
+				print("NO SUPER CLASS FOUND!!!!!")
 				ret = []
 		if isinstance(self, dlgs.WizardPage):
 			# Skip the title and separator line.
@@ -1279,7 +1279,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "ColSpan", val)
-		except dui.GridSizerSpanException, e:
+		except dui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 
@@ -1298,7 +1298,7 @@ class ClassDesignerControlMixin(LayoutSaverMixin):
 			return
 		try:
 			self.ControllingSizer.setItemProp(self, "RowSpan", val)
-		except dui.GridSizerSpanException, e:
+		except dui.GridSizerSpanException as e:
 			raise PropertyUpdateException(ustr(e))
 
 

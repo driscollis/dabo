@@ -110,5 +110,4 @@ class ObjectPropertySheet(dui.dPanel):
 			data.append(pd[prop])
 		self.propGrid.DataSet = data
 		self.propGrid.fillGrid(True)
- 		self.editButton.Enabled = self.delButton.Enabled = (len(props) > 0)
-
+		self.editButton.Enabled = self.delButton.Enabled = (len(props) > 0)
