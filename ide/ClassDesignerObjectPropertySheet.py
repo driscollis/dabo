@@ -21,28 +21,28 @@ class ObjectPropertySheet(dui.dPanel):
 		sz = self.Sizer = dui.dSizer("v")
 		sz.append1x(self.propGrid)
 		col = dui.dColumn(grd, Caption=_("Property Name"), Order=10,
-				          DataField="propName", DataType=str, Name="PropName",
-				          Width=100, Sortable=True)
+				DataField="propName", DataType=str, Name="PropName",
+				Width=100, Sortable=True)
 		grd.addColumn(col)
 		col = dui.dColumn(grd, Caption=_("Default Value"), Order=20,
-				          DataField="defaultValue",  Name="DefaultValue",
-				          Width=80, Sortable=False)
+				DataField="defaultValue",  Name="DefaultValue",
+				Width=80, Sortable=False)
 		grd.addColumn(col)
 		col = dui.dColumn(grd, Caption=_("Comment"), Order=30,
-				          DataField="comment", DataType=str, Name="Comment",
-				          Width=200, Sortable=False)
+				DataField="comment", DataType=str, Name="Comment",
+				Width=200, Sortable=False)
 		grd.addColumn(col)
 		col = dui.dColumn(grd, Caption=_("Get"), Order=40,
-				          DataField="getter", DataType=bool, Name="Get", Width=40,
-				          Sortable=False)
+				DataField="getter", DataType=bool, Name="Get", Width=40,
+				Sortable=False)
 		grd.addColumn(col)
 		col = dui.dColumn(grd, Caption=_("Set"), Order=50,
-				          DataField="setter", DataType=bool, Name="Set", Width=40,
-				          Sortable=False)
+				DataField="setter", DataType=bool, Name="Set", Width=40,
+				Sortable=False)
 		grd.addColumn(col)
 		col = dui.dColumn(grd, Caption=_("Del"), Order=60,
-				          DataField="deller", DataType=bool, Name="Del", Width=40,
-				          Sortable=False)
+				DataField="deller", DataType=bool, Name="Del", Width=40,
+				Sortable=False)
 		grd.addColumn(col)
 
 		self.addButton = dui.dButton(self, Caption=_("Add"))
@@ -87,9 +87,9 @@ class ObjectPropertySheet(dui.dPanel):
 			else:
 				obj = obj[0]
 		self.addButton.Enabled = self.editButton.Enabled = \
-			self.delButton.Enabled = not isinstance(obj,
-				                                    (LayoutPanel, LayoutBasePanel, LayoutSpacerPanel, LayoutSizer,
-				                                     LayoutBorderSizer, LayoutGridSizer))
+				self.delButton.Enabled = not isinstance(obj,
+				(LayoutPanel, LayoutBasePanel, LayoutSpacerPanel, LayoutSizer,
+				LayoutBorderSizer, LayoutGridSizer))
 		self.populatePropList()
 
 
@@ -110,5 +110,5 @@ class ObjectPropertySheet(dui.dPanel):
 			data.append(pd[prop])
 		self.propGrid.DataSet = data
 		self.propGrid.fillGrid(True)
-		self.editButton.Enabled = self.delButton.Enabled = (len(props) > 0)
+ 		self.editButton.Enabled = self.delButton.Enabled = (len(props) > 0)
 
