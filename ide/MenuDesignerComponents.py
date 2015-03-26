@@ -22,7 +22,7 @@ class MenuSaverMixin(object):
 		ret["name"] = self.__class__.__name__
 		ret["attributes"] = ra = {}
 		propsToExclude = ("HotKeyChar", "HotKeyControl",
-				          "HotKeyAlt", "HotKeyShift")
+				"HotKeyAlt", "HotKeyShift")
 		for prop in self.DesignerProps:
 			if prop in propsToExclude:
 				continue
@@ -39,7 +39,7 @@ class MenuSaverMixin(object):
 					ref = "."
 				ref = os.path.abspath(ref)
 				val = dabo.lib.utils.getPathAttributePrefix() + \
-					dabo.lib.utils.relativePath(val, ref)
+						dabo.lib.utils.relativePath(val, ref)
 			if isinstance(val, sixBasestring):
 				strval = val
 			else:
@@ -51,8 +51,8 @@ class MenuSaverMixin(object):
 				evalStrVal = None
 			ra[prop] = val
 		ret["children"] = [kid.getDesignerDict()
-				           for kid in self.Children
-				           if hasattr(kid, "getDesignerDict")]
+				for kid in self.Children
+				if hasattr(kid, "getDesignerDict")]
 		return ret
 
 
@@ -96,12 +96,12 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 		self._selectedForeColor = "blue"
 		# This is the background draw object
 		self._background = self.drawRectangle(0, 0, -1, -1,
-				                              penWidth=0, fillColor=self._unselectedBackColor, visible=False)
+				penWidth=0, fillColor=self._unselectedBackColor, visible=False)
 		self._capText = self.drawText(self.Caption, 5, 5, visible=False)
 		self._hotKeyText = self.drawText(self.AbbreviatedHotKey, 5, 5, visible=False)
 		self.DynamicBackColor = self.getBack		#lambda: {True: self._selectedBackColor, False: self._unselectedBackColor}[self._selected]
 		self._background.DynamicFillColor = self._capText.DynamicFillColor = \
-			self._hotKeyText.DynamicFillColor = self.getBack		#lambda: {True: self._selectedBackColor, False: self._unselectedBackColor}[self._selected]
+				self._hotKeyText.DynamicFillColor = self.getBack		#lambda: {True: self._selectedBackColor, False: self._unselectedBackColor}[self._selected]
 		self._capText.DynamicForeColor = lambda: {True: self._selectedForeColor, False: self._unselectedForeColor}[self._selected]
 		# This will allow the hot key text position to stay right-aligned.
 		self._hotKeyText.DynamicXpos = self.positionHotKeyText
@@ -115,9 +115,9 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 		# We want Hover behavior
 		self.Hover = True
 		# Smooth the drawing
-		self.Buffered = True
+ 		self.Buffered = True
 
-		self._kids = [self._background, self._hotKeyText, self._capText]
+ 		self._kids = [self._background, self._hotKeyText, self._capText]
 
 	def getBack(self):
 		if self._selected:
@@ -284,16 +284,16 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 
 	def _getDesignerProps(self):
 		ret = {"Caption": {"type" : sixUnicode, "readonly" : False},
-			   "HelpText" : {"type" : sixUnicode, "readonly" : False},
-			   "MRU": {"type" : bool, "readonly" : False}}
+				"HelpText" : {"type" : sixUnicode, "readonly" : False},
+				"MRU": {"type" : bool, "readonly" : False}}
 		if self.isMenuItem:
 			ret.update({"HotKey": {"type" : sixUnicode, "readonly" : False,
-						           "customEditor": "editHotKey"},
-						"HotKeyAlt": {"type" : bool, "readonly" : False},
-						"HotKeyChar": {"type" : sixUnicode, "readonly" : False},
-						"HotKeyControl": {"type" : bool, "readonly" : False},
-						"HotKeyShift": {"type" : bool, "readonly" : False},
-						"Action": {"type" : sixUnicode, "readonly" : False}})
+					"customEditor": "editHotKey"},
+					"HotKeyAlt": {"type" : bool, "readonly" : False},
+					"HotKeyChar": {"type" : sixUnicode, "readonly" : False},
+					"HotKeyControl": {"type" : bool, "readonly" : False},
+					"HotKeyShift": {"type" : bool, "readonly" : False},
+					"Action": {"type" : sixUnicode, "readonly" : False}})
 			del ret["MRU"]
 		return ret
 
@@ -403,49 +403,49 @@ class CaptionPanel(MenuSaverMixin, dabo.ui.dPanel):
 
 
 	AbbreviatedHotKey = property(_getAbbreviatedHotKey, None, None,
-		                         _("Short version of the HotKey string (read-only) (str)"))
+			_("Short version of the HotKey string (read-only) (str)"))
 
 	Action = property(_getAction, _setAction, None,
-		              _("Action to be called when a menu item is selected.  (str)"))
+			_("Action to be called when a menu item is selected.  (str)"))
 
 	Caption = property(_getCaption, _setCaption, None,
-		               _("Caption displayed on this panel  (str)"))
+			_("Caption displayed on this panel  (str)"))
 
 	Controller = property(_getController, _setController, None,
-		                  _("Object to which this one reports events  (object (varies))"))
+			_("Object to which this one reports events  (object (varies))"))
 
 	DesignerProps = property(_getDesignerProps, None, None,
-		                     _("Properties exposed in the Menu Designer (read-only) (dict)"))
+			_("Properties exposed in the Menu Designer (read-only) (dict)"))
 
 	DisplayText = property(_getDisplayText, None, None,
-		                   _("Text used in the prop sheet to identify this object (read-only) (str)"))
+			_("Text used in the prop sheet to identify this object (read-only) (str)"))
 
 	HelpText = property(_getHelpText, _setHelpText, None,
-		                _("Help string displayed when the menu item is selected.  (str)"))
+			_("Help string displayed when the menu item is selected.  (str)"))
 
 	HotKey = property(_getHotKey, _setHotKey, None,
-		              _("Displayed version of the hotkey combination  (str)"))
+			_("Displayed version of the hotkey combination  (str)"))
 
 	HotKeyAlt = property(_getHotKeyAlt, _setHotKeyAlt, None,
-		                 _("Is the Alt key part of the hotkey combo?  (bool)"))
+			_("Is the Alt key part of the hotkey combo?  (bool)"))
 
 	HotKeyChar = property(_getHotKeyChar, _setHotKeyChar, None,
-		                  _("Character part of the hot key for this menu  (str)"))
+			_("Character part of the hot key for this menu  (str)"))
 
 	HotKeyControl = property(_getHotKeyControl, _setHotKeyControl, None,
-		                     _("Is the Control key part of the hotkey combo?  (bool)"))
+			_("Is the Control key part of the hotkey combo?  (bool)"))
 
 	HotKeyShift = property(_getHotKeyShift, _setHotKeyShift, None,
-		                   _("Is the Shift key part of the hotkey combo?  (bool)"))
+			_("Is the Shift key part of the hotkey combo?  (bool)"))
 
 	MRU = property(_getMRU, _setMRU, None,
-		           _("Should this menu be tracked for MRU lists  (bool)"))
+			_("Should this menu be tracked for MRU lists  (bool)"))
 
 	Selected = property(_getSelected, _setSelected, None,
-		                _("Is this the currently selected item?  (bool)"))
+			_("Is this the currently selected item?  (bool)"))
 
 	TreeDisplayCaption = property(_getTreeDisplayCaption, None, None,
-		                          _("Identifying label displayed in the prop sheet tree (read-only) (str)"))
+			_("Identifying label displayed in the prop sheet tree (read-only) (str)"))
 
 
 	_proxyDict = {}
@@ -491,7 +491,7 @@ class CaptionBitmapPanel(CaptionPanel):
 			self._bmp = None
 		self._bmp = self.drawBitmap(bmp, 5, 5, visible=self.Parent.Visible)
 
-		self._kids.append(self._bmp)
+ 		self._kids.append(self._bmp)
 
 		wd = self._bmp.Width
 		# Move the text over to fit
@@ -502,7 +502,7 @@ class CaptionBitmapPanel(CaptionPanel):
 	def _getDesignerProps(self):
 		ret = super(CaptionBitmapPanel, self)._getDesignerProps()
 		ret.update({"Picture": {"type" : "path", "readonly" : False,
-				                "customEditor": "editStdPicture"}})
+				"customEditor": "editStdPicture"}})
 		return ret
 
 
@@ -519,13 +519,13 @@ class CaptionBitmapPanel(CaptionPanel):
 
 
 	Bitmap = property(_getBitmap, _setBitmap, None,
-		              _("Bitmap to display on the panel  (bitmap)"))
+			_("Bitmap to display on the panel  (bitmap)"))
 
 	DesignerProps = property(_getDesignerProps, None, None,
-		                     _("Properties exposed in the Menu Designer (read-only) (dict)"))
+			_("Properties exposed in the Menu Designer (read-only) (dict)"))
 
 	Picture = property(_getPicture, _setPicture, None,
-		               _("The file used as the source for the displayed image.  (str)") )
+			_("The file used as the source for the displayed image.  (str)") )
 
 
 
@@ -542,7 +542,7 @@ class SeparatorPanel(CaptionBitmapPanel):
 		self.Height = 16
 		midHt = self.Height / 2.0
 		self._line = self.drawLine(4, midHt, self.Width-4, midHt,
-				                   penColor="gray", penWidth=1)
+				penColor="gray", penWidth=1)
 		self._line.DynamicPoints = self.setLineWidth
 		self._line.DynamicPenWidth = self.setLineThick
 		self._kids.append(self._line)
@@ -578,8 +578,8 @@ class SeparatorPanel(CaptionBitmapPanel):
 
 
 	DesignerProps = property(_getDesignerProps, None, None,
-		                     _("Properties exposed in the Menu Designer (read-only) (dict)"))
+			_("Properties exposed in the Menu Designer (read-only) (dict)"))
 
 	DisplayText = property(_getDisplayText, None, None,
-		                   _("Text used in the prop sheet to identify this object (read-only) (str)"))
+			_("Text used in the prop sheet to identify this object (read-only) (str)"))
 
