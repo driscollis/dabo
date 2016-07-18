@@ -1,5 +1,6 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 
 import gettext
 import locale
@@ -162,15 +163,15 @@ def getDaboLocaleDir():
 
 if __name__ == "__main__":
 	install()
-	print
-	print "sys.getdefaultencoding():", sys.getdefaultencoding()
+	print()
+	print("sys.getdefaultencoding():", sys.getdefaultencoding())
 	if dabo.loadUserLocale:
 		locale.setlocale(locale.LC_ALL, '')
-		print "locale.getlocale():", locale.getlocale()
+		print("locale.getlocale():", locale.getlocale())
 	else:
-		print "locale.getdefaultlocale():", locale.getdefaultlocale()
-	print "_defaultLanguage, _defaultEncoding:", _defaultLanguage, _defaultEncoding
-	print
+		print("locale.getdefaultlocale():", locale.getdefaultlocale())
+	print("_defaultLanguage, _defaultEncoding:", _defaultLanguage, _defaultEncoding)
+	print()
 
 	stringsToTranslate = ("OK", "&File", "&Edit", "&Help", "Application finished.")
 	max_len = {}
@@ -203,11 +204,11 @@ if __name__ == "__main__":
 			add("|")
 		return ''.join(lin)
 
-	print line()
-	print line(("en",) + stringsToTranslate)
-	print line()
+	print(line())
+	print(line(("en",) + stringsToTranslate))
+	print(line())
 	for l in translatedStrings:
 		setLanguage(l[0])
-		print line(l)
-	print line()
+		print(line(l))
+	print(line())
 

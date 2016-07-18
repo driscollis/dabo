@@ -4,16 +4,20 @@
 
 http://dabodev.com
 """
-import sys
-import os
+from __future__ import print_function
 import locale
 import logging
 import logging.handlers
-from settings import *
-from version import __version__
+import os
+import six
+import sys
+
+from .settings import *
+from .version import __version__
 
 # dApp will change the following values upon its __init__:
 dAppRef = None
+
 
 def getEncoding():
 	encoding = locale.getdefaultlocale()[1] or locale.getlocale()[1] or defaultEncoding
@@ -28,7 +32,7 @@ def getEncoding():
 			yield prefEncoding
 		if not encoding == defaultEncoding:
 			yield defaultEncoding
-		raise ValueError, "Unknown encoding: %s" % encoding
+		raise ValueError("Unknown encoding: %s" % encoding)
 
 	for encoding in _getEncodingName():
 		try:
@@ -182,7 +186,7 @@ def setDbLogFile(fname, level=None):
 if localizeDabo:
 	# Install localization service for dabo. dApp will install localization service
 	# for the user application separately.
-	import dLocalize
+	from . import dLocalize
 	dLocalize.install("dabo")
 
 # On some platforms getfilesystemencoding() and even getdefaultlocale()
@@ -292,7 +296,7 @@ app.start()
 		fname = "%s/__init__.py" % dd
 		txt = template % locals()
 		open(fname, "w").write(txt)
-	os.chmod("main.py", 0744)
+	os.chmod("main.py", 744)
 	os.chdir(currLoc)
-	print "Application '%s' has been created for you" % homedir
+	print("Application '%s' has been created for you" % homedir)
 
