@@ -1,13 +1,14 @@
 ﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+
 
 import gettext
-import locale
+from . import locale
 import os
 import sys
 import warnings
 
+import six
 import dabo
 
 
@@ -95,7 +96,7 @@ def setLanguage(lang=None, charset=None):
     global _domains, _currentTrans
     lang = _languageAliases.get(lang.lower(), lang)
 
-    if lang is not None and isinstance(lang, basestring):
+    if lang is not None and isinstance(lang, six.string_types):
         lang = [lang]
 
     daboTranslation = None
@@ -112,9 +113,13 @@ No translation file found for domain 'dabo'.
     Codeset = %s """ % (daboLocaleDir, ustr(lang), charset))
             # Default to US English
             daboTranslation = gettext.translation("dabo", daboLocaleDir, languages=["en"], codeset=charset)
-        _currentTrans = daboTranslation.ugettext
+        try:
+            _currentTrans = daboTranslation.ugettext
+        except AttributeError:
+            # Python3
+            _currentTrans = daboTranslation.gettext
 
-    for domain, localedir in _domains.items():
+    for domain, localedir in list(_domains.items()):
         if domain == "dabo":
             continue  ## already handled separately above
         try:

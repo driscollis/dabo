@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+import inspect
 import os
 import sys
 import time
-import inspect
-from cStringIO import StringIO
+
+from six.moves import StringIO
+
 import dabo
 from dabo.lib.utils import ustr
 
@@ -74,7 +76,7 @@ def loggit(fnc):
             for ag in args:
                 try:
                     loggit.fhwr.write(" %s" % ag)
-                except StandardError, e:
+                except Exception as e:
                     loggit.fhwr.write(" ERR: %s" % e)
             loggit.fhwr.write("\n")
         if kwargs:

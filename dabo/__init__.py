@@ -4,7 +4,7 @@
 
 http://dabodev.com
 """
-from __future__ import print_function
+
 import locale
 import logging
 import logging.handlers
@@ -195,7 +195,7 @@ fileSystemEncoding = (sys.getfilesystemencoding()
         or locale.getdefaultlocale()[1] or defaultEncoding)
 
 if importDebugger:
-    from dBug import logPoint
+    from .dBug import logPoint
     try:
         import pudb as pdb
     except ImportError:
@@ -203,7 +203,7 @@ if importDebugger:
     trace = pdb.set_trace
 
     def debugout(*args):
-        from lib.utils import ustr
+        from .lib.utils import ustr
         txtargs = [ustr(arg) for arg in args]
         txt = " ".join(txtargs)
         log = logging.getLogger("Debug")
@@ -214,17 +214,17 @@ if importDebugger:
     #         debugout("Another Message", self.Caption)
     # to their code for debugging.
     # (I added 'debugo' as an homage to Whil Hentzen!)
-    import __builtin__
-    __builtin__.debugo = __builtin__.debugout = debugout
+    from six.moves import builtins
+    builtins.debugo = builtins.debugout = debugout
 
 if implicitImports:
-    import dColors
-    import dEvents
-    import dabo.db
-    import dabo.biz
-    import dabo.ui
-    from dApp import dApp
-    from dPref import dPref
+    from . import dColors
+    from . import dEvents
+    from . import db
+    from . import biz
+    from . import ui
+    from .dApp import dApp
+    from .dPref import dPref
 
 # Store the base path to the framework
 frameworkPath = os.path.dirname(__file__)
@@ -252,7 +252,7 @@ def quickStart(homedir=None):
     """
     currLoc = os.getcwd()
     if homedir is None:
-        homedir = raw_input("Enter the name for your application: ")
+        homedir = input("Enter the name for your application: ")
     if not homedir:
         return
 
