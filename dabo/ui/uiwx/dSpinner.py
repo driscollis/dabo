@@ -12,19 +12,19 @@ if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 
 
-class _dSpinButton(dcm.dDataControlMixin, wx.SpinButton):
+class _dSpinButton(dDataControlMixin, wx.SpinButton):
     """Simple wrapper around the base wx.SpinButton."""
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         self._baseClass = _dSpinButton
         preClass = wx.PreSpinButton
         kwargs["style"] = kwargs.get("style", 0) | wx.SP_ARROW_KEYS
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
         if sys.platform.startswith("win"):
             # otherwise, the arrows are way too wide (34)

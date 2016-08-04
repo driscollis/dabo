@@ -2,6 +2,8 @@
 import string
 import types
 
+import six
+
 import dabo
 from dabo.lib.propertyHelperMixin import PropertyHelperMixin
 from dabo.lib.eventMixin import EventMixin
@@ -226,7 +228,7 @@ class dObject(PropertyHelperMixin, EventMixin):
         methodList = []
         for c in cls.__mro__:
             for item in dir(c):
-                if item[0] in string.lowercase:
+                if item[0] in string.ascii_lowercase:
                     if item in c.__dict__:
                         if type(c.__dict__[item]) in (types.MethodType, types.FunctionType):
                             if methodList.count(item) == 0:
@@ -343,7 +345,7 @@ class dObject(PropertyHelperMixin, EventMixin):
             return "?"
 
     def _setName(self, val):
-        if not isinstance(val, (str,)):
+        if not isinstance(val, six.string_types):
             raise TypeError('Name must be a string.')
         if not len(val.split()) == 1:
             raise KeyError('Name must not contain any spaces')

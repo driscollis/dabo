@@ -5,13 +5,13 @@ import dabo
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
-from . import dControlMixin as dcm
+from . import dControlMixin
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors
 from dabo.dLocalize import _
 
 
-class dSlidePanel(dcm.dControlMixin, fpb.FoldPanelItem):
+class dSlidePanel(dControlMixin, fpb.FoldPanelItem):
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         self._baseClass = dSlidePanel
         preClass = fpb.FoldPanelItem
@@ -52,7 +52,7 @@ class dSlidePanel(dcm.dControlMixin, fpb.FoldPanelItem):
                 "borderonly" : fpb.CAPTIONBAR_RECTANGLE,
                 "filledborder" : fpb.CAPTIONBAR_FILLED_RECTANGLE}
 
-        dcm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
         self._cont.appendPanel(self)
@@ -385,7 +385,7 @@ class dSlidePanel(dcm.dControlMixin, fpb.FoldPanelItem):
 
 
 
-class dSlidePanelControl(dcm.dControlMixin, wx.lib.foldpanelbar.FoldPanelBar):
+class dSlidePanelControl(dControlMixin, wx.lib.foldpanelbar.FoldPanelBar):
     """
     Creates a control consisting of several panels that can be
     hidden or revealed by clicking on their 'caption bar'.
@@ -409,7 +409,7 @@ class dSlidePanelControl(dcm.dControlMixin, wx.lib.foldpanelbar.FoldPanelBar):
         # Ensures that the control has a minimum size.
         self._minSizerWidth = self._minSizerHeight = 100
 
-        dcm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
         self._setInitialOpenPanel()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import types
 import wx
-from . import dPemMixin as pm
+from . import dPemMixin
 from . import dIcons
 import dabo
 from dabo.dLocalize import _
@@ -10,7 +10,7 @@ from dabo.ui import makeDynamicProperty
 from dabo.lib.utils import ustr
 
 
-class dMenuItem(pm.dPemMixin, wx.MenuItem):
+class dMenuItem(dPemMixin, wx.MenuItem):
     """Creates a menu item, which is usually represented as a string."""
     def __init__(self, parent=None, properties=None, *args, **kwargs):
         self._baseClass = dMenuItem
@@ -29,7 +29,7 @@ class dMenuItem(pm.dPemMixin, wx.MenuItem):
         # Holds the unique ID, if any
         self._itemID = None
 
-        pm.dPemMixin.__init__(self, preClass, parent, properties, *args, **kwargs)
+        dPemMixin.__init__(self, preClass, parent, properties, *args, **kwargs)
 
 
     def _initEvents(self):
@@ -221,7 +221,7 @@ class dMenuItem(pm.dPemMixin, wx.MenuItem):
 
 
 
-class dSeparatorMenuItem(pm.dPemMixin, wx.MenuItem):
+class dSeparatorMenuItem(dPemMixin, wx.MenuItem):
     """Creates a menu separator."""
     def __init__(self, parent=None, properties=None, *args, **kwargs):
         self._baseClass = dSeparatorMenuItem
@@ -229,7 +229,7 @@ class dSeparatorMenuItem(pm.dPemMixin, wx.MenuItem):
         self.Parent = parent
         # Holds the unique ID, if any
         self._itemID = None
-        pm.dPemMixin.__init__(self, preClass, parent, properties, *args, **kwargs)
+        dPemMixin.__init__(self, preClass, parent, properties, *args, **kwargs)
 
 
     # The following are methods designed to make separators work like other menu items.

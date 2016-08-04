@@ -21,7 +21,7 @@ import dabo.dEvents as dEvents
 import dabo.dException as dException
 from dabo.dLocalize import _, n_
 from dabo.lib.utils import ustr
-from . import dControlMixin as cm
+from . import dControlMixin
 from . import dKeys
 from . import dUICursors
 import dabo.biz
@@ -1790,7 +1790,7 @@ class dColumn(dabo.ui.dPemMixinBase.dPemMixinBase):
 
 
 
-class dGrid(cm.dControlMixin, wx.grid.Grid):
+class dGrid(dControlMixin, wx.grid.Grid):
     """
     Creates a grid, with rows and columns to represent records and fields.
 
@@ -1906,7 +1906,7 @@ class dGrid(cm.dControlMixin, wx.grid.Grid):
         self._rowColorEven = "white"
         self._rowColorOdd = (212, 255, 212)        # very light green
 
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
         # Reduces grid flickering on Windows platform.

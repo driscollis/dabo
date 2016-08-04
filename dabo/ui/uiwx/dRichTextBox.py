@@ -9,14 +9,14 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 import dabo.dColors as dColors
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 
 
 
-class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
+class dRichTextBox(dDataControlMixin, wx.richtext.RichTextCtrl):
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         self._baseClass = dRichTextBox
         # Used to test if selection has any of the styles applied to any part of it.
@@ -30,7 +30,7 @@ class dRichTextBox(dcm.dDataControlMixin, wx.richtext.RichTextCtrl):
         self._htmlHandler = wx.richtext.RichTextHTMLHandler()
         self._handlers = (self._xmlHandler, self._htmlHandler)
         preClass = wx.richtext.PreRichTextCtrl
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

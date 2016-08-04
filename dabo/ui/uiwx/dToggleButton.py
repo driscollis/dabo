@@ -7,12 +7,12 @@ if __name__ == "__main__":
     import dabo.ui
     dabo.ui.loadUI("wx")
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 from . import dImageMixin as dim
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 
-class dToggleButton(dcm.dDataControlMixin, dim.dImageMixin,
+class dToggleButton(dDataControlMixin, dim.dImageMixin,
         wxb.GenBitmapTextToggleButton):
     """
     Creates a button that toggles on and off, for editing boolean values.
@@ -37,7 +37,7 @@ class dToggleButton(dcm.dDataControlMixin, dim.dImageMixin,
         style = self._extractKey((properties, attProperties, kwargs), "style", 0) | wx.BORDER_NONE
         kwargs["style"] = style
         dim.dImageMixin.__init__(self)
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
         self.Bind(wx.EVT_BUTTON, self.__onButton)
 

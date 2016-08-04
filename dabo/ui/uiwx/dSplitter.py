@@ -9,7 +9,7 @@ from . import dForm
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 import dabo.dColors as dColors
-from . import dControlMixin as cm
+from . import dControlMixin
 
 
 class SplitterPanelMixin(object):
@@ -101,7 +101,7 @@ class SplitterPanelMixin(object):
 
 
 
-class dSplitter(cm.dControlMixin, wx.SplitterWindow):
+class dSplitter(dControlMixin, wx.SplitterWindow):
     """
     Main class for handling split windows. It will contain two
     panels (subclass of SplitterPanelMixin), each of which can further
@@ -147,7 +147,7 @@ class dSplitter(cm.dControlMixin, wx.SplitterWindow):
         self._showPanelSplitMenu = False
 
         preClass = wx.PreSplitterWindow
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, style=style, *args, **kwargs)
 
 

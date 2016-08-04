@@ -7,14 +7,14 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 import dabo.dEvents as dEvents
-from . import dFormMixin as fm
+from . import dFormMixin
 import dabo.dException as dException
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from .dDialog import dDialog
 
 
-class BaseForm(fm.dFormMixin):
+class BaseForm(dFormMixin):
     """
     Creates a bizobj-aware form.
 
@@ -36,7 +36,7 @@ class BaseForm(fm.dFormMixin):
         # or a requery is about to happen.
         self._checkForChanges = True
 
-        fm.dFormMixin.__init__(self, preClass, parent, properties=properties,
+        dFormMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
         # Used to override some cases where the status

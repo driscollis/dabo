@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-import builtins
 import time
+
+from six.moves import builtins
+
 import wx
 import wx.stc as stc
 import wx.py
 from wx.py import pseudo
+
 import dabo
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _

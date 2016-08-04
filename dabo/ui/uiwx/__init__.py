@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
-import sys
+import datetime
+import glob
+import io
 import os
 import re
-import glob
-import urllib.request, urllib.parse, urllib.error
-import datetime
+import sys
 import time
-import io
-import warnings
 import traceback
+import warnings
+
+from six.moves import urllib
+
 import dabo
-from dabo.dLocalize import _
-from dabo.lib.utils import ustr
-from dabo.lib import utils
 import dabo.dEvents as dEvents
+from dabo.dLocalize import _
+from dabo.lib import utils
+from dabo.lib.utils import ustr
 from . import dKeys
 
 # Very VERY first thing: ensure a minimal wx is selected, but only if

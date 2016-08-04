@@ -18,7 +18,7 @@ if __name__ == "__main__":
 import dabo.dEvents as dEvents
 import dabo.dColors as dColors
 from dabo.dLocalize import _
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 from . import dTimer
 
 LexerDic = {
@@ -233,7 +233,7 @@ class STCPrintout(wx.Printout):
         return True
 
 
-class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
+class dEditor(dDataControlMixin, stc.StyledTextCtrl):
     # The Editor is copied from the wxPython demo, StyledTextCtrl_2.py,
     # and modified. Thanks to Robin Dunn and everyone that contributed to
     # that demo to get us going!
@@ -286,9 +286,10 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
         self._defPat = re.compile(r"^\s*def ")
 
         stc.StyledTextCtrl.__init__(self, parent, -1,
-                                    style = wx.NO_BORDER)
-        dcm.dDataControlMixin.__init__(self, name, properties=properties,
-                                       attProperties=attProperties, _explicitName=_explicitName, *args, **kwargs)
+                style = wx.NO_BORDER)
+        dDataControlMixin.__init__(self, name, properties=properties,
+                attProperties=attProperties, _explicitName=_explicitName,
+                *args, **kwargs)
         self._afterInit()
 
         self._printData = wx.PrintData()
@@ -300,8 +301,10 @@ class dEditor(dcm.dDataControlMixin, stc.StyledTextCtrl):
         # Used for parsing class and method names
         self._pat = re.compile("^[ \t]*((?:(?:class)|(?:def)) [^\(]+)\(", re.M)
 
-        self.modifiedEventMask = (stc.STC_MOD_INSERTTEXT | stc.STC_MOD_DELETETEXT |
-                                  stc.STC_PERFORMED_USER | stc.STC_PERFORMED_UNDO | stc.STC_PERFORMED_REDO)
+        self.modifiedEventMask = (
+                stc.STC_MOD_INSERTTEXT | stc.STC_MOD_DELETETEXT |
+                stc.STC_PERFORMED_USER | stc.STC_PERFORMED_UNDO |
+                stc.STC_PERFORMED_REDO)
         self.SetModEventMask(self.modifiedEventMask)
         self.Bind(stc.EVT_STC_UPDATEUI, self.OnUpdateUI)
         self.Bind(stc.EVT_STC_MARGINCLICK, self.OnMarginClick)

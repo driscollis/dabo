@@ -7,7 +7,7 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dControlMixin as cm
+from . import dControlMixin
 from dabo.dLocalize import _
 
 # Need to define this exception class for x-platform
@@ -26,7 +26,7 @@ except Exception:
     PDFWindow = Dummy
 
 
-class dPdfWindow(cm.dControlMixin, PDFWindow):
+class dPdfWindow(dControlMixin, PDFWindow):
     """
     Displays a PDF file on Windows using Adobe Acrobat Reader in a panel.
 
@@ -38,7 +38,7 @@ class dPdfWindow(cm.dControlMixin, PDFWindow):
 
         self._baseClass = dPdfWindow
         preClass = pdfwin.PDFWindow
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

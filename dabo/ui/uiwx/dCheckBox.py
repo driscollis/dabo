@@ -5,16 +5,16 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 from dabo.dLocalize import _
 
 
-class dCheckBox(dcm.dDataControlMixin, wx.CheckBox):
+class dCheckBox(dDataControlMixin, wx.CheckBox):
     """Creates a checkbox, allowing editing boolean values."""
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         self._baseClass = dCheckBox
         preClass = wx.PreCheckBox
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 
@@ -82,14 +82,14 @@ class dCheckBox(dcm.dDataControlMixin, wx.CheckBox):
 
     def _getValue(self):
         if not self._hasWindowStyleFlag(wx.CHK_3STATE):
-            return dcm.dDataControlMixin._getValue(self)
+            return dDataControlMixin._getValue(self)
         else:
             return self._3StateToValue.get(self.Get3StateValue(), None)
 
     def _setValue(self, val):
         if self._constructed():
             if not self._hasWindowStyleFlag(wx.CHK_3STATE):
-                dcm.dDataControlMixin._setValue(self, val)
+                dDataControlMixin._setValue(self, val)
             else:
                 try:
                     state = self._ValueTo3State[val]

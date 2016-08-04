@@ -8,11 +8,11 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dControlMixin as cm
+from . import dControlMixin
 from .alignmentMixin import AlignmentMixin
 
 
-class dLabel(cm.dControlMixin, AlignmentMixin, wx.StaticText):
+class dLabel(dControlMixin, AlignmentMixin, wx.StaticText):
     """Creates a static label, to make a caption for another control, for example."""
     _layout_on_set_caption = True
 
@@ -22,7 +22,7 @@ class dLabel(cm.dControlMixin, AlignmentMixin, wx.StaticText):
         self._inResizeEvent = False
         self._resetAutoResize = True
         preClass = wx.PreStaticText
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
         self.bindEvent(dEvents.Resize, self.__onResize)
 

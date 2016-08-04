@@ -133,7 +133,7 @@ class dPemMixin(dPemMixinBase):
         properties = dictStringify(properties)
 
         # Hacks to fix up various things:
-        from . import dMenuBar, dMenuItem, dMenu, dSlidePanelControl, dToggleButton
+        import dMenu, dMenuBar, dMenuItem, dSlidePanelControl, dToggleButton
         if wx.VERSION >= (2, 8, 8):
             from . import dBorderlessButton
         if isinstance(self, (dMenuItem.dMenuItem, dMenuItem.dSeparatorMenuItem)):

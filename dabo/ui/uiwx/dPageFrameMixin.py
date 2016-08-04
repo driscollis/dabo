@@ -5,7 +5,7 @@ import dabo
 import dabo.ui
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
-from . import dControlMixin as cm
+from . import dControlMixin
 from .dPage import dPage
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
@@ -16,7 +16,7 @@ from dabo.ui import makeDynamicProperty
 MSG_SMART_FOCUS_ABUSE = _("The '%s' control must inherit from dPage to use the UseSmartFocus feature.")
 
 
-class dPageFrameMixin(cm.dControlMixin):
+class dPageFrameMixin(dControlMixin):
     """Creates a container for an unlimited number of pages."""
 
     def __init__(self, preClass, parent, properties=None, attProperties=None, *args, **kwargs):

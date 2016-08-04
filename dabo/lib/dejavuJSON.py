@@ -12,6 +12,8 @@ import decimal
 import time
 import sys
 
+from six import with_metaclass
+
 try:
     from simplejson import JSONEncoder, JSONDecoder
 except ImportError:
@@ -26,13 +28,14 @@ Please install that module before using the web features of Dabo.
 
 __all__ = ["Encoder", "Decoder", "Converter"]
 
-class Null(object, metaclass=meta):
-    class meta(type):
-        def __new__(cls, *args, **kwargs):
-            if '_inst' not in vars(cls):
-                cls._inst = type.__new__(cls, *args, **kwargs)
-            return cls._inst
-        def __init__(self, *args, **kwargs): pass
+class meta(type):
+    def __new__(cls, *args, **kwargs):
+        if '_inst' not in vars(cls):
+            cls._inst = type.__new__(cls, *args, **kwargs)
+        return cls._inst
+    def __init__(self, *args, **kwargs): pass
+
+class Null(with_metaclass(meta, object)):
     def __call__(self, *args, **kwargs): return self
     def __repr__(self): return "Null()"
     def __bool__(self): return False

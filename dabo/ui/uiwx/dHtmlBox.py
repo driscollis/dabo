@@ -1,26 +1,27 @@
 # -*- coding: utf-8 -*-
-import wx.html
+import datetime
 import os
 import re
 import string
 import types
-import urllib.request, urllib.error, urllib.parse
-import urllib.parse
-import datetime
+
+from six.moves import urllib
+
 import dabo
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
-from . import dControlMixin as cm
+from . import dControlMixin
 try:
     import webbrowser as wb
 except ImportError:
     wb = None
+import wx.html
 
 
-class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
+class dHtmlBox(dControlMixin, wx.html.HtmlWindow):
     """
     Creates a scrolled panel that can load and display html pages. The Html Window
     can load any html text, file, or url that is fed to it.
@@ -34,7 +35,7 @@ class dHtmlBox(cm.dControlMixin, wx.html.HtmlWindow):
         self._source = self._page = ""
         self._respondToLinks = True
         self._openLinksInBrowser = False
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
         self.SetScrollRate(10, 10)
         if wx.VERSION >= (2, 7):

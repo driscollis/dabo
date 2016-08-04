@@ -7,13 +7,13 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 from . import dControlItemMixin as cim
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
 
-class _dRadioButton(dcm.dDataControlMixin, wx.RadioButton):
+class _dRadioButton(dDataControlMixin, wx.RadioButton):
     """
     Subclass of wx.RadioButton. Not meant to be used individually, but
     only in the context of a parent dRadioList control.
@@ -21,7 +21,7 @@ class _dRadioButton(dcm.dDataControlMixin, wx.RadioButton):
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         self._baseClass = _dRadioButton
         preClass = wx.PreRadioButton
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

@@ -22,13 +22,13 @@ import dabo.ui
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dDataControlMixin as dcm
+from . import dDataControlMixin
 from dabo.dLocalize import _
 import dabo.dEvents as dEvents
 from dabo.ui import makeDynamicProperty
 
 
-class dTextBoxMixinBase(dcm.dDataControlMixin):
+class dTextBoxMixinBase(dDataControlMixin):
     def __init__(self, preClass, parent, properties=None, attProperties=None, *args, **kwargs):
         global decimalPoint
         if decimalPoint is None:
@@ -41,7 +41,7 @@ class dTextBoxMixinBase(dcm.dDataControlMixin):
         self._inTextLength = False
         self._flushOnLostFocus = True  ## see dabo.ui.dDataControlMixinBase::flushValue()
 
-        dcm.dDataControlMixin.__init__(self, preClass, parent, properties=properties,
+        dDataControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

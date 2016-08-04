@@ -7,7 +7,7 @@ import dabo.ui
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dControlMixin as cm
+from . import dControlMixin
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
 
@@ -23,7 +23,7 @@ except Exception as e:
     openGL = False
 
 
-class dGlWindow(cm.dControlMixin, glcanvas.GLCanvas):
+class dGlWindow(dControlMixin, glcanvas.GLCanvas):
     def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
         if not openGL:
             raise ImportError("PyOpenGL is not present, so dGlWindow cannot instantiate.")
@@ -38,7 +38,7 @@ class dGlWindow(cm.dControlMixin, glcanvas.GLCanvas):
 
         self._baseClass = dGlWindow
         preClass = glcanvas.GLCanvas
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
     def initGL(self):

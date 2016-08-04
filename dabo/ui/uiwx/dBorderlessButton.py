@@ -11,13 +11,13 @@ import dabo.ui
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dControlMixin as cm
+from . import dControlMixin
 from dabo.dLocalize import _
 import dabo.dColors as dColors
 from dabo.ui import makeDynamicProperty
 
 
-class dBorderlessButton(cm.dControlMixin, platebtn.PlateButton):
+class dBorderlessButton(dControlMixin, platebtn.PlateButton):
     """
     Creates a button that can be pressed by the user to trigger an action.
 
@@ -47,7 +47,7 @@ class dBorderlessButton(cm.dControlMixin, platebtn.PlateButton):
         # around the bitmap image in order for it to appear correctly
         self._bmpBorder = 10
 
-        cm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

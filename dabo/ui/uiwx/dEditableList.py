@@ -4,13 +4,13 @@ import dabo
 if __name__ == "__main__":
     import dabo.ui
     dabo.ui.loadUI("wx")
-from . import dControlMixin as dcm
+from . import dControlMixin
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
 
 
-class dEditableList(dcm.dControlMixin, wx.gizmos.EditableListBox):
+class dEditableList(dControlMixin, wx.gizmos.EditableListBox):
     """
     Creates an editable list box, complete with buttons to control
     editing, adding/deleting items, and re-ordering them.
@@ -44,7 +44,7 @@ class dEditableList(dcm.dControlMixin, wx.gizmos.EditableListBox):
         self._upButton = None
         self._panel = None
 
-        dcm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

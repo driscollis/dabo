@@ -6,7 +6,7 @@ from dabo.ui import makeDynamicProperty
 import collections
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
-from . import dPemMixin as pm
+from . import dPemMixin
 from . import dIcons
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
@@ -20,7 +20,7 @@ RadioItemType = wx.ITEM_RADIO
 SeparatorItemType = wx.ITEM_SEPARATOR
 
 
-class dMenu(pm.dPemMixin, wx.Menu):
+class dMenu(dPemMixin, wx.Menu):
     """
     Creates a menu, which can contain submenus, menu items,
     and separators.
@@ -44,7 +44,7 @@ class dMenu(pm.dPemMixin, wx.Menu):
         ##      To work around this, we maintain an internal dictionary that
         ##      maps the id of the wxMenuItem to the dMenuItem object.
         self._daboChildren = {}
-        pm.dPemMixin.__init__(self, preClass, parent, properties=properties,
+        dPemMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
 

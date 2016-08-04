@@ -8,12 +8,12 @@ if __name__ == "__main__":
 import dabo.dEvents as dEvents
 import dabo.dConstants as kons
 from dabo.dLocalize import _
-from . import dFormMixin as fm
+from . import dFormMixin
 from . import dPemMixin as pm
 from dabo.ui import makeDynamicProperty
 
 
-class dDialog(fm.dFormMixin, wx.Dialog):
+class dDialog(dFormMixin, wx.Dialog):
     """
     Creates a dialog, which is a lightweight form.
 
@@ -38,7 +38,7 @@ class dDialog(fm.dFormMixin, wx.Dialog):
             kwargs["style"] = defaultStyle
 
         preClass = wx.PreDialog
-        fm.dFormMixin.__init__(self, preClass, parent, properties=properties,
+        dFormMixin.__init__(self, preClass, parent, properties=properties,
                 *args, **kwargs)
 
         # Hook method, so that we add the buttons last

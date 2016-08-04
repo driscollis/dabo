@@ -3,7 +3,7 @@ import os
 import sys
 import wx
 import dabo
-from . import dPemMixin as pm
+from . import dPemMixin
 from . import dMenu
 import dabo.icons
 from dabo.dLocalize import _
@@ -15,7 +15,7 @@ from dabo.lib.utils import cleanMenuCaption
 from dabo.ui import makeDynamicProperty
 
 
-class dFormMixin(pm.dPemMixin):
+class dFormMixin(dPemMixin):
     def __init__(self, preClass, parent=None, properties=None, attProperties=None,
             src=None, *args, **kwargs):
         self._cxnName = ""

@@ -6,12 +6,12 @@ import dabo
 from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
-from . import dControlMixin as dcm
+from . import dControlMixin
 import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
 
-class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
+class BaseCalendar(wxcal.CalendarCtrl):
     """
     This is the base wrapper of the wx calendar control. Do not
     use this directly; instead, use either the 'dCalendar' or the
@@ -39,7 +39,7 @@ class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
         self._currentMonth = None
         self._currentYear = None
 
-        dcm.dControlMixin.__init__(self, preClass, parent, properties=properties,
+        dControlMixin.__init__(self, preClass, parent, properties=properties,
                 attProperties=attProperties, *args, **kwargs)
 
         # Store some event types in case we need to raise them

@@ -9,8 +9,8 @@ from dabo.ui import makeDynamicProperty
 if __name__ == "__main__":
     dabo.ui.loadUI("wx")
 
-from . import dControlMixin as cm
-from . import dDataControlMixin as dcm
+from . import dControlMixin
+from . import dDataControlMixin
 
 
 class _BasePanelMixin(object):
@@ -239,17 +239,17 @@ class _BasePanelMixin(object):
 
 
 
-class _PanelMixin(cm.dControlMixin, _BasePanelMixin):
+class _PanelMixin(dControlMixin, _BasePanelMixin):
     def __init__(self, preClass, parent, properties=None, attProperties=None,
             *args, **kwargs):
-        _BasePanelMixin.__init__(self, cm.dControlMixin, preClass=preClass, parent=parent,
+        _BasePanelMixin.__init__(self, dControlMixin, preClass=preClass, parent=parent,
                 properties=properties, attProperties=attProperties, *args, **kwargs)
 
 
-class _DataPanelMixin(dcm.dDataControlMixin, _BasePanelMixin):
+class _DataPanelMixin(dDataControlMixin, _BasePanelMixin):
     def __init__(self, preClass, parent, properties=None, attProperties=None,
             *args, **kwargs):
-        _BasePanelMixin.__init__(self, dcm.dDataControlMixin, preClass=preClass, parent=parent,
+        _BasePanelMixin.__init__(self, dDataControlMixin, preClass=preClass, parent=parent,
                 properties=properties, attProperties=attProperties, *args, **kwargs)
 
 
