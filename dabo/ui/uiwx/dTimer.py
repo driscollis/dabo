@@ -10,10 +10,26 @@ from .dPemMixin import dPemMixin as PM
 from . import dPanel
 
 
+
+def safe_interval(fnc):
+    def wrapped(self, interval=None, *args, **kwargs):
+        safe_interval = interval
+        if interval:
+            safe_interval = min(interval, self.max_interval)
+            if safe_interval < interval:
+                print("WARNING: Timer interval of %s exceeds the maximum "
+                        "allowed of %s" % (interval, self.max_interval))
+        return fnc(self, safe_interval, *args, **kwargs)
+    return wrapped
+
+
 class dTimer(PM):
     """Creates a timer, for causing something to happen at regular intervals."""
     def __init__(self, parent=None, properties=None, *args, **kwargs):
         self._baseClass = dTimer
+        # Setting the timer's Interval to anything longer than this will raise
+        # an exception
+        self.max_interval = 2147483647
         super(dTimer, self).__init__(preClass=None, parent=parent, properties=properties, *args, **kwargs)
 
 
@@ -21,6 +37,7 @@ class dTimer(PM):
         return self.Enabled
 
 
+    @safe_interval
     def start(self, interval=-1):
         if interval >= 0:
             self.Interval = interval
@@ -79,14 +96,16 @@ class dTimer(PM):
             v = self._interval = 0
         return v
 
+    @safe_interval
     def _setInterval(self, val):
         self._interval = val
 
 
     Enabled = property(_getEnabled, _setEnabled, None,
-            _("""Alternative means of starting/stopping the timer, or determining
-            its status. If Enabled is set to True and the timer has a positive value
-            for its Interval, the timer will be started.  (bool)"""))
+            _("""Alternative means of starting/stopping the timer, or
+            determining its status. If Enabled is set to True and the timer has
+            a positive value for its Interval, the timer will be started.
+            (bool)"""))
 
     Interval = property(_getInterval, _setInterval, None,
             _("Specifies the timer interval (milliseconds)."))

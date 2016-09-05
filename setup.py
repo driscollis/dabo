@@ -1,11 +1,8 @@
 import os
 import glob
-from setuptools import setup
-from setuptools.command.sdist import sdist as _sdist
-import ez_setup # From http://peak.telecommunity.com/DevCenter/setuptools
-ez_setup.use_setuptools()
-
 from setuptools import setup, find_packages
+from setuptools.command.sdist import sdist as _sdist
+
 from dabo.version import __version__
 
 setupDir = os.path.dirname(__file__)
@@ -29,41 +26,40 @@ def getLocaleDirs(arg, dirname, fnames):
 	if dirname[-1] != "\\":
 		po_files = tuple(glob.glob(os.path.join(dirname, "*.po")))
 		mo_files = tuple(glob.glob(os.path.join(dirname, "*.mo")))
-		if po_files or mo_files:
+		if po_files:
 			subdir = os.path.join(localeDir, dirname[len(arg)+1:])
-			localeDirs.append((subdir, po_files + mo_files))
+			localeDirs.append((subdir, ["*.po"]))
+		if mo_files:
+			subdir = os.path.join(localeDir, dirname[len(arg)+1:])
+			localeDirs.append((subdir, ["*.po"]))
 os.path.walk(localeDir, getLocaleDirs, localeDir)
 
 package_data = {
-		'':['ANNOUNCE', 'AUTHORS', 'ChangeLog', 'INSTALL',
-		'LICENSE.TXT', 'README', 'TODO'],
-		'dabo.icons': ['*.png', '*.ico'],
-		'dabo.icons.cards.small': ['*.png', '*.ico'],
-		'dabo.icons.cards.large': ['*.png', '*.ico'],
-		'dabo.lib.reporting':['*.rfxml'],
-		'dabo.lib.reporting_stefano':['*.rfxml'],
-		'dabo.ui.uiwx.macImageProblem':['*.png'],
-		'dabo.ui.uiwx.masked':['README'],
-		}
+	"":["ANNOUNCE", "AUTHORS", "ChangeLog", "INSTALL",
+	"LICENSE.TXT", "README", "TODO"],
+	"dabo.icons": ["*.png", "*.ico"],
+	"dabo.icons.cards.small": ["*.png", "*.ico"],
+	"dabo.icons.cards.large": ["*.png", "*.ico"],
+	"dabo.lib.reporting":["*.rfxml"],
+	"dabo.lib.reporting_stefano":["*.rfxml"],
+	"dabo.ui.uiwx.macImageProblem":["*.png"],
+	"dabo.ui.uiwx.masked":["README"],
+	}
 
 package_data.update(iconDirs)
-
-data_files = [
-		(os.path.join('dabo', 'locale'), glob.glob('dabo/locale/*.pot')),
-		]
-data_files.extend(localeDirs)
+package_data.update(localeDirs)
 
 version = __version__
 setup(
-		name = "Dabo",
-		version = version,
-		url = 'http://dabodev.com/',
-		download_url = 'https://github.com/dabodev/dabo/archive/v%s.zip' % version,
-		author = 'Ed Leafe and Paul McNett',
-		author_email = 'dev@dabodev.com',
-		description = 'Dabo 3-tier Application Framework',
-		license = 'MIT',
-		packages = find_packages(),
-		package_data = package_data,
-		data_files = data_files,
+	name = "Dabo",
+	version = version,
+	url = "http://dabodev.com/",
+	download_url = "https://github.com/dabodev/dabo/archive/v%s.zip" % version,
+	author = "Ed Leafe and Paul McNett",
+	author_email = "dev@dabodev.com",
+	description = "Dabo 3-tier Application Framework",
+	license = "MIT",
+	packages = find_packages(),
+	package_data = package_data,
+	include_package_data = True,
 )
