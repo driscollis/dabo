@@ -4,6 +4,7 @@
 """
 import datetime
 import wx
+import wx.adv
 import dabo
 if __name__ == "__main__":
 	import dabo.ui
@@ -41,7 +42,7 @@ def dateTimeWx2Py(date):
 	return retVal
 
 
-class dDatePicker(dcm.dDataControlMixin, wx.DatePickerCtrl):
+class dDatePicker(dcm.dDataControlMixin, wx.adv.DatePickerCtrl):
 	"""
 	Creates a DatePicker control.
 	Control purpose is to maintain Date field types, but it can
@@ -55,7 +56,7 @@ class dDatePicker(dcm.dDataControlMixin, wx.DatePickerCtrl):
 		self._timePart = [0, 0, 0, 0]
 		self._lastWasNone = True
 		self._baseClass = dDatePicker
-		preClass = wx.PreDatePickerCtrl
+		preClass = wx.adv.DatePickerCtrl()
 		pickerMode = self._extractKey((properties, attProperties, kwargs),
 				"PickerMode", "Dropdown")[:1].lower()
 		if pickerMode not in "ds":
