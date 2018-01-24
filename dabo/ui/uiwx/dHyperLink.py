@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import wx
-import wx.lib.hyperlink as hyperlink
+import wx.lib.agw.hyperlink as hyperlink
 import dabo
 from dabo.dLocalize import _
 from dabo.ui import makeDynamicProperty
