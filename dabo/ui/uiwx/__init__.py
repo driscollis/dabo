@@ -620,7 +620,7 @@ def getEventData(wxEvt):
                 except AttributeError:
                         pass
 
-        if isinstance(wxEvt, wx.calendar.CalendarEvent):
+        if isinstance(wxEvt, wx.adv.CalendarEvent):
                 ed["date"] = wxEvt.PyGetDate()
                 # This will be undefined for all but the
                 # EVT_CALENDAR_WEEKDAY_CLICKED event.

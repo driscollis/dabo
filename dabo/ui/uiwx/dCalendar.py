@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import wx
-import wx.calendar as wxcal
+import wx.adv
 import datetime
 import dabo
 from dabo.ui import makeDynamicProperty
@@ -11,7 +11,7 @@ import dabo.dEvents as dEvents
 from dabo.dLocalize import _
 
 
-class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
+class BaseCalendar(dcm.dControlMixin, wx.adv.CalendarCtrl):
 	"""
 	This is the base wrapper of the wx calendar control. Do not
 	use this directly; instead, use either the 'dCalendar' or the
@@ -19,7 +19,7 @@ class BaseCalendar(dcm.dControlMixin, wxcal.CalendarCtrl):
 	"""
 	def __init__(self, parent, properties=None, attProperties=None, *args, **kwargs):
 		self._baseClass = dCalendar
-		preClass = wxcal.PreCalendarCtrl
+		preClass = wx.adv.CalendarCtrl()
 
 		style = kwargs.get("style", 0)
 		dow = self._firstDayOfWeek = self._extractKey((kwargs, properties, attProperties),
