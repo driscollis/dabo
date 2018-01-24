@@ -136,7 +136,7 @@ if sys.platform.startswith("win"):
 elif sys.platform.startswith("darwin"):
 	options = {"py2app":
 			{"includes": ["App", "version", "ui", "biz", "encodings",
-				"wx", "wx.lib.calendar", "wx.gizmos"],
+				"wx", "wx.lib.calendar", "wx.adv"],
 			"optimize": 2,
 			"excludes": ["matplotlib", "Tkconstants","Tkinter","tcl",
 				"_imagingtk", "PIL._imagingtk",
@@ -172,7 +172,7 @@ elif sys.platform.startswith("linux"):
 			unpacked.append((source_item, destination_item))
 	include_files = unpacked
 	options = {"build_exe": {"include_files": include_files,
-	                         "includes": ["wx.gizmos", "wx.lib.calendar",
+	                         "includes": ["wx.adv", "wx.lib.calendar",
 	                                      "distutils.unixccompiler"],
 	                         "optimize": 2,
 	                         "create_shared_zip": False
