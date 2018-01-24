@@ -14,7 +14,7 @@ iconDir = os.path.split(dabo.icons.__file__)[0]
 setup(name="DaboDemo",
 		description="Dabo UI demo program",
 		author="Ed Leafe",
-		options={"py2exe": {"packages": ["wx.gizmos", "wx.lib.masked",
+		options={"py2exe": {"packages": ["wx.adv", "wx.lib.masked",
 					"wx.lib.calendar"],
 				"optimize": 2,
 				"excludes": ["kinterbasdb", "MySQLdb", "psycopg"],

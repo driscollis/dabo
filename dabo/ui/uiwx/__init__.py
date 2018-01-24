@@ -10,6 +10,7 @@ import cStringIO
 import warnings
 import traceback
 import dabo
+from exceptions import RuntimeError
 from dabo.dLocalize import _
 from dabo.lib.utils import ustr
 from dabo.lib import utils
@@ -70,7 +71,7 @@ if wx.PlatformInfo[0] == "__WXGTK__":
 uiType["platform"] = _platform
 
 # Add these to the dabo.ui namespace
-deadObjectException = wx._core.PyDeadObjectError
+deadObjectException = RuntimeError
 deadObject = wx._core._wxPyDeadObject
 assertionException = wx._core.PyAssertionError
 nativeScrollBar = wx.ScrollBar
@@ -318,7 +319,7 @@ def callAfterInterval(interval, func, *args, **kwargs):
                 defunct = _callAfterIntervalReferences.pop((_func_ref, args), None)
                 try:
                         _func(*args, **kwargs)
-                except wx._core.PyDeadObjectError:
+                except RuntimeError:
                         pass
 
         _callAfterIntervalReferences[(func_ref, args)] = wx.FutureCall(interval, ca_func, func_ref, func, *args, **kwargs)
