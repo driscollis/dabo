@@ -1963,7 +1963,7 @@ class ReportDesigner(dabo.ui.dScrollPanel):
 		if saveDialog:
 			style = wx.SAVE
 		else:
-			style = wx.OPEN
+			style = wx.FD_OPEN
 
 		dlg = wx.FileDialog(self,
 				            message = prompt,

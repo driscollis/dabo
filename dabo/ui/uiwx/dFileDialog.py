@@ -94,7 +94,7 @@ class dFileDialog(OsDialogMixin, wx.FileDialog):
 	_exposeFiles = True
 
 	def __init__(self, parent=None, message=_("Choose a file"), defaultPath="",
-			defaultFile="", wildcard="*.*", multiple=False, style=wx.OPEN):
+			defaultFile="", wildcard="*.*", multiple=False, style=wx.FD_OPEN):
 		self._baseClass = dFileDialog
 		if multiple:
 			# wxPython changed the constant after 2.6
