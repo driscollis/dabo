@@ -1906,7 +1906,7 @@ class dPemMixin(dPemMixinBase):
 			if i:
 				candidate = "%s%s" % (name, i)
 			nameError = hasattr(parent, candidate) \
-					and type(getattr(parent, candidate)) != RuntimeError \
+					and not wx.siplib.isdeleted(getattr(parent, candidate)) \
 					and getattr(parent, candidate) != self \
 					and [win for win in parent.GetChildren()
 						if win != self and win.GetName() == candidate]
@@ -2500,7 +2500,7 @@ class dPemMixin(dPemMixinBase):
 				# Make sure that the name isn't already used
 				if self.Parent:
 					if hasattr(self.Parent, name) \
-							and type(getattr(self.Parent, name)) != RuntimeError \
+							and not wx.siplib.isdeleted(getattr(parent, candidate)) \
 							and getattr(self.Parent, name) != self:
 						raise NameError("Name '%s' is already in use." % name)
 				try:
@@ -2520,7 +2520,7 @@ class dPemMixin(dPemMixinBase):
 					# the user is explicitly setting the Name. If another object already
 					# has the name, we must raise an exception immediately.
 					if hasattr(parent, name) \
-							and type(getattr(parent, name)) != RuntimeError \
+							and not wx.siplib.isdeleted(getattr(parent, candidate)) \
 							and getattr(parent, name) != self:
 						raise NameError("Name '%s' is already in use." % name)
 					else:
