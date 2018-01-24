@@ -132,7 +132,7 @@ class dFolderDialog(OsDialogMixin, wx.DirDialog):
 class dSaveDialog(dFileDialog):
 	"""Creates a save dialog, which asks the user to specify a file to save to."""
 	def __init__(self, parent=None, message=_("Save to:"), defaultPath="",
-			defaultFile="", wildcard="*.*", style=wx.SAVE):
+			defaultFile="", wildcard="*.*", style=wx.FD_SAVE):
 		self._baseClass = dSaveDialog
 		if parent is None:
 			parent = dabo.dAppRef.ActiveForm
