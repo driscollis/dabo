@@ -1034,7 +1034,7 @@ class dForm(BaseForm, wx.Frame):
 				self._mdi = True
 			else:
 				# This is a normal SDI form:
-				preClass = wx.PreFrame
+				preClass = wx.Frame
 				self._mdi = False
 			dForm._hackToFrame()
 
@@ -1130,7 +1130,7 @@ class dBorderlessForm(BaseForm, wx.Frame):
 		kwargs["ShowStatusBar"] = False
 		kwargs["ShowSystemMenu"] = False
 		kwargs["MenuBarClass"] = None
-		preClass = wx.PreFrame
+		preClass = wx.Frame
 		BaseForm.__init__(self, preClass, parent, properties=properties, attProperties=attProperties,
 				*args, **kwargs)
 

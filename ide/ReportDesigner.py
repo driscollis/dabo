@@ -1961,7 +1961,7 @@ class ReportDesigner(dabo.ui.dScrollPanel):
 			dir_ = ""
 
 		if saveDialog:
-			style = wx.SAVE
+			style = wx.FD_SAVE
 		else:
 			style = wx.FD_OPEN
 

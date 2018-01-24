@@ -42,7 +42,7 @@ class dFormMain(dFormMainBase, wx.Frame):
 		else:
 			# This is a normal SDI form:
 			dFormMain.__bases__ = (dFormMainBase, wx.Frame)
-			preClass = wx.PreFrame
+			preClass = wx.Frame
 			self._mdi = False
 		## (Note that it is necessary to run the above block each time, because
 		##  we are modifying the dFormMain class definition globally.)
