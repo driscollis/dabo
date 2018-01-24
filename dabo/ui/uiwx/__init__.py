@@ -72,7 +72,7 @@ uiType["platform"] = _platform
 
 # Add these to the dabo.ui namespace
 deadObjectException = RuntimeError
-deadObject = wx._core._wxPyDeadObject
+deadObject = RuntimeError
 assertionException = wx._core.PyAssertionError
 nativeScrollBar = wx.ScrollBar
 
