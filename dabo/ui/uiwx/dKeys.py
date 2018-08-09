@@ -27,8 +27,8 @@ key_Control = wx.WXK_CONTROL
 key_Menu = wx.WXK_MENU
 key_Pause = wx.WXK_PAUSE
 key_Capital = wx.WXK_CAPITAL
-key_Prior = wx.WXK_PRIOR
-key_Next = wx.WXK_NEXT
+key_Prior = wx.WXK_PAGEUP
+key_Next = wx.WXK_PAGEDOWN
 key_End = wx.WXK_END
 key_Home = wx.WXK_HOME
 # if wx.Platform == "__WXMAC__":
